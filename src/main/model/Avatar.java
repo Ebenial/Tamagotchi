@@ -9,10 +9,14 @@ public class Avatar {
     private String nom;
     private int sante;
     private int bonheur;
+
     private int faim;
     private int fatigue;
     private int hygiene;
     private int besoins;
+
+
+
 
     /**
      * Construit un avatar
@@ -22,6 +26,44 @@ public class Avatar {
     public Avatar(String type, String nom){
         this.type = type;
         this.nom = nom;
+        this.sante = 10;
+        this.bonheur = 10;
+        this.faim = 8;
+        this.fatigue = 8;
+        this.hygiene = 8;
+        this.besoins = 8;
+    }
+
+    /**
+     * Modifie la barre de faim de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire à la faim
+     */
+    public void modifierFaim(int valeur){
+        this.faim += valeur;
+    }
+
+    /**
+     * Modifie la barre de fatigue de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire à la fatigue
+     */
+    public void modifierFatigue(int valeur){
+        this.fatigue += valeur;
+    }
+
+    /**
+     * Modifie la barre de d'hygiène de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire à l'hygiène
+     */
+    public void modifierHygiene(int valeur){
+        this.hygiene += hygiene;
+    }
+
+    /**
+     * Modifie la barre de besoins de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire aux besoins
+     */
+    public void modifierBesoins(int valeur){
+        this.besoins += besoins;
     }
 
 

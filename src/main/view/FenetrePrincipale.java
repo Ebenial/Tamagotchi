@@ -52,21 +52,13 @@ public class FenetrePrincipale extends JFrame{
         this.options = new Options(this);
         this.regles = new Regles(this);
         this.sauvegardes = new Sauvegardes(this);
-        this.chambre = new Chambre(this);
-        this.douche = new Douche(this);
-        this.cuisine = new Cuisine(this);
-        this.jardin = new Jardin(this);
 
-        this.add(accueil, "accueil");
-        this.add(jouer, "jouer");
+        //this.add(accueil, "accueil");
+        //this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
         this.add(regles, "regles");
         this.add(sauvegardes, "sauvegardes");
-        this.add(chambre, "chambre");
-        this.add(douche, "douche");
-        this.add(cuisine, "cuisine");
-        this.add(jardin, "jardin");
 
         this.setVisible(true);
     }
@@ -142,7 +134,17 @@ public class FenetrePrincipale extends JFrame{
     public void actionValider(){
 
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix);
-        System.out.println(NouvellePartie.monChoix);
+
+        this.chambre = new Chambre(this);
+        this.douche = new Douche(this);
+        this.cuisine = new Cuisine(this);
+        this.jardin = new Jardin(this);
+
+        this.add(chambre, "chambre");
+        this.add(douche, "douche");
+        this.add(cuisine, "cuisine");
+        this.add(jardin, "jardin");
+
         this.layout.show(this.getContentPane(), "chambre");
     }
 
@@ -173,5 +175,11 @@ public class FenetrePrincipale extends JFrame{
                 this.layout.show(this.getContentPane(), "cuisine");
             }
         }
+    }
+
+    //GETTERS
+
+    public Jeu getJeu(){
+        return this.jeu;
     }
 }

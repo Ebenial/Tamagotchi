@@ -1,5 +1,7 @@
 package main.model;
 
+import java.util.Date;
+
 import main.view.FenetrePrincipale;
 
 /**
@@ -11,6 +13,7 @@ public class Jeu{
     FenetrePrincipale principale;
     private Joueur joueur;
     private Avatar avatar;
+    private double compteurTemps;
 
     /**
      * Constructeur du type de jeu
@@ -23,8 +26,25 @@ public class Jeu{
         this.avatar = new Avatar(typeAvatar, nomAvatar);
     }
 
-    public void nourrir(){
-        
+    public void tempsEcoule(){
+        Date date = new Date();
+        //This method returns the time in millis
+        double tempsActuel = date.getTime();
+
+        if(tempsActuel - this.compteurTemps > 120000){  //Si plus de 2 minutes (en ms) se sont écoulées
+            this.avatar.modifierFaim(-1);
+            this.avatar.modifierFatigue(-1);
+            this.avatar.modifierHygiene(-1);
+            this.avatar.modifierBesoins(-1);
+            this.compteurTemps = tempsActuel;   //On réinitialise le compteur avec le temps actuel
+        }
+
+    }
+
+    //GETTERS
+
+    public Avatar getAvatar(){
+        return this.avatar;
     }
     
 }
