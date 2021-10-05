@@ -58,7 +58,7 @@ public class FenetrePrincipale extends JFrame{
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
         this.add(regles, "regles");
-        this.add(sauvegardes, "sauvegardes");
+        //this.add(sauvegardes, "sauvegardes");
 
         this.setVisible(true);
     }
@@ -135,10 +135,10 @@ public class FenetrePrincipale extends JFrame{
 
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix);
 
-        this.chambre = new Chambre(this);
-        this.douche = new Douche(this);
-        this.cuisine = new Cuisine(this);
-        this.jardin = new Jardin(this);
+        this.chambre = new Environnement("Chambre", this);
+        this.douche = new Environnement("Douche", this);
+        this.cuisine = new Environnement("Cuisine", this);
+        this.jardin = new Environnement("Jardin", this);
 
         this.add(chambre, "chambre");
         this.add(douche, "douche");

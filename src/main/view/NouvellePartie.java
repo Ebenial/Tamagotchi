@@ -105,7 +105,7 @@ public class NouvellePartie extends JPanel{
 
         //Bouton pour retourner à la sélection nouvelle partie / charger une partie
         retour = new JButton("Retour");
-        retour.addActionListener(new ListenerBouton(principale));
+        retour.addActionListener(new ListenerBouton("Chambre", principale));
         retour.setPreferredSize(new Dimension(600, 150));
         retour.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
         retour.setFont(new Font("Comic sans ms", Font.BOLD, 50));

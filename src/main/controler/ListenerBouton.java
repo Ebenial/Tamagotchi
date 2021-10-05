@@ -5,12 +5,8 @@ import java.awt.event.ActionEvent;
 
 import main.view.FenetrePrincipale;
 import main.view.Accueil;
-import main.view.Chambre;
 import main.view.Jouer;
 import main.view.NouvellePartie;
-import main.view.Douche;
-import main.view.Cuisine;
-import main.view.Jardin;
 import main.view.Options;
 import main.view.Regles;
 import main.view.Sauvegardes;
@@ -21,7 +17,31 @@ import main.view.Sauvegardes;
 public class ListenerBouton implements ActionListener{
 
     private FenetrePrincipale principale;
+    private String lieu;
+    private String direction;
     private NouvellePartie panel;
+
+    /**
+     * Créé le listener
+     * @param fp - FenetrePrincipale qui contient toutes les méthodes
+     * @param lieu - l'environnement dans lequel évolue le tamagotchi
+     * @param direction - indique la direction de la flèche lors d'un changement de panel
+     */
+    public ListenerBouton(String lieu, String direction, FenetrePrincipale fp){
+        this.principale = fp;
+        this.lieu = lieu;
+        this.direction = direction;
+    }
+
+    /**
+     * Créé le listener
+     * @param fp - FenetrePrincipale qui contient toutes les méthodes
+     * @param lieu - l'environnement dans lequel évolue le tamagotchi
+     */
+    public ListenerBouton(String lieu, FenetrePrincipale fp){
+        this.principale = fp;
+        this.lieu = lieu;
+    }
 
     /**
      * Créé le listener
@@ -83,17 +103,17 @@ public class ListenerBouton implements ActionListener{
             this.panel.actionSwitchAvatar("Gauche");
         }else if(e.getSource() == NouvellePartie.choixDroite){
             this.panel.actionSwitchAvatar("Droite");
-        }else if(e.getSource() == Chambre.gauche){
+        }else if(this.lieu == "Chambre" && this.direction == "Gauche"){
             this.principale.actionChangementEnvironnement("Chambre", "Gauche");
-        }else if(e.getSource() == Douche.gauche){
+        }else if(this.lieu == "Douche" && this.direction == "Gauche"){
             this.principale.actionChangementEnvironnement("Douche", "Gauche");
-        }else if(e.getSource() == Douche.droite){
+        }else if(this.lieu == "Douche" && this.direction == "Droite"){
             this.principale.actionChangementEnvironnement("Douche", "Droite");
-        }else if(e.getSource() == Cuisine.gauche){
+        }else if(this.lieu == "Cuisine" && this.direction == "Gauche"){
             this.principale.actionChangementEnvironnement("Cuisine", "Gauche");
-        }else if(e.getSource() == Cuisine.droite){
+        }else if(this.lieu == "Cuisine" && this.direction == "Droite"){
             this.principale.actionChangementEnvironnement("Cuisine", "Droite");
-        }else if(e.getSource() == Jardin.droite){
+        }else if(this.lieu == "Jardin" && this.direction == "Droite"){
             this.principale.actionChangementEnvironnement("Jardin", "Droite");
         }
     }

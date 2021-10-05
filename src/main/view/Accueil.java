@@ -28,10 +28,9 @@ public class Accueil extends JPanel{
 
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
-        titre = new JLabel("Tamagotchi", SwingConstants.CENTER);
-        titre.setFont(new Font("Century Gothic", Font.PLAIN, 100));
+        titre = new JLabel(new ImageIcon("resources/others/tamagotchiBlanc.png"));
         titre.setForeground(Color.RED);
-        titre.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre.setBorder(BorderFactory.createEmptyBorder(50,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -67,7 +66,7 @@ public class Accueil extends JPanel{
         //Bouton qui ouvre le dossier des sauvegardes
         jouer = new JButton("Jouer");
         jouer.addActionListener(new ListenerBouton(principale));
-        jouer.setIcon(new ImageIcon(new ImageIcon("../data/Boutoncontinuer.jpg").getImage().getScaledInstance(600, 150, java.awt.Image.SCALE_SMOOTH)));
+        jouer.setIcon(new ImageIcon(new ImageIcon("../data/Boutoncontinuer.jpg").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
         jouer.setPreferredSize(new Dimension(600, 150));
         jouer.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
         jouer.setFont(new Font("Century Gothic", Font.BOLD, 50));
@@ -75,7 +74,7 @@ public class Accueil extends JPanel{
         //Bouton qui mène à la page de création d'un nouveau Tamagotchi
         regles = new JButton("Règles");
         regles.addActionListener(new ListenerBouton(principale));
-        regles.setIcon(new ImageIcon(new ImageIcon("../data/BoutonnouvellePartie.png").getImage().getScaledInstance(600, 150, java.awt.Image.SCALE_SMOOTH)));
+        regles.setIcon(new ImageIcon(new ImageIcon("../data/BoutonnouvellePartie.png").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
         regles.setPreferredSize(new Dimension(600, 150));
         regles.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
         regles.setFont(new Font("Century Gothic", Font.BOLD, 50));
@@ -84,7 +83,7 @@ public class Accueil extends JPanel{
         //Bouton qui mène à la page des options
         options = new JButton("Options");
         options.addActionListener(new ListenerBouton(principale));
-        options.setIcon(new ImageIcon(new ImageIcon("../data/BoutonUnivers.jpg").getImage().getScaledInstance(600, 150, java.awt.Image.SCALE_SMOOTH)));
+        options.setIcon(new ImageIcon(new ImageIcon("../data/BoutonUnivers.jpg").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
         options.setPreferredSize(new Dimension(600, 150));
         options.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
         options.setFont(new Font("Century Gothic", Font.BOLD, 50));
@@ -93,7 +92,7 @@ public class Accueil extends JPanel{
         //Bouton pour quitter le programme
         quitter = new JButton("Quitter");
         quitter.addActionListener(new ListenerBouton(principale));
-        quitter.setIcon(new ImageIcon(new ImageIcon("../data/BoutonQuitter.jpg").getImage().getScaledInstance(600, 150, java.awt.Image.SCALE_SMOOTH)));
+        quitter.setIcon(new ImageIcon(new ImageIcon("../data/BoutonQuitter.jpg").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
         quitter.setPreferredSize(new Dimension(600, 150));
         quitter.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
         quitter.setFont(new Font("Century Gothic", Font.BOLD, 50));

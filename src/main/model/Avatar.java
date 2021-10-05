@@ -35,6 +35,28 @@ public class Avatar {
     }
 
     /**
+     * Construit un avatar à partir d'une sauvegarde
+     * @param type - le type d'avatar
+     * @param nom - le nom donné à l'avatar
+     * @param sante - la santé indiquée dans la sauvegarde
+     * @param bonheur - le bonheur indiqué dans la sauvegarde
+     * @param faim - la faim indiquée dans la sauvegarde
+     * @param fatigue - la fatigue indiquée dans la sauvegarde
+     * @param hygiene - l'hygiène indiquée dans la sauvegarde
+     * @param besoins - les besoins indiqués dans la sauvegarde
+     */
+    public Avatar(String type, String nom, int sante, int bonheur, int faim, int fatigue, int hygiene, int besoins){
+        this.type = type;
+        this.nom = nom;
+        this.sante = sante;
+        this.bonheur = bonheur;
+        this.faim = faim;
+        this.fatigue = fatigue;
+        this.hygiene = hygiene;
+        this.besoins = besoins;
+    }
+
+    /**
      * Modifie la barre de faim de l'avatar
      * @param valeur - la valeur à ajouter ou soustraire à la faim
      */
