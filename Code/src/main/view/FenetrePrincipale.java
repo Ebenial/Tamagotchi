@@ -54,8 +54,8 @@ public class FenetrePrincipale extends JFrame{
         this.regles = new Regles(this);
         this.sauvegardes = new Sauvegardes(this);
 
-        //this.add(accueil, "accueil");
-        //this.add(jouer, "jouer");
+        this.add(accueil, "accueil");
+        this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
         this.add(regles, "regles");
