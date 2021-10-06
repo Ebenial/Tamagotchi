@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class Environnement extends JPanel{
 
-    public Jeu jeu;
+    private Jeu jeu;
 
     private String lieu;
     public static JButton gauche;
