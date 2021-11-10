@@ -1,6 +1,6 @@
 # Tamagotchi
 
-![alt text](https://github.com/Ebenial/Tamagotchi/blob/master/Code/resources/others/tamagotchiBlanc.png)
+![alt text](https://github.com/Ebenial/Tamagotchi/blob/master/Code/resources/others/keneil_logo.png)
 
 Projet de programmation de L3 MIS à l'UBS
 
