@@ -1,4 +1,4 @@
-# Tamagotchi
+# Keneil
 
 ![alt text](https://github.com/Ebenial/Tamagotchi/blob/master/Code/resources/others/keneil_logo.png)
 
