@@ -21,9 +21,9 @@ public class BoutonFleche extends JButton {
         this.setFocusPainted(false);
         this.setBorderPainted(false);
         if(sensFleche == "Gauche"){
-            this.setIcon(new ImageIcon(new ImageIcon("resources/others/flecheGauche.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
+            this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/flecheGauche.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
         }else if(sensFleche == "Droite"){
-            this.setIcon(new ImageIcon(new ImageIcon("resources/others/flecheDroite.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
+            this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/flecheDroite.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
         }
     }
     

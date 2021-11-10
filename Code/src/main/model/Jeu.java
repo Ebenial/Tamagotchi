@@ -72,37 +72,37 @@ public class Jeu{
 
         switch(valeur){
             case 10:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques10.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques10.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 1:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques01.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques01.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 2:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques02.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques02.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 3:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques03.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques03.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break; 
             case 4:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques04.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques04.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 5:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques05.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques05.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break; 
             case 6:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques06.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques06.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 7:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques07.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques07.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break; 
             case 8:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques08.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques08.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 9:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques09.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques09.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;   
             default:
-                res = new ImageIcon(new ImageIcon("resources/others/barreStatistiques00.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques00.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
 
         }
