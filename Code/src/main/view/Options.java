@@ -96,6 +96,6 @@ public class Options extends JPanel{
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("resources/background/options2.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(new ImageIcon("Code/resources/background/options2.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }

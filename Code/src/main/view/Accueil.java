@@ -28,7 +28,7 @@ public class Accueil extends JPanel{
 
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
-        titre = new JLabel(new ImageIcon("resources/others/tamagotchiBlanc.png"));
+        titre = new JLabel(new ImageIcon("Code/resources/others/tamagotchiBlanc.png"));
         titre.setForeground(Color.RED);
         titre.setBorder(BorderFactory.createEmptyBorder(50,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
@@ -135,6 +135,6 @@ public class Accueil extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }

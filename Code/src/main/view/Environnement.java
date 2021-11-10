@@ -69,17 +69,17 @@ public class Environnement extends JPanel{
         infosStats.setLayout(new GridLayout(6, 1));
 
         //Construction des différents éléments des statistiques
-        imageSante = new JLabel(new ImageIcon(new ImageIcon("resources/others/logoSante.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoSante.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         sante = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getSante()));
-        imageBonheur = new JLabel(new ImageIcon(new ImageIcon("resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         bonheur = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getBonheur()));
-        imageFaim = new JLabel(new ImageIcon(new ImageIcon("resources/others/logoFaim.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        imageFaim = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoFaim.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         faim = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getFaim()));
-        imageFatigue = new JLabel(new ImageIcon(new ImageIcon("resources/others/logoFatigue.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        imageFatigue = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoFatigue.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         fatigue = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getFatigue()));
-        imageHygiene = new JLabel(new ImageIcon(new ImageIcon("resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         hygiene = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getHygiene()));
-        imageBesoins = new JLabel(new ImageIcon(new ImageIcon("resources/others/logoBesoins.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        imageBesoins = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBesoins.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         besoins = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getBesoins()));
 
         //Ajout des images aux panneaux
@@ -139,19 +139,19 @@ public class Environnement extends JPanel{
         //BORDERLAYOUT.CENTER
         //Affichage de l'avatar
         if(jeu.getAvatar().getType() == "Chien"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("resources/tamagotchi/chienPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/chienPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else if(jeu.getAvatar().getType() == "Chat"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("resources/tamagotchi/chatPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/chatPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else if(jeu.getAvatar().getType() == "Oiseau"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("resources/tamagotchi/oiseauPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/oiseauPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else if(jeu.getAvatar().getType() == "Poulpe"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("resources/tamagotchi/poulpe.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/poulpe.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else{
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }
 
@@ -173,7 +173,7 @@ public class Environnement extends JPanel{
         options.setContentAreaFilled(false);
         options.setFocusPainted(false);
         options.setBorderPainted(false);
-        options.setIcon(new ImageIcon(new ImageIcon("resources/others/logoOptions.png").getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH)));
+        options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/logoOptions.png").getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH)));
 
         sud.add(actions);
         sud.add(vide3);
@@ -193,15 +193,15 @@ public class Environnement extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if(this.lieu == "Jardin"){
-            g.drawImage(new ImageIcon("resources/background/jardin.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            g.drawImage(new ImageIcon("Code/resources/background/jardin.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
         }else if(this.lieu == "Cuisine"){
-            g.drawImage(new ImageIcon("resources/background/cuisineG.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            g.drawImage(new ImageIcon("Code/resources/background/cuisineG.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
         }else if(this.lieu == "Douche"){
-            g.drawImage(new ImageIcon("resources/background/salleDeBain.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            g.drawImage(new ImageIcon("Code/resources/background/salleDeBain.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
         }else if(this.lieu == "Chambre"){
-            g.drawImage(new ImageIcon("resources/background/chambre.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            g.drawImage(new ImageIcon("Code/resources/background/chambre.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
         }else{
-            g.drawImage(new ImageIcon("resources/background/sarah-boeving-kitchen.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            g.drawImage(new ImageIcon("Code/resources/background/sarah-boeving-kitchen.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
         }
     }
 }

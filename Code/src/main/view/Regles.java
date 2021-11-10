@@ -35,6 +35,6 @@ public class Regles extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("resources/rules/paysage.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(new ImageIcon("Code/resources/rules/paysage.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }
