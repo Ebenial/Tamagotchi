@@ -10,10 +10,10 @@ public class Avatar {
     private int sante;
     private int bonheur;
 
-    private int faim;
-    private int fatigue;
+    private int nourriture;
+    private int energie;
     private int hygiene;
-    private int besoins;
+    private int divertissement;
 
 
 
@@ -28,10 +28,10 @@ public class Avatar {
         this.nom = nom;
         this.sante = 10;
         this.bonheur = 9;
-        this.faim = 8;
-        this.fatigue = 7;
+        this.nourriture = 8;
+        this.energie = 7;
         this.hygiene = 6;
-        this.besoins = 5;
+        this.divertissement = 5;
     }
 
     /**
@@ -40,20 +40,20 @@ public class Avatar {
      * @param nom - le nom donné à l'avatar
      * @param sante - la santé indiquée dans la sauvegarde
      * @param bonheur - le bonheur indiqué dans la sauvegarde
-     * @param faim - la faim indiquée dans la sauvegarde
-     * @param fatigue - la fatigue indiquée dans la sauvegarde
+     * @param nourriture - la nourriture indiquée dans la sauvegarde
+     * @param energie - la energie indiquée dans la sauvegarde
      * @param hygiene - l'hygiène indiquée dans la sauvegarde
-     * @param besoins - les besoins indiqués dans la sauvegarde
+     * @param divertissement - les divertissement indiqués dans la sauvegarde
      */
-    public Avatar(String type, String nom, int sante, int bonheur, int faim, int fatigue, int hygiene, int besoins){
+    public Avatar(String type, String nom, int sante, int bonheur, int nourriture, int energie, int hygiene, int divertissement){
         this.type = type;
         this.nom = nom;
         this.sante = sante;
         this.bonheur = bonheur;
-        this.faim = faim;
-        this.fatigue = fatigue;
+        this.nourriture = nourriture;
+        this.energie = energie;
         this.hygiene = hygiene;
-        this.besoins = besoins;
+        this.divertissement = divertissement;
     }
 
  
@@ -78,22 +78,22 @@ public class Avatar {
     }
 
     /**
-     * Modifie la barre de faim de l'avatar
-     * @param valeur - la valeur à ajouter ou soustraire à la faim
+     * Modifie la barre de nourriture de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire à la nourriture
      */
-    public void modifierFaim(int valeur){
-        if(this.faim > 0){
-            this.faim += valeur;
+    public void modifierNourriture(int valeur){
+        if(this.nourriture > 0){
+            this.nourriture += valeur;
         }
     }
 
     /**
-     * Modifie la barre de fatigue de l'avatar
-     * @param valeur - la valeur à ajouter ou soustraire à la fatigue
+     * Modifie la barre de energie de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire à la energie
      */
-    public void modifierFatigue(int valeur){
-        if(this.fatigue > 0){
-            this.fatigue += valeur;
+    public void modifierEnergie(int valeur){
+        if(this.energie > 0){
+            this.energie += valeur;
         }
     }
 
@@ -108,12 +108,12 @@ public class Avatar {
     }
 
     /**
-     * Modifie la barre de besoins de l'avatar
-     * @param valeur - la valeur à ajouter ou soustraire aux besoins
+     * Modifie la barre de divertissement de l'avatar
+     * @param valeur - la valeur à ajouter ou soustraire aux divertissement
      */
-    public void modifierBesoins(int valeur){
-        if(this.besoins > 0){
-            this.besoins += valeur;
+    public void modifierDivertissement(int valeur){
+        if(this.divertissement > 0){
+            this.divertissement += valeur;
         }
     }
 
@@ -136,20 +136,20 @@ public class Avatar {
         return this.bonheur;
     }
 
-    public int getFaim(){
-        return this.faim;
+    public int getNourriture(){
+        return this.nourriture;
     }
 
-    public int getFatigue(){
-        return this.fatigue;
+    public int getEnergie(){
+        return this.energie;
     }
 
     public int getHygiene(){
         return this.hygiene;
     }
 
-    public int getBesoins(){
-        return this.besoins;
+    public int getDivertissement(){
+        return this.divertissement;
     }
 
     //SETTERS
@@ -162,19 +162,19 @@ public class Avatar {
         this.bonheur = nouveauBonheur;
     }
     
-    public void setFaim(int nouvelleFaim){
-        this.faim = nouvelleFaim;
+    public void setNourriture(int nouvellenourriture){
+        this.nourriture = nouvellenourriture;
     }
 
-    public void setFatigue(int nouvelleFatigue){
-        this.fatigue = nouvelleFatigue;
+    public void setEnergie(int nouvelleenergie){
+        this.energie = nouvelleenergie;
     }
 
     public void setHygiene(int nouvelleHygiene){
         this.hygiene = nouvelleHygiene;
     }
 
-    public void setBesoins(int nouveauxBesoins){
-        this.besoins = nouveauxBesoins;
+    public void setDivertissement(int nouveauxdivertissement){
+        this.divertissement = nouveauxdivertissement;
     }
 }

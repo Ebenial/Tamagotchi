@@ -74,13 +74,13 @@ public class Environnement extends JPanel{
         imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         bonheur = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getBonheur()));
         imageFaim = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoFaim.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        faim = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getFaim()));
+        faim = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getNourriture()));
         imageFatigue = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoFatigue.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        fatigue = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getFatigue()));
+        fatigue = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getEnergie()));
         imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
         hygiene = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getHygiene()));
         imageBesoins = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBesoins.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        besoins = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getBesoins()));
+        besoins = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getDivertissement()));
 
         //Ajout des images aux panneaux
         imagesStats.add(imageSante);
