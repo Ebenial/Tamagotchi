@@ -28,9 +28,9 @@ public class Regles extends JPanel {
     }
     
 
-        /**
+    /**
      * Permet de surcharger le paintComponent pour ajouter l'Image background en fond d'écran du panel.
-     * @param g - 
+     * @param g - objet Graphics permettant l'ajout d'une image sur une fenêtre.
      */
     @Override
     public void paintComponent(Graphics g){
