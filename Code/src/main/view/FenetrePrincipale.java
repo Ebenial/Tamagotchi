@@ -37,9 +37,10 @@ public class FenetrePrincipale extends JFrame{
 
         LookAndFeel.initLookAndFeel();
 
-        this.setTitle("Tamagotchi");
+        this.setTitle("Keneil - The best Tamagotchi");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         int largeur = Toolkit.getDefaultToolkit().getScreenSize().width;
         int hauteur = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -72,7 +73,7 @@ public class FenetrePrincipale extends JFrame{
         int confirmation = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter ?", "Quitter", JOptionPane.YES_NO_OPTION);
         if(confirmation == JOptionPane.YES_OPTION){
             this.dispose();
-            //System.exit(0);
+            System.exit(0);
         }
     }    
 
