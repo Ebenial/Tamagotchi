@@ -118,16 +118,16 @@ public class FenetrePrincipale extends JFrame{
      */
     public void actionRetour(String s){
 
-        if(s == "Jouer"){
-            this.layout.show(this.getContentPane(), "accueil");
-        }else if(s == "NouvellePartie"){
-            this.layout.show(this.getContentPane(), "jouer");
-        }else if(s == "Options"){
-            this.layout.show(this.getContentPane(), "accueil");
-        }else if(s == "Regles"){
-            this.layout.show(this.getContentPane(), "accueil");
-        }else if(s == "Sauvegardes"){
-            this.layout.show(this.getContentPane(), "jouer");
+        switch (s) {
+            case "Jouer":
+            case "Options":
+            case "Regles":
+                this.layout.show(this.getContentPane(), "accueil");
+                break;
+            case "NouvellePartie":
+            case "Sauvegardes":
+                this.layout.show(this.getContentPane(), "jouer");
+                break;
         }
     }
 
