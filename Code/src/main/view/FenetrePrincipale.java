@@ -72,7 +72,7 @@ public class FenetrePrincipale extends JFrame{
         int confirmation = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter ?", "Quitter", JOptionPane.YES_NO_OPTION);
         if(confirmation == JOptionPane.YES_OPTION){
             this.dispose();
-            //System.exit(0);
+            System.exit(0);
         }
     }    
 

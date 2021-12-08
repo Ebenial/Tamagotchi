@@ -115,5 +115,19 @@ public class Jeu{
     public Avatar getAvatar(){
         return this.avatar;
     }
+
+    public Date getCompteur() {
+        return this.compteurTemps;
+    }
+
+    public boolean getEnCours() {
+        return this.enCours;
+    }
+
+    public Joueur getJoueur() {
+        return this.joueur;
+    }
+
+
     
 }
