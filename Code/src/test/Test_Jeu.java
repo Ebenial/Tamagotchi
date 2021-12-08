@@ -17,14 +17,11 @@ public class Test_Jeu {
     public void testJeu_Cst() {
         Jeu test_jeu = new Jeu("Pierre", "Felix", "Chat");
         assertNotNull(test_jeu);
-        
-        Avatar expected_avatar = new Avatar("Chat", "Felix");
-        Joueur expected_joueur = new Joueur("Pierre");
 
         assertNotNull(test_jeu.getAvatar());
         assertNotNull(test_jeu.getJoueur());
     }
-
+    
     @Test 
     public void test_init() {
         Jeu test_jeu = new Jeu("Pierre", "Felix", "Chat");
@@ -57,15 +54,5 @@ public class Test_Jeu {
         assertEquals(expected_divertissement, test_jeu.getAvatar().getDivertissement());
         
         assertEquals(expected_date, test_jeu.getCompteur()); 
-    }
-
-    @Test 
-    public void test_getAvatar() {
-        Jeu test_jeu = new Jeu("Pierre", "Angus", "robot");
-        Avatar test_Avatar = new Avatar("robot", "Angus");
-
-        assertEquals(test_Avatar, test_jeu.getAvatar());
-
-    }
-    
+    }    
 }
