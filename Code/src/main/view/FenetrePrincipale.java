@@ -37,9 +37,10 @@ public class FenetrePrincipale extends JFrame{
 
         LookAndFeel.initLookAndFeel();
 
-        this.setTitle("Tamagotchi");
+        this.setTitle("Keneil - The best Tamagotchi");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         int largeur = Toolkit.getDefaultToolkit().getScreenSize().width;
         int hauteur = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -117,16 +118,16 @@ public class FenetrePrincipale extends JFrame{
      */
     public void actionRetour(String s){
 
-        if(s == "Jouer"){
-            this.layout.show(this.getContentPane(), "accueil");
-        }else if(s == "NouvellePartie"){
-            this.layout.show(this.getContentPane(), "jouer");
-        }else if(s == "Options"){
-            this.layout.show(this.getContentPane(), "accueil");
-        }else if(s == "Regles"){
-            this.layout.show(this.getContentPane(), "accueil");
-        }else if(s == "Sauvegardes"){
-            this.layout.show(this.getContentPane(), "jouer");
+        switch (s) {
+            case "Jouer":
+            case "Options":
+            case "Regles":
+                this.layout.show(this.getContentPane(), "accueil");
+                break;
+            case "NouvellePartie":
+            case "Sauvegardes":
+                this.layout.show(this.getContentPane(), "jouer");
+                break;
         }
     }
 
@@ -158,37 +159,43 @@ public class FenetrePrincipale extends JFrame{
     public void actionChangementEnvironnement(String lieu, String orientation){
         //TODO : définir l'ordre d'affichage des pièces de la maison
         //Ordre temporaire : Jardin -- Cuisine -- Douche -- Chambre
-        if(orientation == "Gauche"){
-            if(lieu == "Chambre"){
-                this.layout.removeLayoutComponent(this.douche);
-                this.douche = new Environnement("Douche", this);
-                this.add(douche, "douche");
-                this.layout.show(this.getContentPane(), "douche");
-                this.jeu.tempsEcoule();
-            }else if(lieu == "Douche"){
-                this.layout.show(this.getContentPane(), "cuisine");
-                this.jeu.tempsEcoule();
-                this.getContentPane().revalidate();
-                this.getContentPane().repaint();
-            }else if(lieu == "Cuisine"){
-                this.layout.show(this.getContentPane(), "jardin");
-                this.jeu.tempsEcoule();
-                this.getContentPane().revalidate();
-                this.getContentPane().repaint();
+        if(orientation.equals("Gauche")){
+            switch (lieu) {
+                case "Chambre":
+                    this.layout.removeLayoutComponent(this.douche);
+                    this.douche = new Environnement("Douche", this);
+                    this.add(douche, "douche");
+                    this.layout.show(this.getContentPane(), "douche");
+                    this.jeu.tempsEcoule();
+                    break;
+                case "Douche":
+                    this.layout.show(this.getContentPane(), "cuisine");
+                    this.jeu.tempsEcoule();
+                    this.getContentPane().revalidate();
+                    this.getContentPane().repaint();
+                    break;
+                case "Cuisine":
+                    this.layout.show(this.getContentPane(), "jardin");
+                    this.jeu.tempsEcoule();
+                    this.getContentPane().revalidate();
+                    this.getContentPane().repaint();
+                    break;
             }
-        }else if(orientation == "Droite"){
-            if(lieu == "Chambre"){
-                this.layout.show(this.getContentPane(), "cuisine");
-                this.jeu.tempsEcoule();
-            }else if(lieu == "Douche"){
-                this.layout.show(this.getContentPane(), "chambre");
-                this.jeu.tempsEcoule();
-            }else if(lieu == "Cuisine"){
-                this.layout.show(this.getContentPane(), "douche");
-                this.jeu.tempsEcoule();
-            }else if(lieu == "Jardin"){
-                this.layout.show(this.getContentPane(), "cuisine");
-                this.jeu.tempsEcoule();
+        }else if(orientation.equals("Droite")){
+            switch (lieu) {
+                case "Chambre":
+                case "Jardin":
+                    this.layout.show(this.getContentPane(), "cuisine");
+                    this.jeu.tempsEcoule();
+                    break;
+                case "Douche":
+                    this.layout.show(this.getContentPane(), "chambre");
+                    this.jeu.tempsEcoule();
+                    break;
+                case "Cuisine":
+                    this.layout.show(this.getContentPane(), "douche");
+                    this.jeu.tempsEcoule();
+                    break;
             }
         }
     }

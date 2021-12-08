@@ -9,7 +9,7 @@ import javax.swing.JButton;
 public class BoutonFleche extends JButton {
 
     /**
-     * Construit un bouton flèché personnalisé
+     * Construit un bouton fléché personnalisé
      * @param sensFleche - indique le sens de la flèche (forme du bouton)
      * @param longueur - taille horizontale du bouton
      * @param hauteur - taille verticale du bouton
@@ -20,9 +20,9 @@ public class BoutonFleche extends JButton {
         this.setContentAreaFilled(false);
         this.setFocusPainted(false);
         this.setBorderPainted(false);
-        if(sensFleche == "Gauche"){
+        if(sensFleche.equals("Gauche")){
             this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/flecheGauche.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
-        }else if(sensFleche == "Droite"){
+        }else if(sensFleche.equals("Droite")){
             this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/flecheDroite.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
         }
     }
