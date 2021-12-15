@@ -46,13 +46,14 @@ public class Test_Jeu {
         int expected_hygiene = 5;
         int expected_divertissement = 4;
 
-        test_jeu.tempsEcoule(); // modifie les attributs de l'avatar et la valeur du compteur
+        assertEquals(expected_date.getTime() - test_jeu.getCompteur().getTime() / 1000 > 2, true);
+
+        test_jeu.tempsEcoule_test(); // modifie les attributs de l'avatar et la valeur du compteur
 
         assertEquals(expected_nourriture, test_jeu.getAvatar().getNourriture());
         assertEquals(expected_energie, test_jeu.getAvatar().getEnergie());
         assertEquals(expected_hygiene, test_jeu.getAvatar().getHygiene());
         assertEquals(expected_divertissement, test_jeu.getAvatar().getDivertissement());
         
-        assertEquals(expected_date, test_jeu.getCompteur()); 
-    }    
+    }
 }

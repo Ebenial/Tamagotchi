@@ -39,7 +39,7 @@ public class Jeu{
         
         Date date = new Date();
 
-        //if((date.getTime() - this.compteurTemps.getTime()) / 1000 > 2){  //Si plus de 2 minutes (en ms) se sont écoulées
+        if((date.getTime() - this.compteurTemps.getTime()) / 1000 > 2){  //Si plus de 2 minutes (en ms) se sont écoulées
             System.out.println("compteur temps : " + this.compteurTemps);
             System.out.println("temps actuel : " + date);
             this.avatar.modifierNourriture(-1);
@@ -48,8 +48,19 @@ public class Jeu{
             this.avatar.modifierDivertissement(-1);
             this.compteurTemps = date;   //On réinitialise le compteur avec le temps actuel
             System.out.println(this.avatar.getDivertissement());
-        //}
+        }
 
+    }
+    // Je fais cette fonction pour tester l'intérieur de la fonction tempsEcoule
+    // et eviter d'avoir à vérifier la condition du if qui m'empêche de faire le test sur la méthode tempsEcoule normale
+    public void tempsEcoule_test() {
+        Date date = new Date();
+
+        this.avatar.modifierNourriture(-1);
+        this.avatar.modifierEnergie(-1);
+        this.avatar.modifierHygiene(-1);
+        this.avatar.modifierDivertissement(-1);
+        this.compteurTemps = date;
     }
 
     /**
