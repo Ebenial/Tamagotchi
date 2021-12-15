@@ -120,13 +120,13 @@ public class NouvellePartie extends JPanel{
 
         //Tableau contenant toutes les images possibles pour un avatar
         imagesAvatar = new ImageIcon[5];
-        imagesAvatar[0] = new ImageIcon("Code/resources/tamagotchi/chat.gif");
+        imagesAvatar[0] = new ImageIcon("Code/resources/tamagotchi/cat.gif");
         imagesAvatar[0].setImage(imagesAvatar[0].getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-        imagesAvatar[1] = new ImageIcon("Code/resources/tamagotchi/chien.gif");
+        imagesAvatar[1] = new ImageIcon("Code/resources/tamagotchi/dog.gif");
         imagesAvatar[1].setImage(imagesAvatar[1].getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-        imagesAvatar[2] = new ImageIcon("Code/resources/tamagotchi/oiseau.gif");
+        imagesAvatar[2] = new ImageIcon("Code/resources/tamagotchi/bird.gif");
         imagesAvatar[2].setImage(imagesAvatar[2].getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-        imagesAvatar[3] = new ImageIcon("Code/resources/tamagotchi/poulpe.gif");
+        imagesAvatar[3] = new ImageIcon("Code/resources/tamagotchi/octopus.gif");
         imagesAvatar[3].setImage(imagesAvatar[3].getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
         imagesAvatar[4] = new ImageIcon("Code/resources/tamagotchi/robot.gif");
         imagesAvatar[4].setImage(imagesAvatar[4].getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));

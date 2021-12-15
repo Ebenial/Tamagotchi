@@ -139,16 +139,16 @@ public class Environnement extends JPanel{
         //BORDERLAYOUT.CENTER
         //Affichage de l'avatar
         if(jeu.getAvatar().getType() == "Chien"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/chienPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/dog.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else if(jeu.getAvatar().getType() == "Chat"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/chatPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/cat.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else if(jeu.getAvatar().getType() == "Oiseau"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/oiseauPerso.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/bird.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else if(jeu.getAvatar().getType() == "Poulpe"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/poulpe.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/octopus.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
             avatarChoisi = new JLabel(imageAvatar);
         }else{
             ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
