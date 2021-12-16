@@ -1,5 +1,6 @@
 package main;
 
+import main.model.BoucleJeu;
 import main.view.FenetrePrincipale;
 
 /**
@@ -14,7 +15,7 @@ public class Lanceur{
      * @param args - lance les paramètres du String[], pas nécessaire ici
       */
     public static void main(String[] args){
-
-        new FenetrePrincipale();
+        FenetrePrincipale principale = new FenetrePrincipale();
+        new BoucleJeu(principale);
     }
 }

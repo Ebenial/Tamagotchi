@@ -1,10 +1,9 @@
 package main.model;
 
+import java.awt.*;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
-
-import java.awt.Image;
 
 import main.view.FenetrePrincipale;
 
@@ -83,37 +82,37 @@ public class Jeu{
 
         switch(valeur){
             case 10:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques10.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques10.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 1:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques01.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques01.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 2:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques02.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques02.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 3:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques03.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
-                break; 
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques03.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                break;
             case 4:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques04.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques04.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 5:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques05.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
-                break; 
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques05.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                break;
             case 6:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques06.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques06.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 7:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques07.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
-                break; 
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques07.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                break;
             case 8:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques08.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques08.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
             case 9:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques09.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
-                break;   
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques09.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                break;
             default:
-                res = new ImageIcon(new ImageIcon("Code/resources/others/barreStatistiques00.png").getImage().getScaledInstance(300, 30, Image.SCALE_DEFAULT));
+                res = new ImageIcon(Toolkit.getDefaultToolkit().createImage("Code/resources/others/barreStatistiques00.png").getScaledInstance(300, 30, Image.SCALE_DEFAULT));
                 break;
 
         }

@@ -204,4 +204,29 @@ public class Environnement extends JPanel{
             g.drawImage(new ImageIcon("Code/resources/background/sarah-boeving-kitchen.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
         }
     }
+
+    public JLabel getSante() {
+        return sante;
+    }
+
+    public JLabel getBonheur() {
+        return bonheur;
+    }
+
+    public JLabel getEnergie() {
+        return energie;
+    }
+
+    public JLabel getHygiene() {
+        return hygiene;
+    }
+
+    public JLabel getDivertissement() {
+        return divertissement;
+    }
+
+    public JLabel getNourriture() {
+        return nourriture;
+    }
+
 }

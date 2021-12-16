@@ -27,8 +27,10 @@ public class FenetrePrincipale extends JFrame{
     private Environnement cuisine;
     private Environnement chambre;
     private Environnement douche;
+    private Environnement currentEnvironnement;
     private Jeu jeu;
     private CardLayout layout = new CardLayout();
+    private boolean isInitialized = false;
 
     /**
      * Créé la fenêtre principale du jeu
@@ -63,7 +65,6 @@ public class FenetrePrincipale extends JFrame{
         //this.add(sauvegardes, "sauvegardes");
 
         this.setVisible(true);
-        new Thread(new BoucleJeu()).start();
     }
 
     /**
@@ -142,6 +143,7 @@ public class FenetrePrincipale extends JFrame{
         this.douche = new Environnement("Douche", this);
         this.cuisine = new Environnement("Cuisine", this);
         this.jardin = new Environnement("Jardin", this);
+        this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
 
         this.add(chambre, "chambre");
         this.add(douche, "douche");
@@ -149,6 +151,7 @@ public class FenetrePrincipale extends JFrame{
         this.add(jardin, "jardin");
 
         this.layout.show(this.getContentPane(), "chambre");
+        isInitialized = true;
     }
 
     /**
@@ -162,6 +165,7 @@ public class FenetrePrincipale extends JFrame{
         if(orientation.equals("Gauche")){
             switch (lieu) {
                 case "Chambre":
+                    this.currentEnvironnement = chambre;
                     this.layout.removeLayoutComponent(this.douche);
                     this.douche = new Environnement("Douche", this);
                     this.add(douche, "douche");
@@ -169,12 +173,14 @@ public class FenetrePrincipale extends JFrame{
                     this.jeu.tempsEcoule();
                     break;
                 case "Douche":
+                    this.currentEnvironnement = douche;
                     this.layout.show(this.getContentPane(), "cuisine");
                     this.jeu.tempsEcoule();
                     this.getContentPane().revalidate();
                     this.getContentPane().repaint();
                     break;
                 case "Cuisine":
+                    this.currentEnvironnement = cuisine;
                     this.layout.show(this.getContentPane(), "jardin");
                     this.jeu.tempsEcoule();
                     this.getContentPane().revalidate();
@@ -185,6 +191,7 @@ public class FenetrePrincipale extends JFrame{
             switch (lieu) {
                 case "Chambre":
                 case "Jardin":
+                    this.currentEnvironnement = jardin;
                     this.layout.show(this.getContentPane(), "cuisine");
                     this.jeu.tempsEcoule();
                     break;
@@ -204,5 +211,13 @@ public class FenetrePrincipale extends JFrame{
 
     public Jeu getJeu(){
         return this.jeu;
+    }
+
+    public Environnement getCurrentEnvironnement() {
+        return this.currentEnvironnement;
+    }
+
+    public boolean getIsInitialized() {
+        return this.isInitialized;
     }
 }
