@@ -160,8 +160,7 @@ public class FenetrePrincipale extends JFrame{
      * @param orientation - le côté vers lequel se dirige l'avatar (gauche ou droite)
      */
     public void actionChangementEnvironnement(String lieu, String orientation){
-        //TODO : définir l'ordre d'affichage des pièces de la maison
-        //Ordre temporaire : Jardin -- Cuisine -- Douche -- Chambre
+
         if(orientation.equals("Gauche")){
             switch (lieu) {
                 case "Chambre":
@@ -170,19 +169,16 @@ public class FenetrePrincipale extends JFrame{
                     this.douche = new Environnement("Douche", this);
                     this.add(douche, "douche");
                     this.layout.show(this.getContentPane(), "douche");
-                    this.jeu.tempsEcoule();
                     break;
                 case "Douche":
                     this.currentEnvironnement = douche;
                     this.layout.show(this.getContentPane(), "cuisine");
-                    this.jeu.tempsEcoule();
                     this.getContentPane().revalidate();
                     this.getContentPane().repaint();
                     break;
                 case "Cuisine":
                     this.currentEnvironnement = cuisine;
                     this.layout.show(this.getContentPane(), "jardin");
-                    this.jeu.tempsEcoule();
                     this.getContentPane().revalidate();
                     this.getContentPane().repaint();
                     break;
@@ -193,18 +189,20 @@ public class FenetrePrincipale extends JFrame{
                 case "Jardin":
                     this.currentEnvironnement = jardin;
                     this.layout.show(this.getContentPane(), "cuisine");
-                    this.jeu.tempsEcoule();
                     break;
                 case "Douche":
                     this.layout.show(this.getContentPane(), "chambre");
-                    this.jeu.tempsEcoule();
                     break;
                 case "Cuisine":
                     this.layout.show(this.getContentPane(), "douche");
-                    this.jeu.tempsEcoule();
                     break;
             }
         }
+    }
+
+    public void actionOptionsEnJeu() {
+        System.out.println("coucou les amis");
+        this.layout.show(this.getContentPane(), "options");
     }
 
     //GETTERS
@@ -220,4 +218,5 @@ public class FenetrePrincipale extends JFrame{
     public boolean getIsInitialized() {
         return this.isInitialized;
     }
+
 }

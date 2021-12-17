@@ -10,12 +10,6 @@ public class BoucleJeu implements Runnable{
     public static Thread myThread;
     public boolean running = true;
     private final FenetrePrincipale principale;
-    private int cptSant = 0;
-    private int cptBonh = 0;
-    private int cptNour = 0;
-    private int cptEner = 0;
-    private int cptHygi = 0;
-    private  int cptDive = 0;
 
 
     public synchronized void start() {
@@ -23,16 +17,16 @@ public class BoucleJeu implements Runnable{
             public void run(){
                 long sec = 0;
                 //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
-                int nbSecUpdateSante = 20;
-                int nbSecUpdateBonheur = 20;
-                int nbSecUpdateNourriture = 10;
-                int nbSecUpdateEnergie = 5;
-                int nbSecUpdateHygiene = 15;
-                int nbSecUpdateDivertissement = 7;
+                int nbSecUpdateSante = 2;
+                int nbSecUpdateBonheur = 2;
+                int nbSecUpdateNourriture = 2;
+                int nbSecUpdateEnergie = 2;
+                int nbSecUpdateHygiene = 2;
+                int nbSecUpdateDivertissement = 2;
 
 
                 while (running) {
-                    System.out.println(principale.getIsInitialized());  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
+                    System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                     if(principale.getIsInitialized()) {
                         try {
                             myThread.sleep(1000);
@@ -42,22 +36,22 @@ public class BoucleJeu implements Runnable{
 
                         //Update;
                         if(sec % nbSecUpdateSante == 0) {
-                            updateSante();
+                            updateSante(-1);
                         }
                         if(sec % nbSecUpdateBonheur == 0) {
-                            updateBonheur();
+                            updateBonheur(-1);
                         }
                         if(sec % nbSecUpdateNourriture == 0) {
-                            updateNourriture();
+                            updateNourriture(-1);
                         }
                         if(sec % nbSecUpdateEnergie == 0) {
-                            updateEnergie();
+                            updateEnergie(-1);
                         }
                         if(sec % nbSecUpdateHygiene == 0) {
-                            updateHygiene();
+                            updateHygiene(-1);
                         }
                         if(sec % nbSecUpdateDivertissement == 0) {
-                            updateDivertissement();
+                            updateDivertissement(-1);
                         }
 
                         sec++;
@@ -75,40 +69,82 @@ public class BoucleJeu implements Runnable{
         running = false;
     }
 
-    private void updateSante() {
-        JLabel label1 =  principale.getCurrentEnvironnement().getSante();
-        label1.setIcon(principale.getJeu().choixBarreStats(cptSant));
-        cptSant++;
+    /**
+     * Modifie la santé de l'avatar de la valeur passé en paramètre
+     * @param modif - la valeur a jouter ou soustraire à la santé actuelle de l'avatar
+     */
+    private void updateSante(int modif) {
+
+        int sante = this.principale.getJeu().getAvatar().getSante();        //Récupération de la santé actuelle
+        this.principale.getJeu().getAvatar().setSante(sante + modif);       //Mise à jour de la valeur de santé de l'avatar
+        //System.out.println("sante : " + sante);
+        JLabel label1 =  principale.getCurrentEnvironnement().getSante();   //Récupération de l'affichage de la barre de santé
+        label1.setIcon(principale.getJeu().choixBarreStats(sante + modif)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
     }
 
-    private void updateBonheur() {
+    /**
+     * 
+     * @param modif
+     */
+    private void updateBonheur(int modif) {
+
+        int bonheur = this.principale.getJeu().getAvatar().getBonheur();
+        this.principale.getJeu().getAvatar().setBonheur(bonheur + modif);
+        //System.out.println("bonheur : " + bonheur);
         JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
-        label2.setIcon(principale.getJeu().choixBarreStats(cptBonh));
-        cptBonh++;
+        label2.setIcon(principale.getJeu().choixBarreStats(bonheur + modif));
     }
 
-    private void updateNourriture() {
+    /**
+     * 
+     * @param modif
+     */
+    private void updateNourriture(int modif) {
+
+        int nourriture = this.principale.getJeu().getAvatar().getNourriture();
+        this.principale.getJeu().getAvatar().setNourriture(nourriture + modif);
+        //System.out.println("nourriture : " + nourriture);
         JLabel label1 =  principale.getCurrentEnvironnement().getNourriture();
-        label1.setIcon(principale.getJeu().choixBarreStats(cptNour));
-        cptNour++;
+        label1.setIcon(principale.getJeu().choixBarreStats(nourriture + modif));
     }
 
-    private void updateEnergie() {
+    /**
+     * 
+     * @param modif
+     */
+    private void updateEnergie(int modif) {
+
+        int energie = this.principale.getJeu().getAvatar().getEnergie();
+        this.principale.getJeu().getAvatar().setEnergie(energie + modif);
+        //System.out.println("energie : " + energie);
         JLabel label1 =  principale.getCurrentEnvironnement().getEnergie();
-        label1.setIcon(principale.getJeu().choixBarreStats(cptEner));
-        cptEner++;
+        label1.setIcon(principale.getJeu().choixBarreStats(energie + modif));
     }
 
-    private void updateHygiene() {
+    /**
+     * 
+     * @param modif
+     */
+    private void updateHygiene(int modif) {
+
+        int hygiene = this.principale.getJeu().getAvatar().getHygiene();
+        this.principale.getJeu().getAvatar().setHygiene(hygiene + modif);
+        //System.out.println("hygiene : " + hygiene);
         JLabel label1 =  principale.getCurrentEnvironnement().getHygiene();
-        label1.setIcon(principale.getJeu().choixBarreStats(cptHygi));
-        cptHygi++;
+        label1.setIcon(principale.getJeu().choixBarreStats(hygiene + modif));
     }
 
-    private void updateDivertissement() {
+    /**
+     * 
+     * @param modif
+     */
+    private void updateDivertissement(int modif) {
+
+        int divertissement = this.principale.getJeu().getAvatar().getDivertissement();
+        this.principale.getJeu().getAvatar().setDivertissement(divertissement + modif);
+        //System.out.println("divertissement : " + divertissement);
         JLabel label3 =  principale.getCurrentEnvironnement().getDivertissement();
-        label3.setIcon(principale.getJeu().choixBarreStats(cptDive));
-        cptDive++;
+        label3.setIcon(principale.getJeu().choixBarreStats(divertissement + modif));
     }
 
 

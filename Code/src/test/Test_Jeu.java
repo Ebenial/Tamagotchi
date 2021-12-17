@@ -48,7 +48,7 @@ public class Test_Jeu {
 
         assertEquals(expected_date.getTime() - test_jeu.getCompteur().getTime() / 1000 > 2, true);
 
-        test_jeu.tempsEcoule_test(); // modifie les attributs de l'avatar et la valeur du compteur
+        //test_jeu.tempsEcoule_test(); // modifie les attributs de l'avatar et la valeur du compteur
 
         assertEquals(expected_nourriture, test_jeu.getAvatar().getNourriture());
         assertEquals(expected_energie, test_jeu.getAvatar().getEnergie());

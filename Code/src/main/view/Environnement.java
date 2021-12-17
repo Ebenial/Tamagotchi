@@ -8,11 +8,13 @@ import main.util.BoutonFleche;
 import main.model.Jeu;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Créé un panneau chambre qui est un des environnements du jeu ainsi que le lieu de départ lors d'une nouvelle partie
  */
-public class Environnement extends JPanel{
+public class Environnement extends JPanel implements KeyListener{
 
     private Jeu jeu;
 
@@ -20,6 +22,8 @@ public class Environnement extends JPanel{
     public static JButton gauche;
     public static JButton droite;
     public static JButton options;
+    public static JButton action1;
+    public static JButton action2;
     public JLabel avatarChoisi;
     private JLabel sante;
     private JLabel bonheur;
@@ -164,16 +168,29 @@ public class Environnement extends JPanel{
 
         JPanel actions = new JPanel();
         actions.setBackground(Color.GREEN);
+        actions.setLayout(new GridLayout(1, 2));
+
+        action1 = new JButton("Action1");
+        action1.addActionListener(new ListenerBouton(this.lieu, "Action1", principale));
+        action1.setBackground(Color.RED);
+
+        action2 = new JButton("Action2");
+        action2.addActionListener(new ListenerBouton(this.lieu, "Action2", principale));
+        action2.setBackground(Color.BLUE);
+
+        actions.add(action1);
+        actions.add(action2);
 
         JPanel vide3 = new JPanel();
         vide3.setOpaque(false);
 
-        options = new JButton();
-        options.setBackground(null);
-        options.setContentAreaFilled(false);
-        options.setFocusPainted(false);
-        options.setBorderPainted(false);
-        options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/logoOptions.png").getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH)));
+        options = new JButton("Options");
+        options.addActionListener(new ListenerBouton(this.lieu, "Options", principale));
+        options.setBackground(Color.WHITE);
+        //options.setContentAreaFilled(false);
+        //options.setFocusPainted(false);
+        //options.setBorderPainted(false);
+        //options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/logoOptions.png").getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH)));
 
         sud.add(actions);
         sud.add(vide3);
@@ -228,5 +245,16 @@ public class Environnement extends JPanel{
     public JLabel getNourriture() {
         return nourriture;
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
 
 }

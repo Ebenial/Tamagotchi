@@ -155,7 +155,13 @@ public class Avatar {
     //SETTERS
 
     public void setSante(int nouvelleSante){
-        this.sante = nouvelleSante;
+        if(nouvelleSante < 0){
+            this.sante = 0;
+        }else if(nouvelleSante > 10){
+            this.sante = 10;
+        }else{
+            this.sante = nouvelleSante;
+        }
     }
 
     public void setBonheur(int nouveauBonheur){

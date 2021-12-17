@@ -28,47 +28,6 @@ public class Jeu{
     public Jeu(String nomJoueur, String nomAvatar, String typeAvatar){
         this.joueur = new Joueur(nomJoueur);
         this.avatar = new Avatar(typeAvatar, nomAvatar);
-        init();
-    }
-
-    /**
-     * Compare le temps écoulé depuis le dernier rafraichissement des caractéristiques. Modifie les caractéristiques toutes les 2 minutes 
-     */
-    public void tempsEcoule(){
-        
-        Date date = new Date();
-
-        if((date.getTime() - this.compteurTemps.getTime()) / 1000 > 2){  //Si plus de 2 minutes (en ms) se sont écoulées
-            System.out.println("compteur temps : " + this.compteurTemps);
-            System.out.println("temps actuel : " + date);
-            this.avatar.modifierNourriture(-1);
-            this.avatar.modifierEnergie(-1);
-            this.avatar.modifierHygiene(-1);
-            this.avatar.modifierDivertissement(-1);
-            this.compteurTemps = date;   //On réinitialise le compteur avec le temps actuel
-            System.out.println(this.avatar.getDivertissement());
-        }
-
-    }
-    // Je fais cette fonction pour tester l'intérieur de la fonction tempsEcoule
-    // et eviter d'avoir à vérifier la condition du if qui m'empêche de faire le test sur la méthode tempsEcoule normale
-    public void tempsEcoule_test() {
-        Date date = new Date();
-
-        this.avatar.modifierNourriture(-1);
-        this.avatar.modifierEnergie(-1);
-        this.avatar.modifierHygiene(-1);
-        this.avatar.modifierDivertissement(-1);
-        this.compteurTemps = date;
-    }
-
-    /**
-     * Initialise la partie 
-     */
-    private void init(){
-        this.enCours = true;
-        this.compteurTemps = new Date();
-
     }
 
     /**
@@ -136,6 +95,10 @@ public class Jeu{
 
     public Joueur getJoueur() {
         return this.joueur;
+    }
+
+    public FenetrePrincipale getPrincipale(){
+        return this.principale;
     }
 
 

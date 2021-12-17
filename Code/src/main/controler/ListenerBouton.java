@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 
 import main.view.FenetrePrincipale;
 import main.view.Accueil;
+import main.view.Environnement;
 import main.view.Jouer;
 import main.view.NouvellePartie;
 import main.view.Options;
@@ -115,6 +116,12 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionChangementEnvironnement("Cuisine", "Droite");
         }else if(this.lieu == "Jardin" && this.direction == "Droite"){
             this.principale.actionChangementEnvironnement("Jardin", "Droite");
+        }else if(this.direction == "Options"){
+            this.principale.actionOptionsEnJeu();
+        }else if(this.lieu == "Chambre" && this.direction == "Action1"){
+            System.out.println("coucou");
+            int santeActuelle = this.principale.getJeu().getAvatar().getSante();
+            this.principale.getJeu().getAvatar().setSante(santeActuelle + 2);
         }
     }
 }
