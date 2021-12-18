@@ -6,9 +6,9 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import main.util.LookAndFeel;
+
 import main.model.BoucleJeu;
 import main.model.Jeu;
 
@@ -20,6 +20,7 @@ public class FenetrePrincipale extends JFrame{
     private Accueil accueil;
     private Jouer jouer;
     private NouvellePartie nouvellePartie;
+    private BoucleJeu boucle;
     private Sauvegardes sauvegardes;
     private Options options;
     private Regles regles;
@@ -164,37 +165,38 @@ public class FenetrePrincipale extends JFrame{
         if(orientation.equals("Gauche")){
             switch (lieu) {
                 case "Chambre":
-                    this.currentEnvironnement = chambre;
-                    this.layout.removeLayoutComponent(this.douche);
-                    this.douche = new Environnement("Douche", this);
-                    this.add(douche, "douche");
+                    this.currentEnvironnement = douche;
+                    this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "douche");
                     break;
                 case "Douche":
-                    this.currentEnvironnement = douche;
+                    this.currentEnvironnement = cuisine;;
+                    this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
-                    this.getContentPane().revalidate();
-                    this.getContentPane().repaint();
                     break;
                 case "Cuisine":
-                    this.currentEnvironnement = cuisine;
+                    this.currentEnvironnement = jardin;
+                    this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "jardin");
-                    this.getContentPane().revalidate();
-                    this.getContentPane().repaint();
                     break;
             }
         }else if(orientation.equals("Droite")){
             switch (lieu) {
                 case "Chambre":
                 case "Jardin":
-                    this.currentEnvironnement = jardin;
+                    this.currentEnvironnement = cuisine;
+                    this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
                     break;
                 case "Douche":
+                    this.currentEnvironnement = chambre;
+                    this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "chambre");
                     break;
                 case "Cuisine":
+                    this.currentEnvironnement = douche;
                     this.layout.show(this.getContentPane(), "douche");
+                    this.getBoucle().updateAllStats();
                     break;
             }
         }
@@ -217,6 +219,14 @@ public class FenetrePrincipale extends JFrame{
 
     public boolean getIsInitialized() {
         return this.isInitialized;
+    }
+
+    public BoucleJeu getBoucle(){
+        return this.boucle;
+    }
+
+    public void setBoucle(BoucleJeu nouvelleBoucle){
+        this.boucle = nouvelleBoucle;
     }
 
 }

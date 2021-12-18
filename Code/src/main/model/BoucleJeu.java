@@ -147,6 +147,18 @@ public class BoucleJeu implements Runnable{
         label3.setIcon(principale.getJeu().choixBarreStats(divertissement + modif));
     }
 
+    /**
+     * 
+     */
+    public void updateAllStats(){
+        updateBonheur(0);
+        updateSante(0);
+        updateDivertissement(0);
+        updateEnergie(0);
+        updateHygiene(0);
+        updateNourriture(0);
+    }
+
 
     @Override
     public void run() {
@@ -155,6 +167,7 @@ public class BoucleJeu implements Runnable{
 
     public BoucleJeu(FenetrePrincipale principale) {
         this.principale = principale;
+        this.principale.setBoucle(this);
         start();
     }
 
