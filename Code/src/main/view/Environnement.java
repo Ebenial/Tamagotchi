@@ -115,13 +115,13 @@ public class Environnement extends JPanel implements KeyListener{
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
         if(this.lieu != "Jardin" ){
-            gauche = new BoutonFleche("Gauche", 150, 120);
+            gauche = new BoutonFleche("Gauche", 98, 98);
             gauche.addActionListener(new ListenerBouton(this.lieu, "Gauche", principale));
-            gauche.setSize(new Dimension(200, 150));
+            gauche.setSize(new Dimension(98, 98));
             this.add(gauche, BorderLayout.WEST);
         }else{
             JPanel gaucheVide = new JPanel();
-            gaucheVide.setPreferredSize(new Dimension(200, 150));
+            gaucheVide.setPreferredSize(new Dimension(98, 98));
             gaucheVide.setOpaque(false);
             this.add(gaucheVide, BorderLayout.WEST);
         }
@@ -129,13 +129,13 @@ public class Environnement extends JPanel implements KeyListener{
         //BORDERLAYOUT.EAST
         //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
         if(this.lieu != "Chambre"){
-            droite = new BoutonFleche("Droite", 150, 120);
+            droite = new BoutonFleche("Droite", 98, 98);
             droite.addActionListener(new ListenerBouton(this.lieu, "Droite", principale));
-            droite.setSize(new Dimension(600, 150));
+            droite.setSize(new Dimension(98, 98));
             this.add(droite, BorderLayout.EAST);
         }else{
             JPanel droiteVide = new JPanel();
-            droiteVide.setPreferredSize(new Dimension(200, 150));
+            droiteVide.setPreferredSize(new Dimension(98, 98));
             droiteVide.setOpaque(false);
             this.add(droiteVide, BorderLayout.EAST);
         }
