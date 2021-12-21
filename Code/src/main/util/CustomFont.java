@@ -1,0 +1,33 @@
+package main.util;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+public class CustomFont{
+    public static Font customFont100 = null;
+    public static Font customFont50 = null;
+    public static Font customFont40 = null;
+    public static Font customFont28 = null;
+
+    public static void initFont(){
+        try {
+            String fontPath = "Code/resources/font/PixelArt.ttf";
+
+            customFont100 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.BOLD,100f);
+            customFont50 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.BOLD,50f);
+            customFont40 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 40f);
+            customFont28 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 28f);
+
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(customFont100);
+            ge.registerFont(customFont50);
+            ge.registerFont(customFont40);
+            ge.registerFont(customFont28);
+
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+    }
+}

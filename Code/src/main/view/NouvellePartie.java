@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import main.controler.ListenerBouton;
 import main.util.BoutonFleche;
+import main.util.CustomFont;
 
 import java.awt.*;
 
@@ -37,7 +38,8 @@ public class NouvellePartie extends JPanel{
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
         creation = new JLabel("Nouvel avatar", SwingConstants.CENTER);
-        creation.setFont(new Font("Comic sans ms", Font.BOLD, 100));
+        creation.setFont(CustomFont.customFont100);
+        creation.setForeground(Color.white);
         creation.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
@@ -61,23 +63,23 @@ public class NouvellePartie extends JPanel{
 
         //Indique au joueur de choisir son nom
         joueur = new JLabel("Je m'appelle", SwingConstants.CENTER);
-        joueur.setFont(new Font("Comic sans ms", Font.PLAIN, 40));
+        joueur.setFont(CustomFont.customFont40);
         joueur.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //TextArea pour choisir un nom de joueur
         nomJoueur = new JTextArea("Mon nom de joueur");
         nomJoueur.setPreferredSize(new Dimension(600, 150));
-        nomJoueur.setFont(new Font("Comic sans ms", Font.BOLD, 50));
+        nomJoueur.setFont(CustomFont.customFont50);
 
         //Indique au joueur de choisir un nom pour son avatar
         avatar = new JLabel("Mon avatar va s'appeler", SwingConstants.CENTER);
-        avatar.setFont(new Font("Comic sans ms", Font.PLAIN, 28));
+        avatar.setFont(CustomFont.customFont28);
         avatar.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //TextArea pour choisir un nom d'avatar
         nomAvatar = new JTextArea("Nom de mon avatar");
         nomAvatar.setPreferredSize(new Dimension(600, 150));
-        nomAvatar.setFont(new Font("Comic sans ms", Font.BOLD, 50));
+        nomAvatar.setFont(CustomFont.customFont50);
 
         //Ajout des différents boutons au panneau du menu
         gbc.insets = new Insets(30, 0, 30, 0);
@@ -101,14 +103,14 @@ public class NouvellePartie extends JPanel{
         valider.addActionListener(new ListenerBouton(principale, this));
         valider.setPreferredSize(new Dimension(600, 150));
         valider.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        valider.setFont(new Font("Comic sans ms", Font.BOLD, 50));
+        valider.setFont(CustomFont.customFont50);
 
         //Bouton pour retourner à la sélection nouvelle partie / charger une partie
         retour = new JButton("Retour");
         retour.addActionListener(new ListenerBouton("Chambre", principale));
         retour.setPreferredSize(new Dimension(600, 150));
         retour.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        retour.setFont(new Font("Comic sans ms", Font.BOLD, 50));
+        retour.setFont(CustomFont.customFont50);
 
         //Bouton pour changer de type d'avatar vers la gauche String sensFleche, int x, int y, int longueur, int hauteur
         choixGauche = new BoutonFleche("Gauche", 150, 120);

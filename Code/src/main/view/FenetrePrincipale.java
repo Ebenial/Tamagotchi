@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.util.CustomFont;
 import main.util.LookAndFeel;
 
 import main.model.BoucleJeu;
@@ -39,6 +40,7 @@ public class FenetrePrincipale extends JFrame{
     public FenetrePrincipale(){
 
         LookAndFeel.initLookAndFeel();
+        CustomFont.initFont();
 
         this.setTitle("Keneil - The best Tamagotchi");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
