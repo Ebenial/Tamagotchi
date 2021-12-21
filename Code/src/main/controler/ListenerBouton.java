@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 
 import main.view.FenetrePrincipale;
 import main.view.Accueil;
-import main.view.Environnement;
 import main.view.Jouer;
 import main.view.NouvellePartie;
 import main.view.Options;
@@ -104,21 +103,23 @@ public class ListenerBouton implements ActionListener{
             this.panel.actionSwitchAvatar("Gauche");
         }else if(e.getSource() == NouvellePartie.choixDroite){
             this.panel.actionSwitchAvatar("Droite");
-        }else if(this.lieu == "Chambre" && this.direction == "Gauche"){
+        }else if(this.lieu.equals("Chambre") && this.direction.equals("Gauche")){
             this.principale.actionChangementEnvironnement("Chambre", "Gauche");
-        }else if(this.lieu == "Douche" && this.direction == "Gauche"){
+        }else if(this.lieu.equals("Douche") && this.direction.equals("Gauche")){
             this.principale.actionChangementEnvironnement("Douche", "Gauche");
-        }else if(this.lieu == "Douche" && this.direction == "Droite"){
+        }else if(this.lieu.equals("Douche") && this.direction.equals("Droite")){
             this.principale.actionChangementEnvironnement("Douche", "Droite");
-        }else if(this.lieu == "Cuisine" && this.direction == "Gauche"){
+        }else if(this.lieu.equals("Cuisine") && this.direction.equals("Gauche")){
             this.principale.actionChangementEnvironnement("Cuisine", "Gauche");
-        }else if(this.lieu == "Cuisine" && this.direction == "Droite"){
+        }else if(this.lieu.equals("Cuisine") && this.direction.equals("Droite")){
             this.principale.actionChangementEnvironnement("Cuisine", "Droite");
-        }else if(this.lieu == "Jardin" && this.direction == "Droite"){
+        }else if(this.lieu.equals("Jardin") && this.direction.equals("Droite")){
             this.principale.actionChangementEnvironnement("Jardin", "Droite");
-        }else if(this.direction == "Options"){
+        }else if(this.direction.equals("Options")){
             this.principale.actionOptionsEnJeu();
-        }else if(this.lieu == "Chambre" && this.direction == "Action1"){
+        }else if(this.lieu.equals("Chambre") && this.direction.equals("Action1")){
+            //TODO : enlever le print (jsp si ça sert à quelqu'un ou pas)
+
             System.out.println("coucou");
             int santeActuelle = this.principale.getJeu().getAvatar().getSante();
             this.principale.getJeu().getAvatar().setSante(santeActuelle + 2);
