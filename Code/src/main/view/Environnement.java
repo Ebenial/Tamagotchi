@@ -16,28 +16,20 @@ import java.awt.event.KeyListener;
  */
 public class Environnement extends JPanel implements KeyListener{
 
-    private Jeu jeu;
-
-    private String lieu;
+    private final String lieu;
     public static JButton gauche;
     public static JButton droite;
     public static JButton options;
     public static JButton action1;
     public static JButton action2;
     public JLabel avatarChoisi;
-    private JLabel sante;
-    private JLabel bonheur;
-    private JLabel nourriture;
-    private JLabel energie;
-    private JLabel hygiene;
-    private JLabel divertissement;
-    private JLabel imageSante;
-    private JLabel imageBonheur;
-    private JLabel imageNourriture;
-    private JLabel imageEnergie;
-    private JLabel imageHygiene;
-    private JLabel imageDivertissement;
-    
+    private final JLabel sante;
+    private final JLabel bonheur;
+    private final JLabel nourriture;
+    private final JLabel energie;
+    private final JLabel hygiene;
+    private final JLabel divertissement;
+
     /**
      * Panneau qui contient les éléments nécessaires à la création de l'avatar
      * @param principale - la JFrame a laquelle on applique le panneau
@@ -48,7 +40,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         this.setLayout(new BorderLayout());
 
-        this.jeu = principale.getJeu();
+        Jeu jeu = principale.getJeu();
 
         //BORDERLAYOUT.NORTH
         //Affichage des statistiques et de l'heure
@@ -73,18 +65,18 @@ public class Environnement extends JPanel implements KeyListener{
         infosStats.setLayout(new GridLayout(6, 1));
 
         //Construction des différents éléments des statistiques
-        imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoSante.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        sante = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getSante()));
-        imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        bonheur = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getBonheur()));
-        imageNourriture = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logonourriture.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        nourriture = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getNourriture()));
-        imageEnergie = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoenergie.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        energie = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getEnergie()));
-        imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        hygiene = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getHygiene()));
-        imageDivertissement = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logodivertissement.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
-        divertissement = new JLabel(this.jeu.choixBarreStats(this.jeu.getAvatar().getDivertissement()));
+        JLabel imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoSante.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        sante = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getSante()));
+        JLabel imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        bonheur = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getBonheur()));
+        JLabel imageNourriture = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logonourriture.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        nourriture = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getNourriture()));
+        JLabel imageEnergie = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoenergie.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        energie = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getEnergie()));
+        JLabel imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        hygiene = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getHygiene()));
+        JLabel imageDivertissement = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logodivertissement.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        divertissement = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getDivertissement()));
 
         //Ajout des images aux panneaux
         imagesStats.add(imageSante);
