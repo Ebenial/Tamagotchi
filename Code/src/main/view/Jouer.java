@@ -53,15 +53,15 @@ public class Jouer extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
 
         //Bouton qui lance une nouvelle partie
-        nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre, CustomFont.customFont35);
+        nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre, "Code/resources/others/button_background_large.png");
         this.add(nouvellePartie);
 
         //Bouton qui mène à la page des sauvegardes
-        continuer = new CustomJButton("Continuer", fenetre);
+        continuer = new CustomJButton("Continuer", fenetre, "Code/resources/others/button_background_large.png");
         this.add(continuer);
 
         //Bouton qui ramène à la page d'accueil
-        retour = new CustomJButton("Retour", fenetre);
+        retour = new CustomJButton("Retour", fenetre, "Code/resources/others/button_background_large.png");
         this.add(retour);
 
         //BORDERLAYOUT.SOUTH
