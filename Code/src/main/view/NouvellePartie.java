@@ -99,7 +99,10 @@ public class NouvellePartie extends JPanel{
         sud.setOpaque(false);
 
         //Bouton pour valider la création du personnage
-        valider = new JButton("Valider");
+        valider = new JButton("Valider", new ImageIcon("Code/resources/others/button_background.png"));
+        valider.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+
+
         valider.addActionListener(new ListenerBouton(principale, this));
         valider.setPreferredSize(new Dimension(600, 150));
         valider.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)

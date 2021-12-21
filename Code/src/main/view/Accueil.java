@@ -3,6 +3,8 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
+import main.util.CustomFont;
+import main.util.CustomJButton;
 
 import java.awt.*;
 
@@ -14,10 +16,11 @@ public class Accueil extends JPanel{
     public static JLabel titre;
     public static JButton jouer;
     public static JButton regles;
-    public static JButton options;
+    //public static JButton options;
     public static JButton quitter;
     public static JLabel signature;
-    
+
+    public static CustomJButton options;
     /**
      * Créé le panneau d'accueil
      * @param principale - la JFrame a laquelle on applique le panneau
@@ -65,37 +68,50 @@ public class Accueil extends JPanel{
 
         //Bouton qui ouvre le dossier des sauvegardes
         jouer = new JButton("Jouer");
+        jouer.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         jouer.addActionListener(new ListenerBouton(principale));
-        jouer.setIcon(new ImageIcon(new ImageIcon("../data/Boutoncontinuer.jpg").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
-        jouer.setPreferredSize(new Dimension(600, 150));
+        jouer.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/button_background.png").getImage().getScaledInstance(384, 96, java.awt.Image.SCALE_SMOOTH))); //old : 400 par 100
         jouer.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        jouer.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        jouer.setVerticalAlignment(JButton.CENTER);
+        jouer.setFont(CustomFont.customFont50_PLAIN); //old font : setFont(new Font("Century Gothic", Font.PLAIN, 50));
+        //jouer.setPreferredSize(new Dimension(600, 150));
+
 
         //Bouton qui mène à la page de création d'un nouveau Tamagotchi
         regles = new JButton("Règles");
         regles.addActionListener(new ListenerBouton(principale));
-        regles.setIcon(new ImageIcon(new ImageIcon("../data/BoutonnouvellePartie.png").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
-        regles.setPreferredSize(new Dimension(600, 150));
+        regles.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/button_background.png").getImage().getScaledInstance(384, 96, java.awt.Image.SCALE_SMOOTH)));
         regles.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        regles.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        regles.setVerticalAlignment(JButton.CENTER);
+        regles.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        regles.setFont(CustomFont.customFont50_PLAIN);
         regles.setForeground(Color.BLACK);
 
         //Bouton qui mène à la page des options
+        /*
         options = new JButton("Options");
         options.addActionListener(new ListenerBouton(principale));
-        options.setIcon(new ImageIcon(new ImageIcon("../data/BoutonUnivers.jpg").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
-        options.setPreferredSize(new Dimension(600, 150));
+        options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/button_background.png").getImage().getScaledInstance(384, 96, java.awt.Image.SCALE_SMOOTH)));
         options.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        options.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        options.setVerticalAlignment(JButton.CENTER);
+        options.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        options.setFont(CustomFont.customFont50_PLAIN);
         options.setForeground(Color.BLACK);
+        */
+
+        options = new CustomJButton("Options", principale);
 
         //Bouton pour quitter le programme
+
+
         quitter = new JButton("Quitter");
         quitter.addActionListener(new ListenerBouton(principale));
-        quitter.setIcon(new ImageIcon(new ImageIcon("../data/BoutonQuitter.jpg").getImage().getScaledInstance(400, 100, java.awt.Image.SCALE_SMOOTH)));
-        quitter.setPreferredSize(new Dimension(600, 150));
+        quitter.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/button_background.png").getImage().getScaledInstance(384, 96, java.awt.Image.SCALE_SMOOTH)));
         quitter.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        quitter.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        quitter.setVerticalAlignment(JButton.CENTER);
+        quitter.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        quitter.setFont(CustomFont.customFont50_PLAIN);
+        quitter.setForeground(Color.BLACK);
 
         //BORDERLAYOUT.SOUTH
         //Ajout de la signature en bas de fenêtre
