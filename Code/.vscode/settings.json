@@ -1,7 +1,0 @@
-{
-    "java.project.sourcePaths": [
-        "src",
-        "resources",
-        "Code/.vscode/org_junit_platform_junit-platform-console-standalone_1.6.0_junit-platform-console-standalone-1.6.0.jar"
-    ]
-}
