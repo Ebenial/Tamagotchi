@@ -3,6 +3,8 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
+import main.util.CustomFont;
+import main.util.CustomJButton;
 
 import java.awt.*;
 
@@ -11,9 +13,9 @@ import java.awt.*;
  */
 public class Jouer extends JPanel{
 
-    public static JButton nouvellePartie;
-    public static JButton continuer;
-    public static JButton retour;
+    public static CustomJButton nouvellePartie;
+    public static CustomJButton continuer;
+    public static CustomJButton retour;
     JLabel titre;
     JLabel signature;
 
@@ -51,27 +53,15 @@ public class Jouer extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
 
         //Bouton qui lance une nouvelle partie
-        nouvellePartie = new JButton("Nouvelle Partie");
-        nouvellePartie.addActionListener(new ListenerBouton(fenetre));
-        nouvellePartie.setPreferredSize(new Dimension(600, 150));
-        nouvellePartie.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        nouvellePartie.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre, CustomFont.customFont35);
         this.add(nouvellePartie);
 
         //Bouton qui mène à la page des sauvegardes
-        continuer = new JButton("Continuer");
-        continuer.addActionListener(new ListenerBouton(fenetre));
-        continuer.setPreferredSize(new Dimension(600, 150));
-        continuer.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        continuer.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        continuer = new CustomJButton("Continuer", fenetre);
         this.add(continuer);
 
         //Bouton qui ramène à la page d'accueil
-        retour = new JButton("Retour");
-        retour.addActionListener(new ListenerBouton(fenetre));
-        retour.setPreferredSize(new Dimension(600, 150));
-        retour.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        retour.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        retour = new CustomJButton("Retour", fenetre);
         this.add(retour);
 
         //BORDERLAYOUT.SOUTH

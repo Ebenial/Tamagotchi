@@ -9,6 +9,7 @@ public class CustomFont{
     public static Font customFont50 = null;
     public static Font customFont50_PLAIN = null;
     public static Font customFont40 = null;
+    public static Font customFont35 = null;
     public static Font customFont28 = null;
 
     public static void initFont(){
@@ -19,6 +20,7 @@ public class CustomFont{
             customFont50 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.BOLD,50f);
             customFont50_PLAIN = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN,50f);
             customFont40 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 40f);
+            customFont35 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 35f);
             customFont28 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 28f);
 
 
@@ -27,6 +29,7 @@ public class CustomFont{
             ge.registerFont(customFont50);
             ge.registerFont(customFont50_PLAIN);
             ge.registerFont(customFont40);
+            ge.registerFont(customFont35);
             ge.registerFont(customFont28);
 
         } catch (IOException | FontFormatException e) {
