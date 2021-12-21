@@ -114,7 +114,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
-        if(this.lieu != "Jardin" ){
+        if(!this.lieu.equals("Jardin")){
             gauche = new BoutonFleche("Gauche", 98, 98);
             gauche.addActionListener(new ListenerBouton(this.lieu, "Gauche", principale));
             gauche.setSize(new Dimension(98, 98));
@@ -128,7 +128,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.EAST
         //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
-        if(this.lieu != "Chambre"){
+        if(!this.lieu.equals("Chambre")){
             droite = new BoutonFleche("Droite", 98, 98);
             droite.addActionListener(new ListenerBouton(this.lieu, "Droite", principale));
             droite.setSize(new Dimension(98, 98));
@@ -142,21 +142,32 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.CENTER
         //Affichage de l'avatar
-        if(jeu.getAvatar().getType() == "Chien"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/dog.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-            avatarChoisi = new JLabel(imageAvatar);
-        }else if(jeu.getAvatar().getType() == "Chat"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/cat.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-            avatarChoisi = new JLabel(imageAvatar);
-        }else if(jeu.getAvatar().getType() == "Oiseau"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/bird.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-            avatarChoisi = new JLabel(imageAvatar);
-        }else if(jeu.getAvatar().getType() == "Poulpe"){
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/octopus.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-            avatarChoisi = new JLabel(imageAvatar);
-        }else{
-            ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-            avatarChoisi = new JLabel(imageAvatar);
+        switch (jeu.getAvatar().getType()) {
+            case "Chien": {
+                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/dog.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+                avatarChoisi = new JLabel(imageAvatar);
+                break;
+            }
+            case "Chat": {
+                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/cat.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+                avatarChoisi = new JLabel(imageAvatar);
+                break;
+            }
+            case "Oiseau": {
+                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/bird.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+                avatarChoisi = new JLabel(imageAvatar);
+                break;
+            }
+            case "Poulpe": {
+                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/octopus.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+                avatarChoisi = new JLabel(imageAvatar);
+                break;
+            }
+            default: {
+                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+                avatarChoisi = new JLabel(imageAvatar);
+                break;
+            }
         }
 
         //BORDERLAYOUT.SOUTH
@@ -209,16 +220,22 @@ public class Environnement extends JPanel implements KeyListener{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        if(this.lieu == "Jardin"){
-            g.drawImage(new ImageIcon("Code/resources/background/jardin.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
-        }else if(this.lieu == "Cuisine"){
-            g.drawImage(new ImageIcon("Code/resources/background/cuisineG.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
-        }else if(this.lieu == "Douche"){
-            g.drawImage(new ImageIcon("Code/resources/background/salleDeBain.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
-        }else if(this.lieu == "Chambre"){
-            g.drawImage(new ImageIcon("Code/resources/background/chambre.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
-        }else{
-            g.drawImage(new ImageIcon("Code/resources/background/sarah-boeving-kitchen.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        switch (this.lieu) {
+            case "Jardin":
+                g.drawImage(new ImageIcon("Code/resources/background/jardin.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                break;
+            case "Cuisine":
+                g.drawImage(new ImageIcon("Code/resources/background/cuisineG.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                break;
+            case "Douche":
+                g.drawImage(new ImageIcon("Code/resources/background/salleDeBain.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                break;
+            case "Chambre":
+                g.drawImage(new ImageIcon("Code/resources/background/chambre.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                break;
+            default:
+                g.drawImage(new ImageIcon("Code/resources/background/sarah-boeving-kitchen.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                break;
         }
     }
 
