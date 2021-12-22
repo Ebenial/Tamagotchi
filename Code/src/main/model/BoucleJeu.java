@@ -23,6 +23,7 @@ public class BoucleJeu implements Runnable{
                 int nbSecUpdateEnergie = 2;
                 int nbSecUpdateHygiene = 2;
                 int nbSecUpdateDivertissement = 2;
+                int nbSecAutoSave = 5;
 
 
                 while (running) {
@@ -52,6 +53,9 @@ public class BoucleJeu implements Runnable{
                         }
                         if(sec % nbSecUpdateDivertissement == 0) {
                             updateDivertissement(-1);
+                        }
+                        if(sec % nbSecAutoSave == 0) {
+                            principale.actionSauvegarde();
                         }
 
                         sec++;

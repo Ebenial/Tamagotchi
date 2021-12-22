@@ -56,6 +56,7 @@ public class Jouer extends JPanel{
         nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre, "Code/resources/others/button_background_large.png");
         this.add(nouvellePartie);
 
+
         //Bouton qui mène à la page des sauvegardes
         continuer = new CustomJButton("Continuer", fenetre, "Code/resources/others/button_background_large.png");
         this.add(continuer);

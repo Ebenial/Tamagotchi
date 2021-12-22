@@ -160,7 +160,7 @@ public class NouvellePartie extends JPanel{
      * @param s - le String permettant de savoir si le joueur a cliqué sur le bouton gauche ou droite
      */
     public void actionSwitchAvatar(String s){
-        if(s == "Gauche"){
+        if(s.equals("Gauche")){
             position--;
             if(this.position < 0){
                 position = this.imagesAvatar.length - 1;
@@ -183,11 +183,11 @@ public class NouvellePartie extends JPanel{
             case 1:
                 monChoix = "Chien";
                 break;
-            
+
             case 2:
                 monChoix = "Oiseau";
                 break;
-            
+
             case 3:
                 monChoix = "Poulpe";
                 break;
@@ -199,7 +199,7 @@ public class NouvellePartie extends JPanel{
             default:
                 monChoix = "Chat";
                 break;
-                
+
         }
     }
 
