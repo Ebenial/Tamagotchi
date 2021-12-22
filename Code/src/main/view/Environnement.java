@@ -135,27 +135,27 @@ public class Environnement extends JPanel implements KeyListener{
         //BORDERLAYOUT.CENTER
         //Affichage de l'avatar
         switch (jeu.getAvatar().getType()) {
-            case "Chien" -> {
+            case "Chien" : {
                 ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/dog.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
                 avatarChoisi = new JLabel(imageAvatar);
                 break;
             }
-            case "Chat" -> {
+            case "Chat" : {
                 ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/cat.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
                 avatarChoisi = new JLabel(imageAvatar);
                 break;
             }
-            case "Oiseau" -> {
+            case "Oiseau" : {
                 ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/bird.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
                 avatarChoisi = new JLabel(imageAvatar);
                 break;
             }
-            case "Poulpe" -> {
+            case "Poulpe" : {
                 ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/octopus.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
                 avatarChoisi = new JLabel(imageAvatar);
                 break;
             }
-            default -> {
+            default : {
                 ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
                 avatarChoisi = new JLabel(imageAvatar);
                 break;
