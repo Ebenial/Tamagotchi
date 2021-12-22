@@ -2,7 +2,8 @@ package main.view;
 
 import javax.swing.*;
 
-import main.controler.ListenerBouton;
+import main.util.CustomFont;
+import main.util.CustomJButton;
 
 import java.awt.*;
 
@@ -21,10 +22,65 @@ public class Regles extends JPanel {
 
         this.setLayout(new BorderLayout());
 
-        retour = new JButton("Retour");
-        retour.addActionListener(new ListenerBouton(principale));
+        //BORDERLAYOUT.NORTH
+        //Ajout du titre de la page
+        JLabel titre = new JLabel("Règles du jeu", SwingConstants.CENTER);
+        titre.setFont(CustomFont.customFont50_PLAIN);
+        titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
-        this.add(retour, BorderLayout.SOUTH);
+        //BORDERLAYOUT.WEST
+        //Ajout d'un panel vide à gauche
+        JPanel gauche = new JPanel();
+        gauche.setPreferredSize(new Dimension(500, 0));
+        gauche.setOpaque(false);
+
+        //BORDERLAYOUT.EAST
+        //Ajout d'un panel vide à droite
+        JPanel droite = new JPanel();
+        droite.setPreferredSize(new Dimension(500,0));
+        droite.setOpaque(false);
+
+        //BORDERLAYOUT.CENTER
+        //Ajout d'un panel qui va stocker les différents éléments du panneau
+        JPanel options = new JPanel();
+        options.setLayout(new GridBagLayout());
+        options.setBackground(new Color(255, 255, 255, 161));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+
+
+        //BORDERLAYOUT.SOUTH
+        //Ajout du bouton retour pour revenir à la page d'accueil
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridBagLayout());
+        buttonPanel.setOpaque(false);
+
+        retour = new CustomJButton("Retour", principale);
+        retour.setPreferredSize(new Dimension(384, 96));
+
+        JPanel leftBox = new JPanel();
+        leftBox.setPreferredSize(new Dimension(500,0));
+        JPanel rightBox = new JPanel();
+        rightBox.setPreferredSize(new Dimension(500,0));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(0, 0, 50, 0);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        buttonPanel.add(leftBox, constraints);
+        constraints.gridx = 1;
+        buttonPanel.add(retour, constraints);
+        constraints.gridx = 2;
+        buttonPanel.add(rightBox, constraints);
+
+        //Ajout des composants au panneau
+        this.add(titre, BorderLayout.NORTH);
+        this.add(gauche, BorderLayout.WEST);
+        this.add(droite, BorderLayout.EAST);
+        this.add(options, BorderLayout.CENTER);
+        this.add(buttonPanel, BorderLayout.SOUTH);
     }
     
 
@@ -35,6 +91,6 @@ public class Regles extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("Code/resources/rules/paysage.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }

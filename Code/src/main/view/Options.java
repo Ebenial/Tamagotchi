@@ -1,23 +1,16 @@
 package main.view;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
-import main.controler.ListenerBouton;
-
-import javax.swing.ImageIcon;
+import main.util.CustomFont;
+import main.util.CustomJButton;
 
 import java.awt.*;
 
 public class Options extends JPanel{
 
     public JLabel titre;
-    public static JButton retour;
+    public static CustomJButton retour;
     public JLabel langue;
     public ButtonGroup choixLangue;
 
@@ -28,8 +21,8 @@ public class Options extends JPanel{
         //BORDERLAYOUT.NORTH
         //Ajout du titre de la page
         titre = new JLabel("Options du jeu", SwingConstants.CENTER);
-        titre.setFont(new Font("Comic sans MS", Font.BOLD, 50));
-        titre.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre.setFont(CustomFont.customFont50_PLAIN);
+        titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -47,12 +40,13 @@ public class Options extends JPanel{
         //Ajout d'un panel qui va stocker les différents éléments du panneau
         JPanel options = new JPanel();
         options.setLayout(new GridBagLayout());
-        options.setOpaque(false);
+        options.setBackground(new Color(255, 255, 255, 161));
+
         GridBagConstraints gbc = new GridBagConstraints();
 
         //Indique au joueur de choisir son nom
         langue = new JLabel("Choix de la langue", SwingConstants.CENTER);
-        langue.setFont(new Font("Comic sans ms", Font.PLAIN, 40));
+        langue.setFont(CustomFont.customFont40);
         langue.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //TextArea pour choisir un nom de joueur
@@ -75,19 +69,35 @@ public class Options extends JPanel{
 
         //BORDERLAYOUT.SOUTH
         //Ajout du bouton retour pour revenir à la page d'accueil
-        retour = new JButton("Retour");
-        retour.addActionListener(new ListenerBouton(principale));
-        retour.setPreferredSize(new Dimension(300, 80));
-        retour.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        retour.setFont(new Font("Serif", Font.BOLD, 50));
-        retour.setForeground(Color.WHITE);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridBagLayout());
+        buttonPanel.setOpaque(false);
+
+        retour = new CustomJButton("Retour", principale);
+        retour.setPreferredSize(new Dimension(384, 96));
+
+        JPanel leftBox = new JPanel();
+        leftBox.setPreferredSize(new Dimension(500,0));
+        JPanel rightBox = new JPanel();
+        rightBox.setPreferredSize(new Dimension(500,0));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(0, 0, 50, 0);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        buttonPanel.add(leftBox, constraints);
+        constraints.gridx = 1;
+        buttonPanel.add(retour, constraints);
+        constraints.gridx = 2;
+        buttonPanel.add(rightBox, constraints);
 
         //Ajout des composants au panneau
         this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(droite, BorderLayout.EAST);
         this.add(options, BorderLayout.CENTER);
-        this.add(retour, BorderLayout.SOUTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
 
     }
 
@@ -96,6 +106,6 @@ public class Options extends JPanel{
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("Code/resources/background/options2.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }
