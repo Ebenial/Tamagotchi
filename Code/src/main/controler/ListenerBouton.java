@@ -73,7 +73,6 @@ public class ListenerBouton implements ActionListener{
      * @param e - l'évènement déclencheur
      */
     public void actionPerformed(ActionEvent e){
-
         if(e.getSource() == Accueil.quitter){
             this.principale.actionQuitter();
         }else if(e.getSource() == Accueil.jouer){
@@ -88,8 +87,10 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionContinuer();
         }else if(e.getSource() == Jouer.retour){
             this.principale.actionRetour("Jouer");
-        }else if(e.getSource() == Options.retour){
+        }else if(e.getSource() == Options.retour) {
             this.principale.actionRetour("Options");
+        }else if(e.getSource() == Options.sauvegarde) {
+            this.principale.actionSauvegarde();
         }else if(e.getSource() == Regles.retour){
             this.principale.actionRetour("Regles");
         }else if(e.getSource() == Sauvegardes.retour){

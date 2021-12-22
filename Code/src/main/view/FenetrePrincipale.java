@@ -3,15 +3,14 @@ package main.view;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.model.*;
 import main.util.CustomFont;
 import main.util.LookAndFeel;
-
-import main.model.BoucleJeu;
-import main.model.Jeu;
 
 /**
  * Permet de modéliser la fenêtre du programme et de la paramétrer
@@ -113,7 +112,30 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
-        this.layout.show(this.getContentPane(), "sauvegardes");
+
+        this.layout.show(this.getContentPane(), "jouer");
+        SauvegardePartie partie = new SauvegardePartie();
+        this.jeu = new Jeu();
+
+        this.jeu.setAvatar(partie.creerAvatar());
+        this.jeu.setJoueur(new Joueur(partie.getNomJoueur()));
+
+        System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
+
+        this.chambre = new Environnement("Chambre", this);
+        this.douche = new Environnement("Douche", this);
+        this.cuisine = new Environnement("Cuisine", this);
+        this.jardin = new Environnement("Jardin", this);
+        this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
+
+        this.add(chambre, "chambre");
+        this.add(douche, "douche");
+        this.add(cuisine, "cuisine");
+        this.add(jardin, "jardin");
+
+        this.layout.show(this.getContentPane(), "chambre");
+        isInitialized = true;
+
     }
 
     /**
@@ -133,6 +155,18 @@ public class FenetrePrincipale extends JFrame{
                 this.layout.show(this.getContentPane(), "jouer");
                 break;
         }
+    }
+
+    /**
+     * Sauvegarde la partie
+     */
+    public void actionSauvegarde() {
+        try {
+            new SauvegardePartie(this.jeu.getJoueur().getNom(), this.jeu.getAvatar(), this.jeu.getCompteur());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("je sauvegarde bien");
     }
 
     /**

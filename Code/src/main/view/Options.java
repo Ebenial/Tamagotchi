@@ -2,6 +2,7 @@ package main.view;
 
 import javax.swing.*;
 
+import main.controler.ListenerBouton;
 import main.util.CustomFont;
 import main.util.CustomJButton;
 
@@ -12,11 +13,13 @@ public class Options extends JPanel{
     public JLabel titre;
     public static CustomJButton retour;
     public JLabel langue;
+    public static JButton sauvegarde;
     public ButtonGroup choixLangue;
 
     public Options(FenetrePrincipale principale){
 
         this.setLayout(new BorderLayout());
+
 
         //BORDERLAYOUT.NORTH
         //Ajout du titre de la page
@@ -67,6 +70,7 @@ public class Options extends JPanel{
         gbc.gridx++;
         options.add(en, gbc);
 
+
         //BORDERLAYOUT.SOUTH
         //Ajout du bouton retour pour revenir à la page d'accueil
 
@@ -91,6 +95,12 @@ public class Options extends JPanel{
         buttonPanel.add(retour, constraints);
         constraints.gridx = 2;
         buttonPanel.add(rightBox, constraints);
+
+        //Ajout d'un action listener sur le bouton de sauvegarde
+        sauvegarde = new JButton("Sauvegarder la partie");
+        sauvegarde.addActionListener(new ListenerBouton(principale));
+        gbc.gridy = 2;
+        options.add(sauvegarde, gbc);
 
         //Ajout des composants au panneau
         this.add(titre, BorderLayout.NORTH);

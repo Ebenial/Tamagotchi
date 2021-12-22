@@ -30,6 +30,8 @@ public class Jeu{
         this.avatar = new Avatar(typeAvatar, nomAvatar);
     }
 
+    public Jeu(){}
+
     /**
      * Récupère la valeur de statistique de l'avatar et indique quelle image de barre de statistiques choisir en conséquence
      * @param valeur - la valeur de la statistique
@@ -101,6 +103,14 @@ public class Jeu{
         return this.principale;
     }
 
+    //SETTERS
 
-    
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
 }

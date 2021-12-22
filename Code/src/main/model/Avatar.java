@@ -183,4 +183,12 @@ public class Avatar {
     public void setDivertissement(int nouveauxdivertissement){
         this.divertissement = nouveauxdivertissement;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }
