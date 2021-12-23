@@ -65,16 +65,16 @@ public class Accueil extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         //Bouton qui ouvre le dossier des sauvegardes
-        jouer = new CustomJButton("Jouer", principale);
+        jouer = new CustomJButton("Jouer", principale, null, null, null, null, null);
 
         //Bouton qui mène à la page des régles du jeu
-        regles = new CustomJButton("Règles", principale);
+        regles = new CustomJButton("Règles", principale, null, null, null, null, null);
 
         //Bouton qui mène à la page des options
-        options = new CustomJButton("Options", principale);
+        options = new CustomJButton("Options", principale, null, null, null, null, null);
 
         //Bouton pour quitter le programme
-        quitter = new CustomJButton("Quitter", principale);
+        quitter = new CustomJButton("Quitter", principale, null, null, null, null, null);
 
         //BORDERLAYOUT.SOUTH
         //Ajout de la signature en bas de fenêtre

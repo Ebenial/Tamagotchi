@@ -78,7 +78,7 @@ public class Options extends JPanel{
         buttonPanel.setLayout(new GridBagLayout());
         buttonPanel.setOpaque(false);
 
-        retour = new CustomJButton("Retour", principale);
+        retour = new CustomJButton("Retour", principale, null, null, null, null, null);
         retour.setPreferredSize(new Dimension(384, 96));
 
         JPanel leftBox = new JPanel();
