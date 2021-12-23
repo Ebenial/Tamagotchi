@@ -166,8 +166,11 @@ public class Environnement extends JPanel implements KeyListener{
         //Affichage des actions possibles pour le joueur ainsi que la roue des options
         JPanel sud = new JPanel();
         sud.setOpaque(false);
-        sud.setPreferredSize(new Dimension(1000, Toolkit.getDefaultToolkit().getScreenSize().height/6));
-        sud.setLayout(new GridLayout(1, 3));
+        sud.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/6));
+        sud.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+
 
         JPanel actions = new JPanel();
         actions.setBackground(Color.GREEN);
@@ -185,18 +188,29 @@ public class Environnement extends JPanel implements KeyListener{
         actions.add(action2);
 
         JPanel vide3 = new JPanel();
+        vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide3.setOpaque(false);
 
-        options = new JButton("Options");
+        options = new JButton();
         options.addActionListener(new ListenerBouton(this.lieu, "Options", principale));
-        options.setBackground(Color.WHITE);
-        //options.setContentAreaFilled(false);
-        //options.setFocusPainted(false);
-        //options.setBorderPainted(false);
-        //options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/logoOptions.png").getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH)));
+        options.setContentAreaFilled(false);
+        options.setFocusPainted(false);
+        options.setBorderPainted(false);
+        options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/settings_icon.png").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+        options.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.25;
 
         sud.add(actions);
+
+        c.gridx = 1;
+        c.weightx = 0.5;
         sud.add(vide3);
+
+        c.gridx = 2;
+        c.weightx = 0.25;
         sud.add(options);
 
         //Ajout des éléments au panneau
@@ -259,9 +273,7 @@ public class Environnement extends JPanel implements KeyListener{
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        
-    }
+    public void keyPressed(KeyEvent e) {}
 
     @Override
     public void keyReleased(KeyEvent e) {}
