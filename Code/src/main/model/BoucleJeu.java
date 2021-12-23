@@ -11,12 +11,12 @@ public class BoucleJeu implements Runnable{
     public boolean running = true;
     public static long secSinceLastConnexion;
     private final FenetrePrincipale principale;
-    private int nbSecUpdateSante = 20;
-    private int nbSecUpdateBonheur = 20;
-    private int nbSecUpdateNourriture = 20;
-    private int nbSecUpdateEnergie = 20;
-    private int nbSecUpdateHygiene = 20;
-    private int nbSecUpdateDivertissement = 20;
+    private int nbSecUpdateSante = 5;
+    private int nbSecUpdateBonheur = 5;
+    private int nbSecUpdateNourriture = 5;
+    private int nbSecUpdateEnergie = 5;
+    private int nbSecUpdateHygiene = 5;
+    private int nbSecUpdateDivertissement = 5;
     private int nbSecAutoSave = 5;
     private boolean isUpdateAllInitialized = false;
 

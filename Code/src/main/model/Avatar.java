@@ -165,23 +165,63 @@ public class Avatar {
     }
 
     public void setBonheur(int nouveauBonheur){
-        this.bonheur = nouveauBonheur;
+        if(nouveauBonheur < 0) {
+            this.bonheur = 0;
+        }
+        else if(nouveauBonheur > 10) {
+            this.bonheur = 10;
+        }
+        else {
+            this.bonheur = nouveauBonheur;
+        }
     }
     
     public void setNourriture(int nouvellenourriture){
-        this.nourriture = nouvellenourriture;
+        if(nouvellenourriture < 0) {
+            this.nourriture = 0;
+        }
+        else if(nouvellenourriture > 10) {
+            this.nourriture = 10;
+        }
+        else {
+            this.nourriture = nouvellenourriture;
+        }
     }
 
     public void setEnergie(int nouvelleenergie){
-        this.energie = nouvelleenergie;
+        if(nouvelleenergie < 0) {
+            this.energie = 0;
+        }
+        else if(nouvelleenergie > 10) {
+            this.energie = 10;
+        } else {
+            this.energie = nouvelleenergie;
+        }
     }
 
     public void setHygiene(int nouvelleHygiene){
-        this.hygiene = nouvelleHygiene;
+        if(nouvelleHygiene < 0) {
+            this.hygiene = 0;
+        }
+        else if(nouvelleHygiene > 10) {
+            this.hygiene = 10;
+        }
+        else {
+            this.hygiene = nouvelleHygiene;
+        }
+
     }
 
     public void setDivertissement(int nouveauxdivertissement){
-        this.divertissement = nouveauxdivertissement;
+        if(nouveauxdivertissement < 0) {
+            this.divertissement = 0;
+        }
+        else if(nouveauxdivertissement > 10) {
+            this.divertissement = 10;
+        }
+        else {
+            this.divertissement = nouveauxdivertissement;
+        }
     }
 
     public void setType(String type) {
