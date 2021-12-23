@@ -2,7 +2,11 @@ package main.model;
 
 import main.view.FenetrePrincipale;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.io.File;
 
 public class BoucleJeu implements Runnable{
 
@@ -24,6 +28,8 @@ public class BoucleJeu implements Runnable{
     public synchronized void start() {
         myThread = new Thread(){
             public void run(){
+                playSound();
+
                 long sec = 0;
                 //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
@@ -74,6 +80,18 @@ public class BoucleJeu implements Runnable{
         myThread.start();
         running = true;
         run();
+    }
+
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/Tamagotchi.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
     /**
