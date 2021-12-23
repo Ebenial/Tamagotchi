@@ -32,6 +32,7 @@ public class FenetrePrincipale extends JFrame{
     private Jeu jeu;
     private CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
+    private boolean continuer = false;
 
     /**
      * Créé la fenêtre principale du jeu
@@ -112,10 +113,12 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
-
+        this.continuer = true;
         this.layout.show(this.getContentPane(), "jouer");
         SauvegardePartie partie = new SauvegardePartie();
         this.jeu = new Jeu();
+        BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
+
 
         this.jeu.setAvatar(partie.creerAvatar());
         this.jeu.setJoueur(new Joueur(partie.getNomJoueur()));
@@ -166,7 +169,12 @@ public class FenetrePrincipale extends JFrame{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //AFFICHAGE POUR TESTS
         System.out.println("je sauvegarde bien");
+        long minutes = (BoucleJeu.secSinceLastConnexion / 1000) / 60;
+        long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
+        System.out.println("TEMPS DEPUIS DERNIERE CONNEXION : " + minutes + "min, " + seconds + " secs");
+        //FIN AFFICHAGE
     }
 
     /**
@@ -263,6 +271,10 @@ public class FenetrePrincipale extends JFrame{
 
     public void setBoucle(BoucleJeu nouvelleBoucle){
         this.boucle = nouvelleBoucle;
+    }
+
+    public boolean getContinuer() {
+        return this.continuer;
     }
 
 }

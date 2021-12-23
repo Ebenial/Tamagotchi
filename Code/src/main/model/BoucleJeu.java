@@ -9,7 +9,16 @@ public class BoucleJeu implements Runnable{
 
     public static Thread myThread;
     public boolean running = true;
+    public static long secSinceLastConnexion;
     private final FenetrePrincipale principale;
+    private int nbSecUpdateSante = 20;
+    private int nbSecUpdateBonheur = 20;
+    private int nbSecUpdateNourriture = 20;
+    private int nbSecUpdateEnergie = 20;
+    private int nbSecUpdateHygiene = 20;
+    private int nbSecUpdateDivertissement = 20;
+    private int nbSecAutoSave = 5;
+    private boolean isUpdateAllInitialized = false;
 
 
     public synchronized void start() {
@@ -17,18 +26,16 @@ public class BoucleJeu implements Runnable{
             public void run(){
                 long sec = 0;
                 //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
-                int nbSecUpdateSante = 2;
-                int nbSecUpdateBonheur = 2;
-                int nbSecUpdateNourriture = 2;
-                int nbSecUpdateEnergie = 2;
-                int nbSecUpdateHygiene = 2;
-                int nbSecUpdateDivertissement = 2;
-                int nbSecAutoSave = 5;
+
 
 
                 while (running) {
                     System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                     if(principale.getIsInitialized()) {
+                        if(!isUpdateAllInitialized && principale.getContinuer()) {
+                            updateAll();
+                            isUpdateAllInitialized = true;
+                        }
                         try {
                             myThread.sleep(1000);
                         } catch (InterruptedException ex) {
@@ -67,6 +74,30 @@ public class BoucleJeu implements Runnable{
         myThread.start();
         running = true;
         run();
+    }
+
+    /**
+     * Compte le nombre d'update qui aurait du se passer pour un evenement donne pendant la deconnexion du joueur
+     * @param secUpdate
+     * @return
+     */
+    private long numberOfUpdate(long secUpdate) {
+        long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
+        return seconds / secUpdate;
+    }
+
+    /**
+     * Update les stats du joueur après une reconnexion
+     */
+    private void updateAll() {
+        System.out.println("UPDATE ALL");
+        System.out.println("nbUpdate : " + (int) numberOfUpdate(nbSecUpdateSante));
+        updateSante((int) numberOfUpdate(-nbSecUpdateSante));
+        updateBonheur((int) numberOfUpdate(-nbSecUpdateBonheur));
+        updateNourriture((int) numberOfUpdate(-nbSecUpdateNourriture));
+        updateEnergie((int) numberOfUpdate(-nbSecUpdateEnergie));
+        updateHygiene((int) numberOfUpdate(-nbSecUpdateHygiene));
+        updateDivertissement((int) numberOfUpdate(-nbSecUpdateDivertissement));
     }
 
     public synchronized void stop() {

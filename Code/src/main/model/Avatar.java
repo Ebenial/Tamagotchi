@@ -27,11 +27,11 @@ public class Avatar {
         this.type = type;
         this.nom = nom;
         this.sante = 10;
-        this.bonheur = 9;
-        this.nourriture = 8;
-        this.energie = 7;
-        this.hygiene = 6;
-        this.divertissement = 5;
+        this.bonheur = 10;
+        this.nourriture = 10;
+        this.energie = 10;
+        this.hygiene = 10;
+        this.divertissement = 10;
     }
 
     /**
