@@ -86,6 +86,33 @@ public class BoucleJeu implements Runnable{
         return seconds / secUpdate;
     }
 
+    private void updateStatsWithStats() {
+        Avatar avatar = principale.getJeu().getAvatar();
+
+        //Sante
+        if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
+            //Faire baisser la sante plus rapidement
+        }
+        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 90) {
+            //Faire augmenter la sante
+        }
+
+        //Bonheur
+        if(avatar.getEnergie() <= 3 || avatar.getDivertissement() <= 3) {
+            //Faire baisser le bonheur plus rapidement
+        }
+        else if(avatar.getEnergie() > 30 && avatar.getEnergie() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
+            //Faire augmenter le bonheur
+        }
+
+        //Divertissement
+        if(avatar.getNourriture() >= 9) {
+            //Augmenter le divertissement
+        }
+
+
+    }
+
     /**
      * Update les stats du joueur après une reconnexion
      */
