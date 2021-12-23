@@ -46,13 +46,15 @@ public class Environnement extends JPanel implements KeyListener{
         //Affichage des statistiques et de l'heure
         JPanel nord = new JPanel();
         nord.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/4));
-        nord.setLayout(new GridLayout(1, 5));
+        nord.setLayout(new GridBagLayout());
         nord.setOpaque(false);
+
+        GridBagConstraints cNord = new GridBagConstraints();
 
         //Configuration du panneau des statistiques de l'avatar
         JPanel statistiques = new JPanel();
         statistiques.setOpaque(false);
-        statistiques.setLayout(new BorderLayout());
+        statistiques.setLayout(new GridLayout(1,1));
 
         //Ajout d'un panneau qui va afficher les icônes des statistiques
         JPanel imagesStats = new JPanel();
@@ -64,18 +66,20 @@ public class Environnement extends JPanel implements KeyListener{
         infosStats.setOpaque(false);
         infosStats.setLayout(new GridLayout(6, 1));
 
+
+
         //Construction des différents éléments des statistiques
-        JLabel imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoSante.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/health_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         sante = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getSante()));
-        JLabel imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/happiness_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         bonheur = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getBonheur()));
-        JLabel imageNourriture = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logonourriture.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageNourriture = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/food_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         nourriture = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getNourriture()));
-        JLabel imageEnergie = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoenergie.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageEnergie = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/energy_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         energie = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getEnergie()));
-        JLabel imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/hygien_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         hygiene = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getHygiene()));
-        JLabel imageDivertissement = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logodivertissement.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageDivertissement = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/entertainment_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         divertissement = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getDivertissement()));
 
         //Ajout des images aux panneaux
@@ -93,16 +97,30 @@ public class Environnement extends JPanel implements KeyListener{
         infosStats.add(divertissement);
 
         //Ajout des panneaux contenant les images et les barres de statistiques au panneau global qui contient toutes les statistiques
-        statistiques.add(imagesStats, BorderLayout.WEST);
-        statistiques.add(infosStats, BorderLayout.EAST);
+        statistiques.add(imagesStats);
+        statistiques.add(infosStats);
+
+        JPanel vide = new JPanel();
+        vide.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
+        vide.setOpaque(false);
 
         //Ajout du panneau des stats dans le coin gauche de l'écran
         nord.add(statistiques);
-        nord.add(new JLabel());
-        nord.add(new JLabel());
-        nord.add(new JLabel());
-        nord.add(new JLabel());
-        
+
+        cNord.gridx = 0;
+        cNord.gridy = 0;
+        cNord.weightx = 0.25;
+
+        nord.add(imagesStats);
+
+        cNord.gridx = 1;
+        cNord.weightx = 0.25;
+        nord.add(infosStats);
+
+        cNord.gridx = 2;
+        cNord.weightx = 0.5;
+        nord.add(vide);
+
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
@@ -168,7 +186,7 @@ public class Environnement extends JPanel implements KeyListener{
         sud.setOpaque(false);
         sud.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/6));
         sud.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        GridBagConstraints cSud = new GridBagConstraints();
 
 
 
@@ -199,18 +217,18 @@ public class Environnement extends JPanel implements KeyListener{
         options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/settings_icon.png").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
         options.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 0.25;
+        cSud.gridx = 0;
+        cSud.gridy = 0;
+        cSud.weightx = 0.25;
 
         sud.add(actions);
 
-        c.gridx = 1;
-        c.weightx = 0.5;
+        cSud.gridx = 1;
+        cSud.weightx = 0.5;
         sud.add(vide3);
 
-        c.gridx = 2;
-        c.weightx = 0.25;
+        cSud.gridx = 2;
+        cSud.weightx = 0.25;
         sud.add(options);
 
         //Ajout des éléments au panneau
