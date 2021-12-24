@@ -22,10 +22,16 @@ public class BoucleJeu implements Runnable{
     private int nbSecUpdateHygiene = 5;
     private int nbSecUpdateDivertissement = 5;
     private int nbSecAutoSave = 5;
-    private long timeCanEat = 10;
-    private long timeCanSleep = 10;
-    private long timeCanShower = 10;
-    private long timeCanPlay = 10;
+    private long timeCanEat = 2;
+    private long timeCanSleep = 2;
+    private long timeCanShower = 2;
+    private long timeCanPlay = 2;
+    private int nbSante = 0;
+    private int nbBonheur = 0;
+    private int nbNourriture = -1;
+    private int nbEnergie = -1;
+    private int nbHygiene = -1;
+    private int nbDivertissement = -1;
     private boolean isUpdateAllInitialized = false;
 
 
@@ -52,25 +58,26 @@ public class BoucleJeu implements Runnable{
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }
+                        updateStatsWithStats();
 
                         //Update;
                         if(sec % nbSecUpdateSante == 0) {
-                            updateSante(-1);
+                            updateSante(nbSante);
                         }
                         if(sec % nbSecUpdateBonheur == 0) {
-                            updateBonheur(-1);
+                            updateBonheur(nbBonheur);
                         }
                         if(sec % nbSecUpdateNourriture == 0) {
-                            updateNourriture(-1);
+                            updateNourriture(nbNourriture);
                         }
                         if(sec % nbSecUpdateEnergie == 0) {
-                            updateEnergie(-1);
+                            updateEnergie(nbEnergie);
                         }
                         if(sec % nbSecUpdateHygiene == 0) {
-                            updateHygiene(-1);
+                            updateHygiene(nbHygiene);
                         }
                         if(sec % nbSecUpdateDivertissement == 0) {
-                            updateDivertissement(-1);
+                            updateDivertissement(nbDivertissement);
                         }
                         if(sec % nbSecAutoSave == 0) {
                             principale.actionSauvegarde();
@@ -126,25 +133,19 @@ public class BoucleJeu implements Runnable{
 
         //Sante
         if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
-            //Faire baisser la sante plus rapidement
+            this.nbSante = -1;
         }
         else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 90) {
-            //Faire augmenter la sante
+            this.nbSante = 1;
         }
 
         //Bonheur
         if(avatar.getEnergie() <= 3 || avatar.getDivertissement() <= 3) {
-            //Faire baisser le bonheur plus rapidement
+            this.nbBonheur = -1;
         }
         else if(avatar.getEnergie() > 30 && avatar.getEnergie() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
-            //Faire augmenter le bonheur
+            this.nbBonheur = 1;
         }
-
-        //Divertissement
-        if(avatar.getNourriture() >= 9) {
-            //Augmenter le divertissement
-        }
-
 
     }
 
