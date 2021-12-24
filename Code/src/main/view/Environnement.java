@@ -114,7 +114,6 @@ public class Environnement extends JPanel implements KeyListener{
         nord.add(imagesStats);
 
         cNord.gridx = 1;
-        cNord.weightx = 0.25;
         nord.add(infosStats);
 
         cNord.gridx = 2;
