@@ -6,6 +6,7 @@ import main.controler.ListenerBouton;
 import main.util.BoutonFleche;
 
 import main.model.Jeu;
+import main.util.CustomFont;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -21,7 +22,6 @@ public class Environnement extends JPanel implements KeyListener{
     public static JButton droite;
     public static JButton options;
     public static JButton action1;
-    public static JButton action2;
     public JLabel avatarChoisi;
     private final JLabel sante;
     private final JLabel bonheur;
@@ -190,19 +190,44 @@ public class Environnement extends JPanel implements KeyListener{
 
 
         JPanel actions = new JPanel();
-        actions.setBackground(Color.GREEN);
-        actions.setLayout(new GridLayout(1, 2));
+        actions.setOpaque(false);
+
 
         action1 = new JButton("Action1");
-        action1.addActionListener(new ListenerBouton(this.lieu, "Action1", principale));
-        action1.setBackground(Color.RED);
 
-        action2 = new JButton("Action2");
-        action2.addActionListener(new ListenerBouton(this.lieu, "Action2", principale));
-        action2.setBackground(Color.BLUE);
+        String actionText = "";
+
+        switch (this.lieu){
+            case "Chambre" : {
+                actionText = "Dormir";
+                break;
+            }
+
+            case "Douche" :{
+                actionText = "Se Nettoyer";
+                break;
+
+            }
+
+            case "Cuisine" : {
+                actionText = "Manger";
+                break;
+            }
+
+            case "Jardin" :{
+                actionText = "Jouer";
+            }
+        }
+        action1.setText(actionText);
+        action1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        action1.addActionListener(new ListenerBouton(this.lieu, "Action1", principale));
+        action1.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
+        action1.setVerticalAlignment(JButton.CENTER);
+        action1.setFont(CustomFont.customFont50_PLAIN);
+        action1.setContentAreaFilled(false);
+        action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
 
         actions.add(action1);
-        actions.add(action2);
 
         JPanel vide3 = new JPanel();
         vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
