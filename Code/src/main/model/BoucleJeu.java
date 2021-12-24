@@ -22,6 +22,10 @@ public class BoucleJeu implements Runnable{
     private int nbSecUpdateHygiene = 5;
     private int nbSecUpdateDivertissement = 5;
     private int nbSecAutoSave = 5;
+    private long timeCanEat = 10;
+    private long timeCanSleep = 10;
+    private long timeCanShower = 10;
+    private long timeCanPlay = 10;
     private boolean isUpdateAllInitialized = false;
 
 
@@ -70,6 +74,18 @@ public class BoucleJeu implements Runnable{
                         }
                         if(sec % nbSecAutoSave == 0) {
                             principale.actionSauvegarde();
+                        }
+                        if(sec % timeCanEat == 0) {
+                            principale.getJeu().getAvatar().setCanEat(true);
+                        }
+                        if(sec % timeCanPlay == 0) {
+                            principale.getJeu().getAvatar().setCanPlay(true);
+                        }
+                        if(sec % timeCanShower == 0) {
+                            principale.getJeu().getAvatar().setCanShower(true);
+                        }
+                        if(sec % timeCanSleep == 0) {
+                            principale.getJeu().getAvatar().setCanSleep(true);
                         }
 
                         sec++;

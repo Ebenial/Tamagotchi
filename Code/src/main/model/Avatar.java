@@ -19,6 +19,11 @@ public class Avatar {
     private int hygiene;
     private int divertissement;
     private FenetrePrincipale principale;
+    private boolean canEat = true;
+    private boolean canShower = true;
+    private boolean canPlay = true;
+    private boolean canSleep = true;
+
 
 
 
@@ -160,7 +165,6 @@ public class Avatar {
     //SETTERS
 
     public void setSante(int nouvelleSante){
-        System.out.println("SetSante : " + nouvelleSante);
         if(nouvelleSante < 0){
             this.sante = 0;
         }else if(nouvelleSante > 10){
@@ -169,11 +173,10 @@ public class Avatar {
             this.sante = nouvelleSante;
         }
         JLabel label1 =  principale.getCurrentEnvironnement().getSante();   //Récupération de l'affichage de la barre de santé
-        label1.setIcon(principale.getJeu().choixBarreStats(nouvelleSante)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
+        label1.setIcon(principale.getJeu().choixBarreStats(this.sante)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
     }
 
     public void setBonheur(int nouveauBonheur){
-        System.out.println("SetBonheur : " + nouveauBonheur);
         if(nouveauBonheur < 0) {
             this.bonheur = 0;
         }
@@ -185,11 +188,10 @@ public class Avatar {
         }
         //System.out.println("bonheur : " + bonheur);
         JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
-        label2.setIcon(principale.getJeu().choixBarreStats(nouveauBonheur));
+        label2.setIcon(principale.getJeu().choixBarreStats(this.bonheur));
     }
     
     public void setNourriture(int nouvellenourriture){
-        System.out.println("SetNourriture : " + nouvellenourriture);
         if(nouvellenourriture < 0) {
             this.nourriture = 0;
         }
@@ -202,7 +204,7 @@ public class Avatar {
 
         //System.out.println("nourriture : " + nourriture);
         JLabel label1 =  principale.getCurrentEnvironnement().getNourriture();
-        label1.setIcon(principale.getJeu().choixBarreStats(nouvellenourriture));
+        label1.setIcon(principale.getJeu().choixBarreStats(this.nourriture));
     }
 
     public void setEnergie(int nouvelleenergie){
@@ -218,11 +220,10 @@ public class Avatar {
 
         //System.out.println("energie : " + energie);
         JLabel label1 =  principale.getCurrentEnvironnement().getEnergie();
-        label1.setIcon(principale.getJeu().choixBarreStats(nouvelleenergie));
+        label1.setIcon(principale.getJeu().choixBarreStats(this.energie));
     }
 
     public void setHygiene(int nouvelleHygiene){
-        System.out.println("setHygiene : " + nouvelleHygiene);
         if(nouvelleHygiene < 0) {
             this.hygiene = 0;
         }
@@ -235,12 +236,11 @@ public class Avatar {
 
         //System.out.println("hygiene : " + hygiene);
         JLabel label1 =  principale.getCurrentEnvironnement().getHygiene();
-        label1.setIcon(principale.getJeu().choixBarreStats(nouvelleHygiene));
+        label1.setIcon(principale.getJeu().choixBarreStats(this.hygiene));
 
     }
 
     public void setDivertissement(int nouveauxdivertissement){
-        System.out.println("setDivertissement : " + nouveauxdivertissement);
         if(nouveauxdivertissement < 0) {
             this.divertissement = 0;
         }
@@ -253,7 +253,7 @@ public class Avatar {
 
         //System.out.println("divertissement : " + divertissement);
         JLabel label3 =  principale.getCurrentEnvironnement().getDivertissement();
-        label3.setIcon(principale.getJeu().choixBarreStats(nouveauxdivertissement));
+        label3.setIcon(principale.getJeu().choixBarreStats(this.divertissement));
     }
 
     public void setPrincipale(FenetrePrincipale principale) {
@@ -266,5 +266,37 @@ public class Avatar {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void setCanEat(boolean bool) {
+        this.canEat = bool;
+    }
+
+    public void setCanShower(boolean bool) {
+        this.canShower = bool;
+    }
+
+    public void setCanPlay(boolean bool) {
+        this.canPlay = bool;
+    }
+
+    public void setCanSleep(boolean bool) {
+        this.canSleep = bool;
+    }
+
+    public boolean getCanEat() {
+        return canEat;
+    }
+
+    public boolean getCanPlay() {
+        return canPlay;
+    }
+
+    public boolean getCanShower() {
+        return canShower;
+    }
+
+    public boolean getCanSleep() {
+        return canSleep;
     }
 }

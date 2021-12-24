@@ -1,4 +1,4 @@
-/**
+
 package test;
 import main.model.Avatar;
 
@@ -262,4 +262,3 @@ public class Test_Avatar {
         assertNotEquals(oiseau.getDivertissement(), 7);
     }
 }
-*/
