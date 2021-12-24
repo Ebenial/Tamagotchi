@@ -38,6 +38,7 @@ public class BoucleJeu implements Runnable{
                 while (running) {
                     System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                     if(principale.getIsInitialized()) {
+                        principale.getJeu().getAvatar().setPrincipale(principale);
                         if(!isUpdateAllInitialized && principale.getContinuer()) {
                             updateAll();
                             isUpdateAllInitialized = true;
@@ -158,8 +159,6 @@ public class BoucleJeu implements Runnable{
         int sante = this.principale.getJeu().getAvatar().getSante();        //Récupération de la santé actuelle
         this.principale.getJeu().getAvatar().setSante(sante + modif);       //Mise à jour de la valeur de santé de l'avatar
         //System.out.println("sante : " + sante);
-        JLabel label1 =  principale.getCurrentEnvironnement().getSante();   //Récupération de l'affichage de la barre de santé
-        label1.setIcon(principale.getJeu().choixBarreStats(sante + modif)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
     }
 
     /**
@@ -170,9 +169,6 @@ public class BoucleJeu implements Runnable{
 
         int bonheur = this.principale.getJeu().getAvatar().getBonheur();
         this.principale.getJeu().getAvatar().setBonheur(bonheur + modif);
-        //System.out.println("bonheur : " + bonheur);
-        JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
-        label2.setIcon(principale.getJeu().choixBarreStats(bonheur + modif));
     }
 
     /**
@@ -183,9 +179,7 @@ public class BoucleJeu implements Runnable{
 
         int nourriture = this.principale.getJeu().getAvatar().getNourriture();
         this.principale.getJeu().getAvatar().setNourriture(nourriture + modif);
-        //System.out.println("nourriture : " + nourriture);
-        JLabel label1 =  principale.getCurrentEnvironnement().getNourriture();
-        label1.setIcon(principale.getJeu().choixBarreStats(nourriture + modif));
+
     }
 
     /**
@@ -196,9 +190,7 @@ public class BoucleJeu implements Runnable{
 
         int energie = this.principale.getJeu().getAvatar().getEnergie();
         this.principale.getJeu().getAvatar().setEnergie(energie + modif);
-        //System.out.println("energie : " + energie);
-        JLabel label1 =  principale.getCurrentEnvironnement().getEnergie();
-        label1.setIcon(principale.getJeu().choixBarreStats(energie + modif));
+
     }
 
     /**
@@ -209,9 +201,7 @@ public class BoucleJeu implements Runnable{
 
         int hygiene = this.principale.getJeu().getAvatar().getHygiene();
         this.principale.getJeu().getAvatar().setHygiene(hygiene + modif);
-        //System.out.println("hygiene : " + hygiene);
-        JLabel label1 =  principale.getCurrentEnvironnement().getHygiene();
-        label1.setIcon(principale.getJeu().choixBarreStats(hygiene + modif));
+
     }
 
     /**
@@ -222,9 +212,7 @@ public class BoucleJeu implements Runnable{
 
         int divertissement = this.principale.getJeu().getAvatar().getDivertissement();
         this.principale.getJeu().getAvatar().setDivertissement(divertissement + modif);
-        //System.out.println("divertissement : " + divertissement);
-        JLabel label3 =  principale.getCurrentEnvironnement().getDivertissement();
-        label3.setIcon(principale.getJeu().choixBarreStats(divertissement + modif));
+
     }
 
     /**

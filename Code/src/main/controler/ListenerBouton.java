@@ -31,6 +31,7 @@ public class ListenerBouton implements ActionListener{
         this.principale = fp;
         this.lieu = lieu;
         this.direction = direction;
+
     }
 
     /**
@@ -120,10 +121,19 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionOptionsEnJeu();
         }else if(this.lieu.equals("Chambre") && this.direction.equals("Action1")){
             //TODO : enlever le print (jsp si ça sert à quelqu'un ou pas)
-
-            System.out.println("coucou");
-            int santeActuelle = this.principale.getJeu().getAvatar().getSante();
-            this.principale.getJeu().getAvatar().setSante(santeActuelle + 2);
+            System.out.println(this.lieu);
+            int energieActuelle = this.principale.getJeu().getAvatar().getEnergie();
+            this.principale.getJeu().getAvatar().setEnergie(energieActuelle + 2);
+        } else if(this.lieu.equals("Douche") && this.direction.equals("Action1")) {
+            int hygieneActuelle = this.principale.getJeu().getAvatar().getHygiene();
+            this.principale.getJeu().getAvatar().setHygiene(hygieneActuelle + 2);
+        } else if(this.lieu.equals("Cuisine") && this.direction.equals("Action1")) {
+            int mangerActuel = this.principale.getJeu().getAvatar().getNourriture();
+            this.principale.getJeu().getAvatar().setNourriture(mangerActuel + 2);
+        } else if(this.lieu.equals("Jardin") && this.direction.equals("Action1")) {
+            int divertissementActuel = this.principale.getJeu().getAvatar().getDivertissement();
+            this.principale.getJeu().getAvatar().setDivertissement(divertissementActuel + 2);
         }
+
     }
 }

@@ -1,3 +1,4 @@
+/**
 package test;
 import main.model.Avatar;
 import main.model.Jeu;
@@ -57,3 +58,4 @@ public class Test_Jeu {
         
     }
 }
+*/
