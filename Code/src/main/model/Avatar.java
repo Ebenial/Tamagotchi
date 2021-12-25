@@ -1,5 +1,9 @@
 package main.model;
 
+import main.view.FenetrePrincipale;
+
+import javax.swing.*;
+
 /**
  * Créé un avatar
  */
@@ -14,6 +18,12 @@ public class Avatar {
     private int energie;
     private int hygiene;
     private int divertissement;
+    private FenetrePrincipale principale;
+    private boolean canEat = true;
+    private boolean canShower = true;
+    private boolean canPlay = true;
+    private boolean canSleep = true;
+
 
 
 
@@ -27,11 +37,11 @@ public class Avatar {
         this.type = type;
         this.nom = nom;
         this.sante = 10;
-        this.bonheur = 9;
-        this.nourriture = 8;
-        this.energie = 7;
-        this.hygiene = 6;
-        this.divertissement = 5;
+        this.bonheur = 10;
+        this.nourriture = 10;
+        this.energie = 10;
+        this.hygiene = 10;
+        this.divertissement = 10;
     }
 
     /**
@@ -162,26 +172,92 @@ public class Avatar {
         }else{
             this.sante = nouvelleSante;
         }
+        JLabel label1 =  principale.getCurrentEnvironnement().getSante();   //Récupération de l'affichage de la barre de santé
+        label1.setIcon(principale.getJeu().choixBarreStats(this.sante)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
     }
 
     public void setBonheur(int nouveauBonheur){
-        this.bonheur = nouveauBonheur;
+        if(nouveauBonheur < 0) {
+            this.bonheur = 0;
+        }
+        else if(nouveauBonheur > 10) {
+            this.bonheur = 10;
+        }
+        else {
+            this.bonheur = nouveauBonheur;
+        }
+        //System.out.println("bonheur : " + bonheur);
+        JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
+        label2.setIcon(principale.getJeu().choixBarreStats(this.bonheur));
     }
     
     public void setNourriture(int nouvellenourriture){
-        this.nourriture = nouvellenourriture;
+        if(nouvellenourriture < 0) {
+            this.nourriture = 0;
+        }
+        else if(nouvellenourriture > 10) {
+            this.nourriture = 10;
+        }
+        else {
+            this.nourriture = nouvellenourriture;
+        }
+
+        //System.out.println("nourriture : " + nourriture);
+        JLabel label1 =  principale.getCurrentEnvironnement().getNourriture();
+        label1.setIcon(principale.getJeu().choixBarreStats(this.nourriture));
     }
 
     public void setEnergie(int nouvelleenergie){
-        this.energie = nouvelleenergie;
+        System.out.println("setEnergie : " + nouvelleenergie);
+        if(nouvelleenergie < 0) {
+            this.energie = 0;
+        }
+        else if(nouvelleenergie > 10) {
+            this.energie = 10;
+        } else {
+            this.energie = nouvelleenergie;
+        }
+
+        //System.out.println("energie : " + energie);
+        JLabel label1 =  principale.getCurrentEnvironnement().getEnergie();
+        label1.setIcon(principale.getJeu().choixBarreStats(this.energie));
     }
 
     public void setHygiene(int nouvelleHygiene){
-        this.hygiene = nouvelleHygiene;
+        if(nouvelleHygiene < 0) {
+            this.hygiene = 0;
+        }
+        else if(nouvelleHygiene > 10) {
+            this.hygiene = 10;
+        }
+        else {
+            this.hygiene = nouvelleHygiene;
+        }
+
+        //System.out.println("hygiene : " + hygiene);
+        JLabel label1 =  principale.getCurrentEnvironnement().getHygiene();
+        label1.setIcon(principale.getJeu().choixBarreStats(this.hygiene));
+
     }
 
     public void setDivertissement(int nouveauxdivertissement){
-        this.divertissement = nouveauxdivertissement;
+        if(nouveauxdivertissement < 0) {
+            this.divertissement = 0;
+        }
+        else if(nouveauxdivertissement > 10) {
+            this.divertissement = 10;
+        }
+        else {
+            this.divertissement = nouveauxdivertissement;
+        }
+
+        //System.out.println("divertissement : " + divertissement);
+        JLabel label3 =  principale.getCurrentEnvironnement().getDivertissement();
+        label3.setIcon(principale.getJeu().choixBarreStats(this.divertissement));
+    }
+
+    public void setPrincipale(FenetrePrincipale principale) {
+        this.principale = principale;
     }
 
     public void setType(String type) {
@@ -190,5 +266,37 @@ public class Avatar {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void setCanEat(boolean bool) {
+        this.canEat = bool;
+    }
+
+    public void setCanShower(boolean bool) {
+        this.canShower = bool;
+    }
+
+    public void setCanPlay(boolean bool) {
+        this.canPlay = bool;
+    }
+
+    public void setCanSleep(boolean bool) {
+        this.canSleep = bool;
+    }
+
+    public boolean getCanEat() {
+        return canEat;
+    }
+
+    public boolean getCanPlay() {
+        return canPlay;
+    }
+
+    public boolean getCanShower() {
+        return canShower;
+    }
+
+    public boolean getCanSleep() {
+        return canSleep;
     }
 }

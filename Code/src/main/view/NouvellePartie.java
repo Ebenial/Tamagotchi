@@ -5,6 +5,7 @@ import javax.swing.*;
 import main.controler.ListenerBouton;
 import main.util.BoutonFleche;
 import main.util.CustomFont;
+import main.util.CustomJButton;
 
 import java.awt.*;
 
@@ -20,8 +21,8 @@ public class NouvellePartie extends JPanel{
     public static JTextArea nomAvatar;
     public static JButton choixGauche;
     public static JButton choixDroite;
-    public static JButton valider;
-    public static JButton retour;
+    public static CustomJButton valider;
+    public static CustomJButton retour;
     public ImageIcon[] imagesAvatar;
     public JLabel avatarChoisi;
     public static String monChoix;
@@ -99,28 +100,19 @@ public class NouvellePartie extends JPanel{
         sud.setOpaque(false);
 
         //Bouton pour valider la création du personnage
-        valider = new JButton("Valider", new ImageIcon("Code/resources/others/button_background.png"));
-        valider.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-
-
-        valider.addActionListener(new ListenerBouton(principale, this));
-        valider.setPreferredSize(new Dimension(600, 150));
-        valider.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        valider.setFont(CustomFont.customFont50);
+        valider = new CustomJButton("Valider", principale, this, null, null, null, null);
 
         //Bouton pour retourner à la sélection nouvelle partie / charger une partie
-        retour = new JButton("Retour");
-        retour.addActionListener(new ListenerBouton("Chambre", principale));
-        retour.setPreferredSize(new Dimension(600, 150));
-        retour.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
-        retour.setFont(CustomFont.customFont50);
+
+        retour = new CustomJButton("Retour", principale, null, null, null, "Chambre", null);
+        retour.setPreferredSize(new Dimension(384, 96));
 
         //Bouton pour changer de type d'avatar vers la gauche String sensFleche, int x, int y, int longueur, int hauteur
-        choixGauche = new BoutonFleche("Gauche", 150, 120);
+        choixGauche = new BoutonFleche("Gauche", 100, 100);
         choixGauche.addActionListener(new ListenerBouton(this));
 
         //Bouton pour changer de type d'avatar vers la droite
-        choixDroite = new BoutonFleche("Droite", 150, 120);
+        choixDroite = new BoutonFleche("Droite", 100, 100);
         choixDroite.addActionListener(new ListenerBouton(this));
 
         //Tableau contenant toutes les images possibles pour un avatar
@@ -160,19 +152,18 @@ public class NouvellePartie extends JPanel{
      * @param s - le String permettant de savoir si le joueur a cliqué sur le bouton gauche ou droite
      */
     public void actionSwitchAvatar(String s){
-        if(s == "Gauche"){
+        if(s.equals("Gauche")){
             position--;
             if(this.position < 0){
                 position = this.imagesAvatar.length - 1;
             }
-            avatarChoisi.setIcon(imagesAvatar[position]);
         }else{
             position++;
             if(this.position > (this.imagesAvatar.length - 1)){
                 position = 0;
             }
-            avatarChoisi.setIcon(imagesAvatar[position]);
         }
+        avatarChoisi.setIcon(imagesAvatar[position]);
     }
 
     /**
@@ -183,11 +174,11 @@ public class NouvellePartie extends JPanel{
             case 1:
                 monChoix = "Chien";
                 break;
-            
+
             case 2:
                 monChoix = "Oiseau";
                 break;
-            
+
             case 3:
                 monChoix = "Poulpe";
                 break;
@@ -199,7 +190,7 @@ public class NouvellePartie extends JPanel{
             default:
                 monChoix = "Chat";
                 break;
-                
+
         }
     }
 

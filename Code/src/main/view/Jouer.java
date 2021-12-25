@@ -2,8 +2,6 @@ package main.view;
 
 import javax.swing.*;
 
-import main.controler.ListenerBouton;
-import main.util.CustomFont;
 import main.util.CustomJButton;
 
 import java.awt.*;
@@ -53,15 +51,16 @@ public class Jouer extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
 
         //Bouton qui lance une nouvelle partie
-        nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre, "Code/resources/others/button_background_large.png");
+        nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
         this.add(nouvellePartie);
 
+
         //Bouton qui mène à la page des sauvegardes
-        continuer = new CustomJButton("Continuer", fenetre, "Code/resources/others/button_background_large.png");
+        continuer = new CustomJButton("Continuer", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
         this.add(continuer);
 
         //Bouton qui ramène à la page d'accueil
-        retour = new CustomJButton("Retour", fenetre, "Code/resources/others/button_background_large.png");
+        retour = new CustomJButton("Retour", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
         this.add(retour);
 
         //BORDERLAYOUT.SOUTH

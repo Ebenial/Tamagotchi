@@ -6,6 +6,7 @@ import main.controler.ListenerBouton;
 import main.util.BoutonFleche;
 
 import main.model.Jeu;
+import main.util.CustomFont;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -21,7 +22,6 @@ public class Environnement extends JPanel implements KeyListener{
     public static JButton droite;
     public static JButton options;
     public static JButton action1;
-    public static JButton action2;
     public JLabel avatarChoisi;
     private final JLabel sante;
     private final JLabel bonheur;
@@ -46,13 +46,15 @@ public class Environnement extends JPanel implements KeyListener{
         //Affichage des statistiques et de l'heure
         JPanel nord = new JPanel();
         nord.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/4));
-        nord.setLayout(new GridLayout(1, 5));
+        nord.setLayout(new GridBagLayout());
         nord.setOpaque(false);
+
+        GridBagConstraints cNord = new GridBagConstraints();
 
         //Configuration du panneau des statistiques de l'avatar
         JPanel statistiques = new JPanel();
         statistiques.setOpaque(false);
-        statistiques.setLayout(new BorderLayout());
+        statistiques.setLayout(new GridLayout(1,1));
 
         //Ajout d'un panneau qui va afficher les icônes des statistiques
         JPanel imagesStats = new JPanel();
@@ -64,18 +66,20 @@ public class Environnement extends JPanel implements KeyListener{
         infosStats.setOpaque(false);
         infosStats.setLayout(new GridLayout(6, 1));
 
+
+
         //Construction des différents éléments des statistiques
-        JLabel imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoSante.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageSante = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/health_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         sante = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getSante()));
-        JLabel imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoBonheur.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageBonheur = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/happiness_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         bonheur = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getBonheur()));
-        JLabel imageNourriture = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logonourriture.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageNourriture = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/food_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         nourriture = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getNourriture()));
-        JLabel imageEnergie = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoenergie.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageEnergie = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/energy_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         energie = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getEnergie()));
-        JLabel imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logoHygiene.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageHygiene = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/hygien_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         hygiene = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getHygiene()));
-        JLabel imageDivertissement = new JLabel(new ImageIcon(new ImageIcon("Code/resources/others/logodivertissement.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+        JLabel imageDivertissement = new JLabel(new ImageIcon(new ImageIcon("Code/resources/environnement/entertainment_icon.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
         divertissement = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getDivertissement()));
 
         //Ajout des images aux panneaux
@@ -93,16 +97,29 @@ public class Environnement extends JPanel implements KeyListener{
         infosStats.add(divertissement);
 
         //Ajout des panneaux contenant les images et les barres de statistiques au panneau global qui contient toutes les statistiques
-        statistiques.add(imagesStats, BorderLayout.WEST);
-        statistiques.add(infosStats, BorderLayout.EAST);
+        statistiques.add(imagesStats);
+        statistiques.add(infosStats);
+
+        JPanel vide = new JPanel();
+        vide.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
+        vide.setOpaque(false);
 
         //Ajout du panneau des stats dans le coin gauche de l'écran
         nord.add(statistiques);
-        nord.add(new JLabel());
-        nord.add(new JLabel());
-        nord.add(new JLabel());
-        nord.add(new JLabel());
-        
+
+        cNord.gridx = 0;
+        cNord.gridy = 0;
+        cNord.weightx = 0.25;
+
+        nord.add(imagesStats);
+
+        cNord.gridx = 1;
+        nord.add(infosStats);
+
+        cNord.gridx = 2;
+        cNord.weightx = 0.5;
+        nord.add(vide);
+
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
@@ -166,37 +183,76 @@ public class Environnement extends JPanel implements KeyListener{
         //Affichage des actions possibles pour le joueur ainsi que la roue des options
         JPanel sud = new JPanel();
         sud.setOpaque(false);
-        sud.setPreferredSize(new Dimension(1000, Toolkit.getDefaultToolkit().getScreenSize().height/6));
-        sud.setLayout(new GridLayout(1, 3));
+        sud.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/6));
+        sud.setLayout(new GridBagLayout());
+        GridBagConstraints cSud = new GridBagConstraints();
+
+
 
         JPanel actions = new JPanel();
-        actions.setBackground(Color.GREEN);
-        actions.setLayout(new GridLayout(1, 2));
+        actions.setOpaque(false);
+
 
         action1 = new JButton("Action1");
-        action1.addActionListener(new ListenerBouton(this.lieu, "Action1", principale));
-        action1.setBackground(Color.RED);
 
-        action2 = new JButton("Action2");
-        action2.addActionListener(new ListenerBouton(this.lieu, "Action2", principale));
-        action2.setBackground(Color.BLUE);
+        String actionText = "";
+
+        switch (this.lieu){
+            case "Chambre" : {
+                actionText = "Dormir";
+                break;
+            }
+
+            case "Douche" :{
+                actionText = "Se Nettoyer";
+                break;
+
+            }
+
+            case "Cuisine" : {
+                actionText = "Manger";
+                break;
+            }
+
+            case "Jardin" :{
+                actionText = "Jouer";
+            }
+        }
+        action1.setText(actionText);
+        action1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        action1.addActionListener(new ListenerBouton(this.lieu, "Action1", principale));
+        action1.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
+        action1.setVerticalAlignment(JButton.CENTER);
+        action1.setFont(CustomFont.customFont50_PLAIN);
+        action1.setContentAreaFilled(false);
+        action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
 
         actions.add(action1);
-        actions.add(action2);
 
         JPanel vide3 = new JPanel();
+        vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide3.setOpaque(false);
 
-        options = new JButton("Options");
+        options = new JButton();
         options.addActionListener(new ListenerBouton(this.lieu, "Options", principale));
-        options.setBackground(Color.WHITE);
-        //options.setContentAreaFilled(false);
-        //options.setFocusPainted(false);
-        //options.setBorderPainted(false);
-        //options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/logoOptions.png").getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH)));
+        options.setContentAreaFilled(false);
+        options.setFocusPainted(false);
+        options.setBorderPainted(false);
+        options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/settings_icon.png").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+        options.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+
+        cSud.gridx = 0;
+        cSud.gridy = 0;
+        cSud.weightx = 0.25;
 
         sud.add(actions);
+
+        cSud.gridx = 1;
+        cSud.weightx = 0.5;
         sud.add(vide3);
+
+        cSud.gridx = 2;
+        cSud.weightx = 0.25;
         sud.add(options);
 
         //Ajout des éléments au panneau
@@ -259,9 +315,7 @@ public class Environnement extends JPanel implements KeyListener{
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        
-    }
+    public void keyPressed(KeyEvent e) {}
 
     @Override
     public void keyReleased(KeyEvent e) {}
