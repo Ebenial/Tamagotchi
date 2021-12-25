@@ -21,39 +21,4 @@ public class Test_Jeu {
         assertNotNull(test_jeu.getAvatar());
         assertNotNull(test_jeu.getJoueur());
     }
-    
-    @Test 
-    public void test_init() {
-        Jeu test_jeu = new Jeu("Pierre", "Felix", "Chat");
-        Date expected_compteur = new Date();
-        boolean expected_enCours = true;
-        assertNotNull(test_jeu.getCompteur());
-        assertNotNull(test_jeu.getEnCours());
-
-        assertEquals(expected_enCours, test_jeu.getEnCours());
-        assertEquals(expected_compteur, test_jeu.getCompteur());
-    }
-
-
-    @Test 
-    public void test_tempsEcoule() {
-        Avatar test_Avatar = new Avatar("chien", "Clifford");
-        Jeu test_jeu = new Jeu("Pierre", test_Avatar.getNom(), test_Avatar.getType());
-
-        Date expected_date = new Date();
-        int expected_nourriture = 7;
-        int expected_energie = 6;
-        int expected_hygiene = 5;
-        int expected_divertissement = 4;
-
-        assertEquals(expected_date.getTime() - test_jeu.getCompteur().getTime() / 1000 > 2, true);
-
-        //test_jeu.tempsEcoule_test(); // modifie les attributs de l'avatar et la valeur du compteur
-
-        assertEquals(expected_nourriture, test_jeu.getAvatar().getNourriture());
-        assertEquals(expected_energie, test_jeu.getAvatar().getEnergie());
-        assertEquals(expected_hygiene, test_jeu.getAvatar().getHygiene());
-        assertEquals(expected_divertissement, test_jeu.getAvatar().getDivertissement());
-        
-    }
 }
