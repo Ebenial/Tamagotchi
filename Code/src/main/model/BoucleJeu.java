@@ -52,6 +52,7 @@ public class BoucleJeu implements Runnable{
                     if(principale.getIsInitialized()) {
                         if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                             principale.getLayout().show(principale.getContentPane(), "gameOver");
+                            running = false;
                         }
                         principale.getJeu().getAvatar().setPrincipale(principale);
                         if(!isUpdateAllInitialized && principale.getContinuer()) {
