@@ -152,6 +152,10 @@ public class FenetrePrincipale extends JFrame{
         switch (s) {
             case "Jouer":
             case "Options":
+                if(this.boucle.getMusic().equals("death")) {
+                    this.boucle.getClip().stop();
+                    this.boucle.playGameMusic();
+                }
             case "Regles":
                 this.layout.show(this.getContentPane(), "accueil");
                 break;

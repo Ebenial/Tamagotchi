@@ -33,12 +33,14 @@ public class BoucleJeu implements Runnable{
     private int nbHygiene = -1;
     private int nbDivertissement = -1;
     private boolean isUpdateAllInitialized = false;
+    private Clip clip;
+    private String music;
 
 
     public synchronized void start() {
         myThread = new Thread(){
             public void run(){
-                playSound();
+                playGameMusic();
 
                 long sec = 0;
                 //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
@@ -52,6 +54,9 @@ public class BoucleJeu implements Runnable{
                         if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                             principale.getLayout().show(principale.getContentPane(), "gameOver");
                             running = false;
+                            clip.stop();
+                            playDeathMusic();
+                            music = "death";
                         }
                         principale.getJeu().getAvatar().setPrincipale(principale);
                         if(!isUpdateAllInitialized && principale.getContinuer()) {
@@ -111,10 +116,30 @@ public class BoucleJeu implements Runnable{
         run();
     }
 
-    public void playSound() {
+    public Clip getClip() {
+        return this.clip;
+    }
+
+    public String getMusic() {
+        return this.music;
+    }
+
+    public void playGameMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/Tamagotchi.wav").getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
+            this.clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
+
+    public void playDeathMusic() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/death.wav").getAbsoluteFile());
+            this.clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
         } catch(Exception ex) {
