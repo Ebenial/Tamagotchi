@@ -3,13 +3,7 @@ package main.controler;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import main.view.FenetrePrincipale;
-import main.view.Accueil;
-import main.view.Jouer;
-import main.view.NouvellePartie;
-import main.view.Options;
-import main.view.Regles;
-import main.view.Sauvegardes;
+import main.view.*;
 
 /**
  * Contient toutes les actions des boutons
@@ -89,6 +83,8 @@ public class ListenerBouton implements ActionListener{
         }else if(e.getSource() == Jouer.retour){
             this.principale.actionRetour("Jouer");
         }else if(e.getSource() == Options.retour) {
+            this.principale.actionRetour("Options");
+        }else if(e.getSource() == GameOver.retour) {
             this.principale.actionRetour("Options");
         }else if(e.getSource() == Options.sauvegarde) {
             this.principale.actionSauvegarde();

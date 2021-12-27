@@ -96,8 +96,17 @@ public class NouvellePartie extends JPanel{
         //BORDERLAYOUT.SOUTH
         //Contient l'affichage de l'image de l'avater et les flèches pour changer de type d'avatar
         JPanel sud = new JPanel();
-        sud.setLayout(new GridLayout(1, 5));
+        sud.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         sud.setOpaque(false);
+
+        JPanel retourPanel =  new JPanel();
+        retourPanel.setLayout(new GridLayout(3,1));
+        retourPanel.setOpaque(false);
+
+        JPanel validerPanel = new JPanel();
+        validerPanel.setLayout(new GridLayout(3, 1));
+        //validerPanel.setOpaque(false);
 
         //Bouton pour valider la création du personnage
         valider = new CustomJButton("Valider", principale, this, null, null, null, null);
@@ -132,11 +141,28 @@ public class NouvellePartie extends JPanel{
         avatarChoisi = new JLabel(imagesAvatar[position]);
 
         //Ajout des différents éléments au panneau qui occupe le bas de l'écran
-        sud.add(retour);
+
+        JPanel vide = new JPanel();
+        vide.setOpaque(false);
+        vide.setPreferredSize(new Dimension(20,20));
+
+        JPanel vide2 = new JPanel();
+        //vide.setOpaque(false);
+        vide2.setBackground(Color.red);
+
+        retourPanel.add(vide);
+        retourPanel.add(retour);
+        retourPanel.add(vide);
+
+        validerPanel.add(vide2);
+        validerPanel.add(valider);
+        validerPanel.add(vide);
+
+        sud.add(retourPanel);
         sud.add(choixGauche);
         sud.add(avatarChoisi);
         sud.add(choixDroite);
-        sud.add(valider);
+        sud.add(validerPanel);
 
         //Ajout des composants au panneau d'accueil
         this.add(creation, BorderLayout.NORTH);

@@ -1,6 +1,7 @@
 package main.model;
 
 import main.view.FenetrePrincipale;
+import main.view.GameOver;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -47,7 +48,11 @@ public class BoucleJeu implements Runnable{
 
                 while (running) {
                     System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
+                    //Bouger la ligne setPrincipale
                     if(principale.getIsInitialized()) {
+                        if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
+                            principale.getLayout().show(principale.getContentPane(), "gameOver");
+                        }
                         principale.getJeu().getAvatar().setPrincipale(principale);
                         if(!isUpdateAllInitialized && principale.getContinuer()) {
                             updateAll();

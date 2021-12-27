@@ -5,8 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import main.model.*;
 import main.util.CustomFont;
@@ -24,6 +23,7 @@ public class FenetrePrincipale extends JFrame{
     private Sauvegardes sauvegardes;
     private Options options;
     private Regles regles;
+    private GameOver gameOver;
     private Environnement jardin;
     private Environnement cuisine;
     private Environnement chambre;
@@ -59,12 +59,14 @@ public class FenetrePrincipale extends JFrame{
         this.options = new Options(this);
         this.regles = new Regles(this);
         this.sauvegardes = new Sauvegardes(this);
+        this.gameOver = new GameOver(this);
 
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
         this.add(regles, "regles");
+        this.add(gameOver, "gameOver");
         //this.add(sauvegardes, "sauvegardes");
 
         this.setVisible(true);
@@ -276,5 +278,9 @@ public class FenetrePrincipale extends JFrame{
     public boolean getContinuer() {
         return this.continuer;
     }
+
+    public JPanel getGameOver(){return this.gameOver;}
+
+    public CardLayout getLayout(){return  this.layout;}
 
 }

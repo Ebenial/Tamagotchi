@@ -36,12 +36,12 @@ public class Avatar {
     public Avatar(String type, String nom){
         this.type = type;
         this.nom = nom;
-        this.sante = 10;
-        this.bonheur = 10;
-        this.nourriture = 10;
-        this.energie = 10;
-        this.hygiene = 10;
-        this.divertissement = 10;
+        this.sante = 2;
+        this.bonheur = 2;
+        this.nourriture = 2;
+        this.energie = 2;
+        this.hygiene = 2;
+        this.divertissement = 2;
     }
 
     /**
