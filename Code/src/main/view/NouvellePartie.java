@@ -6,6 +6,7 @@ import main.controler.ListenerBouton;
 import main.util.BoutonFleche;
 import main.util.CustomFont;
 import main.util.CustomJButton;
+import main.util.TransparentJPanel;
 
 import java.awt.*;
 
@@ -106,7 +107,7 @@ public class NouvellePartie extends JPanel{
 
         JPanel validerPanel = new JPanel();
         validerPanel.setLayout(new GridLayout(3, 1));
-        //validerPanel.setOpaque(false);
+        validerPanel.setOpaque(false);
 
         //Bouton pour valider la création du personnage
         valider = new CustomJButton("Valider", principale, this, null, null, null, null);
@@ -117,11 +118,11 @@ public class NouvellePartie extends JPanel{
         retour.setPreferredSize(new Dimension(384, 96));
 
         //Bouton pour changer de type d'avatar vers la gauche String sensFleche, int x, int y, int longueur, int hauteur
-        choixGauche = new BoutonFleche("Gauche", 100, 100);
+        choixGauche = new BoutonFleche("Gauche", 96, 96);
         choixGauche.addActionListener(new ListenerBouton(this));
 
         //Bouton pour changer de type d'avatar vers la droite
-        choixDroite = new BoutonFleche("Droite", 100, 100);
+        choixDroite = new BoutonFleche("Droite", 96, 96);
         choixDroite.addActionListener(new ListenerBouton(this));
 
         //Tableau contenant toutes les images possibles pour un avatar
@@ -142,27 +143,26 @@ public class NouvellePartie extends JPanel{
 
         //Ajout des différents éléments au panneau qui occupe le bas de l'écran
 
-        JPanel vide = new JPanel();
-        vide.setOpaque(false);
-        vide.setPreferredSize(new Dimension(20,20));
-
-        JPanel vide2 = new JPanel();
-        //vide.setOpaque(false);
-        vide2.setBackground(Color.red);
-
-        retourPanel.add(vide);
+        retourPanel.add(new TransparentJPanel());
         retourPanel.add(retour);
-        retourPanel.add(vide);
+        retourPanel.add(new TransparentJPanel());
 
-        validerPanel.add(vide2);
+        validerPanel.add(new TransparentJPanel());
         validerPanel.add(valider);
-        validerPanel.add(vide);
+        validerPanel.add(new TransparentJPanel());
 
-        sud.add(retourPanel);
-        sud.add(choixGauche);
-        sud.add(avatarChoisi);
-        sud.add(choixDroite);
-        sud.add(validerPanel);
+        c.insets = new Insets(5, 15, 5, 15);
+        c.gridy = 1;
+        c.gridx = 1;
+        sud.add(retourPanel, c);
+        c.gridx = 2;
+        sud.add(choixGauche, c);
+        c.gridx = 3;
+        sud.add(avatarChoisi, c);
+        c.gridx = 4;
+        sud.add(choixDroite, c);
+        c.gridx = 5;
+        sud.add(validerPanel, c);
 
         //Ajout des composants au panneau d'accueil
         this.add(creation, BorderLayout.NORTH);
