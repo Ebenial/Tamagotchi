@@ -150,12 +150,15 @@ public class FenetrePrincipale extends JFrame{
     public void actionRetour(String s){
 
         switch (s) {
-            case "Jouer":
-            case "Options":
+            case "GameOver":
+                this.layout.show(this.getContentPane(), "accueil");
                 if(this.boucle.getMusic().equals("death")) {
                     this.boucle.getClip().stop();
                     this.boucle.playGameMusic();
                 }
+                break;
+            case "Jouer":
+            case "Options":
             case "Regles":
                 this.layout.show(this.getContentPane(), "accueil");
                 break;
