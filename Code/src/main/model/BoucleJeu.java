@@ -22,6 +22,7 @@ public class BoucleJeu implements Runnable{
     private int nbSecUpdateHygiene = 5;
     private int nbSecUpdateDivertissement = 5;
     private int nbSecAutoSave = 5;
+    private int nbSecEvent = 1;
     private long timeCanEat = 2;
     private long timeCanSleep = 2;
     private long timeCanShower = 2;
@@ -104,6 +105,11 @@ public class BoucleJeu implements Runnable{
                         if(sec % timeCanSleep == 0) {
                             principale.getJeu().getAvatar().setCanSleep(true);
                         }
+                        if(sec % nbSecEvent == 0) {
+                            if(isEvent()) {
+                                theEvent();
+                            }
+                        }
 
                         sec++;
                     }
@@ -114,6 +120,40 @@ public class BoucleJeu implements Runnable{
         myThread.start();
         running = true;
         run();
+    }
+
+    private boolean isEvent() {
+        boolean evt = false;
+        int isEv = (int) (Math.random() * 60);
+        System.out.println("IS EVENEMENT = " + isEv);
+        if(isEv == 3 || isEv == 12 || isEv == 26 || isEv == 33 || isEv == 38 || isEv == 45 || isEv == 57) {
+            evt = true;
+        }
+        return evt;
+    }
+
+    private void theEvent() {
+        String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant"};
+        String alea = listeEvent[(int) (Math.random() * 7)];
+        System.out.println(alea);
+        switch (alea) {
+            case "malade":
+                updateSante(-2);
+            case "anniversaire":
+            case "soiree":
+                updateDivertissement(1);
+                updateBonheur(1);
+            case "amoureux":
+                updateBonheur(1);
+                updateHygiene(2);
+            case "sport":
+                updateEnergie(2);
+                updateSante(1);
+            case "jouer":
+                updateDivertissement(2);
+            case "restaurant":
+                updateNourriture(2);
+        }
     }
 
     public Clip getClip() {
