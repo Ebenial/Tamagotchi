@@ -33,6 +33,7 @@ public class FenetrePrincipale extends JFrame{
     private CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
     private boolean continuer = false;
+    private LaunchScreen launchScreen;
 
     /**
      * Créé la fenêtre principale du jeu
@@ -60,6 +61,7 @@ public class FenetrePrincipale extends JFrame{
         this.regles = new Regles(this);
         this.sauvegardes = new Sauvegardes(this);
         this.gameOver = new GameOver(this);
+        this.launchScreen = new LaunchScreen();
 
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
@@ -67,6 +69,7 @@ public class FenetrePrincipale extends JFrame{
         this.add(options, "options");
         this.add(regles, "regles");
         this.add(gameOver, "gameOver");
+        this.add(launchScreen, "launchScreen");
         //this.add(sauvegardes, "sauvegardes");
 
         this.setVisible(true);
@@ -286,8 +289,5 @@ public class FenetrePrincipale extends JFrame{
         return this.continuer;
     }
 
-    public JPanel getGameOver(){return this.gameOver;}
-
     public CardLayout getLayout(){return  this.layout;}
-
 }
