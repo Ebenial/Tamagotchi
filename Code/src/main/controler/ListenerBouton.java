@@ -3,6 +3,7 @@ package main.controler;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import main.util.CustomJButton;
 import main.view.*;
 
 /**
@@ -63,11 +64,25 @@ public class ListenerBouton implements ActionListener{
         this.panel = panel;
     }
 
+    /**else if(e.getSource() == Sauvegardes.sauvegarde1) {
+     this.principale.actionChargerPartie(Sauvegardes.sauvegarde1.getText());
+     }else if(e.getSource() == Sauvegardes.sauvegarde2) {
+     this.principale.actionChargerPartie(Sauvegardes.sauvegarde2.getText());
+     }else if(e.getSource() == Sauvegardes.sauvegarde3) {
+     this.principale.actionChargerPartie(Sauvegardes.sauvegarde3.getText());
+     }
+     */
+
     /**
      * Précise le comportement lorsqu'un bouton est cliqué
      * @param e - l'évènement déclencheur
      */
     public void actionPerformed(ActionEvent e){
+        for(int i = 0; i < Sauvegardes.arrayButton.size(); i++) {
+            if(e.getSource() == Sauvegardes.arrayButton.get(i)) {
+                this.principale.actionChargerPartie(Sauvegardes.arrayButton.get(i).getText());
+            }
+        }
         if(e.getSource() == Accueil.quitter){
             this.principale.actionQuitter();
         }else if(e.getSource() == Accueil.jouer){
@@ -97,14 +112,7 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionValider();
         }else if(e.getSource() == NouvellePartie.retour) {
             this.principale.actionRetour("NouvellePartie");
-        }else if(e.getSource() == Sauvegardes.sauvegarde1) {
-            this.principale.actionChargerPartie(Sauvegardes.sauvegarde1.getText());
-        }else if(e.getSource() == Sauvegardes.sauvegarde2) {
-            this.principale.actionChargerPartie(Sauvegardes.sauvegarde2.getText());
-        }else if(e.getSource() == Sauvegardes.sauvegarde3) {
-            this.principale.actionChargerPartie(Sauvegardes.sauvegarde3.getText());
-        }
-        else if(e.getSource() == NouvellePartie.choixGauche){
+        } else if(e.getSource() == NouvellePartie.choixGauche){
             this.panel.actionSwitchAvatar("Gauche");
         }else if(e.getSource() == NouvellePartie.choixDroite){
             this.panel.actionSwitchAvatar("Droite");
@@ -158,7 +166,6 @@ public class ListenerBouton implements ActionListener{
             else {
                 System.out.println("pas encore temps");
             }
-
         }
 
     }
