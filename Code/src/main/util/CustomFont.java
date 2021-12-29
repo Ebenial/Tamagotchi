@@ -12,6 +12,7 @@ public class CustomFont{
     public static Font customFont40 = null;
     public static Font customFont35 = null;
     public static Font customFont28 = null;
+    public static Font customFont18 = null;
 
     public static void initFont(){
         try {
@@ -24,6 +25,7 @@ public class CustomFont{
             customFont40 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 40f);
             customFont35 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 35f);
             customFont28 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 28f);
+            customFont28 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 18f);
 
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -34,6 +36,7 @@ public class CustomFont{
             ge.registerFont(customFont40);
             ge.registerFont(customFont35);
             ge.registerFont(customFont28);
+            ge.registerFont(customFont18);
 
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
