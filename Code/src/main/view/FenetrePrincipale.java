@@ -142,7 +142,6 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public void actionChargerPartie(String nom) {
-        this.layout.show(this.getContentPane(), "jouer");
         SauvegardePartie partie = new SauvegardePartie(nom);
         this.jeu = new Jeu();
         BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
@@ -166,6 +165,7 @@ public class FenetrePrincipale extends JFrame{
 
         this.layout.show(this.getContentPane(), "chambre");
         isInitialized = true;
+        this.layout.show(this.getContentPane(), "jouer");
     }
 
     /**
