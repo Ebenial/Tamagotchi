@@ -131,7 +131,6 @@ public class BoucleJeu implements Runnable{
     private boolean isEvent() {
         boolean evt = false;
         int isEv = (int) (Math.random() * 60);
-        System.out.println("IS EVENEMENT = " + isEv);
         if(isEv == 3 || isEv == 12 || isEv == 26 || isEv == 33 || isEv == 38 || isEv == 45 || isEv == 57) {
             evt = true;
         }

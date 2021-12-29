@@ -95,9 +95,16 @@ public class ListenerBouton implements ActionListener{
         }else if(e.getSource() == NouvellePartie.valider){
             this.panel.choixAvatar();
             this.principale.actionValider();
-        }else if(e.getSource() == NouvellePartie.retour){
+        }else if(e.getSource() == NouvellePartie.retour) {
             this.principale.actionRetour("NouvellePartie");
-        }else if(e.getSource() == NouvellePartie.choixGauche){
+        }else if(e.getSource() == Sauvegardes.sauvegarde1) {
+            this.principale.actionChargerPartie(Sauvegardes.sauvegarde1.getText());
+        }else if(e.getSource() == Sauvegardes.sauvegarde2) {
+            this.principale.actionChargerPartie(Sauvegardes.sauvegarde2.getText());
+        }else if(e.getSource() == Sauvegardes.sauvegarde3) {
+            this.principale.actionChargerPartie(Sauvegardes.sauvegarde3.getText());
+        }
+        else if(e.getSource() == NouvellePartie.choixGauche){
             this.panel.actionSwitchAvatar("Gauche");
         }else if(e.getSource() == NouvellePartie.choixDroite){
             this.panel.actionSwitchAvatar("Droite");

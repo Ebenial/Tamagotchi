@@ -3,8 +3,12 @@ package main.view;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import main.model.*;
@@ -63,6 +67,7 @@ public class FenetrePrincipale extends JFrame{
         this.gameOver = new GameOver(this);
         this.launchScreen = new LaunchScreen();
 
+
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
@@ -70,9 +75,21 @@ public class FenetrePrincipale extends JFrame{
         this.add(regles, "regles");
         this.add(gameOver, "gameOver");
         this.add(launchScreen, "launchScreen");
-        //this.add(sauvegardes, "sauvegardes");
-
+        this.add(sauvegardes, "sauvegardes");
+        pegi7Sound();
         this.setVisible(true);
+    }
+
+    private void pegi7Sound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/pegi7.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -118,14 +135,20 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
+        System.out.println("heeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrree");
         this.continuer = true;
+        this.layout.show(this.getContentPane(), "sauvegardes");
+
+    }
+
+    public void actionChargerPartie(String nom) {
         this.layout.show(this.getContentPane(), "jouer");
-        SauvegardePartie partie = new SauvegardePartie();
+        SauvegardePartie partie = new SauvegardePartie(nom);
         this.jeu = new Jeu();
         BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
 
 
-        this.jeu.setAvatar(partie.creerAvatar());
+        this.jeu.setAvatar(partie.creerAvatar(nom));
         this.jeu.setJoueur(new Joueur(partie.getNomJoueur()));
 
         System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
@@ -143,7 +166,6 @@ public class FenetrePrincipale extends JFrame{
 
         this.layout.show(this.getContentPane(), "chambre");
         isInitialized = true;
-
     }
 
     /**
