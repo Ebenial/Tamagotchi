@@ -25,7 +25,7 @@ public class CustomFont{
             customFont40 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 40f);
             customFont35 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 35f);
             customFont28 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 28f);
-            customFont28 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 18f);
+            customFont18 = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(Font.PLAIN, 18f);
 
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
