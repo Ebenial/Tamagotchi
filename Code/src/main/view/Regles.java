@@ -27,6 +27,7 @@ public class Regles extends JPanel {
         JLabel titre = new JLabel("Règles du jeu", SwingConstants.CENTER);
         titre.setFont(CustomFont.customFont50_PLAIN);
         titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre.setForeground(Color.white);
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche

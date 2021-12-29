@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public class NouvellePartie extends JPanel{
 
-    public JLabel creation;
+    public JLabel titre;
     public JLabel joueur;
     public static CustomJTextField nomJoueur;
     public JLabel avatar;
@@ -36,10 +36,10 @@ public class NouvellePartie extends JPanel{
 
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
-        creation = new JLabel("NOUVELLE PARTIE", SwingConstants.CENTER);
-        creation.setFont(CustomFont.customFont100_PLAIN);
-        creation.setForeground(Color.white);
-        creation.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre = new JLabel("NOUVELLE PARTIE", SwingConstants.CENTER);
+        titre.setFont(CustomFont.customFont50_PLAIN);
+        titre.setForeground(Color.white);
+        titre.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -168,7 +168,7 @@ public class NouvellePartie extends JPanel{
         sud.add(validerPanel, c);
 
         //Ajout des composants au panneau d'accueil
-        this.add(creation, BorderLayout.NORTH);
+        this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(nouveautes, BorderLayout.EAST);
