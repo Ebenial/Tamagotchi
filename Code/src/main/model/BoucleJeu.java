@@ -22,7 +22,7 @@ public class BoucleJeu implements Runnable{
     private int nbSecUpdateHygiene = 5;
     private int nbSecUpdateDivertissement = 5;
     private int nbSecAutoSave = 5;
-    private int nbSecEvent = 1;
+    private int nbSecEvent = 20;
     private long timeCanEat = 2;
     private long timeCanSleep = 2;
     private long timeCanShower = 2;

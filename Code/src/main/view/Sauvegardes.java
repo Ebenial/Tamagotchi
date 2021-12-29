@@ -8,6 +8,7 @@ import main.util.CustomJButton;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class Sauvegardes extends JPanel {
     public static JButton retour;
 
     public static ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
+    public static ArrayList<String> saveName = new ArrayList<>();
     public static CustomJButton sauvegarde1;
     public static CustomJButton sauvegarde2;
     public static CustomJButton sauvegarde3;
@@ -33,53 +35,21 @@ public class Sauvegardes extends JPanel {
         Set<String> hset = listFilesUsingJavaIO(".");
         for(String s : hset) {
             if (s.toLowerCase().endsWith(".json")) {
-                arrayButton.add(new CustomJButton(s, principale,null, "Code/resources/others/button_background_large.png", null, null, null));
+                String[] tokens = s.split("-");
+                String buttonName = tokens[1] + "-" + tokens[2];
+                arrayButton.add(new CustomJButton(buttonName, principale,null, "Code/resources/others/button_background_large.png", null, null, null));
+                saveName.add(s);
             }
         }
         for (CustomJButton j: Sauvegardes.arrayButton) {
             add(j);
         }
-        /**
-        sauvegarde1 = new CustomJButton("Vide", principale,null, "Code/resources/others/button_background_large.png", null, null, null);
-        sauvegarde2 = new CustomJButton("Vide", principale,null, "Code/resources/others/button_background_large.png", null, null, null);
-        sauvegarde3 = new CustomJButton("Vide", principale,null, "Code/resources/others/button_background_large.png", null, null, null);
-        System.out.println("SAUVEGARDESeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        Set<String> hset = listFilesUsingJavaIO(".");
-        boolean un = false;
-        boolean deux = false;
-        boolean trois = false;
-        for(String s : hset) {
-            if (s.toLowerCase().endsWith(".json")) {
-                System.out.println(s);
-                if(!un) {
-                    sauvegarde1 = new CustomJButton(s, principale,null, "Code/resources/others/button_background_large.png", null, null, null);
-
-                    un = true;
-                }
-                else if(!deux) {
-                    sauvegarde2 = new CustomJButton(s, principale,null, "Code/resources/others/button_background_large.png", null, null, null);
-
-                    deux = true;
-                }
-                else if(!trois) {
-                    sauvegarde3 = new CustomJButton(s, principale,null, "Code/resources/others/button_background_large.png", null, null, null);
-                    trois = true;
-                }
-
-            }
-        }
-
-        add(sauvegarde1);
-        add(sauvegarde2);
-        add(sauvegarde3);
-
 
         retour = new JButton("Retour");
         retour.addActionListener(new ListenerBouton(principale));
 
-        this.add(retour, BorderLayout.SOUTH);
-         */
+        add(retour);
+
     }
 
     private Set<String> listFilesUsingJavaIO(String dir) {
