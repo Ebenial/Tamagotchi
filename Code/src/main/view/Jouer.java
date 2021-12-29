@@ -14,7 +14,6 @@ public class Jouer extends JPanel{
     public static CustomJButton nouvellePartie;
     public static CustomJButton continuer;
     public static CustomJButton retour;
-    JLabel titre;
     JLabel signature;
 
     /**
@@ -24,12 +23,6 @@ public class Jouer extends JPanel{
     public Jouer(FenetrePrincipale fenetre){
 
         this.setLayout(new BorderLayout());
-
-        //BORDERLAYOUT.NORTH
-        //Titre de la page et paramétrage
-        titre = new JLabel("Tamagotchi", SwingConstants.CENTER);
-        titre.setFont(new Font("Century Gothic", Font.PLAIN, 28));
-        titre.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -80,7 +73,7 @@ public class Jouer extends JPanel{
         menu.add(retour, gbc);
 
         //Ajout des composants au panneau d'accueil
-        this.add(titre, BorderLayout.NORTH);
+        //this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(nouveautes, BorderLayout.EAST);
