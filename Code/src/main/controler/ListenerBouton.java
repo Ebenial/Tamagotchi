@@ -4,7 +4,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import main.util.CustomJButton;
+import main.util.PopUp;
 import main.view.*;
+
+import javax.swing.*;
 
 /**
  * Contient toutes les actions des boutons
@@ -109,8 +112,12 @@ public class ListenerBouton implements ActionListener{
         }else if(e.getSource() == Sauvegardes.retour){
             this.principale.actionRetour("Sauvegardes");
         }else if(e.getSource() == NouvellePartie.valider){
-            this.panel.choixAvatar();
-            this.principale.actionValider();
+            if(NouvellePartie.nomJoueur.getText().isEmpty() || NouvellePartie.nomAvatar.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Merci de remplir les champs");
+            }else{
+                this.panel.choixAvatar();
+                this.principale.actionValider();
+            }
         }else if(e.getSource() == NouvellePartie.retour) {
             this.principale.actionRetour("NouvellePartie");
         } else if(e.getSource() == NouvellePartie.choixGauche){
