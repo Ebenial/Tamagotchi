@@ -204,7 +204,7 @@ public class Environnement extends JPanel implements KeyListener{
             }
 
             case "Douche" :{
-                actionText = "Se Nettoyer";
+                actionText = "Laver";
                 break;
 
             }
