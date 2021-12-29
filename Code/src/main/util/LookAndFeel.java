@@ -7,7 +7,7 @@ import javax.swing.UIManager;
  */
 public class LookAndFeel {
 
-    final static String LOOKANDFEEL = "Nimbus";
+    final static String LOOKANDFEEL = "Metal";
 
     /**
      * Initialise le LookAndFeel
