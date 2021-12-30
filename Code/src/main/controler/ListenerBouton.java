@@ -2,6 +2,7 @@ package main.controler;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import main.util.CustomJButton;
 import main.util.PopUp;
@@ -84,6 +85,15 @@ public class ListenerBouton implements ActionListener{
         for(int i = 0; i < Sauvegardes.arrayButton.size(); i++) {
             if(e.getSource() == Sauvegardes.arrayButton.get(i)) {
                 this.principale.actionChargerPartie(Sauvegardes.saveName.get(i));
+            }
+        }
+        for(int i = 0; i < Sauvegardes.arrayDelete.size(); i++) {
+            if(e.getSource() == Sauvegardes.arrayDelete.get(i)) {
+                File file = new File(Sauvegardes.saveName.get(i));
+                Sauvegardes.arrayButton.remove(i);
+                Sauvegardes.saveName.remove(i);
+                Sauvegardes.arrayDelete.remove(i);
+                file.delete();
             }
         }
         if(e.getSource() == Accueil.quitter){

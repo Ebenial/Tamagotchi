@@ -20,6 +20,9 @@ public class Sauvegardes extends JPanel {
 
     public static ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
     public static ArrayList<String> saveName = new ArrayList<>();
+    public static ArrayList<CustomJButton> arrayDelete = new ArrayList<>();
+    private JPanel panel1 = new JPanel();
+    private JPanel panel2 = new JPanel();
 
 
 
@@ -28,7 +31,9 @@ public class Sauvegardes extends JPanel {
      * @param principale - la JFrame dans laquelle est affiché le panneau des règles
      */
     public Sauvegardes(FenetrePrincipale principale){
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         Set<String> hset = listFilesUsingJavaIO(".");
         for(String s : hset) {
             if (s.toLowerCase().endsWith(".json")) {
@@ -36,16 +41,23 @@ public class Sauvegardes extends JPanel {
                 String buttonName = tokens[0];
                 arrayButton.add(new CustomJButton(buttonName, principale,null, "Code/resources/others/button_background_large.png", null, null, null));
                 saveName.add(s);
+                arrayDelete.add(new CustomJButton("Supprimer", principale,null, "Code/resources/others/button_background_large.png", null, null, null));
             }
         }
         for (CustomJButton j: Sauvegardes.arrayButton) {
-            add(j);
+            panel1.add(j);
+        }
+
+        for (CustomJButton j: Sauvegardes.arrayDelete) {
+            panel2.add(j);
         }
 
         retour = new JButton("Retour");
         retour.addActionListener(new ListenerBouton(principale));
 
-        add(retour);
+        panel1.add(retour);
+        add(panel1, BorderLayout.CENTER);
+        add(panel2, BorderLayout.EAST);
 
     }
 
