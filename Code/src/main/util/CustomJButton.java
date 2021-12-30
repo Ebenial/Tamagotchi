@@ -1,6 +1,7 @@
 package main.util;
 
 import main.controler.ListenerBouton;
+import main.model.Lieu;
 import main.view.FenetrePrincipale;
 import main.view.NouvellePartie;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 
 public class CustomJButton extends JButton {
 
-    public CustomJButton(String text, FenetrePrincipale principale, NouvellePartie panel, String imagePath, Font font, String lieu, String direction) {
+    public CustomJButton(String text, FenetrePrincipale principale, NouvellePartie panel, String imagePath, Font font, Lieu lieu, String direction) {
         setText(text);
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         if (principale == null) {

@@ -3,6 +3,7 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
+import main.model.Lieu;
 import main.util.*;
 
 import java.awt.*;
@@ -118,7 +119,7 @@ public class NouvellePartie extends JPanel{
 
         //Bouton pour retourner à la sélection nouvelle partie / charger une partie
 
-        retour = new CustomJButton("Retour", principale, null, null, null, "Chambre", null);
+        retour = new CustomJButton("Retour", principale, null, null, null, Lieu.CHAMBRE, null);
         retour.setPreferredSize(new Dimension(384, 96));
 
         //Bouton pour changer de type d'avatar vers la gauche String sensFleche, int x, int y, int longueur, int hauteur

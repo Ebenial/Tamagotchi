@@ -166,10 +166,10 @@ public class FenetrePrincipale extends JFrame{
 
         System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
 
-        this.chambre = new Environnement("Chambre", this);
-        this.douche = new Environnement("Douche", this);
-        this.cuisine = new Environnement("Cuisine", this);
-        this.jardin = new Environnement("Jardin", this);
+        this.chambre = new Environnement(Lieu.CHAMBRE, this);
+        this.douche = new Environnement(Lieu.LAVER, this);
+        this.cuisine = new Environnement(Lieu.MANGER, this);
+        this.jardin = new Environnement(Lieu.JOUER, this);
         this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
 
         this.add(chambre, "chambre");
@@ -238,10 +238,10 @@ public class FenetrePrincipale extends JFrame{
 
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
-        this.chambre = new Environnement("Chambre", this);
-        this.douche = new Environnement("Douche", this);
-        this.cuisine = new Environnement("Cuisine", this);
-        this.jardin = new Environnement("Jardin", this);
+        this.chambre = new Environnement(Lieu.CHAMBRE, this);
+        this.douche = new Environnement(Lieu.LAVER, this);
+        this.cuisine = new Environnement(Lieu.MANGER, this);
+        this.jardin = new Environnement(Lieu.JOUER, this);
         this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
 
         this.add(chambre, "chambre");
@@ -281,21 +281,21 @@ public class FenetrePrincipale extends JFrame{
      * @param lieu - le lieu actuel de l'avatar
      * @param orientation - le côté vers lequel se dirige l'avatar (gauche ou droite)
      */
-    public void actionChangementEnvironnement(String lieu, String orientation){
+    public void actionChangementEnvironnement(Lieu lieu, String orientation){
 
         if(orientation.equals("Gauche")){
             switch (lieu) {
-                case "Chambre":
+                case CHAMBRE:
                     this.currentEnvironnement = douche;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "douche");
                     break;
-                case "Douche":
+                case LAVER:
                     this.currentEnvironnement = cuisine;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
                     break;
-                case "Cuisine":
+                case MANGER:
                     this.currentEnvironnement = jardin;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "jardin");
@@ -303,18 +303,18 @@ public class FenetrePrincipale extends JFrame{
             }
         }else if(orientation.equals("Droite")){
             switch (lieu) {
-                case "Chambre":
-                case "Jardin":
+                //case "Chambre":
+                case JOUER:
                     this.currentEnvironnement = cuisine;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
                     break;
-                case "Douche":
+                case LAVER:
                     this.currentEnvironnement = chambre;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "chambre");
                     break;
-                case "Cuisine":
+                case MANGER:
                     this.currentEnvironnement = douche;
                     this.layout.show(this.getContentPane(), "douche");
                     this.getBoucle().updateAllStats();

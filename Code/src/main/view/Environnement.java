@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import main.controler.ListenerBouton;
 import main.model.BoucleJeu;
+import main.model.Lieu;
 import main.util.BoutonFleche;
 
 import main.model.Jeu;
@@ -19,7 +20,7 @@ import java.awt.event.KeyListener;
 public class Environnement extends JPanel implements KeyListener{
     private BoucleJeu boucleJeu;
 
-    private final String lieu;
+    private final Lieu lieu;
     public static JButton gauche;
     public static JButton droite;
     public static JButton options;
@@ -36,7 +37,7 @@ public class Environnement extends JPanel implements KeyListener{
      * Panneau qui contient les éléments nécessaires à la création de l'avatar
      * @param principale - la JFrame a laquelle on applique le panneau
      */
-    public Environnement(String lieu, FenetrePrincipale principale){
+    public Environnement(Lieu lieu, FenetrePrincipale principale){
         this.lieu = lieu;
         this.boucleJeu = principale.getBoucle();
 
@@ -125,7 +126,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
-        if(!this.lieu.equals("Jardin")){
+        if(this.lieu != Lieu.JOUER){
             gauche = new BoutonFleche("Gauche", 98, 98);
             gauche.addActionListener(new ListenerBouton(this.lieu, "Gauche", principale));
             gauche.setSize(new Dimension(98, 98));
@@ -139,7 +140,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.EAST
         //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
-        if(!this.lieu.equals("Chambre")){
+        if(this.lieu != Lieu.CHAMBRE){
             droite = new BoutonFleche("Droite", 98, 98);
             droite.addActionListener(new ListenerBouton(this.lieu, "Droite", principale));
             droite.setSize(new Dimension(98, 98));
@@ -200,23 +201,23 @@ public class Environnement extends JPanel implements KeyListener{
         String actionText = "";
 
         switch (this.lieu){
-            case "Chambre" : {
+            case CHAMBRE: {
                 actionText = "Dormir";
                 break;
             }
 
-            case "Douche" :{
+            case LAVER: {
                 actionText = "Laver";
                 break;
 
             }
 
-            case "Cuisine" : {
+            case MANGER: {
                 actionText = "Manger";
                 break;
             }
 
-            case "Jardin" :{
+            case JOUER:{
                 actionText = "Jouer";
             }
         }
@@ -271,16 +272,16 @@ public class Environnement extends JPanel implements KeyListener{
         super.paintComponent(g);
 
         switch (this.lieu) {
-            case "Jardin":
+            case JOUER:
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_jouer.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Cuisine":
+            case MANGER:
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_manger.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Douche":
+            case LAVER:
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_laver.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Chambre": {
+            case CHAMBRE: {
                 String image = this.boucleJeu.getIsDay() ? "jour" : "nuit";
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_" + image + ".png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
@@ -315,7 +316,7 @@ public class Environnement extends JPanel implements KeyListener{
         return nourriture;
     }
 
-    public String getLieu(){return this.lieu;}
+    public Lieu getLieu(){return this.lieu;}
 
     @Override
     public void keyTyped(KeyEvent e) {}

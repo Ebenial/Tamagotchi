@@ -163,7 +163,7 @@ public class BoucleJeu implements Runnable{
         principale.getLayout().show(principale.getContentPane(), "accueil");
 
         running = true;
-        run();
+        run(); // Pourquoi appeler run ?
     }
 
     /**

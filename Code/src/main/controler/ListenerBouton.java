@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+import main.model.Lieu;
 import main.view.*;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import javax.swing.*;
 public class ListenerBouton implements ActionListener{
 
     private FenetrePrincipale principale;
-    private String lieu = " ";
+    private Lieu lieu;
     private String direction = " ";
     private NouvellePartie panel;
 
@@ -24,7 +25,7 @@ public class ListenerBouton implements ActionListener{
      * @param lieu - l'environnement dans lequel évolue le tamagotchi
      * @param direction - indique la direction de la flèche lors d'un changement de panel
      */
-    public ListenerBouton(String lieu, String direction, FenetrePrincipale fp){
+    public ListenerBouton(Lieu lieu, String direction, FenetrePrincipale fp){
         this.principale = fp;
         this.lieu = lieu;
         this.direction = direction;
@@ -35,7 +36,7 @@ public class ListenerBouton implements ActionListener{
      * @param fp - FenetrePrincipale qui contient toutes les méthodes
      * @param lieu - l'environnement dans lequel évolue le tamagotchi
      */
-    public ListenerBouton(String lieu, FenetrePrincipale fp){
+    public ListenerBouton(Lieu lieu, FenetrePrincipale fp){
         this.principale = fp;
         this.lieu = lieu;
     }
@@ -126,25 +127,13 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionRetour("NouvellePartie");
         } else if(e.getSource() == NouvellePartie.choixGauche){
             this.panel.actionSwitchAvatar("Gauche");
-        }else if(e.getSource() == NouvellePartie.choixDroite){
+        }else if(e.getSource() == NouvellePartie.choixDroite) {
             this.panel.actionSwitchAvatar("Droite");
-        }
-        // REFACTOR: passer this.lieu et this.direction en params (un seul appel du coup)
-        else if(this.lieu.equals("Chambre") && this.direction.equals("Gauche")){
-            this.principale.actionChangementEnvironnement("Chambre", "Gauche");
-        }else if(this.lieu.equals("Douche") && this.direction.equals("Gauche")){
-            this.principale.actionChangementEnvironnement("Douche", "Gauche");
-        }else if(this.lieu.equals("Douche") && this.direction.equals("Droite")){
-            this.principale.actionChangementEnvironnement("Douche", "Droite");
-        }else if(this.lieu.equals("Cuisine") && this.direction.equals("Gauche")){
-            this.principale.actionChangementEnvironnement("Cuisine", "Gauche");
-        }else if(this.lieu.equals("Cuisine") && this.direction.equals("Droite")){
-            this.principale.actionChangementEnvironnement("Cuisine", "Droite");
-        }else if(this.lieu.equals("Jardin") && this.direction.equals("Droite")){
-            this.principale.actionChangementEnvironnement("Jardin", "Droite");
+        } else if (this.direction.equals("Gauche") || this.direction.equals("Droite")) {
+            this.principale.actionChangementEnvironnement(this.lieu, this.direction);
         }else if(this.direction.equals("Options")){
             this.principale.actionOptionsEnJeu();
-        }else if(this.lieu.equals("Chambre") && this.direction.equals("Action1")){
+        }else if(this.lieu == Lieu.CHAMBRE && this.direction.equals("Action1")){
             if(this.principale.getJeu().getAvatar().getCanSleep()) {
                 int energieActuelle = this.principale.getJeu().getAvatar().getEnergie();
                 this.principale.getJeu().getAvatar().setEnergie(energieActuelle + 2);
@@ -153,7 +142,7 @@ public class ListenerBouton implements ActionListener{
             else {
                 System.out.println("pas encore temps");
             }
-        } else if(this.lieu.equals("Douche") && this.direction.equals("Action1")) {
+        } else if(this.lieu == Lieu.LAVER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanShower()) {
                 int hygieneActuelle = this.principale.getJeu().getAvatar().getHygiene();
                 this.principale.getJeu().getAvatar().setHygiene(hygieneActuelle + 2);
@@ -162,7 +151,7 @@ public class ListenerBouton implements ActionListener{
             else {
                 System.out.println("pas encore temps");
             }
-        } else if(this.lieu.equals("Cuisine") && this.direction.equals("Action1")) {
+        } else if(this.lieu == Lieu.MANGER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanEat()) {
                 int mangerActuel = this.principale.getJeu().getAvatar().getNourriture();
                 this.principale.getJeu().getAvatar().setNourriture(mangerActuel + 2);
@@ -171,7 +160,7 @@ public class ListenerBouton implements ActionListener{
             else {
                 System.out.println("pas encore temps");
             }
-        } else if(this.lieu.equals("Jardin") && this.direction.equals("Action1")) {
+        } else if(this.lieu == Lieu.JOUER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanPlay()) {
                 int divertissementActuel = this.principale.getJeu().getAvatar().getDivertissement();
                 this.principale.getJeu().getAvatar().setDivertissement(divertissementActuel + 2);
@@ -196,16 +185,16 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionRetour("Difficulte");
         }else if(e.getSource() == OptionsEnJeu.retour) {
             switch (this.principale.getCurrentEnvironnement().getLieu()) {
-                case "Chambre":
+                case CHAMBRE:
                     this.principale.getLayout().show(this.principale.getContentPane(), "chambre");
                     break;
-                case "Douche":
+                case LAVER:
                     this.principale.getLayout().show(this.principale.getContentPane(), "douche");
                     break;
-                case "Cuisine":
+                case MANGER:
                     this.principale.getLayout().show(this.principale.getContentPane(), "cuisine");
                     break;
-                case "Jardin":
+                case JOUER:
                     this.principale.getLayout().show(this.principale.getContentPane(), "jardin");
                     break;
             }
