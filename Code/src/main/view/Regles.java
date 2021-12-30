@@ -67,7 +67,7 @@ public class Regles extends JPanel {
         rightBox.setPreferredSize(new Dimension(500,0));
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0, 0, 50, 0);
+        constraints.insets = new Insets(50, 0, 50, 0);
         constraints.gridx = 0;
         constraints.gridy = 0;
         buttonPanel.add(leftBox, constraints);
