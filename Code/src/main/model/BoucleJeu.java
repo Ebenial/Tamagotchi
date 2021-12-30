@@ -34,6 +34,8 @@ public class BoucleJeu implements Runnable{
     private int nbEnergie = -1;
     private int nbHygiene = -1;
     private int nbDivertissement = -1;
+    private int nbSecUpdateMax;
+    private int nbSecUpdateMin;
     private boolean isUpdateAllInitialized = false;
     private Clip clip;
     private String music;
@@ -162,6 +164,8 @@ public class BoucleJeu implements Runnable{
      * Update toutes les 10 heures
      */
     private void setFacile() {
+        this.nbSecUpdateMax = 36000;
+        this.nbSecUpdateMin = (int) (36000 / 2);
         this.nbSecUpdateBonheur = 36000;
         this.nbSecUpdateSante = 36000;
         this.nbSecUpdateDivertissement = 36000;
@@ -182,6 +186,8 @@ public class BoucleJeu implements Runnable{
      */
     private void setNormal() {
         //toutes les 6h
+        this.nbSecUpdateMax = 21600;
+        this.nbSecUpdateMin = (int) (21600 / 2);
         this.nbSecUpdateBonheur = 21600;
         this.nbSecUpdateSante = 21600;
         this.nbSecUpdateDivertissement = 21600;
@@ -200,6 +206,8 @@ public class BoucleJeu implements Runnable{
 
     private void setDifficile() {
         //Updates toute les 3h
+        this.nbSecUpdateMax = 10800;
+        this.nbSecUpdateMin = (int) (10800 / 2);
         this.nbSecUpdateBonheur = 10800;
         this.nbSecUpdateSante = 10800;
         this.nbSecUpdateDivertissement = 10800;
@@ -216,6 +224,8 @@ public class BoucleJeu implements Runnable{
     }
 
     private void setLegendaire() {
+        this.nbSecUpdateMax = 7;
+        this.nbSecUpdateMin = (int) (7 / 2);
         this.nbSecUpdateBonheur = 7;
         this.nbSecUpdateSante = 7;
         this.nbSecUpdateDivertissement = 7;
@@ -308,12 +318,29 @@ public class BoucleJeu implements Runnable{
     private void updateStatsWithStats() {
         Avatar avatar = principale.getJeu().getAvatar();
 
+        if(avatar.getHygiene() <= 3 && avatar.getNourriture() <= 3) {
+            int newUpdate = (int) (this.nbSecUpdateSante * 0.9);
+            if(newUpdate >= nbSecUpdateMin) {
+                this.nbSecUpdateSante = newUpdate;
+            }
+        }
         //Sante
         if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
             this.nbSante = -1;
         }
         else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 90) {
             this.nbSante = 1;
+            int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
+            if(newUpdate <= nbSecUpdateMax) {
+                this.nbSecUpdateSante = newUpdate;
+            }
+        }
+
+        if(avatar.getHygiene() <= 3 && avatar.getDivertissement() <= 3) {
+            int newUpdate = (int) (this.nbSecUpdateBonheur * 0.9);
+            if(newUpdate >= nbSecUpdateMin) {
+                this.nbSecUpdateBonheur = newUpdate;
+            }
         }
 
         //Bonheur
@@ -322,6 +349,10 @@ public class BoucleJeu implements Runnable{
         }
         else if(avatar.getEnergie() > 30 && avatar.getEnergie() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
             this.nbBonheur = 1;
+            int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
+            if(newUpdate <= nbSecUpdateMax) {
+                this.nbSecUpdateBonheur = newUpdate;
+            }
         }
 
     }
