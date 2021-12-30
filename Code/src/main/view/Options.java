@@ -7,9 +7,6 @@ import main.util.CustomFont;
 import main.util.CustomJButton;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class Options extends JPanel{
 
