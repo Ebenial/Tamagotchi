@@ -53,7 +53,7 @@ public class SauvegardePartie implements Serializable {
     }
 
     private void writeJSON() throws IOException {
-        String filename = "Sauvegarde1-" + nomJoueur + "-" + nomAvatar + "-.json";
+        String filename = nomJoueur + "-" + nomAvatar + ".json";
         FileOutputStream file = new FileOutputStream(filename);
         ObjectOutputStream out = new ObjectOutputStream(file);
         out.writeObject(this);
@@ -94,14 +94,6 @@ public class SauvegardePartie implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("type : " + typeAvatar);
-        System.out.println("nom : " + nomAvatar);
-        System.out.println("santeAvatar : " + santeAvatar);
-        System.out.println("bonheur : " + bonheurAvatar);
-        System.out.println("nourriture : " + nourritureAvatar);
-        System.out.println("energie : " + energieAvatar);
-        System.out.println("hygiene : " + hygieneAvatar);
-        System.out.println("divertissement : " + divertissementAvatar);
         return new Avatar(typeAvatar, nomAvatar, santeAvatar, bonheurAvatar, nourritureAvatar, energieAvatar, hygieneAvatar, divertissementAvatar);
     }
 

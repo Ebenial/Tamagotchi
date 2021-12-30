@@ -35,8 +35,8 @@ public class Sauvegardes extends JPanel {
         Set<String> hset = listFilesUsingJavaIO(".");
         for(String s : hset) {
             if (s.toLowerCase().endsWith(".json")) {
-                String[] tokens = s.split("-");
-                String buttonName = tokens[1] + "-" + tokens[2];
+                String[] tokens = s.split("\\.");
+                String buttonName = tokens[0];
                 arrayButton.add(new CustomJButton(buttonName, principale,null, "Code/resources/others/button_background_large.png", null, null, null));
                 saveName.add(s);
             }
