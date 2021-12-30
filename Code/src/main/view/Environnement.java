@@ -232,7 +232,6 @@ public class Environnement extends JPanel implements KeyListener{
         JPanel vide3 = new JPanel();
         vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide3.setOpaque(false);
-
         options = new JButton();
         options.addActionListener(new ListenerBouton(this.lieu, "Options", principale));
         options.setContentAreaFilled(false);
@@ -311,6 +310,8 @@ public class Environnement extends JPanel implements KeyListener{
     public JLabel getNourriture() {
         return nourriture;
     }
+
+    public String getLieu(){return this.lieu;}
 
     @Override
     public void keyTyped(KeyEvent e) {}

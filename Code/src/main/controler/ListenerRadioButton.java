@@ -2,6 +2,7 @@ package main.controler;
 
 import main.view.FenetrePrincipale;
 import main.view.Options;
+import main.view.OptionsEnJeu;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -21,6 +22,10 @@ public class ListenerRadioButton implements ItemListener {
         }else if(e.getSource() == Options.r2){
             principale.getBoucle().getClip().stop();
         }
-
+        if(e.getSource() == OptionsEnJeu.r1){
+            principale.getBoucle().getClip().start();
+        }else if(e.getSource() == OptionsEnJeu.r2){
+            principale.getBoucle().getClip().stop();
+        }
     }
 }

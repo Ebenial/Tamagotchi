@@ -77,10 +77,10 @@ public class BoucleJeu implements Runnable{
                         default:
                             break;
                     }
-
                 }
                 //Bouger la ligne setPrincipale
                 if(principale.getIsInitialized()) {
+                    System.out.println("Lieu : " + this.principale.getCurrentEnvironnement().getLieu());
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
                         running = false;
@@ -328,7 +328,7 @@ public class BoucleJeu implements Runnable{
         if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
             this.nbSante = -1;
         }
-        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 90) {
+        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
             this.nbSante = 1;
             int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
             if(newUpdate <= nbSecUpdateMax) {

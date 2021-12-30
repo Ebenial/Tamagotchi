@@ -120,6 +120,13 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau des options
      */
     public void actionOptions(){
+        if (this.getBoucle().getClip().isRunning()){
+            Options.r1.setSelected(true);
+            Options.r2.setSelected(false);
+        }else{
+            Options.r1.setSelected(false);
+            Options.r2.setSelected(true);
+        }
         this.layout.show(this.getContentPane(), "options");
     }
 
@@ -192,6 +199,7 @@ public class FenetrePrincipale extends JFrame{
             case "Jouer":
             case "Options":
             case "Regles":
+            case "OptionsEnJeu":
                 this.layout.show(this.getContentPane(), "accueil");
                 break;
             case "Difficulte":
@@ -203,6 +211,7 @@ public class FenetrePrincipale extends JFrame{
                 break;
         }
     }
+
 
     /**
      * Sauvegarde la partie
@@ -314,6 +323,13 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public void actionOptionsEnJeu() {
+        if (this.getBoucle().getClip().isRunning()){
+            OptionsEnJeu.r1.setSelected(true);
+            OptionsEnJeu.r2.setSelected(false);
+        }else{
+            OptionsEnJeu.r1.setSelected(false);
+            OptionsEnJeu.r2.setSelected(true);
+        }
         this.layout.show(this.getContentPane(), "optionsEnJeu");
     }
 
