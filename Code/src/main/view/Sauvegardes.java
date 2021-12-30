@@ -20,9 +20,6 @@ public class Sauvegardes extends JPanel {
 
     public static ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
     public static ArrayList<String> saveName = new ArrayList<>();
-    public static CustomJButton sauvegarde1;
-    public static CustomJButton sauvegarde2;
-    public static CustomJButton sauvegarde3;
 
 
 
@@ -52,7 +49,9 @@ public class Sauvegardes extends JPanel {
 
     }
 
-    private Set<String> listFilesUsingJavaIO(String dir) {
+    public Sauvegardes() {}
+
+    public Set<String> listFilesUsingJavaIO(String dir) {
         return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
                 .filter(file -> !file.isDirectory())
                 .map(File::getName)

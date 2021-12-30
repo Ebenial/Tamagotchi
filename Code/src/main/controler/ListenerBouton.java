@@ -83,7 +83,6 @@ public class ListenerBouton implements ActionListener{
     public void actionPerformed(ActionEvent e){
         for(int i = 0; i < Sauvegardes.arrayButton.size(); i++) {
             if(e.getSource() == Sauvegardes.arrayButton.get(i)) {
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 this.principale.actionChargerPartie(Sauvegardes.saveName.get(i));
             }
         }

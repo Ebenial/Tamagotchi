@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -13,6 +14,7 @@ import javax.swing.*;
 
 import main.model.*;
 import main.util.CustomFont;
+import main.util.CustomJButton;
 import main.util.LookAndFeel;
 
 /**
@@ -231,6 +233,40 @@ public class FenetrePrincipale extends JFrame{
 
         this.layout.show(this.getContentPane(), "chambre");
         isInitialized = true;
+
+
+        //LANCER UNE POP UP A LA PLACE COMME NOM ET AVATAR VIDE
+        if(isNameValid()) {
+            System.out.println("nom valid");
+        } else {
+            System.out.println("ce nom d'avatar et de joueur existe deja pour une autre partie");
+        }
+
+    }
+
+    /**
+     * Vérifie que une autre partie n'a pas déjà le même nom de joueur et le même nom d'Avatar.
+     * @return false si les noms sont déjà pris
+     */
+    private boolean isNameValid() {
+        System.out.println("isNameValid");
+        boolean isValid = true;
+        Sauvegardes save = new Sauvegardes();
+        Set<String> hset = save.listFilesUsingJavaIO(".");
+        for(String s : hset) {
+            if (s.toLowerCase().endsWith(".json")) {
+                String[] tokens = s.split("\\.");
+                String nameJA = tokens[0];
+                String[] decoup = nameJA.split("-");
+                String nameJ = decoup[0];
+                String nameA = decoup[1];
+                if(this.jeu.getJoueur().getNom().equals(nameJ) && this.jeu.getAvatar().getNom().equals(nameA)) {
+                    isValid = false;
+                }
+
+            }
+        }
+        return isValid;
     }
 
     /**
