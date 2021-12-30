@@ -94,7 +94,7 @@ public class ListenerBouton implements ActionListener{
         }else if(e.getSource() == Accueil.options){
             this.principale.actionOptions();
         }else if(e.getSource() == Jouer.nouvellePartie){
-            this.principale.actionNouvellePartie();
+            this.principale.actionDifficulte();
         }else if(e.getSource() == Jouer.continuer){
             this.principale.actionContinuer();
         }else if(e.getSource() == Jouer.retour){

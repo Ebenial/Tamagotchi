@@ -15,7 +15,6 @@ import javax.swing.*;
 import main.model.*;
 import main.util.CustomFont;
 import main.util.LookAndFeel;
-import main.util.Strings;
 
 /**
  * Permet de modéliser la fenêtre du programme et de la paramétrer
@@ -28,6 +27,7 @@ public class FenetrePrincipale extends JFrame{
     private BoucleJeu boucle;
     private Sauvegardes sauvegardes;
     private Options options;
+    private Difficulte difficulte;
   //  private OptionsEnJeu optionsEnJeu;
     private Regles regles;
     private GameOver gameOver;
@@ -70,6 +70,7 @@ public class FenetrePrincipale extends JFrame{
         this.sauvegardes = new Sauvegardes(this);
         this.gameOver = new GameOver(this);
         this.launchScreen = new LaunchScreen();
+        this.difficulte = new Difficulte(this);
 
 
         this.add(accueil, "accueil");
@@ -81,6 +82,7 @@ public class FenetrePrincipale extends JFrame{
         this.add(gameOver, "gameOver");
         this.add(launchScreen, "launchScreen");
         this.add(sauvegardes, "sauvegardes");
+        this.add(difficulte, "difficulte");
 
         pegi7Sound();
         this.setVisible(true);
@@ -135,6 +137,13 @@ public class FenetrePrincipale extends JFrame{
      */
     public void actionNouvellePartie(){
         this.layout.show(this.getContentPane(), "nouvellePartie");
+    }
+
+    /**
+     * Affiche le panneau pour créer un nouvel avatar
+     */
+    public void actionDifficulte(){
+        this.layout.show(this.getContentPane(), "difficulte");
     }
 
     /**
