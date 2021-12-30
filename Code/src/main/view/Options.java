@@ -63,7 +63,8 @@ public class Options extends JPanel{
         r2.setOpaque(false);
         r1.addItemListener(new ListenerRadioButton(principale));
         r2.addItemListener(new ListenerRadioButton(principale));
-
+        r1.setFont(CustomFont.customFont18);
+        r2.setFont(CustomFont.customFont18);
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(r1);
@@ -96,7 +97,7 @@ public class Options extends JPanel{
         rightBox.setPreferredSize(new Dimension(500,0));
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0, 0, 50, 0);
+        constraints.insets = new Insets(50, 0, 50, 0);
         constraints.gridx = 0;
         constraints.gridy = 0;
         buttonPanel.add(leftBox, constraints);
