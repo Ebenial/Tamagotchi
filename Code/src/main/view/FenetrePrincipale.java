@@ -162,10 +162,10 @@ public class FenetrePrincipale extends JFrame{
         this.add(douche, "douche");
         this.add(cuisine, "cuisine");
         this.add(jardin, "jardin");
-
         this.layout.show(this.getContentPane(), "chambre");
+
         isInitialized = true;
-        this.layout.show(this.getContentPane(), "jouer");
+
     }
 
     /**

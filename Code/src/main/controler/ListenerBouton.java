@@ -15,8 +15,8 @@ import javax.swing.*;
 public class ListenerBouton implements ActionListener{
 
     private FenetrePrincipale principale;
-    private String lieu = "Chambre";
-    private String direction = "Gauche";
+    private String lieu = " ";
+    private String direction = " ";
     private NouvellePartie panel;
 
     /**
