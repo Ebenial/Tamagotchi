@@ -47,7 +47,7 @@ public class Regles extends JPanel {
         options.setLayout(new GridBagLayout());
         options.setBackground(new Color(255, 255, 255, 161));
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        new GridBagConstraints();
 
 
 
