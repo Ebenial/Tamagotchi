@@ -177,6 +177,10 @@ public class NouvellePartie extends JPanel{
 
     }
 
+    public void setDifficulty(String difficult) {
+        difficulty = difficult;
+    }
+
     /**
      * Permet de changer l'image de l'avatar lors du clic sur le bouton gauche ou droit
      * @param s - le String permettant de savoir si le joueur a cliqué sur le bouton gauche ou droite

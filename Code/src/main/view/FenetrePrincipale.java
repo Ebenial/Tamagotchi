@@ -31,6 +31,7 @@ public class FenetrePrincipale extends JFrame{
     private final CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
     private boolean continuer = false;
+    private final NouvellePartie nouvellePartie;
 
     /**
      * Créé la fenêtre principale du jeu
@@ -53,7 +54,7 @@ public class FenetrePrincipale extends JFrame{
         //Strings.language = "Fr";
         Accueil accueil = new Accueil(this);
         Jouer jouer = new Jouer(this);
-        NouvellePartie nouvellePartie = new NouvellePartie(this);
+        this.nouvellePartie = new NouvellePartie(this);
         Options options = new Options(this);
         OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
         Regles regles = new Regles(this);
@@ -340,6 +341,10 @@ public class FenetrePrincipale extends JFrame{
 
     public boolean getContinuer() {
         return this.continuer;
+    }
+
+    public NouvellePartie getNouvellePartie() {
+        return this.nouvellePartie;
     }
 
     public CardLayout getLayout(){return  this.layout;}

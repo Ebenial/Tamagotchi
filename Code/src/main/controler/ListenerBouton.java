@@ -180,12 +180,16 @@ public class ListenerBouton implements ActionListener{
                 System.out.println("pas encore temps");
             }
         } else if(e.getSource() == Difficulte.facile) {
+            this.principale.getNouvellePartie().setDifficulty("facile");
             this.principale.actionNouvellePartie();
         } else if(e.getSource() == Difficulte.normal) {
+            this.principale.getNouvellePartie().setDifficulty("normal");
             this.principale.actionNouvellePartie();
         } else if(e.getSource() == Difficulte.difficile) {
+            this.principale.getNouvellePartie().setDifficulty("difficile");
             this.principale.actionNouvellePartie();
         } else if(e.getSource() == Difficulte.legendaire) {
+            this.principale.getNouvellePartie().setDifficulty("legendaire");
             this.principale.actionNouvellePartie();
         } else if(e.getSource() == Difficulte.retour) {
             this.principale.actionRetour("Difficulte");
