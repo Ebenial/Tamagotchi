@@ -25,9 +25,10 @@ public class Jeu{
      * @param nomAvatar - le nom que le joueur a donné à son avatar
      * @param typeAvatar - le type d'avatar choisi (chat, chien, ...)
      */
-    public Jeu(String nomJoueur, String nomAvatar, String typeAvatar){
+    public Jeu(String nomJoueur, String nomAvatar, String typeAvatar, FenetrePrincipale principale){
         this.joueur = new Joueur(nomJoueur);
         this.avatar = new Avatar(typeAvatar, nomAvatar);
+        this.avatar.setPrincipale(principale);
     }
 
     public Jeu(){}

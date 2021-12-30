@@ -219,7 +219,7 @@ public class FenetrePrincipale extends JFrame{
      */
     public void actionValider(){
 
-        this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix);
+        this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
         this.chambre = new Environnement("Chambre", this);
         this.douche = new Environnement("Douche", this);
