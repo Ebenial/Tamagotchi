@@ -2,19 +2,22 @@ package main.view;
 
 import javax.swing.*;
 
-import main.controler.ListenerBouton;
+import main.controler.ListenerRadioButton;
 import main.util.CustomFont;
 import main.util.CustomJButton;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class Options extends JPanel{
 
     public JLabel titre;
     public static CustomJButton retour;
-    public JLabel langue;
-    public static JButton sauvegarde;
-    public ButtonGroup choixLangue;
+    public JLabel soundOn;
+    public static JRadioButton r1;
+    public static JRadioButton r2;
 
     public Options(FenetrePrincipale principale){
 
@@ -48,28 +51,33 @@ public class Options extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        //Indique au joueur de choisir son nom
-        langue = new JLabel("Choix de la langue", SwingConstants.CENTER);
-        langue.setFont(CustomFont.customFont40);
-        langue.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
-        //TextArea pour choisir un nom de joueur
-        choixLangue = new ButtonGroup();
+        soundOn = new JLabel("Musique : ", SwingConstants.CENTER);
+        soundOn.setFont(CustomFont.customFont28);
+        soundOn.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
-        JRadioButton fr = new JRadioButton("Français");
-        JRadioButton en = new JRadioButton("English");
+        // créer une case à cocher avec une icône
+        r1 = new JRadioButton("On" ,/*, new ImageIcon("C:/male.png"), */true);
+        r2 = new JRadioButton("Off", false);
+        r1.setOpaque(false);
+        r2.setOpaque(false);
+        r1.addItemListener(new ListenerRadioButton(principale));
+        r2.addItemListener(new ListenerRadioButton(principale));
 
-        choixLangue.add(fr);
-        choixLangue.add(en);
+
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(r1);
+        buttonGroup.add(r2);
+
 
         //Ajout des différents boutons au panneau des options
-        gbc.insets = new Insets(30, 0, 30, 0);
+        gbc.insets = new Insets(0, 10, 0, 10);
         gbc.gridx = 1;
-        options.add(langue, gbc);
-        gbc.gridy = 1;
-        options.add(fr, gbc);
-        gbc.gridx++;
-        options.add(en, gbc);
+        options.add(soundOn, gbc);
+        gbc.gridx = 2;
+        options.add(r1, gbc);
+        gbc.gridx = 3;
+        options.add(r2, gbc);
 
 
         //BORDERLAYOUT.SOUTH
@@ -97,11 +105,6 @@ public class Options extends JPanel{
         constraints.gridx = 2;
         buttonPanel.add(rightBox, constraints);
 
-        //Ajout d'un action listener sur le bouton de sauvegarde
-        sauvegarde = new JButton("Sauvegarder la partie");
-        sauvegarde.addActionListener(new ListenerBouton(principale));
-        gbc.gridy = 2;
-        options.add(sauvegarde, gbc);
 
         //Ajout des composants au panneau
         this.add(titre, BorderLayout.NORTH);
