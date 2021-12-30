@@ -195,16 +195,16 @@ public class ListenerBouton implements ActionListener{
         }else if(e.getSource() == OptionsEnJeu.retour) {
             switch (this.principale.getCurrentEnvironnement().getLieu()) {
                 case "Chambre":
-                    this.principale.actionChangementEnvironnement("Chambre", "Gauche");
+                    this.principale.getLayout().show(this.principale.getContentPane(), "chambre");
                     break;
                 case "Douche":
-                    this.principale.actionChangementEnvironnement("Douche", "Gauche");
+                    this.principale.getLayout().show(this.principale.getContentPane(), "douche");
                     break;
                 case "Cuisine":
-                    this.principale.actionChangementEnvironnement("Cuisine", "Gauche");
+                    this.principale.getLayout().show(this.principale.getContentPane(), "cuisine");
                     break;
                 case "Jardin":
-                    this.principale.actionChangementEnvironnement("Jardin", "Droite");
+                    this.principale.getLayout().show(this.principale.getContentPane(), "jardin");
                     break;
             }
         }else if (e.getSource() == OptionsEnJeu.retourAuMenu){
