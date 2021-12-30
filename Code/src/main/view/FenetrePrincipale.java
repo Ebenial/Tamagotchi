@@ -14,8 +14,8 @@ import javax.swing.*;
 
 import main.model.*;
 import main.util.CustomFont;
-import main.util.CustomJButton;
 import main.util.LookAndFeel;
+import main.util.Strings;
 
 /**
  * Permet de modéliser la fenêtre du programme et de la paramétrer
@@ -28,6 +28,7 @@ public class FenetrePrincipale extends JFrame{
     private BoucleJeu boucle;
     private Sauvegardes sauvegardes;
     private Options options;
+  //  private OptionsEnJeu optionsEnJeu;
     private Regles regles;
     private GameOver gameOver;
     private Environnement jardin;
@@ -59,11 +60,12 @@ public class FenetrePrincipale extends JFrame{
         this.setSize(new Dimension(largeur, hauteur)); //Prévu pour une résolution 1920*1080
 
         this.getContentPane().setLayout(layout);
-
+        //Strings.language = "Fr";
         this.accueil = new Accueil(this);
         this.jouer = new Jouer(this);
         this.nouvellePartie = new NouvellePartie(this);
         this.options = new Options(this);
+        //this.optionsEnJeu = new OptionsEnJeu(this);
         this.regles = new Regles(this);
         this.sauvegardes = new Sauvegardes(this);
         this.gameOver = new GameOver(this);
@@ -74,10 +76,12 @@ public class FenetrePrincipale extends JFrame{
         this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
+        //this.add(optionsEnJeu, "optionsEnJeu");
         this.add(regles, "regles");
         this.add(gameOver, "gameOver");
         this.add(launchScreen, "launchScreen");
         this.add(sauvegardes, "sauvegardes");
+
         pegi7Sound();
         this.setVisible(true);
     }
@@ -234,23 +238,13 @@ public class FenetrePrincipale extends JFrame{
 
         this.layout.show(this.getContentPane(), "chambre");
         isInitialized = true;
-
-
-        //LANCER UNE POP UP A LA PLACE COMME NOM ET AVATAR VIDE
-        if(isNameValid()) {
-            System.out.println("nom valid");
-        } else {
-            System.out.println("ce nom d'avatar et de joueur existe deja pour une autre partie");
-        }
-
     }
 
     /**
      * Vérifie que une autre partie n'a pas déjà le même nom de joueur et le même nom d'Avatar.
      * @return false si les noms sont déjà pris
      */
-    private boolean isNameValid() {
-        System.out.println("isNameValid");
+    public boolean isNameValid() {
         boolean isValid = true;
         Sauvegardes save = new Sauvegardes();
         Set<String> hset = save.listFilesUsingJavaIO(".");
@@ -261,10 +255,9 @@ public class FenetrePrincipale extends JFrame{
                 String[] decoup = nameJA.split("-");
                 String nameJ = decoup[0];
                 String nameA = decoup[1];
-                if(this.jeu.getJoueur().getNom().equals(nameJ) && this.jeu.getAvatar().getNom().equals(nameA)) {
+                if((NouvellePartie.nomJoueur.getText()).equals(nameJ) && (NouvellePartie.nomAvatar .getText()).equals(nameA)) {
                     isValid = false;
                 }
-
             }
         }
         return isValid;

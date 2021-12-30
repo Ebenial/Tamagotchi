@@ -4,8 +4,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-import main.util.CustomJButton;
-import main.util.PopUp;
 import main.view.*;
 
 import javax.swing.*;
@@ -68,15 +66,6 @@ public class ListenerBouton implements ActionListener{
         this.panel = panel;
     }
 
-    /**else if(e.getSource() == Sauvegardes.sauvegarde1) {
-     this.principale.actionChargerPartie(Sauvegardes.sauvegarde1.getText());
-     }else if(e.getSource() == Sauvegardes.sauvegarde2) {
-     this.principale.actionChargerPartie(Sauvegardes.sauvegarde2.getText());
-     }else if(e.getSource() == Sauvegardes.sauvegarde3) {
-     this.principale.actionChargerPartie(Sauvegardes.sauvegarde3.getText());
-     }
-     */
-
     /**
      * Précise le comportement lorsqu'un bouton est cliqué
      * @param e - l'évènement déclencheur
@@ -124,8 +113,12 @@ public class ListenerBouton implements ActionListener{
             if(NouvellePartie.nomJoueur.getText().isEmpty() || NouvellePartie.nomAvatar.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Merci de remplir les champs");
             }else{
-                this.panel.choixAvatar();
-                this.principale.actionValider();
+                if(principale.isNameValid()) {
+                    this.panel.choixAvatar();
+                    this.principale.actionValider();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ce nom d'avatar et de joueur existe déjà pour une autre partie");
+                }
             }
         }else if(e.getSource() == NouvellePartie.retour) {
             this.principale.actionRetour("NouvellePartie");
