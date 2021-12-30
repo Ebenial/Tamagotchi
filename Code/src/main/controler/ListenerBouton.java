@@ -128,7 +128,9 @@ public class ListenerBouton implements ActionListener{
             this.panel.actionSwitchAvatar("Gauche");
         }else if(e.getSource() == NouvellePartie.choixDroite){
             this.panel.actionSwitchAvatar("Droite");
-        }else if(this.lieu.equals("Chambre") && this.direction.equals("Gauche")){
+        }
+        // REFACTOR: passer this.lieu et this.direction en params (un seul appel du coup)
+        else if(this.lieu.equals("Chambre") && this.direction.equals("Gauche")){
             this.principale.actionChangementEnvironnement("Chambre", "Gauche");
         }else if(this.lieu.equals("Douche") && this.direction.equals("Gauche")){
             this.principale.actionChangementEnvironnement("Douche", "Gauche");

@@ -3,6 +3,7 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
+import main.model.BoucleJeu;
 import main.util.BoutonFleche;
 
 import main.model.Jeu;
@@ -16,6 +17,7 @@ import java.awt.event.KeyListener;
  * Créé un panneau chambre qui est un des environnements du jeu ainsi que le lieu de départ lors d'une nouvelle partie
  */
 public class Environnement extends JPanel implements KeyListener{
+    private BoucleJeu boucleJeu;
 
     private final String lieu;
     public static JButton gauche;
@@ -35,8 +37,8 @@ public class Environnement extends JPanel implements KeyListener{
      * @param principale - la JFrame a laquelle on applique le panneau
      */
     public Environnement(String lieu, FenetrePrincipale principale){
-
         this.lieu = lieu;
+        this.boucleJeu = principale.getBoucle();
 
         this.setLayout(new BorderLayout());
 
@@ -278,9 +280,11 @@ public class Environnement extends JPanel implements KeyListener{
             case "Douche":
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_laver.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Chambre":
-                g.drawImage(new ImageIcon("Code/resources/background/lieu_jour.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            case "Chambre": {
+                String image = this.boucleJeu.getIsDay() ? "jour" : "nuit";
+                g.drawImage(new ImageIcon("Code/resources/background/lieu_" + image + ".png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
+            }
             default:
                 g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;

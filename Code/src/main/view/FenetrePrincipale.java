@@ -340,6 +340,7 @@ public class FenetrePrincipale extends JFrame{
         return this.jeu;
     }
 
+    // REFACTOR: faire passer ces méthodes par Jeu
     public Environnement getCurrentEnvironnement() {
         return this.currentEnvironnement;
     }

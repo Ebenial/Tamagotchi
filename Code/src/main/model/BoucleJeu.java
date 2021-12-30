@@ -8,10 +8,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 import java.io.File;
+import java.time.LocalTime;
 
 public class BoucleJeu implements Runnable{
-
-
     public static Thread myThread;
     public boolean running = true;
     public static long secSinceLastConnexion;
@@ -41,6 +40,9 @@ public class BoucleJeu implements Runnable{
     private String music;
     private boolean isDifficultySet = false;
 
+    private static LocalTime SUNRISE_TIME = LocalTime.of(6, 0);
+    private static LocalTime SUNSET_TIME = LocalTime.of(20, 0);
+    private boolean isDay;
 
     public synchronized void start() {
         myThread = new Thread(() -> {
@@ -80,6 +82,10 @@ public class BoucleJeu implements Runnable{
                 }
                 //Bouger la ligne setPrincipale
                 if(principale.getIsInitialized()) {
+                    LocalTime nowTime = LocalTime.now();
+                    this.isDay = nowTime.isAfter(SUNRISE_TIME) && nowTime.isBefore(SUNSET_TIME);
+                    System.out.println("Il fait jour: " + this.isDay);
+
                     System.out.println("Lieu : " + this.principale.getCurrentEnvironnement().getLieu());
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
@@ -452,6 +458,9 @@ public class BoucleJeu implements Runnable{
         updateNourriture(0);
     }
 
+    public boolean getIsDay() {
+        return this.isDay;
+    }
 
     @Override
     public void run() {
