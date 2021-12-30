@@ -192,6 +192,7 @@ public class FenetrePrincipale extends JFrame{
             case "Jouer":
             case "Options":
             case "Regles":
+            case "OptionsEnJeu":
                 this.layout.show(this.getContentPane(), "accueil");
                 break;
             case "Difficulte":

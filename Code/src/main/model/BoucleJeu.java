@@ -77,7 +77,7 @@ public class BoucleJeu implements Runnable{
                         default:
                             break;
                     }
-
+                    System.out.println("LIEU : "+this.principale.getCurrentEnvironnement().getLieu());
                 }
                 //Bouger la ligne setPrincipale
                 if(principale.getIsInitialized()) {

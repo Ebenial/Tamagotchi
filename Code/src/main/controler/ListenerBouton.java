@@ -28,7 +28,6 @@ public class ListenerBouton implements ActionListener{
         this.principale = fp;
         this.lieu = lieu;
         this.direction = direction;
-
     }
 
     /**
@@ -193,6 +192,24 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionNouvellePartie();
         } else if(e.getSource() == Difficulte.retour) {
             this.principale.actionRetour("Difficulte");
+        }else if(e.getSource() == OptionsEnJeu.retour) {
+            switch (this.principale.getCurrentEnvironnement().getLieu()) {
+                case "Chambre":
+                    this.principale.actionChangementEnvironnement("Chambre", "Gauche");
+                    break;
+                case "Douche":
+                    this.principale.actionChangementEnvironnement("Douche", "Gauche");
+                    break;
+                case "Cuisine":
+                    this.principale.actionChangementEnvironnement("Cuisine", "Gauche");
+                    break;
+                case "Jardin":
+                    this.principale.actionChangementEnvironnement("Jardin", "Droite");
+                    break;
+            }
+        }else if (e.getSource() == OptionsEnJeu.retourAuMenu){
+            this.principale.actionSauvegarde();
+            this.principale.actionRetour("OptionsEnJeu");
         }
 
     }
