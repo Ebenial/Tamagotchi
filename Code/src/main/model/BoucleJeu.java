@@ -464,6 +464,10 @@ public class BoucleJeu implements Runnable{
         start();
     }
 
+    public void setIsdifficultySet(boolean bool) {
+        this.isDifficultySet = bool;
+    }
+
 }
 
 
