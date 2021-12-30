@@ -21,26 +21,16 @@ import main.util.LookAndFeel;
  */
 public class FenetrePrincipale extends JFrame{
 
-    private Accueil accueil;
-    private Jouer jouer;
-    private NouvellePartie nouvellePartie;
     private BoucleJeu boucle;
-    private Sauvegardes sauvegardes;
-    private Options options;
-    private Difficulte difficulte;
-  //  private OptionsEnJeu optionsEnJeu;
-    private Regles regles;
-    private GameOver gameOver;
     private Environnement jardin;
     private Environnement cuisine;
     private Environnement chambre;
     private Environnement douche;
     private Environnement currentEnvironnement;
     private Jeu jeu;
-    private CardLayout layout = new CardLayout();
+    private final CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
     private boolean continuer = false;
-    private LaunchScreen launchScreen;
 
     /**
      * Créé la fenêtre principale du jeu
@@ -61,23 +51,23 @@ public class FenetrePrincipale extends JFrame{
 
         this.getContentPane().setLayout(layout);
         //Strings.language = "Fr";
-        this.accueil = new Accueil(this);
-        this.jouer = new Jouer(this);
-        this.nouvellePartie = new NouvellePartie(this);
-        this.options = new Options(this);
-        //this.optionsEnJeu = new OptionsEnJeu(this);
-        this.regles = new Regles(this);
-        this.sauvegardes = new Sauvegardes(this);
-        this.gameOver = new GameOver(this);
-        this.launchScreen = new LaunchScreen();
-        this.difficulte = new Difficulte(this);
+        Accueil accueil = new Accueil(this);
+        Jouer jouer = new Jouer(this);
+        NouvellePartie nouvellePartie = new NouvellePartie(this);
+        Options options = new Options(this);
+        OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
+        Regles regles = new Regles(this);
+        Sauvegardes sauvegardes = new Sauvegardes(this);
+        GameOver gameOver = new GameOver(this);
+        LaunchScreen launchScreen = new LaunchScreen();
+        Difficulte difficulte = new Difficulte(this);
 
 
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
-        //this.add(optionsEnJeu, "optionsEnJeu");
+        this.add(optionsEnJeu, "optionsEnJeu");
         this.add(regles, "regles");
         this.add(gameOver, "gameOver");
         this.add(launchScreen, "launchScreen");
@@ -223,10 +213,10 @@ public class FenetrePrincipale extends JFrame{
             e.printStackTrace();
         }
         //AFFICHAGE POUR TESTS
-        System.out.println("je sauvegarde bien");
+        System.out.println("TEST SAUVEGARDE : OK");
         long minutes = (BoucleJeu.secSinceLastConnexion / 1000) / 60;
         long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
-        System.out.println("TEMPS DEPUIS DERNIERE CONNEXION : " + minutes + "min, " + seconds + " secs");
+        System.out.println("TEMPS DEPUIS DERNIERE CONNEXION : " + minutes + " min, " + seconds + " secs");
         //FIN AFFICHAGE
     }
 
@@ -290,7 +280,7 @@ public class FenetrePrincipale extends JFrame{
                     this.layout.show(this.getContentPane(), "douche");
                     break;
                 case "Douche":
-                    this.currentEnvironnement = cuisine;;
+                    this.currentEnvironnement = cuisine;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
                     break;
@@ -323,8 +313,7 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public void actionOptionsEnJeu() {
-        System.out.println("coucou les amis");
-        this.layout.show(this.getContentPane(), "options");
+        this.layout.show(this.getContentPane(), "optionsEnJeu");
     }
 
     //GETTERS

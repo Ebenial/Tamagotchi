@@ -103,7 +103,7 @@ public class ListenerBouton implements ActionListener{
             this.principale.actionRetour("Options");
         }else if(e.getSource() == GameOver.retour) {
             this.principale.actionRetour("GameOver");
-        }else if(e.getSource() == Options.sauvegarde) {
+        }else if(e.getSource() == OptionsEnJeu.sauvegarde) {
             this.principale.actionSauvegarde();
         }else if(e.getSource() == Regles.retour){
             this.principale.actionRetour("Regles");
