@@ -94,6 +94,14 @@ public class SauvegardePartie implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println("typeAvatar : " + typeAvatar);
+        System.out.println("nomAvatar : " + nomAvatar);
+        System.out.println("santeAvatar : " + santeAvatar);
+        System.out.println("bonheurAvatar : " + bonheurAvatar);
+        System.out.println("nourritureAvatar : " + nourritureAvatar);
+        System.out.println("energieAvatar : " + energieAvatar);
+        System.out.println("hygieneAvatar : " + hygieneAvatar);
+        System.out.println("divertissementAvatar : " + divertissementAvatar);
         return new Avatar(typeAvatar, nomAvatar, santeAvatar, bonheurAvatar, nourritureAvatar, energieAvatar, hygieneAvatar, divertissementAvatar);
     }
 

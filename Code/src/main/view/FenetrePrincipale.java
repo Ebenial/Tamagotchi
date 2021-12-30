@@ -150,6 +150,7 @@ public class FenetrePrincipale extends JFrame{
 
 
         this.jeu.setAvatar(partie.creerAvatar(nom));
+        this.jeu.getAvatar().setPrincipale(this);
         this.jeu.setJoueur(new Joueur(partie.getNomJoueur()));
 
         System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
