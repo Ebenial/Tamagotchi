@@ -203,9 +203,12 @@ public class FenetrePrincipale extends JFrame{
             case "Regles":
                 this.layout.show(this.getContentPane(), "accueil");
                 break;
-            case "NouvellePartie":
+            case "Difficulte":
             case "Sauvegardes":
                 this.layout.show(this.getContentPane(), "jouer");
+                break;
+            case "NouvellePartie":
+                this.layout.show(this.getContentPane(), "difficulte");
                 break;
         }
     }

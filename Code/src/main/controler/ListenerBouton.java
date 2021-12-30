@@ -110,6 +110,9 @@ public class ListenerBouton implements ActionListener{
         }else if(e.getSource() == Sauvegardes.retour){
             this.principale.actionRetour("Sauvegardes");
         }else if(e.getSource() == NouvellePartie.valider){
+            if(!principale.isNameValid()) {
+                JOptionPane.showMessageDialog(null, "Le nom n est pas valide");
+            }
             if(NouvellePartie.nomJoueur.getText().isEmpty() || NouvellePartie.nomAvatar.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Merci de remplir les champs");
             }else{
@@ -176,6 +179,16 @@ public class ListenerBouton implements ActionListener{
             else {
                 System.out.println("pas encore temps");
             }
+        } else if(e.getSource() == Difficulte.facile) {
+            this.principale.actionNouvellePartie();
+        } else if(e.getSource() == Difficulte.normal) {
+            this.principale.actionNouvellePartie();
+        } else if(e.getSource() == Difficulte.difficile) {
+            this.principale.actionNouvellePartie();
+        } else if(e.getSource() == Difficulte.legendaire) {
+            this.principale.actionNouvellePartie();
+        } else if(e.getSource() == Difficulte.retour) {
+            this.principale.actionRetour("Difficulte");
         }
 
     }

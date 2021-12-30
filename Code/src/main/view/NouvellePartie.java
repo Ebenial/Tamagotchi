@@ -25,6 +25,7 @@ public class NouvellePartie extends JPanel{
     public JLabel avatarChoisi;
     public static String monChoix;
     public int position;
+    public static String difficulty;
     
     /**
      * Panneau qui contient les éléments nécessaires à la création de l'avatar
