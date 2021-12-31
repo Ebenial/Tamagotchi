@@ -29,7 +29,7 @@ public class Accueil extends JPanel {
 
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
-        titre = new JLabel(new ImageIcon("Code/resources/others/tamagotchiBlanc.png"));
+        titre = new JLabel(new ImageIcon("Code/resources/others/keneil_logo_accueil.png"));
         titre.setForeground(Color.RED);
         titre.setBorder(BorderFactory.createEmptyBorder(50, 0, 10, 0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
@@ -70,16 +70,22 @@ public class Accueil extends JPanel {
         signature.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
 
         //Ajout des différents boutons au panneau du menu
-        gbc.insets = new Insets(30, 0, 30, 0);
+        gbc.insets = new Insets(30, 30, 30, 30);
+
+        // TODO: Yoann va modifier
+        // Afficher les boutons sur 2 lignes:
+        // Jouer - Options
+        // Règles - Quitter
         gbc.gridx = 1;
         menu.add(jouer, gbc);
-        gbc.gridy = 1;
-        menu.add(regles, gbc);
-        gbc.gridy = 2;
+        gbc.gridx = 2;
         menu.add(options, gbc);
-        gbc.gridy = 3;
-        menu.add(quitter, gbc);
 
+        gbc.gridy = 1;
+        gbc.gridx = 1;
+        menu.add(regles, gbc);
+        gbc.gridx = 2;
+        menu.add(quitter, gbc);
 
         //Ajout des composants au panneau d'accueil
         this.add(titre, BorderLayout.NORTH);
@@ -87,7 +93,6 @@ public class Accueil extends JPanel {
         this.add(menu, BorderLayout.CENTER);
         this.add(droite, BorderLayout.EAST);
         this.add(signature, BorderLayout.SOUTH);
-
     }
 
     /**
