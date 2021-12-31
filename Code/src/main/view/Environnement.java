@@ -18,6 +18,7 @@ import java.awt.event.KeyListener;
  * Créé un panneau chambre qui est un des environnements du jeu ainsi que le lieu de départ lors d'une nouvelle partie
  */
 public class Environnement extends JPanel implements KeyListener{
+    private Jeu jeu;
     private BoucleJeu boucleJeu;
 
     private final Lieu lieu;
@@ -43,7 +44,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         this.setLayout(new BorderLayout());
 
-        Jeu jeu = principale.getJeu();
+        this.jeu = principale.getJeu();
 
         //BORDERLAYOUT.NORTH
         //Affichage des statistiques et de l'heure
@@ -282,13 +283,10 @@ public class Environnement extends JPanel implements KeyListener{
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_laver.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
             case CHAMBRE: {
-                String image = this.boucleJeu.getIsDay() ? "jour" : "nuit";
+                String image = this.jeu.isDay() ? "jour" : "nuit";
                 g.drawImage(new ImageIcon("Code/resources/background/lieu_" + image + ".png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
             }
-            default:
-                g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
-                break;
         }
     }
 

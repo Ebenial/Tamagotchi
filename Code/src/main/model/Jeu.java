@@ -1,6 +1,7 @@
 package main.model;
 
 import java.awt.*;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -18,6 +19,9 @@ public class Jeu{
     private Avatar avatar;
     private Date compteurTemps;
     private boolean enCours;
+
+    private static LocalTime SUNRISE_TIME = LocalTime.of(6, 0);
+    private static LocalTime SUNSET_TIME = LocalTime.of(20, 0);
 
     /**
      * Constructeur du type de jeu
@@ -80,6 +84,11 @@ public class Jeu{
         }
 
         return res;
+    }
+
+    public boolean isDay() {
+        LocalTime nowTime = LocalTime.now();
+        return nowTime.isAfter(SUNRISE_TIME) && nowTime.isBefore(SUNSET_TIME);
     }
 
     //GETTERS
