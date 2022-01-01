@@ -172,6 +172,7 @@ public class Avatar {
         }else{
             this.sante = nouvelleSante;
         }
+
         JLabel label1 =  principale.getCurrentEnvironnement().getSante();   //Récupération de l'affichage de la barre de santé
         label1.setIcon(principale.getJeu().choixBarreStats(this.sante)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
     }
@@ -186,6 +187,7 @@ public class Avatar {
         else {
             this.bonheur = nouveauBonheur;
         }
+
         //System.out.println("bonheur : " + bonheur);
         JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
         label2.setIcon(principale.getJeu().choixBarreStats(this.bonheur));

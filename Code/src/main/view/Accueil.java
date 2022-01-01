@@ -29,7 +29,7 @@ public class Accueil extends JPanel {
 
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
-        titre = new JLabel(new ImageIcon("Code/resources/others/tamagotchiBlanc.png"));
+        titre = new JLabel(new ImageIcon("Code/resources/others/keneil_logo_accueil.png"));
         titre.setForeground(Color.RED);
         titre.setBorder(BorderFactory.createEmptyBorder(50, 0, 10, 0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
@@ -40,22 +40,9 @@ public class Accueil extends JPanel {
         gauche.setOpaque(false);
 
         //BORDERLAYOUT.EAST
-        //Ajout d'un panel à droite qui contient les dernières nouveautés du programme
-        JPanel nouveautes = new JPanel();
-        nouveautes.setLayout(new GridLayout(10, 1, 30, 20));
-        nouveautes.setPreferredSize(new Dimension(500, 0));
-        nouveautes.setOpaque(false);
-
-        //Ajout du label Nouveautés pour le panel des nouveautés
-        JLabel titreNouveautes = new JLabel("Nouveaut\u00e9s", SwingConstants.CENTER);
-        titreNouveautes.setFont(new Font("Century Gothic", Font.BOLD, 30));
-        titreNouveautes.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-        titreNouveautes.setForeground(Color.WHITE);
-
-        //Première nouveauté de la liste
-        JLabel news1 = new JLabel("Création du personnage en cours !");
-        news1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        news1.setForeground(Color.WHITE);
+        JPanel droite = new JPanel();
+        droite.setPreferredSize(new Dimension(500, 0));
+        droite.setOpaque(false);
 
         //BORDERLAYOUT.CENTER
         //Ajout d'un panel qui va stocker les différents boutons du menu
@@ -83,27 +70,29 @@ public class Accueil extends JPanel {
         signature.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
 
         //Ajout des différents boutons au panneau du menu
-        gbc.insets = new Insets(30, 0, 30, 0);
+        gbc.insets = new Insets(30, 30, 30, 30);
+
+        // TODO: Yoann va modifier
+        // Afficher les boutons sur 2 lignes:
+        // Jouer - Options
+        // Règles - Quitter
         gbc.gridx = 1;
         menu.add(jouer, gbc);
-        gbc.gridy = 1;
-        menu.add(regles, gbc);
-        gbc.gridy = 2;
+        gbc.gridx = 2;
         menu.add(options, gbc);
-        gbc.gridy = 3;
-        menu.add(quitter, gbc);
 
-        //Ajout des nouveautés au panneau des nouveautés
-        nouveautes.add(titreNouveautes);
-        nouveautes.add(news1);
+        gbc.gridy = 1;
+        gbc.gridx = 1;
+        menu.add(regles, gbc);
+        gbc.gridx = 2;
+        menu.add(quitter, gbc);
 
         //Ajout des composants au panneau d'accueil
         this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
-        this.add(nouveautes, BorderLayout.EAST);
+        this.add(droite, BorderLayout.EAST);
         this.add(signature, BorderLayout.SOUTH);
-
     }
 
     /**

@@ -1,18 +1,18 @@
 package main.view;
 
-import javax.swing.*;
-
+import main.util.CustomFont;
 import main.util.CustomJButton;
 
+import javax.swing.*;
 import java.awt.*;
 
-/**
- * Propose de lancer une nouvelle partie ou de continuer une sauvegarde
- */
-public class Jouer extends JPanel{
 
-    public static CustomJButton nouvellePartie;
-    public static CustomJButton continuer;
+public class Difficulte extends JPanel{
+
+    public static CustomJButton facile;
+    public static CustomJButton normal;
+    public static CustomJButton difficile;
+    public static CustomJButton legendaire;
     public static CustomJButton retour;
     JLabel signature;
 
@@ -20,9 +20,14 @@ public class Jouer extends JPanel{
      * Construit le panneau pour choisir le type de partie (nouvelle, continuer)
      * @param fenetre - la fenêtre dans laquelle sera affiché le panneau
      */
-    public Jouer(FenetrePrincipale fenetre){
+    public Difficulte(FenetrePrincipale fenetre){
 
         this.setLayout(new BorderLayout());
+        JLabel titre = new JLabel("Choix de la difficulté");
+        titre.setFont(CustomFont.customFont50_PLAIN);
+        titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre.setForeground(Color.white);
+        titre.setHorizontalAlignment(SwingConstants.CENTER);
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -43,14 +48,19 @@ public class Jouer extends JPanel{
         menu.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
 
-        //Bouton qui lance une nouvelle partie
-        nouvellePartie = new CustomJButton("Nouvelle Partie", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
-        this.add(nouvellePartie);
+        facile = new CustomJButton("Facile", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
+        this.add(facile);
 
+        normal = new CustomJButton("Normal", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
+        this.add(normal);
 
         //Bouton qui mène à la page des sauvegardes
-        continuer = new CustomJButton("Continuer", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
-        this.add(continuer);
+        difficile = new CustomJButton("Difficile", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
+        this.add(difficile);
+
+        //Bouton qui mène à la page des sauvegardes
+        legendaire = new CustomJButton("Légendaire", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
+        this.add(legendaire);
 
         //Bouton qui ramène à la page d'accueil
         retour = new CustomJButton("Retour", fenetre,null, "Code/resources/others/button_background_large.png", null, null, null);
@@ -64,16 +74,23 @@ public class Jouer extends JPanel{
 
 
         //Ajout des différents boutons au panneau du menu
-        gbc.insets = new Insets(30, 0, 30, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
         gbc.gridx = 1;
-        menu.add(nouvellePartie, gbc);
         gbc.gridy = 1;
-        menu.add(continuer, gbc);
+        menu.add(titre, gbc);
         gbc.gridy = 2;
+        menu.add(facile, gbc);
+        gbc.gridy = 3;
+        menu.add(normal, gbc);
+        gbc.gridy = 4;
+        menu.add(difficile, gbc);
+        gbc.gridy = 5;
+        menu.add(legendaire, gbc);
+        gbc.gridy = 6;
         menu.add(retour, gbc);
 
         //Ajout des composants au panneau d'accueil
-        //this.add(titre, BorderLayout.NORTH);
+        this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(nouveautes, BorderLayout.EAST);

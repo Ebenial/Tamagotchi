@@ -1,12 +1,9 @@
 package main.model;
-
-import main.view.FenetrePrincipale;
+import main.view.NouvellePartie;
 
 import java.io.*;
-import java.lang.reflect.AnnotatedArrayType;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 public class SauvegardePartie implements Serializable {
     private Date dateFinSession;
@@ -20,6 +17,7 @@ public class SauvegardePartie implements Serializable {
     private int hygieneAvatar;
     private int divertissementAvatar;
     private int bonheurAvatar;
+    private String difficulty;
 
     public SauvegardePartie(String nomJoueur, Avatar avatar, Date tempsJeu) throws IOException {
         this.nomJoueur = nomJoueur;
@@ -32,6 +30,7 @@ public class SauvegardePartie implements Serializable {
         this.hygieneAvatar = avatar.getHygiene();
         this.divertissementAvatar = avatar.getDivertissement();
         this.bonheurAvatar = avatar.getBonheur();
+        this.difficulty = NouvellePartie.difficulty;
 
         long millis = System.currentTimeMillis();
         this.dateFinSession = new Date(millis);
@@ -39,16 +38,17 @@ public class SauvegardePartie implements Serializable {
 
     }
 
-    public SauvegardePartie() {
+    public SauvegardePartie(String nom) {
         try {
-            readJson();
+            readJson(nom);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     private void writeJSON() throws IOException {
-        FileOutputStream file = new FileOutputStream("BDD.json");
+        String filename = nomJoueur + "-" + nomAvatar + ".json";
+        FileOutputStream file = new FileOutputStream(filename);
         ObjectOutputStream out = new ObjectOutputStream(file);
         out.writeObject(this);
         out.close();
@@ -57,34 +57,46 @@ public class SauvegardePartie implements Serializable {
         System.out.println("Object has been serialized");
     }
 
-    private void readJson() throws IOException, ClassNotFoundException {
-        FileInputStream file = new FileInputStream("BDD.json");
-        ObjectInputStream in = new ObjectInputStream(file);
 
-        SauvegardePartie save = (SauvegardePartie) in.readObject();
-        this.dateFinSession = save.dateFinSession;
-        this.tempsJeu = save.tempsJeu;
-        this.nomJoueur = save.nomJoueur;
-        this.nomAvatar = save.nomAvatar;
-        this.santeAvatar = save.santeAvatar;
-        this.bonheurAvatar = save.bonheurAvatar;
-        this.nourritureAvatar = save.nourritureAvatar;
-        this.energieAvatar = save.energieAvatar;
-        this.hygieneAvatar = save.hygieneAvatar;
-        this.divertissementAvatar = save.divertissementAvatar;
-        this.typeAvatar = save.typeAvatar;
 
-        in.close();
-        file.close();
+    private void readJson(String nom) throws IOException, ClassNotFoundException {
+
+            FileInputStream file = new FileInputStream(nom);
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            SauvegardePartie save = (SauvegardePartie) in.readObject();
+            this.dateFinSession = save.dateFinSession;
+            this.tempsJeu = save.tempsJeu;
+            this.nomJoueur = save.nomJoueur;
+            this.nomAvatar = save.nomAvatar;
+            this.santeAvatar = save.santeAvatar;
+            this.bonheurAvatar = save.bonheurAvatar;
+            this.nourritureAvatar = save.nourritureAvatar;
+            this.energieAvatar = save.energieAvatar;
+            this.hygieneAvatar = save.hygieneAvatar;
+            this.divertissementAvatar = save.divertissementAvatar;
+            this.typeAvatar = save.typeAvatar;
+            NouvellePartie.difficulty = save.difficulty;
+
+            in.close();
+            file.close();
+
     }
 
-    public Avatar creerAvatar() {
+    public Avatar creerAvatar(String nom) {
         try {
-            readJson();
+            readJson(nom);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        System.out.println("typeAvatar : " + typeAvatar);
+        System.out.println("nomAvatar : " + nomAvatar);
+        System.out.println("santeAvatar : " + santeAvatar);
+        System.out.println("bonheurAvatar : " + bonheurAvatar);
+        System.out.println("nourritureAvatar : " + nourritureAvatar);
+        System.out.println("energieAvatar : " + energieAvatar);
+        System.out.println("hygieneAvatar : " + hygieneAvatar);
+        System.out.println("divertissementAvatar : " + divertissementAvatar);
         return new Avatar(typeAvatar, nomAvatar, santeAvatar, bonheurAvatar, nourritureAvatar, energieAvatar, hygieneAvatar, divertissementAvatar);
     }
 

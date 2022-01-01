@@ -3,8 +3,13 @@ package main.view;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import main.model.*;
@@ -16,23 +21,17 @@ import main.util.LookAndFeel;
  */
 public class FenetrePrincipale extends JFrame{
 
-    private Accueil accueil;
-    private Jouer jouer;
-    private NouvellePartie nouvellePartie;
     private BoucleJeu boucle;
-    private Sauvegardes sauvegardes;
-    private Options options;
-    private Regles regles;
-    private GameOver gameOver;
     private Environnement jardin;
     private Environnement cuisine;
     private Environnement chambre;
     private Environnement douche;
     private Environnement currentEnvironnement;
     private Jeu jeu;
-    private CardLayout layout = new CardLayout();
+    private final CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
     private boolean continuer = false;
+    private final NouvellePartie nouvellePartie;
 
     /**
      * Créé la fenêtre principale du jeu
@@ -52,24 +51,44 @@ public class FenetrePrincipale extends JFrame{
         this.setSize(new Dimension(largeur, hauteur)); //Prévu pour une résolution 1920*1080
 
         this.getContentPane().setLayout(layout);
-
-        this.accueil = new Accueil(this);
-        this.jouer = new Jouer(this);
+        //Strings.language = "Fr";
+        Accueil accueil = new Accueil(this);
+        Jouer jouer = new Jouer(this);
         this.nouvellePartie = new NouvellePartie(this);
-        this.options = new Options(this);
-        this.regles = new Regles(this);
-        this.sauvegardes = new Sauvegardes(this);
-        this.gameOver = new GameOver(this);
+        Options options = new Options(this);
+        OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
+        Regles regles = new Regles(this);
+        Sauvegardes sauvegardes = new Sauvegardes(this);
+        GameOver gameOver = new GameOver(this);
+        LaunchScreen launchScreen = new LaunchScreen();
+        Difficulte difficulte = new Difficulte(this);
+
 
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
         this.add(options, "options");
+        this.add(optionsEnJeu, "optionsEnJeu");
         this.add(regles, "regles");
         this.add(gameOver, "gameOver");
-        //this.add(sauvegardes, "sauvegardes");
+        this.add(launchScreen, "launchScreen");
+        this.add(sauvegardes, "sauvegardes");
+        this.add(difficulte, "difficulte");
 
+        pegi7Sound();
         this.setVisible(true);
+    }
+
+    private void pegi7Sound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/pegi7.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -101,6 +120,13 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau des options
      */
     public void actionOptions(){
+        if (this.getBoucle().getClip().isRunning()){
+            Options.r1.setSelected(true);
+            Options.r2.setSelected(false);
+        }else{
+            Options.r1.setSelected(false);
+            Options.r2.setSelected(true);
+        }
         this.layout.show(this.getContentPane(), "options");
     }
 
@@ -112,33 +138,45 @@ public class FenetrePrincipale extends JFrame{
     }
 
     /**
+     * Affiche le panneau pour créer un nouvel avatar
+     */
+    public void actionDifficulte(){
+        this.layout.show(this.getContentPane(), "difficulte");
+    }
+
+    /**
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
         this.continuer = true;
-        this.layout.show(this.getContentPane(), "jouer");
-        SauvegardePartie partie = new SauvegardePartie();
+        this.layout.show(this.getContentPane(), "sauvegardes");
+
+    }
+
+    public void actionChargerPartie(String nom) {
+        SauvegardePartie partie = new SauvegardePartie(nom);
         this.jeu = new Jeu();
         BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
 
 
-        this.jeu.setAvatar(partie.creerAvatar());
+        this.jeu.setAvatar(partie.creerAvatar(nom));
+        this.jeu.getAvatar().setPrincipale(this);
         this.jeu.setJoueur(new Joueur(partie.getNomJoueur()));
 
         System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
 
-        this.chambre = new Environnement("Chambre", this);
-        this.douche = new Environnement("Douche", this);
-        this.cuisine = new Environnement("Cuisine", this);
-        this.jardin = new Environnement("Jardin", this);
+        this.chambre = new Environnement(Lieu.CHAMBRE, this);
+        this.douche = new Environnement(Lieu.LAVER, this);
+        this.cuisine = new Environnement(Lieu.MANGER, this);
+        this.jardin = new Environnement(Lieu.JOUER, this);
         this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
 
         this.add(chambre, "chambre");
         this.add(douche, "douche");
         this.add(cuisine, "cuisine");
         this.add(jardin, "jardin");
-
         this.layout.show(this.getContentPane(), "chambre");
+
         isInitialized = true;
 
     }
@@ -160,14 +198,19 @@ public class FenetrePrincipale extends JFrame{
             case "Jouer":
             case "Options":
             case "Regles":
+            case "OptionsEnJeu":
                 this.layout.show(this.getContentPane(), "accueil");
                 break;
-            case "NouvellePartie":
+            case "Difficulte":
             case "Sauvegardes":
                 this.layout.show(this.getContentPane(), "jouer");
                 break;
+            case "NouvellePartie":
+                this.layout.show(this.getContentPane(), "difficulte");
+                break;
         }
     }
+
 
     /**
      * Sauvegarde la partie
@@ -179,10 +222,10 @@ public class FenetrePrincipale extends JFrame{
             e.printStackTrace();
         }
         //AFFICHAGE POUR TESTS
-        System.out.println("je sauvegarde bien");
+        System.out.println("TEST SAUVEGARDE : OK");
         long minutes = (BoucleJeu.secSinceLastConnexion / 1000) / 60;
         long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
-        System.out.println("TEMPS DEPUIS DERNIERE CONNEXION : " + minutes + "min, " + seconds + " secs");
+        System.out.println("TEMPS DEPUIS DERNIERE CONNEXION : " + minutes + " min, " + seconds + " secs");
         //FIN AFFICHAGE
     }
 
@@ -190,13 +233,14 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau correspondant à la chambre (Panneau de départ pour une nouvelle partie)
      */
     public void actionValider(){
+        this.boucle.setIsdifficultySet(false);
 
-        this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix);
+        this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
-        this.chambre = new Environnement("Chambre", this);
-        this.douche = new Environnement("Douche", this);
-        this.cuisine = new Environnement("Cuisine", this);
-        this.jardin = new Environnement("Jardin", this);
+        this.chambre = new Environnement(Lieu.CHAMBRE, this);
+        this.douche = new Environnement(Lieu.LAVER, this);
+        this.cuisine = new Environnement(Lieu.MANGER, this);
+        this.jardin = new Environnement(Lieu.JOUER, this);
         this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
 
         this.add(chambre, "chambre");
@@ -209,25 +253,48 @@ public class FenetrePrincipale extends JFrame{
     }
 
     /**
+     * Vérifie que une autre partie n'a pas déjà le même nom de joueur et le même nom d'Avatar.
+     * @return false si les noms sont déjà pris
+     */
+    public boolean isNameValid() {
+        boolean isValid = true;
+        Sauvegardes save = new Sauvegardes();
+        Set<String> hset = save.listFilesUsingJavaIO(".");
+        for(String s : hset) {
+            if (s.toLowerCase().endsWith(".json")) {
+                String[] tokens = s.split("\\.");
+                String nameJA = tokens[0];
+                String[] decoup = nameJA.split("-");
+                String nameJ = decoup[0];
+                String nameA = decoup[1];
+                if((NouvellePartie.nomJoueur.getText()).equals(nameJ) && (NouvellePartie.nomAvatar .getText()).equals(nameA)) {
+                    isValid = false;
+                }
+            }
+        }
+        return isValid;
+    }
+
+    /**
      * Change le lieu dans lequel se trouve l'avatar
      * @param lieu - le lieu actuel de l'avatar
      * @param orientation - le côté vers lequel se dirige l'avatar (gauche ou droite)
      */
-    public void actionChangementEnvironnement(String lieu, String orientation){
+    public void actionChangementEnvironnement(Lieu lieu, String orientation){
 
         if(orientation.equals("Gauche")){
             switch (lieu) {
-                case "Chambre":
+                case CHAMBRE:
                     this.currentEnvironnement = douche;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "douche");
                     break;
-                case "Douche":
-                    this.currentEnvironnement = cuisine;;
+                case LAVER:
+                    this.currentEnvironnement = cuisine;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
                     break;
-                case "Cuisine":
+                case MANGER:
                     this.currentEnvironnement = jardin;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "jardin");
@@ -235,18 +302,18 @@ public class FenetrePrincipale extends JFrame{
             }
         }else if(orientation.equals("Droite")){
             switch (lieu) {
-                case "Chambre":
-                case "Jardin":
+                //case "Chambre":
+                case JOUER:
                     this.currentEnvironnement = cuisine;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "cuisine");
                     break;
-                case "Douche":
+                case LAVER:
                     this.currentEnvironnement = chambre;
                     this.getBoucle().updateAllStats();
                     this.layout.show(this.getContentPane(), "chambre");
                     break;
-                case "Cuisine":
+                case MANGER:
                     this.currentEnvironnement = douche;
                     this.layout.show(this.getContentPane(), "douche");
                     this.getBoucle().updateAllStats();
@@ -256,8 +323,14 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public void actionOptionsEnJeu() {
-        System.out.println("coucou les amis");
-        this.layout.show(this.getContentPane(), "options");
+        if (this.getBoucle().getClip().isRunning()){
+            OptionsEnJeu.r1.setSelected(true);
+            OptionsEnJeu.r2.setSelected(false);
+        }else{
+            OptionsEnJeu.r1.setSelected(false);
+            OptionsEnJeu.r2.setSelected(true);
+        }
+        this.layout.show(this.getContentPane(), "optionsEnJeu");
     }
 
     //GETTERS
@@ -266,6 +339,7 @@ public class FenetrePrincipale extends JFrame{
         return this.jeu;
     }
 
+    // REFACTOR: faire passer ces méthodes par Jeu
     public Environnement getCurrentEnvironnement() {
         return this.currentEnvironnement;
     }
@@ -286,8 +360,9 @@ public class FenetrePrincipale extends JFrame{
         return this.continuer;
     }
 
-    public JPanel getGameOver(){return this.gameOver;}
+    public NouvellePartie getNouvellePartie() {
+        return this.nouvellePartie;
+    }
 
     public CardLayout getLayout(){return  this.layout;}
-
 }

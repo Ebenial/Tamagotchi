@@ -1,16 +1,16 @@
 package main.model;
 
 import main.view.FenetrePrincipale;
+import main.view.NouvellePartie;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 import java.io.File;
+import java.time.LocalTime;
 
 public class BoucleJeu implements Runnable{
-
-
     public static Thread myThread;
     public boolean running = true;
     public static long secSinceLastConnexion;
@@ -21,7 +21,7 @@ public class BoucleJeu implements Runnable{
     private int nbSecUpdateEnergie = 5;
     private int nbSecUpdateHygiene = 5;
     private int nbSecUpdateDivertissement = 5;
-    private int nbSecAutoSave = 5;
+    private final int nbSecAutoSave = 5;
     private int nbSecEvent = 1;
     private long timeCanEat = 2;
     private long timeCanSleep = 2;
@@ -33,44 +33,73 @@ public class BoucleJeu implements Runnable{
     private int nbEnergie = -1;
     private int nbHygiene = -1;
     private int nbDivertissement = -1;
+    private int nbSecUpdateMax;
+    private int nbSecUpdateMin;
     private boolean isUpdateAllInitialized = false;
     private Clip clip;
     private String music;
-
+    private boolean isDifficultySet = false;
 
     public synchronized void start() {
-        myThread = new Thread(){
-            public void run(){
-                playGameMusic();
+        myThread = new Thread(() -> {
 
-                long sec = 0;
-                //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
+            playGameMusic();
 
+            long sec = 0;
+            //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
-
-                while (running) {
-                    System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
-                    //Bouger la ligne setPrincipale
-                    if(principale.getIsInitialized()) {
-                        if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
-                            principale.getLayout().show(principale.getContentPane(), "gameOver");
-                            running = false;
-                            clip.stop();
-                            playDeathMusic();
-                            music = "death";
-                        }
-                        principale.getJeu().getAvatar().setPrincipale(principale);
-                        if(!isUpdateAllInitialized && principale.getContinuer()) {
-                            updateAll();
-                            isUpdateAllInitialized = true;
-                        }
-                        try {
-                            myThread.sleep(1000);
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
-                        }
-                        updateStatsWithStats();
-
+            while (running) {
+                System.out.println("Running");
+                System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
+                if(!isDifficultySet && NouvellePartie.difficulty != null) {
+                    switch (NouvellePartie.difficulty) {
+                        case "facile":
+                            setFacile();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        case "normal":
+                            setNormal();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        case "difficile":
+                            setDifficile();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        case "legendaire":
+                            setLegendaire();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                //Bouger la ligne setPrincipale
+                if(principale.getIsInitialized()) {
+                    System.out.println("Lieu : " + this.principale.getCurrentEnvironnement().getLieu());
+                    if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
+                        principale.getLayout().show(principale.getContentPane(), "gameOver");
+                        running = false;
+                        clip.stop();
+                        playDeathMusic();
+                        music = "death";
+                    }
+                    principale.getJeu().getAvatar().setPrincipale(principale);
+                    if(!isUpdateAllInitialized && principale.getContinuer()) {
+                        updateAll();
+                        isUpdateAllInitialized = true;
+                    }
+                    try {
+                        myThread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    updateStatsWithStats();
+                    if(sec > 0) {
+                        System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
                         //Update;
                         if(sec % nbSecUpdateSante == 0) {
                             updateSante(nbSante);
@@ -110,22 +139,108 @@ public class BoucleJeu implements Runnable{
                                 theEvent();
                             }
                         }
-
-                        sec++;
                     }
+                    sec++;
                 }
-
             }
-        };
+
+        });
         myThread.start();
+
+        principale.getLayout().show(principale.getContentPane(), "launchScreen");
+        try {
+            wait(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        principale.getLayout().show(principale.getContentPane(), "accueil");
+
         running = true;
-        run();
+        run(); // Pourquoi appeler run ?
+    }
+
+    /**
+     * Update toutes les 10 heures
+     */
+    private void setFacile() {
+        this.nbSecUpdateMax = 36000;
+        this.nbSecUpdateMin = (int) (36000 / 2);
+        this.nbSecUpdateBonheur = 36000;
+        this.nbSecUpdateSante = 36000;
+        this.nbSecUpdateDivertissement = 36000;
+        this.nbSecUpdateEnergie = 36000;
+        this.nbSecUpdateHygiene = 36000;
+        this.nbSecUpdateNourriture = 36000;
+        //Event toutes les heures
+        this.nbSecEvent = 3600;
+        //Peut faire une action une fois par heure
+        this.timeCanEat = 3600;
+        this.timeCanPlay = 3600;
+        this.timeCanShower = 3600;
+        this.timeCanSleep = 3600;
+    }
+
+    /**
+     * Update toutes les 6 heures
+     */
+    private void setNormal() {
+        //toutes les 6h
+        this.nbSecUpdateMax = 21600;
+        this.nbSecUpdateMin = (int) (21600 / 2);
+        this.nbSecUpdateBonheur = 21600;
+        this.nbSecUpdateSante = 21600;
+        this.nbSecUpdateDivertissement = 21600;
+        this.nbSecUpdateEnergie = 21600;
+        this.nbSecUpdateHygiene = 21600;
+        this.nbSecUpdateNourriture = 21600;
+        //Possible event toutes les 12 heures
+        this.nbSecEvent = 43200;
+        //Peut faire une action une fois par heure
+        this.timeCanEat = 18000; //5h
+        this.timeCanPlay = 10800; //3h
+        this.timeCanShower = 43200; //12h
+        this.timeCanSleep = 43200; //possiblement a changer 12h
+    }
+
+
+    private void setDifficile() {
+        //Updates toute les 3h
+        this.nbSecUpdateMax = 10800;
+        this.nbSecUpdateMin = (int) (10800 / 2);
+        this.nbSecUpdateBonheur = 10800;
+        this.nbSecUpdateSante = 10800;
+        this.nbSecUpdateDivertissement = 10800;
+        this.nbSecUpdateEnergie = 10800;
+        this.nbSecUpdateHygiene = 10800;
+        this.nbSecUpdateNourriture = 10800;
+        //Possible event toutes les 24 heures
+        this.nbSecEvent = 86400;
+        //Peut faire une action une fois par heure
+        this.timeCanEat = 25200; //7h
+        this.timeCanPlay = 21600; //6h
+        this.timeCanShower = 43200; //12h
+        this.timeCanSleep = 43200; //possiblement a changer 12h
+    }
+
+    private void setLegendaire() {
+        this.nbSecUpdateMax = 7;
+        this.nbSecUpdateMin = (int) (7 / 2);
+        this.nbSecUpdateBonheur = 7;
+        this.nbSecUpdateSante = 7;
+        this.nbSecUpdateDivertissement = 7;
+        this.nbSecUpdateEnergie = 7;
+        this.nbSecUpdateHygiene = 7;
+        this.nbSecUpdateNourriture = 7;
+        this.nbSecEvent = 15;
+        this.timeCanEat = 4;
+        this.timeCanPlay = 4;
+        this.timeCanShower = 4;
+        this.timeCanSleep = 4;
     }
 
     private boolean isEvent() {
         boolean evt = false;
         int isEv = (int) (Math.random() * 60);
-        System.out.println("IS EVENEMENT = " + isEv);
         if(isEv == 3 || isEv == 12 || isEv == 26 || isEv == 33 || isEv == 38 || isEv == 45 || isEv == 57) {
             evt = true;
         }
@@ -195,19 +310,37 @@ public class BoucleJeu implements Runnable{
      * @return
      */
     private long numberOfUpdate(long secUpdate) {
-        long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
-        return seconds / secUpdate;
+
+        System.out.println("nb Secondes since last connexion : " + (secSinceLastConnexion / 1000));
+        return (secSinceLastConnexion / 1000) / secUpdate;
     }
 
     private void updateStatsWithStats() {
         Avatar avatar = principale.getJeu().getAvatar();
 
+        if(avatar.getHygiene() <= 3 && avatar.getNourriture() <= 3) {
+            int newUpdate = (int) (this.nbSecUpdateSante * 0.9);
+            if(newUpdate >= nbSecUpdateMin) {
+                this.nbSecUpdateSante = newUpdate;
+            }
+        }
         //Sante
         if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
             this.nbSante = -1;
         }
-        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 90) {
+        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
             this.nbSante = 1;
+            int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
+            if(newUpdate <= nbSecUpdateMax) {
+                this.nbSecUpdateSante = newUpdate;
+            }
+        }
+
+        if(avatar.getHygiene() <= 3 && avatar.getDivertissement() <= 3) {
+            int newUpdate = (int) (this.nbSecUpdateBonheur * 0.9);
+            if(newUpdate >= nbSecUpdateMin) {
+                this.nbSecUpdateBonheur = newUpdate;
+            }
         }
 
         //Bonheur
@@ -216,6 +349,10 @@ public class BoucleJeu implements Runnable{
         }
         else if(avatar.getEnergie() > 30 && avatar.getEnergie() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
             this.nbBonheur = 1;
+            int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
+            if(newUpdate <= nbSecUpdateMax) {
+                this.nbSecUpdateBonheur = newUpdate;
+            }
         }
 
     }
@@ -226,12 +363,16 @@ public class BoucleJeu implements Runnable{
     private void updateAll() {
         System.out.println("UPDATE ALL");
         System.out.println("nbUpdate : " + (int) numberOfUpdate(nbSecUpdateSante));
-        updateSante((int) numberOfUpdate(-nbSecUpdateSante));
-        updateBonheur((int) numberOfUpdate(-nbSecUpdateBonheur));
-        updateNourriture((int) numberOfUpdate(-nbSecUpdateNourriture));
-        updateEnergie((int) numberOfUpdate(-nbSecUpdateEnergie));
-        updateHygiene((int) numberOfUpdate(-nbSecUpdateHygiene));
-        updateDivertissement((int) numberOfUpdate(-nbSecUpdateDivertissement));
+//        updateSante((int) numberOfUpdate(-nbSecUpdateSante));
+//        updateBonheur((int) numberOfUpdate(-nbSecUpdateBonheur));
+        System.out.println("updateNourriture : " + (int) numberOfUpdate(-nbSecUpdateNourriture));
+        System.out.println("updateEnergie : " + (int) numberOfUpdate(-nbSecUpdateEnergie));
+        System.out.println("updateHygiene : " + (int) numberOfUpdate(-nbSecUpdateHygiene));
+        System.out.println("updateDivertissement : " + (int) numberOfUpdate(-nbSecUpdateDivertissement));
+        //updateNourriture((int) numberOfUpdate(-nbSecUpdateNourriture));
+        //updateEnergie((int) numberOfUpdate(-nbSecUpdateEnergie));
+        //updateHygiene((int) numberOfUpdate(-nbSecUpdateHygiene));
+        //updateDivertissement((int) numberOfUpdate(-nbSecUpdateDivertissement));
     }
 
     public synchronized void stop() {
@@ -315,7 +456,6 @@ public class BoucleJeu implements Runnable{
         updateNourriture(0);
     }
 
-
     @Override
     public void run() {
 
@@ -325,6 +465,10 @@ public class BoucleJeu implements Runnable{
         this.principale = principale;
         this.principale.setBoucle(this);
         start();
+    }
+
+    public void setIsdifficultySet(boolean bool) {
+        this.isDifficultySet = bool;
     }
 
 }

@@ -2,36 +2,119 @@ package main.view;
 
 import javax.swing.*;
 
-import main.controler.ListenerBouton;
+import main.util.CustomJButton;
+import main.util.TransparentJPanel;
 
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 public class Sauvegardes extends JPanel {
 
-    public static JButton retour;
+    public static CustomJButton retour;
+
+    public static ArrayList<CustomJButton> arrayButton = new ArrayList<>();
+    public static ArrayList<String> saveName = new ArrayList<>();
+    public static ArrayList<CustomJButton> arrayDelete = new ArrayList<>();
+
 
     /**
      * Contient le panneau des règles
+     *
      * @param principale - la JFrame dans laquelle est affiché le panneau des règles
      */
-    public Sauvegardes(FenetrePrincipale principale){
-
+    public Sauvegardes(FenetrePrincipale principale) {
         this.setLayout(new BorderLayout());
 
-        retour = new JButton("Retour");
-        retour.addActionListener(new ListenerBouton(principale));
+        //BORDERLAYOUT.CENTER
+        JPanel centre = new JPanel();
+        centre.setOpaque(false);
 
-        this.add(retour, BorderLayout.SOUTH);
+        JPanel panelInScroll = new JPanel();
+        panelInScroll.setOpaque(false);
+        panelInScroll.setLayout(new GridLayout(1, 4));
+
+        JPanel panel1 = new JPanel();
+        panel1.setOpaque(false);
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+        panel2.setOpaque(false);
+        Set<String> hset = listFilesUsingJavaIO(".");
+        for (String s : hset) {
+            if (s.toLowerCase().endsWith(".json")) {
+                String[] tokens = s.split("\\.");
+                String buttonName = tokens[0];
+                int length = 13;
+                if (buttonName.length() > length) {
+                    buttonName = buttonName.substring(0, length);
+                    buttonName = buttonName + "...";
+                }
+                arrayButton.add(new CustomJButton(buttonName, principale, null, "Code/resources/others/button_background_large.png", null, null, null));
+                saveName.add(s);
+                arrayDelete.add(new CustomJButton(principale));
+            }
+        }
+        for (CustomJButton j : Sauvegardes.arrayButton) {
+            j.setBackground(new Color(0,0,0,0));
+            j.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+            panel1.add(j);
+        }
+
+        for (CustomJButton j : Sauvegardes.arrayDelete) {
+            j.setBackground(new Color(0,0,0,0));
+            panel2.add(j);
+        }
+
+        JScrollPane jScrollPane = new JScrollPane(panelInScroll);
+        jScrollPane.setOpaque(false);
+        jScrollPane.getViewport().setOpaque(false);
+        jScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane.setBorder(createEmptyBorder());
+
+
+        retour = new CustomJButton("Retour", principale, null, null, null, null, null);
+
+        TransparentJPanel trP = new TransparentJPanel();
+        trP.setBorder(BorderFactory.createEmptyBorder(30,0,5,0));
+        trP.add(retour);
+
+        centre.add(panel1);
+        centre.add(panel2);
+
+        panelInScroll.add(centre);
+
+        add(jScrollPane, BorderLayout.CENTER);
+        add(trP, BorderLayout.SOUTH);
+
     }
-    
 
-        /**
+    public Sauvegardes() {
+    }
+
+    public Set<String> listFilesUsingJavaIO(String dir) {
+        return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
+                .filter(file -> !file.isDirectory())
+                .map(File::getName)
+                .collect(Collectors.toSet());
+    }
+
+
+    /**
      * Permet de surcharger le paintComponent pour ajouter l'Image background en fond d'écran du panel.
-     * @param g - 
+     *
+     * @param g -
      */
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("Code/resources/background/sauvegardes.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }

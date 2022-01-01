@@ -27,6 +27,7 @@ public class Regles extends JPanel {
         JLabel titre = new JLabel("Règles du jeu", SwingConstants.CENTER);
         titre.setFont(CustomFont.customFont50_PLAIN);
         titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre.setForeground(Color.white);
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche
@@ -46,7 +47,7 @@ public class Regles extends JPanel {
         options.setLayout(new GridBagLayout());
         options.setBackground(new Color(255, 255, 255, 161));
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        new GridBagConstraints();
 
 
 
@@ -66,7 +67,7 @@ public class Regles extends JPanel {
         rightBox.setPreferredSize(new Dimension(500,0));
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0, 0, 50, 0);
+        constraints.insets = new Insets(50, 0, 50, 0);
         constraints.gridx = 0;
         constraints.gridy = 0;
         buttonPanel.add(leftBox, constraints);

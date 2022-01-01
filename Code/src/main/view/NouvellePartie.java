@@ -3,10 +3,8 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
-import main.util.BoutonFleche;
-import main.util.CustomFont;
-import main.util.CustomJButton;
-import main.util.TransparentJPanel;
+import main.model.Lieu;
+import main.util.*;
 
 import java.awt.*;
 
@@ -15,11 +13,11 @@ import java.awt.*;
  */
 public class NouvellePartie extends JPanel{
 
-    public JLabel creation;
+    public JLabel titre;
     public JLabel joueur;
-    public static JTextArea nomJoueur;
+    public static CustomJTextField nomJoueur;
     public JLabel avatar;
-    public static JTextArea nomAvatar;
+    public static CustomJTextField nomAvatar;
     public static JButton choixGauche;
     public static JButton choixDroite;
     public static CustomJButton valider;
@@ -28,6 +26,7 @@ public class NouvellePartie extends JPanel{
     public JLabel avatarChoisi;
     public static String monChoix;
     public int position;
+    public static String difficulty;
     
     /**
      * Panneau qui contient les éléments nécessaires à la création de l'avatar
@@ -39,10 +38,10 @@ public class NouvellePartie extends JPanel{
 
         //BORDERLAYOUT.NORTH
         //Titre de la page et paramétrage
-        creation = new JLabel("Nouvel avatar", SwingConstants.CENTER);
-        creation.setFont(CustomFont.customFont100);
-        creation.setForeground(Color.white);
-        creation.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre = new JLabel("NOUVELLE PARTIE", SwingConstants.CENTER);
+        titre.setFont(CustomFont.customFont50_PLAIN);
+        titre.setForeground(Color.white);
+        titre.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -60,38 +59,44 @@ public class NouvellePartie extends JPanel{
         //Ajout d'un panel qui va stocker les différents éléments du panneau
         JPanel menu = new JPanel();
         menu.setLayout(new GridBagLayout());
-        menu.setOpaque(false);
+        menu.setBackground(new Color(255, 255, 255, 161));
+        menu.setBorder(BorderFactory.createEmptyBorder(0,15,0,15));
+
         GridBagConstraints gbc = new GridBagConstraints();
 
         //Indique au joueur de choisir son nom
-        joueur = new JLabel("Je m'appelle", SwingConstants.CENTER);
-        joueur.setFont(CustomFont.customFont40);
+        joueur = new JLabel("Choisi ton pseudo", SwingConstants.CENTER);
+        joueur.setFont(CustomFont.customFont28);
         joueur.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
+
         //TextArea pour choisir un nom de joueur
-        nomJoueur = new JTextArea("Mon nom de joueur");
-        nomJoueur.setPreferredSize(new Dimension(600, 150));
-        nomJoueur.setFont(CustomFont.customFont50);
+        nomJoueur = new CustomJTextField("Ton pseudo");
+        nomJoueur.setFont(CustomFont.customFont40);
 
         //Indique au joueur de choisir un nom pour son avatar
-        avatar = new JLabel("Mon avatar va s'appeler", SwingConstants.CENTER);
+        avatar = new JLabel("Choisi le prénom de ton avatar", SwingConstants.CENTER);
         avatar.setFont(CustomFont.customFont28);
         avatar.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //TextArea pour choisir un nom d'avatar
-        nomAvatar = new JTextArea("Nom de mon avatar");
-        nomAvatar.setPreferredSize(new Dimension(600, 150));
-        nomAvatar.setFont(CustomFont.customFont50);
+        nomAvatar = new CustomJTextField("Surnom de ton avatar");
+        nomAvatar.setFont(CustomFont.customFont40);
 
         //Ajout des différents boutons au panneau du menu
         gbc.insets = new Insets(30, 0, 30, 0);
+
+        gbc.weightx=1.;
+        gbc.fill=GridBagConstraints.HORIZONTAL;
+
         gbc.gridx = 1;
-        menu.add(joueur, gbc);
         gbc.gridy = 1;
-        menu.add(nomJoueur, gbc);
+        menu.add(joueur, gbc);
         gbc.gridy = 2;
-        menu.add(avatar, gbc);
+        menu.add(nomJoueur, gbc);
         gbc.gridy = 3;
+        menu.add(avatar, gbc);
+        gbc.gridy = 4;
         menu.add(nomAvatar, gbc);
 
         //BORDERLAYOUT.SOUTH
@@ -114,7 +119,7 @@ public class NouvellePartie extends JPanel{
 
         //Bouton pour retourner à la sélection nouvelle partie / charger une partie
 
-        retour = new CustomJButton("Retour", principale, null, null, null, "Chambre", null);
+        retour = new CustomJButton("Retour", principale, null, null, null, Lieu.CHAMBRE, null);
         retour.setPreferredSize(new Dimension(384, 96));
 
         //Bouton pour changer de type d'avatar vers la gauche String sensFleche, int x, int y, int longueur, int hauteur
@@ -165,12 +170,16 @@ public class NouvellePartie extends JPanel{
         sud.add(validerPanel, c);
 
         //Ajout des composants au panneau d'accueil
-        this.add(creation, BorderLayout.NORTH);
+        this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(nouveautes, BorderLayout.EAST);
         this.add(sud, BorderLayout.SOUTH);
 
+    }
+
+    public void setDifficulty(String difficult) {
+        difficulty = difficult;
     }
 
     /**

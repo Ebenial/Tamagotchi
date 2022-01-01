@@ -1,6 +1,7 @@
 package main.model;
 
 import java.awt.*;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -19,15 +20,19 @@ public class Jeu{
     private Date compteurTemps;
     private boolean enCours;
 
+    private static LocalTime SUNRISE_TIME = LocalTime.of(6, 0);
+    private static LocalTime SUNSET_TIME = LocalTime.of(20, 0);
+
     /**
      * Constructeur du type de jeu
      * @param nomJoueur - le pseudo du joueur humain
      * @param nomAvatar - le nom que le joueur a donné à son avatar
      * @param typeAvatar - le type d'avatar choisi (chat, chien, ...)
      */
-    public Jeu(String nomJoueur, String nomAvatar, String typeAvatar){
+    public Jeu(String nomJoueur, String nomAvatar, String typeAvatar, FenetrePrincipale principale){
         this.joueur = new Joueur(nomJoueur);
         this.avatar = new Avatar(typeAvatar, nomAvatar);
+        this.avatar.setPrincipale(principale);
     }
 
     public Jeu(){}
@@ -79,6 +84,11 @@ public class Jeu{
         }
 
         return res;
+    }
+
+    public boolean isDay() {
+        LocalTime nowTime = LocalTime.now();
+        return nowTime.isAfter(SUNRISE_TIME) && nowTime.isBefore(SUNSET_TIME);
     }
 
     //GETTERS

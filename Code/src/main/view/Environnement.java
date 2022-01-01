@@ -3,6 +3,8 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
+import main.model.BoucleJeu;
+import main.model.Lieu;
 import main.util.BoutonFleche;
 
 import main.model.Jeu;
@@ -16,8 +18,10 @@ import java.awt.event.KeyListener;
  * Créé un panneau chambre qui est un des environnements du jeu ainsi que le lieu de départ lors d'une nouvelle partie
  */
 public class Environnement extends JPanel implements KeyListener{
+    private Jeu jeu;
+    private BoucleJeu boucleJeu;
 
-    private final String lieu;
+    private final Lieu lieu;
     public static JButton gauche;
     public static JButton droite;
     public static JButton options;
@@ -34,13 +38,13 @@ public class Environnement extends JPanel implements KeyListener{
      * Panneau qui contient les éléments nécessaires à la création de l'avatar
      * @param principale - la JFrame a laquelle on applique le panneau
      */
-    public Environnement(String lieu, FenetrePrincipale principale){
-
+    public Environnement(Lieu lieu, FenetrePrincipale principale){
         this.lieu = lieu;
+        this.boucleJeu = principale.getBoucle();
 
         this.setLayout(new BorderLayout());
 
-        Jeu jeu = principale.getJeu();
+        this.jeu = principale.getJeu();
 
         //BORDERLAYOUT.NORTH
         //Affichage des statistiques et de l'heure
@@ -123,7 +127,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
-        if(!this.lieu.equals("Jardin")){
+        if(this.lieu != Lieu.JOUER){
             gauche = new BoutonFleche("Gauche", 98, 98);
             gauche.addActionListener(new ListenerBouton(this.lieu, "Gauche", principale));
             gauche.setSize(new Dimension(98, 98));
@@ -137,7 +141,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.EAST
         //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
-        if(!this.lieu.equals("Chambre")){
+        if(this.lieu != Lieu.CHAMBRE){
             droite = new BoutonFleche("Droite", 98, 98);
             droite.addActionListener(new ListenerBouton(this.lieu, "Droite", principale));
             droite.setSize(new Dimension(98, 98));
@@ -198,23 +202,23 @@ public class Environnement extends JPanel implements KeyListener{
         String actionText = "";
 
         switch (this.lieu){
-            case "Chambre" : {
+            case CHAMBRE: {
                 actionText = "Dormir";
                 break;
             }
 
-            case "Douche" :{
-                actionText = "Se Nettoyer";
+            case LAVER: {
+                actionText = "Laver";
                 break;
 
             }
 
-            case "Cuisine" : {
+            case MANGER: {
                 actionText = "Manger";
                 break;
             }
 
-            case "Jardin" :{
+            case JOUER:{
                 actionText = "Jouer";
             }
         }
@@ -232,7 +236,6 @@ public class Environnement extends JPanel implements KeyListener{
         JPanel vide3 = new JPanel();
         vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide3.setOpaque(false);
-
         options = new JButton();
         options.addActionListener(new ListenerBouton(this.lieu, "Options", principale));
         options.setContentAreaFilled(false);
@@ -268,22 +271,22 @@ public class Environnement extends JPanel implements KeyListener{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
         switch (this.lieu) {
-            case "Jardin":
-                g.drawImage(new ImageIcon("Code/resources/background/jardin.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            case JOUER:
+                g.drawImage(new ImageIcon("Code/resources/background/lieu_jouer.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Cuisine":
-                g.drawImage(new ImageIcon("Code/resources/background/cuisineG.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            case MANGER:
+                g.drawImage(new ImageIcon("Code/resources/background/lieu_manger.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Douche":
-                g.drawImage(new ImageIcon("Code/resources/background/salleDeBain.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            case LAVER:
+                g.drawImage(new ImageIcon("Code/resources/background/lieu_laver.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            case "Chambre":
-                g.drawImage(new ImageIcon("Code/resources/background/chambre.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+            case CHAMBRE: {
+                String image = this.jeu.isDay() ? "jour" : "nuit";
+                g.drawImage(new ImageIcon("Code/resources/background/lieu_" + image + ".png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
                 break;
-            default:
-                g.drawImage(new ImageIcon("Code/resources/background/sarah-boeving-kitchen.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
-                break;
+            }
         }
     }
 
@@ -310,6 +313,8 @@ public class Environnement extends JPanel implements KeyListener{
     public JLabel getNourriture() {
         return nourriture;
     }
+
+    public Lieu getLieu(){return this.lieu;}
 
     @Override
     public void keyTyped(KeyEvent e) {}

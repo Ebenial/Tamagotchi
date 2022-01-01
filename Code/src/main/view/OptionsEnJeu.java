@@ -1,25 +1,25 @@
 package main.view;
 
-import javax.swing.*;
-
 import main.controler.ListenerRadioButton;
 import main.util.CustomFont;
 import main.util.CustomJButton;
+import main.util.CustomJPanel;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class Options extends JPanel{
+public class OptionsEnJeu extends JPanel{
 
     public JLabel titre;
-    public static CustomJButton retour;
     public JLabel soundOn;
+    public static CustomJButton retour;
+    public static CustomJButton retourAuMenu;
+    public static CustomJButton sauvegarde;
     public static JRadioButton r1;
     public static JRadioButton r2;
 
-    public Options(FenetrePrincipale principale){
-
+    public OptionsEnJeu(FenetrePrincipale principale){
         this.setLayout(new BorderLayout());
-
 
         //BORDERLAYOUT.NORTH
         //Ajout du titre de la page
@@ -42,19 +42,25 @@ public class Options extends JPanel{
 
         //BORDERLAYOUT.CENTER
         //Ajout d'un panel qui va stocker les différents éléments du panneau
-        JPanel options = new JPanel();
+
+        JPanel menu = new JPanel();
+        menu.setLayout(new GridBagLayout());
+        menu.setOpaque(false);
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        //******************************************************************
+        //OPTIONS DE SON
+
+        CustomJPanel options = new CustomJPanel(new ImageIcon("Code/resources/others/button_background_large.png").getImage(), new Dimension(new Dimension(552,96)));
         options.setLayout(new GridBagLayout());
-        options.setBackground(new Color(255, 255, 255, 161));
-
         GridBagConstraints gbc = new GridBagConstraints();
-
 
         soundOn = new JLabel("Musique : ", SwingConstants.CENTER);
         soundOn.setFont(CustomFont.customFont28);
         soundOn.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         // créer une case à cocher avec une icône
-        r1 = new JRadioButton("On" ,/*, new ImageIcon("C:/male.png"), */true);
+        r1 = new JRadioButton("On",true);
         r2 = new JRadioButton("Off", false);
         r1.setOpaque(false);
         r2.setOpaque(false);
@@ -67,7 +73,6 @@ public class Options extends JPanel{
         buttonGroup.add(r1);
         buttonGroup.add(r2);
 
-
         //Ajout des différents boutons au panneau des options
         gbc.insets = new Insets(0, 10, 0, 10);
         gbc.gridx = 1;
@@ -78,39 +83,28 @@ public class Options extends JPanel{
         options.add(r2, gbc);
 
 
-        //BORDERLAYOUT.SOUTH
-        //Ajout du bouton retour pour revenir à la page d'accueil
+        //******************************************************************
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridBagLayout());
-        buttonPanel.setOpaque(false);
+        sauvegarde = new CustomJButton("Sauvegarder", principale, null, "Code/resources/others/button_background_large.png", null, null, null);
+        retourAuMenu = new CustomJButton("Retour au menu", principale, null, "Code/resources/others/button_background_large.png", null, null, null);
+        retour = new CustomJButton("Retour", principale, null, "Code/resources/others/button_background_large.png", null,null, null);
 
-        retour = new CustomJButton("Retour", principale, null, null, null, null, null);
-        retour.setPreferredSize(new Dimension(384, 96));
-
-        JPanel leftBox = new JPanel();
-        leftBox.setPreferredSize(new Dimension(500,0));
-        JPanel rightBox = new JPanel();
-        rightBox.setPreferredSize(new Dimension(500,0));
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(50, 0, 50, 0);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        buttonPanel.add(leftBox, constraints);
+        constraints.insets = new Insets(15,0,15,0);
         constraints.gridx = 1;
-        buttonPanel.add(retour, constraints);
-        constraints.gridx = 2;
-        buttonPanel.add(rightBox, constraints);
-
+        constraints.gridy = 1;
+        menu.add(options, constraints);
+        constraints.gridy = 2;
+        menu.add(retourAuMenu, constraints);
+        constraints.gridy = 3;
+        menu.add(sauvegarde, constraints);
+        constraints.gridy = 4;
+        menu.add(retour, constraints);
 
         //Ajout des composants au panneau
         this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(droite, BorderLayout.EAST);
-        this.add(options, BorderLayout.CENTER);
-        this.add(buttonPanel, BorderLayout.SOUTH);
-
+        this.add(menu, BorderLayout.CENTER);
     }
 
     /**
