@@ -49,28 +49,23 @@ public class BoucleJeu implements Runnable{
             //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
-                System.out.println("Running");
                 System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
                         case "facile":
                             setFacile();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
                             isDifficultySet = true;
                             break;
                         case "normal":
                             setNormal();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
                             isDifficultySet = true;
                             break;
                         case "difficile":
                             setDifficile();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
                             isDifficultySet = true;
                             break;
                         case "legendaire":
                             setLegendaire();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
                             isDifficultySet = true;
                             break;
                         default:
@@ -79,7 +74,6 @@ public class BoucleJeu implements Runnable{
                 }
                 //Bouger la ligne setPrincipale
                 if(principale.getIsInitialized()) {
-                    System.out.println("Lieu : " + this.principale.getCurrentEnvironnement().getLieu());
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
                         running = false;
@@ -89,7 +83,8 @@ public class BoucleJeu implements Runnable{
                     }
                     principale.getJeu().getAvatar().setPrincipale(principale);
                     if(!isUpdateAllInitialized && principale.getContinuer()) {
-                        updateAll();
+                        System.out.println("nb Secondes since last connexion : " + (secSinceLastConnexion / 1000));
+                        updateStatWithStatsWhileDisconnect();
                         isUpdateAllInitialized = true;
                     }
                     try {
@@ -99,7 +94,6 @@ public class BoucleJeu implements Runnable{
                     }
                     updateStatsWithStats();
                     if(sec > 0) {
-                        System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
                         //Update;
                         if(sec % nbSecUpdateSante == 0) {
                             updateSante(nbSante);
@@ -231,7 +225,7 @@ public class BoucleJeu implements Runnable{
         this.nbSecUpdateEnergie = 7;
         this.nbSecUpdateHygiene = 7;
         this.nbSecUpdateNourriture = 7;
-        this.nbSecEvent = 15;
+        this.nbSecEvent = 5;
         this.timeCanEat = 4;
         this.timeCanPlay = 4;
         this.timeCanShower = 4;
@@ -250,7 +244,6 @@ public class BoucleJeu implements Runnable{
     private void theEvent() {
         String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant"};
         String alea = listeEvent[(int) (Math.random() * 7)];
-        System.out.println(alea);
         switch (alea) {
             case "malade":
                 updateSante(-2);
@@ -311,7 +304,6 @@ public class BoucleJeu implements Runnable{
      */
     private long numberOfUpdate(long secUpdate) {
 
-        System.out.println("nb Secondes since last connexion : " + (secSinceLastConnexion / 1000));
         return (secSinceLastConnexion / 1000) / secUpdate;
     }
 
@@ -328,7 +320,7 @@ public class BoucleJeu implements Runnable{
         if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
             this.nbSante = -1;
         }
-        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
+        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getNourriture() > 3 && avatar.getNourriture() < 9) {
             this.nbSante = 1;
             int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
             if(newUpdate <= nbSecUpdateMax) {
@@ -357,22 +349,167 @@ public class BoucleJeu implements Runnable{
 
     }
 
-    /**
-     * Update les stats du joueur après une reconnexion
-     */
-    private void updateAll() {
-        System.out.println("UPDATE ALL");
-        System.out.println("nbUpdate : " + (int) numberOfUpdate(nbSecUpdateSante));
-//        updateSante((int) numberOfUpdate(-nbSecUpdateSante));
-//        updateBonheur((int) numberOfUpdate(-nbSecUpdateBonheur));
-        System.out.println("updateNourriture : " + (int) numberOfUpdate(-nbSecUpdateNourriture));
-        System.out.println("updateEnergie : " + (int) numberOfUpdate(-nbSecUpdateEnergie));
-        System.out.println("updateHygiene : " + (int) numberOfUpdate(-nbSecUpdateHygiene));
-        System.out.println("updateDivertissement : " + (int) numberOfUpdate(-nbSecUpdateDivertissement));
-        //updateNourriture((int) numberOfUpdate(-nbSecUpdateNourriture));
-        //updateEnergie((int) numberOfUpdate(-nbSecUpdateEnergie));
-        //updateHygiene((int) numberOfUpdate(-nbSecUpdateHygiene));
-        //updateDivertissement((int) numberOfUpdate(-nbSecUpdateDivertissement));
+
+    private void updateStatWithStatsWhileDisconnect() {
+
+        //Stats avant update
+        int nourritureBeforeUpdate = this.principale.getJeu().getAvatar().getNourriture();
+        int energieBeforeUpdate = this.principale.getJeu().getAvatar().getEnergie();
+        int hygieneBeforeUpdate = this.principale.getJeu().getAvatar().getHygiene();
+        int divertissementBeforeUpdate = this.principale.getJeu().getAvatar().getDivertissement();
+
+        //Nombre d'update pendant la deconnexion
+        int nbUpdateNourriture = (int) numberOfUpdate(nbSecUpdateNourriture);
+        int nbUpdateEnergie = (int) numberOfUpdate(nbSecUpdateEnergie);
+        int nbUpdateHygiene = (int) numberOfUpdate(nbSecUpdateHygiene);
+        int nbUpdateDivertissement = (int) numberOfUpdate(nbSecUpdateDivertissement);
+        int eventInFourthUpdate = (int) (numberOfUpdate(nbSecEvent) / 4);
+
+
+        int usefullNbUpdateNourriture = nbUpdateNourriture;
+        int usefullNbUpdateEnergie = nbUpdateEnergie;
+        int usefullNbUpdateHygiene = nbUpdateHygiene;
+        int usefullNbUpdateDivertissement = nbUpdateDivertissement;
+
+        //Update les stats (sauf Sante et Bonheur) en fonction du nombre d'update qu'il y a eu lieu pendant la deconnexion + mets 1/4 des events pour une meilleur repartition
+        int event = eventInFourthUpdate;
+        while (usefullNbUpdateNourriture > 0) {
+            if(event > 0) {
+                if(isEvent()) {
+                    theEvent();
+                }
+                event--;
+            }
+            updateNourriture(-1);
+            usefullNbUpdateNourriture--;
+        }
+
+        event = eventInFourthUpdate;
+        while (usefullNbUpdateEnergie > 0) {
+
+            if(event > 0) {
+                if(isEvent()) {
+                    theEvent();
+                }
+                event--;
+            }
+            updateEnergie(-1);
+            usefullNbUpdateEnergie--;
+        }
+
+        event = eventInFourthUpdate;
+        while (usefullNbUpdateHygiene > 0) {
+
+            if(event > 0) {
+                if(isEvent()) {
+                    theEvent();
+                }
+                event--;
+            }
+            updateHygiene(-1);
+            usefullNbUpdateHygiene--;
+        }
+
+        event = eventInFourthUpdate;
+        while (usefullNbUpdateDivertissement > 0) {
+
+            if(event > 0) {
+                if(isEvent()) {
+                    theEvent();
+                }
+                event--;
+            }
+            updateDivertissement(-1);
+            usefullNbUpdateDivertissement--;
+        }
+
+        //Remise a niveau des valeurs a utiliser
+        usefullNbUpdateNourriture = nbUpdateNourriture;
+        usefullNbUpdateEnergie = nbUpdateEnergie;
+        usefullNbUpdateHygiene = nbUpdateHygiene;
+        usefullNbUpdateDivertissement = nbUpdateDivertissement;
+
+        //Fait baisser le nombre d'updateNourriture jusqu'a ce que NourritureBeforeUpdate = 3.
+        while (nourritureBeforeUpdate >= 3 && usefullNbUpdateNourriture > 0) {
+
+            if(nourritureBeforeUpdate < 9) {
+                int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
+                if(newUpdate <= nbSecUpdateMax) {
+                    this.nbSecUpdateSante = newUpdate;
+                }
+            }
+            nourritureBeforeUpdate--;
+            usefullNbUpdateNourriture--;
+        }
+
+        //Fait baisser le nombre d'updateEnergoe jusqu'a ce que EnergieBeforeUpdate = 3.
+        while (energieBeforeUpdate >= 3 && usefullNbUpdateEnergie> 0) {
+            if(energieBeforeUpdate < 9) {
+                int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
+                if(newUpdate <= nbSecUpdateMax) {
+                    this.nbSecUpdateBonheur = newUpdate;
+                }
+            }
+            energieBeforeUpdate--;
+            usefullNbUpdateEnergie--;
+        }
+
+        //Fait baisser le nombre d'updateHygiene jusqu'a ce que HygieneBeforeUpdate = 3.
+        while (hygieneBeforeUpdate >=3 && usefullNbUpdateHygiene > 0) {
+            if(hygieneBeforeUpdate < 9) {
+                int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
+                if(newUpdate <= nbSecUpdateMax) {
+                    this.nbSecUpdateSante = newUpdate;
+                }
+            }
+            hygieneBeforeUpdate--;
+            usefullNbUpdateHygiene--;
+        }
+
+        //Fait baisser le nombre d'updateDivertissement jusqu'a ce que DivertissementBeforeUpdate = 3.
+        while (divertissementBeforeUpdate >= 3 && usefullNbUpdateDivertissement > 0) {
+            if(divertissementBeforeUpdate < 9) {
+                int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
+                if(newUpdate <= nbSecUpdateMax) {
+                    this.nbSecUpdateBonheur = newUpdate;
+                }
+            }
+            divertissementBeforeUpdate--;
+            usefullNbUpdateDivertissement--;
+        }
+
+        int tmpEnergie = usefullNbUpdateEnergie;
+        if(usefullNbUpdateDivertissement > usefullNbUpdateEnergie) {
+            tmpEnergie = usefullNbUpdateDivertissement;
+            usefullNbUpdateDivertissement = usefullNbUpdateEnergie;
+        }
+
+        int tmpNourriture = usefullNbUpdateNourriture;
+        if(usefullNbUpdateHygiene > usefullNbUpdateNourriture) {
+            tmpNourriture = usefullNbUpdateHygiene;
+            usefullNbUpdateHygiene = usefullNbUpdateNourriture;
+        }
+
+        while (usefullNbUpdateDivertissement > 0) {
+            int newUpdate = (int) (this.nbSecUpdateBonheur * 0.9);
+            if(newUpdate >= nbSecUpdateMin) {
+                this.nbSecUpdateBonheur = newUpdate;
+            }
+            usefullNbUpdateDivertissement--;
+        }
+
+        while (usefullNbUpdateHygiene > 0) {
+            int newUpdate = (int) (this.nbSecUpdateSante * 0.9);
+            if(newUpdate >= nbSecUpdateMin) {
+                this.nbSecUpdateSante = newUpdate;
+            }
+            usefullNbUpdateHygiene--;
+        }
+
+
+        updateSante(-tmpNourriture);
+        updateBonheur(-tmpEnergie);
+
     }
 
     public synchronized void stop() {

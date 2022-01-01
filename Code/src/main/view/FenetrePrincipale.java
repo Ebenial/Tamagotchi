@@ -163,7 +163,6 @@ public class FenetrePrincipale extends JFrame{
         this.jeu.getAvatar().setPrincipale(this);
         this.jeu.setJoueur(new Joueur(partie.getNomJoueur()));
 
-        System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
 
         this.chambre = new Environnement(Lieu.CHAMBRE, this);
         this.douche = new Environnement(Lieu.LAVER, this);
@@ -222,7 +221,6 @@ public class FenetrePrincipale extends JFrame{
             e.printStackTrace();
         }
         //AFFICHAGE POUR TESTS
-        System.out.println("TEST SAUVEGARDE : OK");
         long minutes = (BoucleJeu.secSinceLastConnexion / 1000) / 60;
         long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
         System.out.println("TEMPS DEPUIS DERNIERE CONNEXION : " + minutes + " min, " + seconds + " secs");
