@@ -49,6 +49,7 @@ public class BoucleJeu implements Runnable{
             //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
+                System.out.println("Running");
                 System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
@@ -309,8 +310,9 @@ public class BoucleJeu implements Runnable{
      * @return
      */
     private long numberOfUpdate(long secUpdate) {
-        long seconds = (BoucleJeu.secSinceLastConnexion / 1000) % 60;
-        return seconds / secUpdate;
+
+        System.out.println("nb Secondes since last connexion : " + (secSinceLastConnexion / 1000));
+        return (secSinceLastConnexion / 1000) / secUpdate;
     }
 
     private void updateStatsWithStats() {
@@ -361,12 +363,16 @@ public class BoucleJeu implements Runnable{
     private void updateAll() {
         System.out.println("UPDATE ALL");
         System.out.println("nbUpdate : " + (int) numberOfUpdate(nbSecUpdateSante));
-        updateSante((int) numberOfUpdate(-nbSecUpdateSante));
-        updateBonheur((int) numberOfUpdate(-nbSecUpdateBonheur));
-        updateNourriture((int) numberOfUpdate(-nbSecUpdateNourriture));
-        updateEnergie((int) numberOfUpdate(-nbSecUpdateEnergie));
-        updateHygiene((int) numberOfUpdate(-nbSecUpdateHygiene));
-        updateDivertissement((int) numberOfUpdate(-nbSecUpdateDivertissement));
+//        updateSante((int) numberOfUpdate(-nbSecUpdateSante));
+//        updateBonheur((int) numberOfUpdate(-nbSecUpdateBonheur));
+        System.out.println("updateNourriture : " + (int) numberOfUpdate(-nbSecUpdateNourriture));
+        System.out.println("updateEnergie : " + (int) numberOfUpdate(-nbSecUpdateEnergie));
+        System.out.println("updateHygiene : " + (int) numberOfUpdate(-nbSecUpdateHygiene));
+        System.out.println("updateDivertissement : " + (int) numberOfUpdate(-nbSecUpdateDivertissement));
+        //updateNourriture((int) numberOfUpdate(-nbSecUpdateNourriture));
+        //updateEnergie((int) numberOfUpdate(-nbSecUpdateEnergie));
+        //updateHygiene((int) numberOfUpdate(-nbSecUpdateHygiene));
+        //updateDivertissement((int) numberOfUpdate(-nbSecUpdateDivertissement));
     }
 
     public synchronized void stop() {
