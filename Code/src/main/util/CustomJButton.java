@@ -44,7 +44,7 @@ public class CustomJButton extends JButton {
     }
 
     public CustomJButton(FenetrePrincipale principale){
-        this.setBorder(BorderFactory.createEmptyBorder(16, 0, 16, 0));
+        this.setBorder(BorderFactory.createEmptyBorder(21, 0, 21, 0));
         this.setOpaque(false);
         this.addActionListener(new ListenerBouton(principale));
         this.setBackground(new Color(0,0,0,0));
