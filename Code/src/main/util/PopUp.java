@@ -31,12 +31,12 @@ public class PopUp implements ActionListener {
 
 
     // window
-    JOptionPane w;
+    JWindow w;
 
     // constructor
     public PopUp(String text) {
         // create a window
-        w = new JOptionPane();
+        w = new JWindow();
 
         // set background of window transparent
         w.setBackground(new Color(0, 0, 0, 0));
@@ -82,6 +82,12 @@ public class PopUp implements ActionListener {
         w.requestFocusInWindow();
 
         w.setVisible(true);
+        try {
+            w.wait(3000);
+            w.setVisible(false);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     // if button is pressed
@@ -91,8 +97,10 @@ public class PopUp implements ActionListener {
 }
 
 
+ */
 
-*/
+
+
 
 
 /*
@@ -181,8 +189,9 @@ public class PopUp extends JOptionPane {
         //Make sure to paint all the other properties of Swing components.
         super.paint(g);
     }
-}*/
-
+}
+*/
+/*
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -257,5 +266,57 @@ public class PopUp extends JDialog {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(imgBackground.getWidth(), imgBackground.getHeight());
+    }
+}
+*/
+
+import main.view.FenetrePrincipale;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class PopUp {
+
+    static class BackgroundJPanel extends JPanel{
+        BackgroundJPanel(){
+            this.setPreferredSize(new Dimension(384, 192));
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(new ImageIcon("Code/resources/others/popup.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        }
+    }
+
+    private static JDialog d;
+
+    public PopUp(String text, FenetrePrincipale principale) {
+        int width = 384;
+        int height = 235;
+
+        BackgroundJPanel bJ = new BackgroundJPanel();
+        bJ.setLayout(new GridLayout(2,1));
+        d = new JDialog(principale, "Nouvel événement !", true);
+        d.setMinimumSize(new Dimension(width, height));
+        d.setLayout( new FlowLayout() );
+        JButton b = new JButton ("OK");
+        b.addActionListener (e -> PopUp.d.setVisible(false));
+        d.add(bJ);
+        d.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width / 2) - (width / 2), (Toolkit.getDefaultToolkit().getScreenSize().height / 2) - (height / 2));
+        d.setSize(new Dimension(384, 192));
+
+        JLabel textLabel = new JLabel(text);
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        textLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        textLabel.setFont(CustomFont.customFont13);
+
+        JLabel test = new JLabel();
+        test.setLayout(new GridBagLayout());
+        test.add(b);
+
+        bJ.add(textLabel);
+        bJ.add(test);
+        d.setVisible(true);
     }
 }

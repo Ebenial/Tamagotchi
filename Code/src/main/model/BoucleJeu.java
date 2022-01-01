@@ -1,5 +1,6 @@
 package main.model;
 
+import main.util.PopUp;
 import main.view.FenetrePrincipale;
 import main.view.NouvellePartie;
 
@@ -247,20 +248,36 @@ public class BoucleJeu implements Runnable{
         switch (alea) {
             case "malade":
                 updateSante(-2);
+                 new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est tombé malade !<br><br> Sa SANTE baisse de 2 points.")+"</html>", principale);
+                 break;
             case "anniversaire":
+                updateDivertissement(1);
+                updateBonheur(1);
+                new PopUp("<html><center><br>"+("C'est l'anniversaire de "+ principale.getJeu().getAvatar().getNom()+ " !<br><br> Son BONHEUR augmente de 1 point<br><br>Son DIVERTISSEMENT augmente de 1 point.")+"</html>", principale);
+                break;
             case "soiree":
                 updateDivertissement(1);
                 updateBonheur(1);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " fait une soirée !<br><br> Son BONHEUR augmente de 1 point<br><br>Son DIVERTISSEMENT augmente de 1 point.")+"</html>", principale);
+                break;
             case "amoureux":
                 updateBonheur(1);
                 updateHygiene(2);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est tombé amoureux !<br><br> Son BONHEUR augmente de 1 point<br><br>Son HYGIENE augmente de 1 point.")+"</html>", principale);
+                break;
             case "sport":
-                updateEnergie(2);
+                updateEnergie(-1);
                 updateSante(1);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " fait du sport !<br><br> Sa SANTE augmente de 1 point<br><br>Son ENERGIE baisse de 1 point.")+"</html>", principale);
+                break;
             case "jouer":
                 updateDivertissement(2);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " s'amuse !<br><br> Son DIVERTISSEMENT augmente de 2 points.")+"</html>", principale);
+                break;
             case "restaurant":
                 updateNourriture(2);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est au restaurant !<br><br> Sa NOURRITURE augmente de 2 points.")+"</html>", principale);
+                break;
         }
     }
 
