@@ -148,7 +148,6 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
-        System.out.println("heeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrree");
         this.continuer = true;
         this.layout.show(this.getContentPane(), "sauvegardes");
 
