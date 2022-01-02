@@ -165,7 +165,6 @@ public class Avatar {
     //SETTERS
 
     public void setSante(int nouvelleSante){
-        System.out.println("setSante : " + nouvelleSante);
         if(nouvelleSante < 0){
             this.sante = 0;
         }else if(nouvelleSante > 10){
@@ -179,7 +178,6 @@ public class Avatar {
     }
 
     public void setBonheur(int nouveauBonheur){
-        System.out.println("setBonheur : " + nouveauBonheur);
         if(nouveauBonheur < 0) {
             this.bonheur = 0;
         }
@@ -196,7 +194,6 @@ public class Avatar {
     }
     
     public void setNourriture(int nouvellenourriture){
-        System.out.println("setNourriture : " + nouvellenourriture);
         if(nouvellenourriture < 0) {
             this.nourriture = 0;
         }
@@ -213,7 +210,6 @@ public class Avatar {
     }
 
     public void setEnergie(int nouvelleenergie){
-        System.out.println("setEnergie : " + nouvelleenergie);
         if(nouvelleenergie < 0) {
             this.energie = 0;
         }
@@ -229,7 +225,6 @@ public class Avatar {
     }
 
     public void setHygiene(int nouvelleHygiene){
-        System.out.println("setHygiene : " + nouvelleHygiene);
         if(nouvelleHygiene < 0) {
             this.hygiene = 0;
         }
@@ -247,7 +242,6 @@ public class Avatar {
     }
 
     public void setDivertissement(int nouveauxdivertissement){
-        System.out.println("setDivertissement : " + nouveauxdivertissement);
         if(nouveauxdivertissement < 0) {
             this.divertissement = 0;
         }

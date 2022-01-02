@@ -1,5 +1,8 @@
 package main.util;
 
+import main.model.BoucleJeu;
+import main.view.FenetrePrincipale;
+
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -11,9 +14,12 @@ import javax.swing.Timer;
 public class TimerPanel extends JPanel {
     JLabel label;
     Timer timer;
-    int count;
+    private long count;
+    FenetrePrincipale principale;
 
-    public TimerPanel() {
+    public TimerPanel(FenetrePrincipale principale) {
+        this.principale = principale;
+        this.count = principale.getTempsTotal();
         this.setOpaque(false);
         label = new JLabel("...");
         setLayout(new GridBagLayout());
@@ -23,22 +29,27 @@ public class TimerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 count++;
+                //System.out.println("count : "  + count);
 
-                int sec = count % 60;
-                int min = (count / 60) % 60;
-                int hours = (count / 60) / 60;
+                int sec = (int) count % 60;
+                int min = (int) (count / 60) % 60;
+                int hours = (int) (count / 60) / 60;
 
                 String strSec = (sec < 10) ? "0" + sec : Integer.toString(sec);
                 String strmin = (min < 10) ? "0" + min : Integer.toString(min);
                 String strHours = (hours < 10) ? "0" + hours : Integer.toString(hours);
 
-                System.out.println(strHours + ":" + strmin + ":" + strSec);
+                //System.out.println(strHours + ":" + strmin + ":" + strSec);
 
                 label.setText(strHours + ":" + strmin + ":" + strSec);
             }
         });
         timer.setInitialDelay(0);
         timer.start();
+    }
+
+    public void setCount(long count) {
+        this.count = count;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package test;
 
+/**
 import main.model.Avatar;
 import main.model.Jeu;
 import main.model.Joueur;
@@ -192,3 +193,4 @@ public class Test_SauvegardePartie {
     }
     
 }
+*/

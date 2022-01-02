@@ -12,9 +12,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import main.model.*;
 import main.util.CustomFont;
 import main.util.LookAndFeel;
+import main.util.TimerPanel;
 
 /**
  * Permet de modéliser la fenêtre du programme et de la paramétrer
@@ -32,7 +34,7 @@ public class FenetrePrincipale extends JFrame{
     private boolean isInitialized = false;
     private boolean continuer = false;
     private final NouvellePartie nouvellePartie;
-
+    private long tempsTotal;
     /**
      * Créé la fenêtre principale du jeu
      */
@@ -74,6 +76,8 @@ public class FenetrePrincipale extends JFrame{
         this.add(launchScreen, "launchScreen");
         this.add(sauvegardes, "sauvegardes");
         this.add(difficulte, "difficulte");
+
+        tempsTotal = 0;
 
         pegi7Sound();
         this.setVisible(true);
@@ -148,16 +152,21 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
+        isInitialized = false;
         this.continuer = true;
         this.layout.show(this.getContentPane(), "sauvegardes");
 
     }
 
     public void actionChargerPartie(String nom) {
+        this.boucle.setSec(0);
+        System.out.println("ISINITIALIZED : " + isInitialized);
         SauvegardePartie partie = new SauvegardePartie(nom);
         this.jeu = new Jeu();
         BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
-
+        System.out.println("GET TEMPS JEU : " + partie.getTempsJeu() );
+        tempsTotal = partie.getTempsJeu() + (partie.getTimeSinceLastConnexion() / 1000);
+        //TimerPanel.count = tempsTotal;
 
         this.jeu.setAvatar(partie.creerAvatar(nom));
         this.jeu.getAvatar().setPrincipale(this);
@@ -196,6 +205,7 @@ public class FenetrePrincipale extends JFrame{
                 break;
             case "Jouer":
             case "Options":
+                //System.exit(0);
             case "Regles":
             case "OptionsEnJeu":
                 this.layout.show(this.getContentPane(), "accueil");
@@ -215,8 +225,11 @@ public class FenetrePrincipale extends JFrame{
      * Sauvegarde la partie
      */
     public void actionSauvegarde() {
+        if(this.tempsTotal == 0) {
+            this.tempsTotal = this.boucle.getSec();
+        }
         try {
-            new SauvegardePartie(this.jeu.getJoueur().getNom(), this.jeu.getAvatar(), this.jeu.getCompteur());
+            new SauvegardePartie(this.jeu.getJoueur().getNom(), this.jeu.getAvatar(), (this.tempsTotal + this.boucle.getSec()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -232,7 +245,8 @@ public class FenetrePrincipale extends JFrame{
      */
     public void actionValider(){
         this.boucle.setIsdifficultySet(false);
-
+        this.boucle.setSec(0);
+        this.tempsTotal = 0;
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
         this.chambre = new Environnement(Lieu.CHAMBRE, this);
@@ -363,4 +377,6 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public CardLayout getLayout(){return  this.layout;}
+
+    public long getTempsTotal(){return this.tempsTotal;}
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class SauvegardePartie implements Serializable {
     private Date dateFinSession;
-    private Date tempsJeu;
+    private long tempsJeu;
     private String nomJoueur;
     private String nomAvatar;
     private String typeAvatar;
@@ -19,7 +19,7 @@ public class SauvegardePartie implements Serializable {
     private int bonheurAvatar;
     private String difficulty;
 
-    public SauvegardePartie(String nomJoueur, Avatar avatar, Date tempsJeu) throws IOException {
+    public SauvegardePartie(String nomJoueur, Avatar avatar, long tempsJeu) throws IOException {
         this.nomJoueur = nomJoueur;
         this.nomAvatar = avatar.getNom();
         this.typeAvatar = avatar.getType();
@@ -99,7 +99,7 @@ public class SauvegardePartie implements Serializable {
         return (current.getTime() - this.dateFinSession.getTime());
     }
 
-    public Date getTempsJeu() {
+    public long getTempsJeu() {
         return this.tempsJeu;
     }
 

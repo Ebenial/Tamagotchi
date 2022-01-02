@@ -1,6 +1,7 @@
 package main.model;
 
 import main.util.PopUp;
+import main.util.TimerPanel;
 import main.view.FenetrePrincipale;
 import main.view.NouvellePartie;
 
@@ -40,16 +41,19 @@ public class BoucleJeu implements Runnable{
     private Clip clip;
     private String music;
     private boolean isDifficultySet = false;
+    private long sec;
 
     public synchronized void start() {
         myThread = new Thread(() -> {
 
             playGameMusic();
 
-            long sec = 0;
+            sec = 0;
             //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
+                //System.out.println("Temps total : " + FenetrePrincipale.tempsTotal);
+
                 System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
@@ -623,6 +627,14 @@ public class BoucleJeu implements Runnable{
 
     public void setIsdifficultySet(boolean bool) {
         this.isDifficultySet = bool;
+    }
+
+    public long getSec() {
+        return this.sec;
+    }
+
+    public void setSec(long sec) {
+        this.sec = sec;
     }
 
 }

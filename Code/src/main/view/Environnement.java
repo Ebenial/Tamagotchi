@@ -109,7 +109,7 @@ public class Environnement extends JPanel implements KeyListener{
         vide.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide.setOpaque(false);
 
-        TimerPanel timerPanel = new TimerPanel();
+        TimerPanel timerPanel = new TimerPanel(principale);
 
         //Ajout du panneau des stats dans le coin gauche de l'écran
         nord.add(statistiques);
