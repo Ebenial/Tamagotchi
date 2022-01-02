@@ -42,4 +42,12 @@ public class CustomJButton extends JButton {
             this.setFont(font); //old font : setFont(new Font("Century Gothic", Font.PLAIN, 50));
         }
     }
+
+    public CustomJButton(FenetrePrincipale principale){
+        this.setBorder(BorderFactory.createEmptyBorder(21, 0, 21, 0));
+        this.setOpaque(false);
+        this.addActionListener(new ListenerBouton(principale));
+        this.setBackground(new Color(0,0,0,0));
+        this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/trash_can.png").getImage().getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH)));
+    }
 }
