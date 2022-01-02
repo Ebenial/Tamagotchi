@@ -34,7 +34,6 @@ public class FenetrePrincipale extends JFrame{
      * Créé la fenêtre principale du jeu
      */
     public FenetrePrincipale(){
-
         LookAndFeel.initLookAndFeel();
         CustomFont.initFont();
 
@@ -60,8 +59,6 @@ public class FenetrePrincipale extends JFrame{
         LaunchScreen launchScreen = new LaunchScreen();
         Difficulte difficulte = new Difficulte(this);
 
-        this.resetEnvironnement();
-
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
         this.add(nouvellePartie, "nouvellePartie");
@@ -72,7 +69,6 @@ public class FenetrePrincipale extends JFrame{
         this.add(launchScreen, "launchScreen");
         this.add(sauvegardes, "sauvegardes");
         this.add(difficulte, "difficulte");
-        this.add(this.currentEnvironnement, "environnement");
 
         pegi7Sound();
         this.setVisible(true);
@@ -80,6 +76,7 @@ public class FenetrePrincipale extends JFrame{
 
     private void resetEnvironnement() {
         this.currentEnvironnement = new Environnement(Lieu.CHAMBRE, this);
+        this.add(this.currentEnvironnement, "environnement");
     }
 
     private void pegi7Sound() {
