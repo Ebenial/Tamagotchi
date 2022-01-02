@@ -78,15 +78,17 @@ public class Accueil extends JPanel {
         // Règles - Quitter
         gbc.gridx = 1;
         menu.add(jouer, gbc);
-        gbc.gridy = 1;
+        gbc.gridx = 2;
         menu.add(options, gbc);
-        gbc.gridy = 2;
+
+        gbc.gridy = 1;
+        gbc.gridx = 1;
         menu.add(regles, gbc);
-        gbc.gridy = 3;
+        gbc.gridx = 2;
         menu.add(quitter, gbc);
 
         //Ajout des composants au panneau d'accueil
-        //this.add(titre, BorderLayout.NORTH);
+        this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(droite, BorderLayout.EAST);

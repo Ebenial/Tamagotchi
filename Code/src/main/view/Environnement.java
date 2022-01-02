@@ -128,8 +128,8 @@ public class Environnement extends JPanel implements KeyListener{
         cNord.weightx = 0.5;
         nord.add(timerPanel);
 
-        // BORDERLAYOUT.WEST et EAST
-        // Boutons de déplacement
+        // BORDERLAYOUT.EAST
+        // Création des composants
         gauche = new BoutonFleche("Gauche", 98, 98);
         gauche.setSize(new Dimension(98, 98));
 
@@ -215,8 +215,6 @@ public class Environnement extends JPanel implements KeyListener{
         this.add(nord, BorderLayout.NORTH);
         this.add(avatarChoisi, BorderLayout.CENTER);
         this.add(sud, BorderLayout.SOUTH);
-        this.add(gauche, BorderLayout.WEST);
-        this.add(droite, BorderLayout.EAST);
 
         this.changerLieu(principale, lieu);
     }
@@ -234,28 +232,23 @@ public class Environnement extends JPanel implements KeyListener{
      */
     public void changerLieu(FenetrePrincipale principale, Lieu lieu) {
         this.lieu = lieu;
-        System.out.println("changerLieu(): new = " + this.lieu);
-        gauche.activerFleche();
-        droite.activerFleche();
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
-        // Pas de possibilité d'aller à gauche depuis dehors
-        if (this.lieu == Lieu.JOUER) {
-            gauche.desactiverFleche();
-        } else {
+        if(this.lieu != Lieu.JOUER){
             gauche.activerFleche();
-            System.out.println("creation listener gauche: lieu = " + this.lieu);
             this.replaceButtonListener(gauche, new ListenerBouton(this.lieu, "Gauche", principale));
+        }else{
+            gauche.desactiverFleche();
         }
 
         //BORDERLAYOUT.EAST
-        //Pas de possibilité d'aller à droite depuis la chambre
-        if (this.lieu == Lieu.CHAMBRE){
-            droite.desactiverFleche();
-        }else{
+        //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
+        if(this.lieu != Lieu.CHAMBRE){
             droite.activerFleche();
             this.replaceButtonListener(droite, new ListenerBouton(this.lieu, "Droite", principale));
+        }else{
+            droite.desactiverFleche();
         }
 
         // Change l'action
@@ -283,8 +276,6 @@ public class Environnement extends JPanel implements KeyListener{
         }
         action1.setText(actionText);
         this.replaceButtonListener(action1, new ListenerBouton(this.lieu, "Action1", principale));
-
-        this.repaint();
     }
 
     /**
@@ -294,8 +285,6 @@ public class Environnement extends JPanel implements KeyListener{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        System.out.println("paint: lieu = " + this.lieu);
 
         switch (this.lieu) {
             case JOUER:
