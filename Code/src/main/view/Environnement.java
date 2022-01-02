@@ -8,7 +8,6 @@ import main.util.BoutonFleche;
 
 import main.model.Jeu;
 import main.util.CustomFont;
-import main.util.TimerPanel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -42,11 +41,11 @@ public class Environnement extends JPanel implements KeyListener{
      * @param principale - la JFrame a laquelle on applique le panneau
      */
     public Environnement(Lieu lieu, FenetrePrincipale principale){
+        this.jeu = principale.getJeu();
+
         this.lieu = lieu;
 
         this.setLayout(new BorderLayout());
-
-        this.jeu = principale.getJeu();
 
         //BORDERLAYOUT.NORTH
         //Affichage des statistiques et de l'heure
@@ -110,8 +109,6 @@ public class Environnement extends JPanel implements KeyListener{
         vide.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide.setOpaque(false);
 
-        TimerPanel timerPanel = new TimerPanel();
-
         //Ajout du panneau des stats dans le coin gauche de l'écran
         nord.add(statistiques);
 
@@ -126,7 +123,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         cNord.gridx = 2;
         cNord.weightx = 0.5;
-        nord.add(timerPanel);
+        nord.add(vide);
 
         // BORDERLAYOUT.EAST
         // Création des composants
