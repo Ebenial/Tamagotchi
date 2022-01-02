@@ -26,5 +26,14 @@ public class BoutonFleche extends JButton {
             this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/flecheDroite.png").getImage().getScaledInstance(longueur, hauteur, java.awt.Image.SCALE_SMOOTH)));
         }
     }
-    
+
+    public void activerFleche() {
+        this.setEnabled(true);
+        this.setVisible(true);
+    }
+
+    public void desactiverFleche() {
+        this.setEnabled(false);
+        this.setVisible(false);
+    }
 }

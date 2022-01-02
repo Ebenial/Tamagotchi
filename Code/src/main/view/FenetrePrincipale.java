@@ -20,14 +20,11 @@ import main.util.LookAndFeel;
  * Permet de modéliser la fenêtre du programme et de la paramétrer
  */
 public class FenetrePrincipale extends JFrame{
-
-    private BoucleJeu boucle;
-    private Environnement jardin;
-    private Environnement cuisine;
-    private Environnement chambre;
-    private Environnement douche;
-    private Environnement currentEnvironnement;
     private Jeu jeu;
+    private BoucleJeu boucle;
+
+    private Environnement currentEnvironnement;
+
     private final CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
     private boolean continuer = false;
@@ -63,6 +60,7 @@ public class FenetrePrincipale extends JFrame{
         LaunchScreen launchScreen = new LaunchScreen();
         Difficulte difficulte = new Difficulte(this);
 
+        this.resetEnvironnement();
 
         this.add(accueil, "accueil");
         this.add(jouer, "jouer");
@@ -74,9 +72,14 @@ public class FenetrePrincipale extends JFrame{
         this.add(launchScreen, "launchScreen");
         this.add(sauvegardes, "sauvegardes");
         this.add(difficulte, "difficulte");
+        this.add(this.currentEnvironnement, "environnement");
 
         pegi7Sound();
         this.setVisible(true);
+    }
+
+    private void resetEnvironnement() {
+        this.currentEnvironnement = new Environnement(Lieu.CHAMBRE, this);
     }
 
     private void pegi7Sound() {
@@ -148,7 +151,6 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau qui répertorie les différentes sauvegardes existantes
      */
     public void actionContinuer(){
-        System.out.println("heeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrree");
         this.continuer = true;
         this.layout.show(this.getContentPane(), "sauvegardes");
 
@@ -156,8 +158,8 @@ public class FenetrePrincipale extends JFrame{
 
     public void actionChargerPartie(String nom) {
         SauvegardePartie partie = new SauvegardePartie(nom);
-        this.jeu = new Jeu();
-        BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
+        this.jeu = new Jeu(this);
+        //BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
 
 
         this.jeu.setAvatar(partie.creerAvatar(nom));
@@ -166,20 +168,16 @@ public class FenetrePrincipale extends JFrame{
 
         System.out.println("TYPE AVATAR2 : " + this.jeu.getAvatar().getType());
 
-        this.chambre = new Environnement(Lieu.CHAMBRE, this);
-        this.douche = new Environnement(Lieu.LAVER, this);
-        this.cuisine = new Environnement(Lieu.MANGER, this);
-        this.jardin = new Environnement(Lieu.JOUER, this);
-        this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
+        this.resetEnvironnement();
 
-        this.add(chambre, "chambre");
-        this.add(douche, "douche");
-        this.add(cuisine, "cuisine");
-        this.add(jardin, "jardin");
-        this.layout.show(this.getContentPane(), "chambre");
+        //this.add(chambre, "chambre");
+        //this.add(douche, "douche");
+        //this.add(cuisine, "cuisine");
+        //this.add(jardin, "jardin");
+        //this.layout.show(this.getContentPane(), "chambre");
 
+        //this.jeu.demarrerPartie();
         isInitialized = true;
-
     }
 
     /**
@@ -238,18 +236,14 @@ public class FenetrePrincipale extends JFrame{
 
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
-        this.chambre = new Environnement(Lieu.CHAMBRE, this);
-        this.douche = new Environnement(Lieu.LAVER, this);
-        this.cuisine = new Environnement(Lieu.MANGER, this);
-        this.jardin = new Environnement(Lieu.JOUER, this);
-        this.currentEnvironnement = chambre; // A MODIFIER !!!!!!!!!!!!!!!!!!!!
+        this.resetEnvironnement();
 
-        this.add(chambre, "chambre");
-        this.add(douche, "douche");
-        this.add(cuisine, "cuisine");
-        this.add(jardin, "jardin");
+        //this.add(chambre, "chambre");
+        //this.add(douche, "douche");
+        //this.add(cuisine, "cuisine");
+        //this.add(jardin, "jardin");
 
-        this.layout.show(this.getContentPane(), "chambre");
+        //this.layout.show(this.getContentPane(), "chambre");
         isInitialized = true;
     }
 
@@ -286,38 +280,37 @@ public class FenetrePrincipale extends JFrame{
         if(orientation.equals("Gauche")){
             switch (lieu) {
                 case CHAMBRE:
-                    this.currentEnvironnement = douche;
-                    this.getBoucle().updateAllStats();
-                    this.layout.show(this.getContentPane(), "douche");
+                    //this.getBoucle().updateAllStats();
+                    //this.layout.show(this.getContentPane(), "douche");
+                    this.currentEnvironnement.changerLieu(this, Lieu.LAVER);
                     break;
                 case LAVER:
-                    this.currentEnvironnement = cuisine;
-                    this.getBoucle().updateAllStats();
-                    this.layout.show(this.getContentPane(), "cuisine");
+                    //this.getBoucle().updateAllStats();
+                    //this.layout.show(this.getContentPane(), "cuisine");
+                    this.currentEnvironnement.changerLieu(this, Lieu.MANGER);
                     break;
                 case MANGER:
-                    this.currentEnvironnement = jardin;
-                    this.getBoucle().updateAllStats();
-                    this.layout.show(this.getContentPane(), "jardin");
+                    //this.getBoucle().updateAllStats();
+                    //this.layout.show(this.getContentPane(), "jardin");
+                    this.currentEnvironnement.changerLieu(this, Lieu.JOUER);
                     break;
             }
         }else if(orientation.equals("Droite")){
             switch (lieu) {
-                //case "Chambre":
                 case JOUER:
-                    this.currentEnvironnement = cuisine;
-                    this.getBoucle().updateAllStats();
-                    this.layout.show(this.getContentPane(), "cuisine");
+                    //this.getBoucle().updateAllStats();
+                    //this.layout.show(this.getContentPane(), "cuisine");
+                    this.currentEnvironnement.changerLieu(this, Lieu.MANGER);
                     break;
                 case LAVER:
-                    this.currentEnvironnement = chambre;
-                    this.getBoucle().updateAllStats();
-                    this.layout.show(this.getContentPane(), "chambre");
+                    //this.getBoucle().updateAllStats();
+                    //this.layout.show(this.getContentPane(), "chambre");
+                    this.currentEnvironnement.changerLieu(this, Lieu.CHAMBRE);
                     break;
                 case MANGER:
-                    this.currentEnvironnement = douche;
-                    this.layout.show(this.getContentPane(), "douche");
-                    this.getBoucle().updateAllStats();
+                    //this.layout.show(this.getContentPane(), "douche");
+                    //this.getBoucle().updateAllStats();
+                    this.currentEnvironnement.changerLieu(this, Lieu.LAVER);
                     break;
             }
         }
