@@ -13,12 +13,17 @@ import main.view.FenetrePrincipale;
  * S'occupe des statistiques de l'avatar, des évènements ainsi que des conditions de fin de partie
  */
 public class Jeu{
-
     FenetrePrincipale principale;
     private Joueur joueur;
     private Avatar avatar;
+
+
+
+    private String difficulty;
     private Date compteurTemps;
     private boolean enCours;
+
+    private BoucleJeu boucle;
 
     private static LocalTime SUNRISE_TIME = LocalTime.of(6, 0);
     private static LocalTime SUNSET_TIME = LocalTime.of(20, 0);
@@ -30,12 +35,25 @@ public class Jeu{
      * @param typeAvatar - le type d'avatar choisi (chat, chien, ...)
      */
     public Jeu(String nomJoueur, String nomAvatar, String typeAvatar, FenetrePrincipale principale){
+        this(principale);
+
         this.joueur = new Joueur(nomJoueur);
         this.avatar = new Avatar(typeAvatar, nomAvatar);
         this.avatar.setPrincipale(principale);
     }
 
-    public Jeu(){}
+    public Jeu(FenetrePrincipale principale){
+        this.principale = principale;
+        this.boucle = new BoucleJeu(principale);
+    }
+
+    public void demarrerPartie() {
+        this.boucle.start();
+    }
+
+    public void arreterPartie() {
+        this.boucle.stop();
+    }
 
     /**
      * Récupère la valeur de statistique de l'avatar et indique quelle image de barre de statistiques choisir en conséquence
@@ -92,9 +110,12 @@ public class Jeu{
     }
 
     //GETTERS
-
     public Avatar getAvatar(){
         return this.avatar;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
     }
 
     public Date getCompteur() {
@@ -114,10 +135,12 @@ public class Jeu{
     }
 
     //SETTERS
-
-
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     public void setJoueur(Joueur joueur) {

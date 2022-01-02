@@ -11,7 +11,7 @@ import java.io.File;
 import java.time.LocalTime;
 
 public class BoucleJeu implements Runnable{
-    public static Thread myThread;
+    public Thread myThread;
     public boolean running = true;
     public static long secSinceLastConnexion;
     private final FenetrePrincipale principale;
@@ -41,118 +41,16 @@ public class BoucleJeu implements Runnable{
     private boolean isDifficultySet = false;
 
     public synchronized void start() {
-        myThread = new Thread(() -> {
 
-            playGameMusic();
-
-            long sec = 0;
-            //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
-
-            while (running) {
-                System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
-                if(!isDifficultySet && NouvellePartie.difficulty != null) {
-                    switch (NouvellePartie.difficulty) {
-                        case "facile":
-                            setFacile();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
-                            isDifficultySet = true;
-                            break;
-                        case "normal":
-                            setNormal();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
-                            isDifficultySet = true;
-                            break;
-                        case "difficile":
-                            setDifficile();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
-                            isDifficultySet = true;
-                            break;
-                        case "legendaire":
-                            setLegendaire();
-                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
-                            isDifficultySet = true;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                //Bouger la ligne setPrincipale
-                if(principale.getIsInitialized()) {
-                    System.out.println("Lieu : " + this.principale.getCurrentEnvironnement().getLieu());
-                    if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
-                        principale.getLayout().show(principale.getContentPane(), "gameOver");
-                        running = false;
-                        clip.stop();
-                        playDeathMusic();
-                        music = "death";
-                    }
-                    principale.getJeu().getAvatar().setPrincipale(principale);
-                    if(!isUpdateAllInitialized && principale.getContinuer()) {
-                        updateAll();
-                        isUpdateAllInitialized = true;
-                    }
-                    try {
-                        myThread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
-                    updateStatsWithStats();
-                    if(sec > 0) {
-                        System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
-                        //Update;
-                        if(sec % nbSecUpdateSante == 0) {
-                            updateSante(nbSante);
-                        }
-                        if(sec % nbSecUpdateBonheur == 0) {
-                            updateBonheur(nbBonheur);
-                        }
-                        if(sec % nbSecUpdateNourriture == 0) {
-                            updateNourriture(nbNourriture);
-                        }
-                        if(sec % nbSecUpdateEnergie == 0) {
-                            updateEnergie(nbEnergie);
-                        }
-                        if(sec % nbSecUpdateHygiene == 0) {
-                            updateHygiene(nbHygiene);
-                        }
-                        if(sec % nbSecUpdateDivertissement == 0) {
-                            updateDivertissement(nbDivertissement);
-                        }
-                        if(sec % nbSecAutoSave == 0) {
-                            principale.actionSauvegarde();
-                        }
-                        if(sec % timeCanEat == 0) {
-                            principale.getJeu().getAvatar().setCanEat(true);
-                        }
-                        if(sec % timeCanPlay == 0) {
-                            principale.getJeu().getAvatar().setCanPlay(true);
-                        }
-                        if(sec % timeCanShower == 0) {
-                            principale.getJeu().getAvatar().setCanShower(true);
-                        }
-                        if(sec % timeCanSleep == 0) {
-                            principale.getJeu().getAvatar().setCanSleep(true);
-                        }
-                        if(sec % nbSecEvent == 0) {
-                            if(isEvent()) {
-                                theEvent();
-                            }
-                        }
-                    }
-                    sec++;
-                }
-            }
-
-        });
         myThread.start();
 
-        principale.getLayout().show(principale.getContentPane(), "launchScreen");
-        try {
-            wait(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        principale.getLayout().show(principale.getContentPane(), "accueil");
+        //principale.getLayout().show(principale.getContentPane(), "launchScreen");
+        //try {
+        //    wait(2000);
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
+        //principale.getLayout().show(principale.getContentPane(), "accueil");
 
         running = true;
         run(); // Pourquoi appeler run ?
@@ -371,6 +269,7 @@ public class BoucleJeu implements Runnable{
 
     public synchronized void stop() {
         running = false;
+        myThread.stop();
     }
 
     /**
@@ -458,7 +357,111 @@ public class BoucleJeu implements Runnable{
     public BoucleJeu(FenetrePrincipale principale) {
         this.principale = principale;
         this.principale.setBoucle(this);
-        start();
+        myThread = new Thread(() -> {
+
+            //playGameMusic();
+
+            long sec = 0;
+            //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
+
+            while (running) {
+                System.out.println("-----\nBOUCLE");
+                if(!isDifficultySet && NouvellePartie.difficulty != null) {
+                    switch (NouvellePartie.difficulty) {
+                        case "facile":
+                            setFacile();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        case "normal":
+                            setNormal();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        case "difficile":
+                            setDifficile();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        case "legendaire":
+                            setLegendaire();
+                            System.out.println("NB SEC UPDATE : " + nbSecUpdateNourriture);
+                            isDifficultySet = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                //Bouger la ligne setPrincipale
+                if(principale.getIsInitialized()) {
+                    System.out.println("Lieu : " + this.principale.getCurrentEnvironnement().getLieu());
+                    if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
+                        principale.getLayout().show(principale.getContentPane(), "gameOver");
+                        running = false;
+                        //clip.stop();
+                        //playDeathMusic();
+                        music = "death";
+                    }
+                    principale.getJeu().getAvatar().setPrincipale(principale);
+                    if(!isUpdateAllInitialized && principale.getContinuer()) {
+                        updateAll();
+                        isUpdateAllInitialized = true;
+                    }
+
+                    updateStatsWithStats();
+                    if(sec > 0) {
+                        System.out.println("NB SEC UPDATE : " + sec);
+                        //Update;
+                        if(sec % nbSecUpdateSante == 0) {
+                            updateSante(nbSante);
+                        }
+                        if(sec % nbSecUpdateBonheur == 0) {
+                            updateBonheur(nbBonheur);
+                        }
+                        if(sec % nbSecUpdateNourriture == 0) {
+                            updateNourriture(nbNourriture);
+                        }
+                        if(sec % nbSecUpdateEnergie == 0) {
+                            updateEnergie(nbEnergie);
+                        }
+                        if(sec % nbSecUpdateHygiene == 0) {
+                            updateHygiene(nbHygiene);
+                        }
+                        if(sec % nbSecUpdateDivertissement == 0) {
+                            updateDivertissement(nbDivertissement);
+                        }
+                        if(sec % nbSecAutoSave == 0) {
+                            principale.actionSauvegarde();
+                        }
+                        if(sec % timeCanEat == 0) {
+                            principale.getJeu().getAvatar().setCanEat(true);
+                        }
+                        if(sec % timeCanPlay == 0) {
+                            principale.getJeu().getAvatar().setCanPlay(true);
+                        }
+                        if(sec % timeCanShower == 0) {
+                            principale.getJeu().getAvatar().setCanShower(true);
+                        }
+                        if(sec % timeCanSleep == 0) {
+                            principale.getJeu().getAvatar().setCanSleep(true);
+                        }
+                        if(sec % nbSecEvent == 0) {
+                            if(isEvent()) {
+                                theEvent();
+                            }
+                        }
+                    }
+                    sec++;
+
+                    // Attend 1 seconde
+                    try {
+                        myThread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     public void setIsdifficultySet(boolean bool) {

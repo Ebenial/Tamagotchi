@@ -34,6 +34,7 @@ public class FenetrePrincipale extends JFrame{
      * Créé la fenêtre principale du jeu
      */
     public FenetrePrincipale(){
+        this.jeu = new Jeu("", "", "", this);
 
         LookAndFeel.initLookAndFeel();
         CustomFont.initFont();
@@ -153,7 +154,6 @@ public class FenetrePrincipale extends JFrame{
     public void actionContinuer(){
         this.continuer = true;
         this.layout.show(this.getContentPane(), "sauvegardes");
-
     }
 
     public void actionChargerPartie(String nom) {
@@ -177,6 +177,7 @@ public class FenetrePrincipale extends JFrame{
         //this.layout.show(this.getContentPane(), "chambre");
 
         //this.jeu.demarrerPartie();
+        this.layout.show(this.getContentPane(), "environnement");
         isInitialized = true;
     }
 
@@ -244,6 +245,7 @@ public class FenetrePrincipale extends JFrame{
         //this.add(jardin, "jardin");
 
         //this.layout.show(this.getContentPane(), "chambre");
+        this.layout.show(this.getContentPane(), "environnement");
         isInitialized = true;
     }
 
@@ -276,12 +278,13 @@ public class FenetrePrincipale extends JFrame{
      * @param orientation - le côté vers lequel se dirige l'avatar (gauche ou droite)
      */
     public void actionChangementEnvironnement(Lieu lieu, String orientation){
-
+        System.out.println("Change lieu: lieu = " + lieu + ", dir = " + orientation);
         if(orientation.equals("Gauche")){
             switch (lieu) {
                 case CHAMBRE:
                     //this.getBoucle().updateAllStats();
                     //this.layout.show(this.getContentPane(), "douche");
+                    System.out.println("new = laver");
                     this.currentEnvironnement.changerLieu(this, Lieu.LAVER);
                     break;
                 case LAVER:

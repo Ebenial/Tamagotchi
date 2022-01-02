@@ -18,7 +18,7 @@ public class Sauvegardes extends JPanel {
 
     public static JButton retour;
 
-    public static ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
+    public static ArrayList<CustomJButton> arrayButton = new ArrayList<>();
     public static ArrayList<String> saveName = new ArrayList<>();
     public static ArrayList<CustomJButton> arrayDelete = new ArrayList<>();
     private JPanel panel1 = new JPanel();
