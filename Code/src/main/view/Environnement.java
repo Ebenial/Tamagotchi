@@ -128,8 +128,8 @@ public class Environnement extends JPanel implements KeyListener{
         cNord.weightx = 0.5;
         nord.add(timerPanel);
 
-        // BORDERLAYOUT.EAST
-        // Création des composants
+        // BORDERLAYOUT.WEST et EAST
+        // Création des flèches
         gauche = new BoutonFleche("Gauche", 98, 98);
         gauche.setSize(new Dimension(98, 98));
 
@@ -215,6 +215,9 @@ public class Environnement extends JPanel implements KeyListener{
         this.add(nord, BorderLayout.NORTH);
         this.add(avatarChoisi, BorderLayout.CENTER);
         this.add(sud, BorderLayout.SOUTH);
+
+        this.add(gauche, BorderLayout.WEST);
+        this.add(droite, BorderLayout.EAST);
 
         this.changerLieu(principale, lieu);
     }
