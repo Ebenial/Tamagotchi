@@ -103,7 +103,7 @@ public class FenetrePrincipale extends JFrame{
             this.dispose();
             System.exit(0);
         }
-    }    
+    }
 
     /**
      * Action lors du clic sur le bouton jouer, affiche un nouveau panneau
@@ -175,6 +175,7 @@ public class FenetrePrincipale extends JFrame{
         //this.add(cuisine, "cuisine");
         //this.add(jardin, "jardin");
         //this.layout.show(this.getContentPane(), "chambre");
+        this.layout.show(this.getContentPane(), "environnement");
 
         //this.jeu.demarrerPartie();
         isInitialized = true;
@@ -244,6 +245,7 @@ public class FenetrePrincipale extends JFrame{
         //this.add(jardin, "jardin");
 
         //this.layout.show(this.getContentPane(), "chambre");
+        this.layout.show(this.getContentPane(), "environnement");
         isInitialized = true;
     }
 

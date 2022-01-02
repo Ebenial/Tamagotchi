@@ -61,25 +61,25 @@ public class SauvegardePartie implements Serializable {
 
     private void readJson(String nom) throws IOException, ClassNotFoundException {
 
-            FileInputStream file = new FileInputStream(nom);
-            ObjectInputStream in = new ObjectInputStream(file);
+        FileInputStream file = new FileInputStream(nom);
+        ObjectInputStream in = new ObjectInputStream(file);
 
-            SauvegardePartie save = (SauvegardePartie) in.readObject();
-            this.dateFinSession = save.dateFinSession;
-            this.tempsJeu = save.tempsJeu;
-            this.nomJoueur = save.nomJoueur;
-            this.nomAvatar = save.nomAvatar;
-            this.santeAvatar = save.santeAvatar;
-            this.bonheurAvatar = save.bonheurAvatar;
-            this.nourritureAvatar = save.nourritureAvatar;
-            this.energieAvatar = save.energieAvatar;
-            this.hygieneAvatar = save.hygieneAvatar;
-            this.divertissementAvatar = save.divertissementAvatar;
-            this.typeAvatar = save.typeAvatar;
-            NouvellePartie.difficulty = save.difficulty;
+        SauvegardePartie save = (SauvegardePartie) in.readObject();
+        this.dateFinSession = save.dateFinSession;
+        this.tempsJeu = save.tempsJeu;
+        this.nomJoueur = save.nomJoueur;
+        this.nomAvatar = save.nomAvatar;
+        this.santeAvatar = save.santeAvatar;
+        this.bonheurAvatar = save.bonheurAvatar;
+        this.nourritureAvatar = save.nourritureAvatar;
+        this.energieAvatar = save.energieAvatar;
+        this.hygieneAvatar = save.hygieneAvatar;
+        this.divertissementAvatar = save.divertissementAvatar;
+        this.typeAvatar = save.typeAvatar;
+        NouvellePartie.difficulty = save.difficulty;
 
-            in.close();
-            file.close();
+        in.close();
+        file.close();
 
     }
 

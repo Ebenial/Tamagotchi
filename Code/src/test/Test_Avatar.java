@@ -1,4 +1,3 @@
-
 package test;
 import main.model.Avatar;
 
@@ -17,7 +16,7 @@ public class Test_Avatar {
     //|    Test des CONSTRUCTEURS     |
     //+-------------------------------+
 
-    @Test 
+    @Test
     public void testAvatar_Cst1() {
         String expected_type = "chat";
         String expected_nom = "felix";
@@ -26,6 +25,12 @@ public class Test_Avatar {
         assertNotNull(test_Avatar);
         assertEquals(test_Avatar.getType(), expected_type);
         assertEquals(test_Avatar.getNom(), expected_nom);
+        assertEquals(test_Avatar.getSante(), 10);
+        assertEquals(test_Avatar.getBonheur(), 10);
+        assertEquals(test_Avatar.getNourriture(), 10);
+        assertEquals(test_Avatar.getEnergie(), 10);
+        assertEquals(test_Avatar.getHygiene(), 10);
+        assertEquals(test_Avatar.getDivertissement(), 10);
     }
 
     @Test
@@ -40,7 +45,7 @@ public class Test_Avatar {
         int expected_hygiene = 6;
         int expected_divertissement = 5;
 
-        Avatar test_Avatar = new Avatar(expected_type, expected_nom, expected_sante, expected_bonheur, expected_nourriture, expected_energie, expected_hygiene, expected_divertissement);
+        Avatar test_Avatar = new Avatar("chat", "felix", 10, 9, 8, 7, 6, 5);
         assertNotNull(test_Avatar);
         assertEquals(test_Avatar.getType(), expected_type);
         assertEquals(test_Avatar.getNom(), expected_nom);
@@ -68,11 +73,6 @@ public class Test_Avatar {
         test_Avatar.modifierSante(-1);
         assertNotEquals(test_Avatar.getSante(), expected_sante);
 
-        //cas limite
-        int expected_sante2 = 0;
-        test_Avatar.setSante(expected_sante2);
-        test_Avatar.modifierSante(1);
-        assertEquals(test_Avatar.getSante(), expected_sante2);
     }
 
     @Test
@@ -86,12 +86,6 @@ public class Test_Avatar {
         //cas erreur
         test_Avatar.modifierBonheur(-1);
         assertNotEquals(test_Avatar.getBonheur(), expected_bonheur);
-
-        //cas limite
-        int expected_bonheur2 = 0;
-        test_Avatar.setBonheur(expected_bonheur2);
-        test_Avatar.modifierBonheur(1);
-        assertEquals(test_Avatar.getBonheur(), expected_bonheur2);
     }
 
     @Test
@@ -106,11 +100,6 @@ public class Test_Avatar {
         test_Avatar.modifierNourriture(-1);
         assertNotEquals(test_Avatar.getNourriture(), expected_nourriture);
 
-        //cas limite
-        int expected_nourriture2 = 0;
-        test_Avatar.setNourriture(expected_nourriture2);
-        test_Avatar.modifierNourriture(1);
-        assertEquals(test_Avatar.getNourriture(), expected_nourriture2);
     }
 
     @Test
@@ -125,11 +114,6 @@ public class Test_Avatar {
         test_Avatar.modifierEnergie(-1);
         assertNotEquals(test_Avatar.getEnergie(), expected_energie);
 
-        //cas limite
-        int expected_energie2 = 0;
-        test_Avatar.setEnergie(expected_energie2);
-        test_Avatar.modifierEnergie(1);
-        assertEquals(test_Avatar.getEnergie(), expected_energie2);
     }
 
     @Test
@@ -143,12 +127,6 @@ public class Test_Avatar {
         //cas erreur
         test_Avatar.modifierHygiene(-1);
         assertNotEquals(test_Avatar.getHygiene(), expected_hygiene);
-
-        //cas limite
-        int expected_hygiene2 = 0;
-        test_Avatar.setHygiene(expected_hygiene2);
-        test_Avatar.modifierHygiene(1);
-        assertEquals(test_Avatar.getHygiene(), expected_hygiene2);
     }
 
     @Test
@@ -163,11 +141,6 @@ public class Test_Avatar {
         test_Avatar.modifierDivertissement(-1);
         assertNotEquals(test_Avatar.getDivertissement(), expected_divertissement);
 
-        //cas limite
-        int expected_divertissement2 = 0;
-        test_Avatar.setDivertissement(expected_divertissement2);
-        test_Avatar.modifierDivertissement(1);
-        assertEquals(test_Avatar.getDivertissement(), expected_divertissement2);
     }
 
     //+-------------------------------+
@@ -228,7 +201,7 @@ public class Test_Avatar {
         //cas erreur
         assertNotEquals(poulpe.getNourriture(), 10);
     }
-    
+
     @Test
     public void test_getEnergie() {
         //cas normal
@@ -261,4 +234,78 @@ public class Test_Avatar {
         //cas erreur
         assertNotEquals(oiseau.getDivertissement(), 7);
     }
+
+    @Test
+    public void test_getCanEat() {
+        //cas normal
+        Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
+        boolean des_canEat = true;
+        assertEquals(des_canEat, oiseau.getCanEat());
+    }
+
+    @Test
+    public void test_getCanShower() {
+        //cas normal
+        Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
+        boolean des_canShower = true;
+        assertEquals(des_canShower, oiseau.getCanShower());
+    }
+
+    @Test
+    public void test_getCanPlay() {
+        //cas normal
+        Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
+        boolean des_canPlay = true;
+        assertEquals(des_canPlay, oiseau.getCanPlay());
+    }
+
+    @Test
+    public void test_getCanSleep() {
+        //cas normal
+        Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
+        boolean des_canSleep = true;
+        assertEquals(des_canSleep, oiseau.getCanSleep());
+    }
+
+    @Test
+    public void test_setCanEat() {
+        //cas normal
+        Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
+        boolean des_canEat = true;
+        assertEquals(des_canEat, chien.getCanSleep());
+        chien.setCanEat(false);
+        assertEquals(false, chien.getCanEat());
+    }
+
+    @Test
+    public void test_setCanShower() {
+        //cas normal
+        Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
+        boolean des_canShower = true;
+        assertEquals(des_canShower, chien.getCanShower());
+        chien.setCanShower(false);
+        assertEquals(false, chien.getCanShower());
+    }
+
+    @Test
+    public void test_setCanPlay() {
+        //cas normal
+        Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
+        boolean des_canPlay = true;
+        assertEquals(des_canPlay, chien.getCanPlay());
+        chien.setCanPlay(false);
+        assertEquals(false, chien.getCanPlay());
+    }
+
+    @Test
+    public void test_setCanSleep() {
+        //cas normal
+        Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
+        boolean des_canSleep = true;
+        assertEquals(des_canSleep, chien.getCanSleep());
+        chien.setCanSleep(false);
+        assertEquals(false, chien.getCanSleep());
+    }
+
+
 }

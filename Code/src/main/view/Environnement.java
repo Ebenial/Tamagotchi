@@ -8,6 +8,7 @@ import main.util.BoutonFleche;
 
 import main.model.Jeu;
 import main.util.CustomFont;
+import main.util.TimerPanel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -41,11 +42,11 @@ public class Environnement extends JPanel implements KeyListener{
      * @param principale - la JFrame a laquelle on applique le panneau
      */
     public Environnement(Lieu lieu, FenetrePrincipale principale){
-        this.jeu = principale.getJeu();
-
         this.lieu = lieu;
 
         this.setLayout(new BorderLayout());
+
+        this.jeu = principale.getJeu();
 
         //BORDERLAYOUT.NORTH
         //Affichage des statistiques et de l'heure
@@ -65,7 +66,7 @@ public class Environnement extends JPanel implements KeyListener{
         JPanel imagesStats = new JPanel();
         imagesStats.setOpaque(false);
         imagesStats.setLayout(new GridLayout(6, 1));
-    
+
         //Ajout d'un panneau qui va afficher les barres de statistiques
         JPanel infosStats = new JPanel();
         infosStats.setOpaque(false);
@@ -109,6 +110,8 @@ public class Environnement extends JPanel implements KeyListener{
         vide.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
         vide.setOpaque(false);
 
+        TimerPanel timerPanel = new TimerPanel();
+
         //Ajout du panneau des stats dans le coin gauche de l'écran
         nord.add(statistiques);
 
@@ -123,7 +126,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         cNord.gridx = 2;
         cNord.weightx = 0.5;
-        nord.add(vide);
+        nord.add(timerPanel);
 
         // BORDERLAYOUT.EAST
         // Création des composants
@@ -277,7 +280,7 @@ public class Environnement extends JPanel implements KeyListener{
 
     /**
      * Permet de surcharger le paintComponent pour ajouter l'Image background en fond d'écran du panel.
-     * @param g - 
+     * @param g -
      */
     @Override
     public void paintComponent(Graphics g){
