@@ -33,15 +33,17 @@ public class TimerPanel extends JPanel {
 
                 int sec = (int) count % 60;
                 int min = (int) (count / 60) % 60;
-                int hours = (int) (count / 60) / 60;
+                int hours = (int) ((count / 60) / 60)%24;
+                int days = (int) (((count / 60) / 60) / 24);
 
                 String strSec = (sec < 10) ? "0" + sec : Integer.toString(sec);
                 String strmin = (min < 10) ? "0" + min : Integer.toString(min);
                 String strHours = (hours < 10) ? "0" + hours : Integer.toString(hours);
+                String strDays = (days < 10) ? "0" + days : Integer.toString(days);
 
                 //System.out.println(strHours + ":" + strmin + ":" + strSec);
 
-                label.setText(strHours + ":" + strmin + ":" + strSec);
+                label.setText(strDays + ":" + strHours + ":" + strmin + ":" + strSec);
             }
         });
         timer.setInitialDelay(0);
