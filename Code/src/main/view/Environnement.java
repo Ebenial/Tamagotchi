@@ -305,6 +305,8 @@ public class Environnement extends JPanel implements KeyListener{
                 break;
             }
         }
+
+        this.repaint();
     }
 
     public JLabel getSante() {
