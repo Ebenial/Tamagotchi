@@ -52,7 +52,7 @@ public class BoucleJeu implements Runnable{
             //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
-                //System.out.println("----\nBOUCLE"); // ATTENTION: parfois ne fonctionne pas sans ce print
+                System.out.println("----\nBOUCLE"); // ATTENTION: parfois ne fonctionne pas sans ce print
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
                         case "facile":
