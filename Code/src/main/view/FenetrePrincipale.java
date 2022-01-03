@@ -169,7 +169,7 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public void actionChargerPartie(String nom) {
-        this.boucle.setSec(0);
+        //this.boucle.setSec(0);
         System.out.println("ISINITIALIZED : " + isInitialized);
         SauvegardePartie partie = new SauvegardePartie(nom);
         this.jeu = new Jeu();
@@ -249,8 +249,8 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau correspondant à la chambre (Panneau de départ pour une nouvelle partie)
      */
     public void actionValider(){
-        this.boucle.setIsdifficultySet(false);
-        this.boucle.setSec(0);
+        //this.boucle.setIsdifficultySet(false);
+        //this.boucle.setSec(0);
         this.tempsTotal = 0;
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 

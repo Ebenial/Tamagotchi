@@ -17,6 +17,8 @@ public class BoucleJeu implements Runnable{
     public boolean running = false;
     public static long secSinceLastConnexion;
     private final FenetrePrincipale principale;
+    //private Avatar avatar;
+
     private int nbSecUpdateSante = 5;
     private int nbSecUpdateBonheur = 5;
     private int nbSecUpdateNourriture = 5;
@@ -45,105 +47,60 @@ public class BoucleJeu implements Runnable{
 
     public BoucleJeu(FenetrePrincipale principale) {
         this.principale = principale;
+        //this.avatar = principale.getJeu().getAvatar();
+
         this.principale.setBoucle(this);
+
         start();
     }
 
     @Override
     public void run() {
-        //playGameMusic();
-        this.running = true;
+        // Initialise difficulté
+        if (!this.isDifficultySet && NouvellePartie.difficulty != null) {
+            this.isDifficultySet = true;
+            switch (NouvellePartie.difficulty) {
+                case "facile":
+                    this.setFacile();
+                    break;
+                case "normal":
+                    this.setNormal();
+                    break;
+                case "difficile":
+                    this.setDifficile();
+                    break;
+                case "legendaire":
+                    this.setLegendaire();
+            }
+        }
 
-        sec = 0;
+        //playGameMusic();
+
         //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
-        while (running) {
-            System.out.println("----\nBOUCLE"); // ATTENTION: ne fonctionne pas sans ce print
-            if(!isDifficultySet && NouvellePartie.difficulty != null) {
-                switch (NouvellePartie.difficulty) {
-                    case "facile":
-                        setFacile();
-                        isDifficultySet = true;
-                        break;
-                    case "normal":
-                        setNormal();
-                        isDifficultySet = true;
-                        break;
-                    case "difficile":
-                        setDifficile();
-                        isDifficultySet = true;
-                        break;
-                    case "legendaire":
-                        setLegendaire();
-                        isDifficultySet = true;
-                        break;
-                    default:
-                        break;
-                }
+        sec = 0;
+        this.running = true;
+        while (this.running) {
+            if (sec % nbSecUpdateSante == 0) {
+                this.updateSante(this.nbSante);
             }
-            //Bouger la ligne setPrincipale
-            if(principale.getIsInitialized()) {
-                if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
-                    principale.getLayout().show(principale.getContentPane(), "gameOver");
-                    running = false;
-                    clip.stop();
-                    playDeathMusic();
-                    music = "death";
-                }
-                principale.getJeu().getAvatar().setPrincipale(principale);
-                if(!isUpdateAllInitialized && principale.getContinuer()) {
-                    isUpdateAllInitialized = true;
-                    updateStatWithStatsWhileDisconnect();
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                updateStatsWithStats();
-                if(sec > 0) {
-                    //Update;
-                    if(sec % nbSecUpdateSante == 0) {
-                        updateSante(nbSante);
-                    }
-                    if(sec % nbSecUpdateBonheur == 0) {
-                        updateBonheur(nbBonheur);
-                    }
-                    if(sec % nbSecUpdateNourriture == 0) {
-                        updateNourriture(nbNourriture);
-                    }
-                    if(sec % nbSecUpdateEnergie == 0) {
-                        updateEnergie(nbEnergie);
-                    }
-                    if(sec % nbSecUpdateHygiene == 0) {
-                        updateHygiene(nbHygiene);
-                    }
-                    if(sec % nbSecUpdateDivertissement == 0) {
-                        updateDivertissement(nbDivertissement);
-                    }
-                    if(sec % nbSecAutoSave == 0) {
-                        principale.actionSauvegarde();
-                    }
-                    if(sec % timeCanEat == 0) {
-                        principale.getJeu().getAvatar().setCanEat(true);
-                    }
-                    if(sec % timeCanPlay == 0) {
-                        principale.getJeu().getAvatar().setCanPlay(true);
-                    }
-                    if(sec % timeCanShower == 0) {
-                        principale.getJeu().getAvatar().setCanShower(true);
-                    }
-                    if(sec % timeCanSleep == 0) {
-                        principale.getJeu().getAvatar().setCanSleep(true);
-                    }
-                    if(sec % nbSecEvent == 0) {
-                        if(isEvent()) {
-                            theEvent();
-                        }
-                    }
-                }
-                sec++;
+            if (sec % nbSecUpdateBonheur == 0) {
+                this.updateBonheur(this.nbBonheur);
             }
+            if (sec % nbSecUpdateHygiene == 0) {
+                this.updateHygiene(this.nbHygiene);
+            }
+            if (sec % nbSecUpdateEnergie == 0) {
+                this.updateEnergie(this.nbEnergie);
+            }
+            if (sec % nbSecUpdateNourriture == 0) {
+                this.updateNourriture(this.nbNourriture);
+            }
+            if (sec % nbSecUpdateDivertissement == 0) {
+                this.updateDivertissement(this.nbDivertissement);
+            }
+
+            sec++;
         }
     }
 
