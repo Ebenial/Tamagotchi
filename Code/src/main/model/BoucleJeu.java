@@ -86,8 +86,8 @@ public class BoucleJeu implements Runnable{
                     }
                     principale.getJeu().getAvatar().setPrincipale(principale);
                     if(!isUpdateAllInitialized && principale.getContinuer()) {
-                        updateAll();
                         isUpdateAllInitialized = true;
+                        updateStatWithStatsWhileDisconnect();
                     }
                     try {
                         myThread.sleep(1000);
