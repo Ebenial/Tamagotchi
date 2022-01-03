@@ -346,7 +346,7 @@ public class BoucleJeu implements Runnable{
             }
         }
 
-        if(avatar.getHygiene() <= 3 && avatar.getDivertissement() <= 3) {
+        if(avatar.getEnergie() <= 3 && avatar.getDivertissement() <= 3) {
             int newUpdate = (int) (this.nbSecUpdateBonheur * 0.9);
             if(newUpdate >= nbSecUpdateMin) {
                 this.nbSecUpdateBonheur = newUpdate;
