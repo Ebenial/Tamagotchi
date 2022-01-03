@@ -338,7 +338,7 @@ public class BoucleJeu implements Runnable{
         if(avatar.getHygiene() <= 3 || avatar.getNourriture() <= 3) {
             this.nbSante = -1;
         }
-        else if (avatar.getHygiene() > 3 && avatar.getHygiene() < 9 || avatar.getNourriture() > 3 && avatar.getNourriture() < 9) {
+        else if (avatar.getHygiene() > 3 && avatar.getHygiene() <= 9 || avatar.getNourriture() > 3 && avatar.getNourriture() <= 9) {
             this.nbSante = 1;
             int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
             if(newUpdate <= nbSecUpdateMax) {
@@ -357,7 +357,7 @@ public class BoucleJeu implements Runnable{
         if(avatar.getEnergie() <= 3 || avatar.getDivertissement() <= 3) {
             this.nbBonheur = -1;
         }
-        else if(avatar.getEnergie() > 30 && avatar.getEnergie() < 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() < 9) {
+        else if(avatar.getEnergie() > 30 && avatar.getEnergie() <= 9 || avatar.getDivertissement() > 3 && avatar.getDivertissement() <= 9) {
             this.nbBonheur = 1;
             int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
             if(newUpdate <= nbSecUpdateMax) {
@@ -450,7 +450,7 @@ public class BoucleJeu implements Runnable{
         //Fait baisser le nombre d'updateNourriture jusqu'a ce que NourritureBeforeUpdate = 3.
         while (nourritureBeforeUpdate >= 3 && usefullNbUpdateNourriture > 0) {
 
-            if(nourritureBeforeUpdate < 9) {
+            if(nourritureBeforeUpdate <= 9) {
                 int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
                 if(newUpdate <= nbSecUpdateMax) {
                     this.nbSecUpdateSante = newUpdate;
@@ -462,7 +462,7 @@ public class BoucleJeu implements Runnable{
 
         //Fait baisser le nombre d'updateEnergoe jusqu'a ce que EnergieBeforeUpdate = 3.
         while (energieBeforeUpdate >= 3 && usefullNbUpdateEnergie> 0) {
-            if(energieBeforeUpdate < 9) {
+            if(energieBeforeUpdate <= 9) {
                 int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
                 if(newUpdate <= nbSecUpdateMax) {
                     this.nbSecUpdateBonheur = newUpdate;
@@ -474,7 +474,7 @@ public class BoucleJeu implements Runnable{
 
         //Fait baisser le nombre d'updateHygiene jusqu'a ce que HygieneBeforeUpdate = 3.
         while (hygieneBeforeUpdate >=3 && usefullNbUpdateHygiene > 0) {
-            if(hygieneBeforeUpdate < 9) {
+            if(hygieneBeforeUpdate <= 9) {
                 int newUpdate = (int) (this.nbSecUpdateSante * 1.1);
                 if(newUpdate <= nbSecUpdateMax) {
                     this.nbSecUpdateSante = newUpdate;
@@ -486,7 +486,7 @@ public class BoucleJeu implements Runnable{
 
         //Fait baisser le nombre d'updateDivertissement jusqu'a ce que DivertissementBeforeUpdate = 3.
         while (divertissementBeforeUpdate >= 3 && usefullNbUpdateDivertissement > 0) {
-            if(divertissementBeforeUpdate < 9) {
+            if(divertissementBeforeUpdate <= 9) {
                 int newUpdate = (int) (this.nbSecUpdateBonheur * 1.1);
                 if(newUpdate <= nbSecUpdateMax) {
                     this.nbSecUpdateBonheur = newUpdate;
