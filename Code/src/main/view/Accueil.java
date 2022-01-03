@@ -11,7 +11,6 @@ import java.awt.*;
  */
 public class Accueil extends JPanel {
 
-    public static JLabel titre;
     public static CustomJButton jouer;
     public static CustomJButton regles;
     public static CustomJButton options;
@@ -26,12 +25,6 @@ public class Accueil extends JPanel {
     public Accueil(FenetrePrincipale principale) {
 
         this.setLayout(new BorderLayout());
-
-        //BORDERLAYOUT.NORTH
-        //Titre de la page et paramétrage
-        titre = new JLabel(new ImageIcon("Code/resources/others/keneil_logo_accueil.png"));
-        titre.setForeground(Color.RED);
-        titre.setBorder(BorderFactory.createEmptyBorder(50, 0, 10, 0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
@@ -76,19 +69,17 @@ public class Accueil extends JPanel {
         // Afficher les boutons sur 2 lignes:
         // Jouer - Options
         // Règles - Quitter
-        gbc.gridx = 1;
+        gbc.gridy = 1;
         menu.add(jouer, gbc);
-        gbc.gridx = 2;
+        gbc.gridy = 2;
         menu.add(options, gbc);
 
-        gbc.gridy = 1;
-        gbc.gridx = 1;
+        gbc.gridy = 3;
         menu.add(regles, gbc);
-        gbc.gridx = 2;
+        gbc.gridy = 4;
         menu.add(quitter, gbc);
 
         //Ajout des composants au panneau d'accueil
-        this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(droite, BorderLayout.EAST);
