@@ -24,6 +24,7 @@ import main.util.TimerPanel;
 public class FenetrePrincipale extends JFrame{
     private Jeu jeu;
     private BoucleJeu boucle;
+    private Thread threadBoucle;
 
     private Environnement currentEnvironnement;
 
@@ -78,6 +79,13 @@ public class FenetrePrincipale extends JFrame{
 
         pegi7Sound();
         this.setVisible(true);
+    }
+
+    private void demarrerPartie() {
+        this.isInitialized = true;
+        this.boucle = new BoucleJeu(this);
+        this.threadBoucle = new Thread(this.boucle);
+        this.threadBoucle.start();
     }
 
     private void resetEnvironnement() {
@@ -184,8 +192,7 @@ public class FenetrePrincipale extends JFrame{
         //this.layout.show(this.getContentPane(), "chambre");
         this.layout.show(this.getContentPane(), "environnement");
 
-        isInitialized = true;
-
+        this.demarrerPartie();
     }
 
     /**
@@ -256,7 +263,7 @@ public class FenetrePrincipale extends JFrame{
 
         //this.layout.show(this.getContentPane(), "chambre");
         this.layout.show(this.getContentPane(), "environnement");
-        isInitialized = true;
+        this.demarrerPartie();
     }
 
     /**
@@ -330,13 +337,13 @@ public class FenetrePrincipale extends JFrame{
     }
 
     public void actionOptionsEnJeu() {
-        if (this.getBoucle().getClip().isRunning()){
-            OptionsEnJeu.r1.setSelected(true);
-            OptionsEnJeu.r2.setSelected(false);
-        }else{
-            OptionsEnJeu.r1.setSelected(false);
-            OptionsEnJeu.r2.setSelected(true);
-        }
+        //if (this.getBoucle().getClip().isRunning()){
+        //    OptionsEnJeu.r1.setSelected(true);
+        //    OptionsEnJeu.r2.setSelected(false);
+        //}else{
+        //    OptionsEnJeu.r1.setSelected(false);
+        //    OptionsEnJeu.r2.setSelected(true);
+        //}
         this.layout.show(this.getContentPane(), "optionsEnJeu");
     }
 
