@@ -54,31 +54,32 @@ public class SauvegardePartie implements Serializable {
         out.close();
         file.close();
 
+        System.out.println("Object has been serialized");
     }
 
 
 
     private void readJson(String nom) throws IOException, ClassNotFoundException {
 
-            FileInputStream file = new FileInputStream(nom);
-            ObjectInputStream in = new ObjectInputStream(file);
+        FileInputStream file = new FileInputStream(nom);
+        ObjectInputStream in = new ObjectInputStream(file);
 
-            SauvegardePartie save = (SauvegardePartie) in.readObject();
-            this.dateFinSession = save.dateFinSession;
-            this.tempsJeu = save.tempsJeu;
-            this.nomJoueur = save.nomJoueur;
-            this.nomAvatar = save.nomAvatar;
-            this.santeAvatar = save.santeAvatar;
-            this.bonheurAvatar = save.bonheurAvatar;
-            this.nourritureAvatar = save.nourritureAvatar;
-            this.energieAvatar = save.energieAvatar;
-            this.hygieneAvatar = save.hygieneAvatar;
-            this.divertissementAvatar = save.divertissementAvatar;
-            this.typeAvatar = save.typeAvatar;
-            NouvellePartie.difficulty = save.difficulty;
+        SauvegardePartie save = (SauvegardePartie) in.readObject();
+        this.dateFinSession = save.dateFinSession;
+        this.tempsJeu = save.tempsJeu;
+        this.nomJoueur = save.nomJoueur;
+        this.nomAvatar = save.nomAvatar;
+        this.santeAvatar = save.santeAvatar;
+        this.bonheurAvatar = save.bonheurAvatar;
+        this.nourritureAvatar = save.nourritureAvatar;
+        this.energieAvatar = save.energieAvatar;
+        this.hygieneAvatar = save.hygieneAvatar;
+        this.divertissementAvatar = save.divertissementAvatar;
+        this.typeAvatar = save.typeAvatar;
+        NouvellePartie.difficulty = save.difficulty;
 
-            in.close();
-            file.close();
+        in.close();
+        file.close();
 
     }
 
@@ -88,7 +89,14 @@ public class SauvegardePartie implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        System.out.println("typeAvatar : " + typeAvatar);
+        System.out.println("nomAvatar : " + nomAvatar);
+        System.out.println("santeAvatar : " + santeAvatar);
+        System.out.println("bonheurAvatar : " + bonheurAvatar);
+        System.out.println("nourritureAvatar : " + nourritureAvatar);
+        System.out.println("energieAvatar : " + energieAvatar);
+        System.out.println("hygieneAvatar : " + hygieneAvatar);
+        System.out.println("divertissementAvatar : " + divertissementAvatar);
         return new Avatar(typeAvatar, nomAvatar, santeAvatar, bonheurAvatar, nourritureAvatar, energieAvatar, hygieneAvatar, divertissementAvatar);
     }
 

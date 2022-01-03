@@ -12,7 +12,7 @@ import org.junit.*;
 
 public class Test_Jeu {
 
-    @Test 
+    @Test
     public void testJeu_Cst() {
         FenetrePrincipale fen = new FenetrePrincipale();
         Jeu test_jeu = new Jeu("Pierre", "Felix", "chat", fen);
@@ -37,7 +37,7 @@ public class Test_Jeu {
         assertEquals(des_avatar.getNourriture(), test_jeu.getAvatar().getNourriture());
         assertEquals(des_avatar.getNom(), test_jeu.getAvatar().getNom());
         assertEquals(des_avatar.getHygiene(), test_jeu.getAvatar().getHygiene());
-        assertEquals(des_avatar.getEnergie(), test_jeu.getAvatar().getEnergie());    
+        assertEquals(des_avatar.getEnergie(), test_jeu.getAvatar().getEnergie());
         assertEquals(des_avatar.getDivertissement(), test_jeu.getAvatar().getDivertissement());
         assertEquals(des_avatar.getCanSleep(), test_jeu.getAvatar().getCanSleep());
         assertEquals(des_avatar.getCanShower(), test_jeu.getAvatar().getCanShower());

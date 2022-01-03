@@ -52,8 +52,6 @@ public class BoucleJeu implements Runnable{
             //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
-                //System.out.println("Temps total : " + FenetrePrincipale.tempsTotal);
-
                 System.out.println();  // ATTENTION CASSE TOUT SI ENLEVER WTF LES AMIS
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
@@ -88,8 +86,7 @@ public class BoucleJeu implements Runnable{
                     }
                     principale.getJeu().getAvatar().setPrincipale(principale);
                     if(!isUpdateAllInitialized && principale.getContinuer()) {
-                        System.out.println("nb Secondes since last connexion : " + (secSinceLastConnexion / 1000));
-                        updateStatWithStatsWhileDisconnect();
+                        updateAll();
                         isUpdateAllInitialized = true;
                     }
                     try {

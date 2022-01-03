@@ -184,20 +184,7 @@ public class ListenerBouton implements ActionListener{
         } else if(e.getSource() == Difficulte.retour) {
             this.principale.actionRetour("Difficulte");
         }else if(e.getSource() == OptionsEnJeu.retour) {
-            switch (this.principale.getCurrentEnvironnement().getLieu()) {
-                case CHAMBRE:
-                    this.principale.getLayout().show(this.principale.getContentPane(), "chambre");
-                    break;
-                case LAVER:
-                    this.principale.getLayout().show(this.principale.getContentPane(), "douche");
-                    break;
-                case MANGER:
-                    this.principale.getLayout().show(this.principale.getContentPane(), "cuisine");
-                    break;
-                case JOUER:
-                    this.principale.getLayout().show(this.principale.getContentPane(), "jardin");
-                    break;
-            }
+            this.principale.getLayout().show(this.principale.getContentPane(), "environnement");
         }else if (e.getSource() == OptionsEnJeu.retourAuMenu){
             this.principale.actionSauvegarde();
             this.principale.actionRetour("OptionsEnJeu");

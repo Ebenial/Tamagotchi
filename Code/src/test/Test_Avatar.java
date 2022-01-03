@@ -1,4 +1,3 @@
-
 package test;
 import main.model.Avatar;
 
@@ -17,7 +16,7 @@ public class Test_Avatar {
     //|    Test des CONSTRUCTEURS     |
     //+-------------------------------+
 
-    @Test 
+    @Test
     public void testAvatar_Cst1() {
         String expected_type = "chat";
         String expected_nom = "felix";
@@ -202,7 +201,7 @@ public class Test_Avatar {
         //cas erreur
         assertNotEquals(poulpe.getNourriture(), 10);
     }
-    
+
     @Test
     public void test_getEnergie() {
         //cas normal
@@ -238,75 +237,75 @@ public class Test_Avatar {
 
     @Test
     public void test_getCanEat() {
-        //cas normal 
+        //cas normal
         Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
         boolean des_canEat = true;
-        assertEquals(des_canEat, oiseau.getCanEat()); 
+        assertEquals(des_canEat, oiseau.getCanEat());
     }
-    
+
     @Test
     public void test_getCanShower() {
-        //cas normal 
+        //cas normal
         Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
         boolean des_canShower = true;
-        assertEquals(des_canShower, oiseau.getCanShower()); 
+        assertEquals(des_canShower, oiseau.getCanShower());
     }
 
     @Test
     public void test_getCanPlay() {
-        //cas normal 
+        //cas normal
         Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
         boolean des_canPlay = true;
-        assertEquals(des_canPlay, oiseau.getCanPlay()); 
+        assertEquals(des_canPlay, oiseau.getCanPlay());
     }
 
     @Test
     public void test_getCanSleep() {
-        //cas normal 
+        //cas normal
         Avatar oiseau = new Avatar("oiseau", "flappy", 10, 7, 8, 6, 1, 8);
         boolean des_canSleep = true;
-        assertEquals(des_canSleep, oiseau.getCanSleep()); 
+        assertEquals(des_canSleep, oiseau.getCanSleep());
     }
 
     @Test
     public void test_setCanEat() {
-        //cas normal 
+        //cas normal
         Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
         boolean des_canEat = true;
-        assertEquals(des_canEat, chien.getCanSleep()); 
+        assertEquals(des_canEat, chien.getCanSleep());
         chien.setCanEat(false);
         assertEquals(false, chien.getCanEat());
     }
 
     @Test
     public void test_setCanShower() {
-        //cas normal 
+        //cas normal
         Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
         boolean des_canShower = true;
-        assertEquals(des_canShower, chien.getCanShower()); 
+        assertEquals(des_canShower, chien.getCanShower());
         chien.setCanShower(false);
         assertEquals(false, chien.getCanShower());
     }
 
     @Test
     public void test_setCanPlay() {
-        //cas normal 
+        //cas normal
         Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
         boolean des_canPlay = true;
-        assertEquals(des_canPlay, chien.getCanPlay()); 
+        assertEquals(des_canPlay, chien.getCanPlay());
         chien.setCanPlay(false);
         assertEquals(false, chien.getCanPlay());
     }
 
     @Test
     public void test_setCanSleep() {
-        //cas normal 
+        //cas normal
         Avatar chien = new Avatar("chien", "Rhobalas", 10, 7, 8, 6, 1, 8);
         boolean des_canSleep = true;
-        assertEquals(des_canSleep, chien.getCanSleep()); 
+        assertEquals(des_canSleep, chien.getCanSleep());
         chien.setCanSleep(false);
         assertEquals(false, chien.getCanSleep());
     }
 
-    
+
 }

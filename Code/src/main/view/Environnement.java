@@ -3,7 +3,6 @@ package main.view;
 import javax.swing.*;
 
 import main.controler.ListenerBouton;
-import main.model.BoucleJeu;
 import main.model.Lieu;
 import main.util.BoutonFleche;
 
@@ -12,22 +11,23 @@ import main.util.CustomFont;
 import main.util.TimerPanel;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Créé un panneau chambre qui est un des environnements du jeu ainsi que le lieu de départ lors d'une nouvelle partie
+ * Vue de la partie en cours, affiche le lieu dans lequel
+ * se trouve l'avatar
  */
 public class Environnement extends JPanel implements KeyListener{
     private Jeu jeu;
-    private BoucleJeu boucleJeu;
 
-    private final Lieu lieu;
-    public static JButton gauche;
-    public static JButton droite;
+    private Lieu lieu;
+    public static BoutonFleche gauche;
+    public static BoutonFleche droite;
     public static JButton options;
     public static JButton action1;
-    public JLabel avatarChoisi;
+    private JLabel avatarChoisi;
     private final JLabel sante;
     private final JLabel bonheur;
     private final JLabel nourriture;
@@ -36,12 +36,13 @@ public class Environnement extends JPanel implements KeyListener{
     private final JLabel divertissement;
 
     /**
-     * Panneau qui contient les éléments nécessaires à la création de l'avatar
+     * Initialise la vue
+     *
+     * @param lieu - lieu actuel
      * @param principale - la JFrame a laquelle on applique le panneau
      */
     public Environnement(Lieu lieu, FenetrePrincipale principale){
         this.lieu = lieu;
-        this.boucleJeu = principale.getBoucle();
 
         this.setLayout(new BorderLayout());
 
@@ -65,7 +66,7 @@ public class Environnement extends JPanel implements KeyListener{
         JPanel imagesStats = new JPanel();
         imagesStats.setOpaque(false);
         imagesStats.setLayout(new GridLayout(6, 1));
-    
+
         //Ajout d'un panneau qui va afficher les barres de statistiques
         JPanel infosStats = new JPanel();
         infosStats.setOpaque(false);
@@ -127,64 +128,42 @@ public class Environnement extends JPanel implements KeyListener{
         cNord.weightx = 0.5;
         nord.add(timerPanel);
 
+        // BORDERLAYOUT.WEST et EAST
+        // Création des flèches
+        gauche = new BoutonFleche("Gauche", 98, 98);
+        gauche.setSize(new Dimension(98, 98));
 
-        //BORDERLAYOUT.WEST
-        //Affichage du bouton fléché gauche pour changer d'environnement
-        if(this.lieu != Lieu.JOUER){
-            gauche = new BoutonFleche("Gauche", 98, 98);
-            gauche.addActionListener(new ListenerBouton(this.lieu, "Gauche", principale));
-            gauche.setSize(new Dimension(98, 98));
-            this.add(gauche, BorderLayout.WEST);
-        }else{
-            JPanel gaucheVide = new JPanel();
-            gaucheVide.setPreferredSize(new Dimension(98, 98));
-            gaucheVide.setOpaque(false);
-            this.add(gaucheVide, BorderLayout.WEST);
-        }
-
-        //BORDERLAYOUT.EAST
-        //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
-        if(this.lieu != Lieu.CHAMBRE){
-            droite = new BoutonFleche("Droite", 98, 98);
-            droite.addActionListener(new ListenerBouton(this.lieu, "Droite", principale));
-            droite.setSize(new Dimension(98, 98));
-            this.add(droite, BorderLayout.EAST);
-        }else{
-            JPanel droiteVide = new JPanel();
-            droiteVide.setPreferredSize(new Dimension(98, 98));
-            droiteVide.setOpaque(false);
-            this.add(droiteVide, BorderLayout.EAST);
-        }
+        droite = new BoutonFleche("Droite", 98, 98);
+        droite.setSize(new Dimension(98, 98));
 
         //BORDERLAYOUT.CENTER
         //Affichage de l'avatar
+        String typeAvatar;
         switch (jeu.getAvatar().getType()) {
             case "Chien" : {
-                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/dog.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-                avatarChoisi = new JLabel(imageAvatar);
+                typeAvatar = "dog";
                 break;
             }
             case "Chat" : {
-                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/cat.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-                avatarChoisi = new JLabel(imageAvatar);
+                typeAvatar = "cat";
                 break;
             }
             case "Oiseau" : {
-                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/bird.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-                avatarChoisi = new JLabel(imageAvatar);
+                typeAvatar = "bird";
                 break;
             }
             case "Poulpe" : {
-                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/octopus.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-                avatarChoisi = new JLabel(imageAvatar);
+                typeAvatar = "octopus";
                 break;
             }
             default : {
-                ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/robot.gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-                avatarChoisi = new JLabel(imageAvatar);
+                typeAvatar = "robot";
                 break;
             }
         }
+
+        ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/" + typeAvatar + ".gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+        this.avatarChoisi = new JLabel(imageAvatar);
 
         //BORDERLAYOUT.SOUTH
         //Affichage des actions possibles pour le joueur ainsi que la roue des options
@@ -194,40 +173,11 @@ public class Environnement extends JPanel implements KeyListener{
         sud.setLayout(new GridBagLayout());
         GridBagConstraints cSud = new GridBagConstraints();
 
-
-
         JPanel actions = new JPanel();
         actions.setOpaque(false);
 
-
         action1 = new JButton("Action1");
-
-        String actionText = "";
-
-        switch (this.lieu){
-            case CHAMBRE: {
-                actionText = "Dormir";
-                break;
-            }
-
-            case LAVER: {
-                actionText = "Laver";
-                break;
-
-            }
-
-            case MANGER: {
-                actionText = "Manger";
-                break;
-            }
-
-            case JOUER:{
-                actionText = "Jouer";
-            }
-        }
-        action1.setText(actionText);
         action1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        action1.addActionListener(new ListenerBouton(this.lieu, "Action1", principale));
         action1.setHorizontalTextPosition(JButton.CENTER);    //Permet d'afficher le texte sur l'image et pas à droite (par défaut)
         action1.setVerticalAlignment(JButton.CENTER);
         action1.setFont(CustomFont.customFont50_PLAIN);
@@ -265,11 +215,75 @@ public class Environnement extends JPanel implements KeyListener{
         this.add(nord, BorderLayout.NORTH);
         this.add(avatarChoisi, BorderLayout.CENTER);
         this.add(sud, BorderLayout.SOUTH);
+
+        this.add(gauche, BorderLayout.WEST);
+        this.add(droite, BorderLayout.EAST);
+
+        this.changerLieu(principale, lieu);
+    }
+
+    private void replaceButtonListener(JButton button, ListenerBouton newListener) {
+        for (ActionListener al : button.getActionListeners()) {
+            button.removeActionListener(al);
+        }
+        button.addActionListener(newListener);
+    }
+
+    /**
+     * Initialise les boutons d'un lieu. Utilisé lors du changement de lieu
+     * @param lieu - nouveau lieu
+     */
+    public void changerLieu(FenetrePrincipale principale, Lieu lieu) {
+        this.lieu = lieu;
+
+        //BORDERLAYOUT.WEST
+        //Affichage du bouton fléché gauche pour changer d'environnement
+        if(this.lieu != Lieu.JOUER){
+            gauche.activerFleche();
+            this.replaceButtonListener(gauche, new ListenerBouton(this.lieu, "Gauche", principale));
+        }else{
+            gauche.desactiverFleche();
+        }
+
+        //BORDERLAYOUT.EAST
+        //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
+        if(this.lieu != Lieu.CHAMBRE){
+            droite.activerFleche();
+            this.replaceButtonListener(droite, new ListenerBouton(this.lieu, "Droite", principale));
+        }else{
+            droite.desactiverFleche();
+        }
+
+        // Change l'action
+        String actionText = "";
+        switch (this.lieu){
+            case CHAMBRE: {
+                actionText = "Dormir";
+                break;
+            }
+
+            case LAVER: {
+                actionText = "Laver";
+                break;
+
+            }
+
+            case MANGER: {
+                actionText = "Manger";
+                break;
+            }
+
+            case JOUER:{
+                actionText = "Jouer";
+            }
+        }
+        action1.setText(actionText);
+        this.replaceButtonListener(action1, new ListenerBouton(this.lieu, "Action1", principale));
     }
 
     /**
      * Permet de surcharger le paintComponent pour ajouter l'Image background en fond d'écran du panel.
-     * @param g - 
+     * @param g -
      */
     @Override
     public void paintComponent(Graphics g){

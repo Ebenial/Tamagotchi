@@ -8,7 +8,7 @@ import javax.swing.*;
  * Créé un avatar
  */
 public class Avatar {
-    
+
     private String type;
     private String nom;
     private int sante;
@@ -66,7 +66,7 @@ public class Avatar {
         this.divertissement = divertissement;
     }
 
- 
+
     /**
      * Modifie la barre de santé de l'avatar
      * @param valeur - la valeur à ajouter ou soustraire à la santé
@@ -129,7 +129,7 @@ public class Avatar {
 
 
     //GETTERS
-    
+
     public String getType(){
         return this.type;
     }
@@ -192,7 +192,7 @@ public class Avatar {
         JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
         label2.setIcon(principale.getJeu().choixBarreStats(this.bonheur));
     }
-    
+
     public void setNourriture(int nouvellenourriture){
         if(nouvellenourriture < 0) {
             this.nourriture = 0;
