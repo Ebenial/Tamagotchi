@@ -16,7 +16,7 @@ public class BoucleJeu implements Runnable{
     public static Thread myThread;
     public boolean running = true;
     public static long secSinceLastConnexion;
-    private final FenetrePrincipale principale;
+    private FenetrePrincipale principale;
     private int nbSecUpdateSecondaryStats;
     private int nbSecUpdateSante = 5;
     private int nbSecUpdateBonheur = 5;
@@ -36,11 +36,13 @@ public class BoucleJeu implements Runnable{
     private boolean isDisplayEvent = true;
 
     public synchronized void start() {
+        System.out.println("START : ");
         myThread = new Thread(() -> {
-
+            System.out.println("start ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
             sec = 0;
 
             while (running) {
+                System.out.println(running + "TU ES SUUUUUUUUUUUUUUR");
                 System.out.println(); // ATTENTION: parfois ne fonctionne pas sans ce print
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
@@ -65,6 +67,9 @@ public class BoucleJeu implements Runnable{
                     }
                 }
                 if(principale.getIsInitialized()) {
+                    System.out.println("AVATARRRRRRRRRRRR : ");
+                    System.out.println(principale.getJeu().getAvatar().getSante());
+                    System.out.println(principale.getJeu().getAvatar().getBonheur());
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                         GameOver.score = principale.getCurrentEnvironnement().getTimerPanel().getCount();
                         System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk : " + principale.getCurrentEnvironnement().getTimerPanel().getCount());
@@ -606,6 +611,7 @@ public class BoucleJeu implements Runnable{
     public void setRunning(boolean bool) {
         this.running = bool;
     }
+
 
 }
 

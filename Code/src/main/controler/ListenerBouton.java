@@ -143,7 +143,7 @@ public class ListenerBouton implements ActionListener{
                 this.principale.getJeu().getAvatar().setCanSleep(false);
             }
             else {
-                System.out.println("pas encore temps");
+                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
             }
         } else if(this.lieu == Lieu.LAVER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanShower()) {
@@ -152,7 +152,7 @@ public class ListenerBouton implements ActionListener{
                 this.principale.getJeu().getAvatar().setCanShower(false);
             }
             else {
-                System.out.println("pas encore temps");
+                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
             }
         } else if(this.lieu == Lieu.MANGER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanEat()) {
@@ -161,7 +161,7 @@ public class ListenerBouton implements ActionListener{
                 this.principale.getJeu().getAvatar().setCanEat(false);
             }
             else {
-                System.out.println("pas encore temps");
+                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
             }
         } else if(this.lieu == Lieu.JOUER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanPlay()) {
@@ -170,7 +170,7 @@ public class ListenerBouton implements ActionListener{
                 this.principale.getJeu().getAvatar().setCanPlay(false);
             }
             else {
-                System.out.println("pas encore temps");
+                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
             }
         } else if(e.getSource() == Difficulte.facile) {
             this.principale.getNouvellePartie().setDifficulty("facile");

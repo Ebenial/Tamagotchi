@@ -172,6 +172,7 @@ public class FenetrePrincipale extends JFrame{
      * @param nom - nom de la sauvegarde
      */
     public void actionChargerPartie(String nom) {
+        isInitialized = false;
         this.boucle.setSec(0);
         this.boucle.setRunning(true);
         this.boucle.start();
@@ -251,17 +252,22 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau correspondant à la chambre (Panneau de départ pour une nouvelle partie)
      */
     public void actionValider(){
+        System.out.println("valider");
+        this.tempsTotal = 0;
+        this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
+
         this.boucle.setRunning(true);
+        System.out.println("runnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn : " + this.boucle.running);
         this.boucle.start();
         this.boucle.setIsdifficultySet(false);
         this.boucle.setSec(0);
-        this.tempsTotal = 0;
-        this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
         this.resetEnvironnement();
 
         this.layout.show(this.getContentPane(), "environnement");
         isInitialized = true;
+
+
     }
 
     /**
