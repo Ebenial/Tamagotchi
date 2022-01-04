@@ -28,6 +28,12 @@ public class Accueil extends JPanel {
 
         this.setLayout(new BorderLayout());
 
+        // BORDERLAYOUT.NORTH
+        // Logo titre
+        JLabel logoTitre = new JLabel("", SwingConstants.CENTER);
+        logoTitre.setIcon(new ImageIcon("Code/resources/others/keneil_logo_accueil.png"));
+        logoTitre.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
+
         //BORDERLAYOUT.WEST
         //Ajout d'un panel vide à gauche 
         JPanel gauche = new JPanel();
@@ -84,12 +90,8 @@ public class Accueil extends JPanel {
         signature.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
 
         //Ajout des différents boutons au panneau du menu
-        gbc.insets = new Insets(30, 30, 30, 30);
+        gbc.insets = new Insets(20, 30, 20, 30);
 
-        // TODO: Yoann va modifier
-        // Afficher les boutons sur 2 lignes:
-        // Jouer - Options
-        // Règles - Quitter
         gbc.gridy = 1;
         menu.add(jouer, gbc);
         gbc.gridy = 2;
@@ -101,6 +103,7 @@ public class Accueil extends JPanel {
         menu.add(quitter, gbc);
 
         //Ajout des composants au panneau d'accueil
+        this.add(logoTitre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(droite, BorderLayout.EAST);
