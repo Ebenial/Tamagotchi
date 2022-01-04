@@ -178,12 +178,10 @@ public class FenetrePrincipale extends JFrame{
         this.boucle.setSec(0);
         this.boucle.setRunning(true);
         this.boucle.start();
-        System.out.println("ISINITIALIZED : " + isInitialized);
         SauvegardePartie partie = new SauvegardePartie(nom);
         this.isDead = partie.isDead();
         this.jeu = new Jeu();
         BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
-        System.out.println("GET TEMPS JEU : " + partie.getTempsJeu() );
         if(!isDead) {
             tempsTotal = partie.getTempsJeu() + (partie.getTimeSinceLastConnexion() / 1000);
         }

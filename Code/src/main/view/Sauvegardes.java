@@ -108,7 +108,6 @@ public class Sauvegardes extends JPanel {
         String score = "0";
         try {
             score = Files.readString(filename);
-            System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii : " + score);
         } catch (IOException ignored) {
 
         }
@@ -129,7 +128,6 @@ public class Sauvegardes extends JPanel {
                 arrayButton.add(new CustomJButton(buttonName, principale, null, "Code/resources/others/button_background_large.png", null, null, null));
                 saveName.add(s);
                 arrayDelete.add(new CustomJButton(principale));
-                System.out.println("NOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM : " + s);
             }
         }
     }

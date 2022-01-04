@@ -227,7 +227,6 @@ public class BoucleJeu implements Runnable{
     private void theEvent() {
         String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant", "vacances", "depression"};
         String alea = listeEvent[(int) (Math.random() * 9)];
-        System.out.println("ALEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA : " + alea);
         switch (alea) {
             case "malade":
                 updateSante(-2);
@@ -304,7 +303,6 @@ public class BoucleJeu implements Runnable{
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch(Exception ex) {
-            System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
     }
@@ -542,7 +540,6 @@ public class BoucleJeu implements Runnable{
 
         int sante = this.principale.getJeu().getAvatar().getSante();        //Récupération de la santé actuelle
         this.principale.getJeu().getAvatar().setSante(sante + modif);       //Mise à jour de la valeur de santé de l'avatar
-        //System.out.println("sante : " + sante);
     }
 
     /**

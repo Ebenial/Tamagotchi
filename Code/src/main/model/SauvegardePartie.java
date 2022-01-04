@@ -56,7 +56,7 @@ public class SauvegardePartie implements Serializable {
         out.writeObject(this);
         out.close();
         file.close();
-        System.out.println("Object has been serialized");
+        System.out.println("La partie a bien été sauvegardée");
     }
 
 

@@ -188,7 +188,6 @@ public class Avatar {
             this.bonheur = nouveauBonheur;
         }
 
-        //System.out.println("bonheur : " + bonheur);
         JLabel label2 =  principale.getCurrentEnvironnement().getBonheur();
         label2.setIcon(principale.getJeu().choixBarreStats(this.bonheur));
     }
@@ -204,7 +203,6 @@ public class Avatar {
             this.nourriture = nouvellenourriture;
         }
 
-        //System.out.println("nourriture : " + nourriture);
         JLabel label1 =  principale.getCurrentEnvironnement().getNourriture();
         label1.setIcon(principale.getJeu().choixBarreStats(this.nourriture));
     }
@@ -219,7 +217,6 @@ public class Avatar {
             this.energie = nouvelleenergie;
         }
 
-        //System.out.println("energie : " + energie);
         JLabel label1 =  principale.getCurrentEnvironnement().getEnergie();
         label1.setIcon(principale.getJeu().choixBarreStats(this.energie));
     }
@@ -235,7 +232,6 @@ public class Avatar {
             this.hygiene = nouvelleHygiene;
         }
 
-        //System.out.println("hygiene : " + hygiene);
         JLabel label1 =  principale.getCurrentEnvironnement().getHygiene();
         label1.setIcon(principale.getJeu().choixBarreStats(this.hygiene));
 
@@ -252,7 +248,6 @@ public class Avatar {
             this.divertissement = nouveauxdivertissement;
         }
 
-        //System.out.println("divertissement : " + divertissement);
         JLabel label3 =  principale.getCurrentEnvironnement().getDivertissement();
         label3.setIcon(principale.getJeu().choixBarreStats(this.divertissement));
     }
