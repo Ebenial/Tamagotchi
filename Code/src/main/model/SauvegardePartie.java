@@ -1,5 +1,6 @@
 package main.model;
 import main.view.NouvellePartie;
+import main.view.Sauvegardes;
 
 import java.io.*;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class SauvegardePartie implements Serializable {
     private int divertissementAvatar;
     private int bonheurAvatar;
     private String difficulty;
+    private Sauvegardes sauvegardes;
 
     public SauvegardePartie(String nomJoueur, Avatar avatar, long tempsJeu) throws IOException {
         this.nomJoueur = nomJoueur;
@@ -48,12 +50,11 @@ public class SauvegardePartie implements Serializable {
 
     private void writeJSON() throws IOException {
         String filename = nomJoueur + "-" + nomAvatar + ".json";
-        FileOutputStream file = new FileOutputStream(filename);
+        FileOutputStream file = new FileOutputStream("./Code/resources/saves/" + filename);
         ObjectOutputStream out = new ObjectOutputStream(file);
         out.writeObject(this);
         out.close();
         file.close();
-
         System.out.println("Object has been serialized");
     }
 

@@ -4,7 +4,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+import main.model.BoucleJeu;
 import main.model.Lieu;
+import main.model.SauvegardePartie;
 import main.view.*;
 
 import javax.swing.*;
@@ -71,9 +73,10 @@ public class ListenerBouton implements ActionListener{
      * @param e - l'évènement déclencheur
      */
     public void actionPerformed(ActionEvent e){
+
         for(int i = 0; i < Sauvegardes.arrayButton.size(); i++) {
             if(e.getSource() == Sauvegardes.arrayButton.get(i)) {
-                this.principale.actionChargerPartie(Sauvegardes.saveName.get(i));
+                this.principale.actionChargerPartie("./Code/resources/saves/"+Sauvegardes.saveName.get(i));
             }
         }
         for(int i = 0; i < Sauvegardes.arrayDelete.size(); i++) {

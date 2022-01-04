@@ -26,6 +26,7 @@ public class FenetrePrincipale extends JFrame{
     private BoucleJeu boucle;
 
     private Environnement currentEnvironnement;
+    private Sauvegardes sauvegardes;
 
     private final CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
@@ -57,7 +58,7 @@ public class FenetrePrincipale extends JFrame{
         Options options = new Options(this);
         OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
         Regles regles = new Regles(this);
-        Sauvegardes sauvegardes = new Sauvegardes(this);
+        this.sauvegardes = new Sauvegardes(this);
         GameOver gameOver = new GameOver(this);
         LaunchScreen launchScreen = new LaunchScreen();
         Difficulte difficulte = new Difficulte(this);
@@ -80,17 +81,11 @@ public class FenetrePrincipale extends JFrame{
         this.setVisible(true);
     }
 
-    /**
-     * Réinitialise la vue de l'environnement au chargement d'une partie
-     */
     private void resetEnvironnement() {
         this.currentEnvironnement = new Environnement(Lieu.CHAMBRE, this);
         this.add(this.currentEnvironnement, "environnement");
     }
 
-    /**
-     * Joue le son "Pegi 7"
-     */
     private void pegi7Sound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/pegi7.wav").getAbsoluteFile());
@@ -166,10 +161,6 @@ public class FenetrePrincipale extends JFrame{
 
     }
 
-    /**
-     * Charge une sauvegarde
-     * @param nom - nom de la sauvegarde
-     */
     public void actionChargerPartie(String nom) {
         this.boucle.setSec(0);
         this.boucle.setRunning(true);
@@ -189,9 +180,15 @@ public class FenetrePrincipale extends JFrame{
 
         this.resetEnvironnement();
 
+        //this.add(chambre, "chambre");
+        //this.add(douche, "douche");
+        //this.add(cuisine, "cuisine");
+        //this.add(jardin, "jardin");
+        //this.layout.show(this.getContentPane(), "chambre");
         this.layout.show(this.getContentPane(), "environnement");
 
         isInitialized = true;
+
     }
 
     /**
@@ -199,6 +196,7 @@ public class FenetrePrincipale extends JFrame{
      * @param s - le nom du panneau en cours (le bouton retour est présent sur plusieurs panneaux)
      */
     public void actionRetour(String s){
+        //System.out.println("ACTION REEEEEEEEEEEEEEEETOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURRRRRRRRRRRRRRRRRRRRRRRR");
         this.boucle.setRunning(false);
 
         switch (s) {
@@ -332,9 +330,6 @@ public class FenetrePrincipale extends JFrame{
         }
     }
 
-    /**
-     * Ouvre le menu des options depuis le jeu
-     */
     public void actionOptionsEnJeu() {
         if (this.getBoucle().getClip().isRunning()){
             OptionsEnJeu.r1.setSelected(true);
@@ -348,73 +343,40 @@ public class FenetrePrincipale extends JFrame{
 
     //GETTERS
 
-    /**
-     * Retourne le jeu
-     * @return jeu
-     */
     public Jeu getJeu(){
         return this.jeu;
     }
 
-    /**
-     * Retourne la vue de l'environnement
-     * @return vue de l'environnement
-     */
+    // REFACTOR: faire passer ces méthodes par Jeu
     public Environnement getCurrentEnvironnement() {
         return this.currentEnvironnement;
     }
 
-    /**
-     * Vérifie si la partie est lancée
-     * @return vrai si la partie est lancée
-     */
     public boolean getIsInitialized() {
         return this.isInitialized;
     }
 
-    /**
-     * Retourne la boucle de jeu
-     * @return boucle de jeu
-     */
     public BoucleJeu getBoucle(){
         return this.boucle;
     }
 
-    /**
-     *
-     * @return
-     */
+    public void setBoucle(BoucleJeu nouvelleBoucle){
+        this.boucle = nouvelleBoucle;
+    }
+
     public boolean getContinuer() {
         return this.continuer;
     }
 
-    /**
-     *
-     * @return
-     */
     public NouvellePartie getNouvellePartie() {
         return this.nouvellePartie;
     }
 
-    /**
-     * Retourne le layout de la fenêtre
-     * @return layout de la fenêtre
-     */
     public CardLayout getLayout(){return  this.layout;}
 
-    /**
-     * Retourne le temps total de jeu
-     * @return temps total de jeu
-     */
     public long getTempsTotal(){return this.tempsTotal;}
 
-    // SETTERS
-
-    /**
-     * Modifie la boucle du jeu
-     * @param nouvelleBoucle - nouvelle boucle du jeu
-     */
-    public void setBoucle(BoucleJeu nouvelleBoucle){
-        this.boucle = nouvelleBoucle;
+    public Sauvegardes getSauvegardes() {
+        return this.sauvegardes;
     }
 }
