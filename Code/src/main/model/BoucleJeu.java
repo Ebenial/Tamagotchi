@@ -227,7 +227,7 @@ public class BoucleJeu implements Runnable{
         this.nbSecUpdateEnergie = 7;
         this.nbSecUpdateHygiene = 7;
         this.nbSecUpdateNourriture = 7;
-        this.nbSecEvent = 5;
+        this.nbSecEvent = 1;
         this.timeCanEat = 4;
         this.timeCanPlay = 4;
         this.timeCanShower = 4;
@@ -236,16 +236,16 @@ public class BoucleJeu implements Runnable{
 
     private boolean isEvent() {
         boolean evt = false;
-        int isEv = (int) (Math.random() * 60);
-        if(isEv == 3 || isEv == 12 || isEv == 26 || isEv == 33 || isEv == 38 || isEv == 45 || isEv == 57) {
+        int isEv = (int) (Math.random() * 90);
+        if(isEv == 3 || isEv == 12 || isEv == 26 || isEv == 38 || isEv == 45 || isEv == 57 || isEv == 64 || isEv == 75 || isEv == 87) {
             evt = true;
         }
         return evt;
     }
 
     private void theEvent() {
-        String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant"};
-        String alea = listeEvent[(int) (Math.random() * 7)];
+        String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant", "vacances", "depression"};
+        String alea = listeEvent[(int) (Math.random() * 9)];
         switch (alea) {
             case "malade":
                 updateSante(-2);
@@ -279,6 +279,12 @@ public class BoucleJeu implements Runnable{
                 updateNourriture(2);
                 new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est au restaurant !<br><br> Sa NOURRITURE augmente de 2 points.")+"</html>", principale);
                 break;
+            case "vacances":
+                updateEnergie(3);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est en vacances !<br><br> Son ENERGIE augmente de 3 points.")+"</html>", principale);
+            case "depression":
+                updateBonheur(-2);
+                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est en dépression !<br><br> Son BONHEUR baisse de 2 points.")+"</html>", principale);
         }
     }
 
