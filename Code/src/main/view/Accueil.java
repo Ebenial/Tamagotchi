@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import main.util.CustomFont;
 import main.util.CustomJButton;
+import main.util.TransparentJPanel;
 
 import java.awt.*;
 
@@ -35,8 +36,12 @@ public class Accueil extends JPanel {
 
         //BORDERLAYOUT.EAST
         JPanel droite = new JPanel();
+        droite.setLayout(new GridBagLayout());
         droite.setPreferredSize(new Dimension(500, 0));
         droite.setOpaque(false);
+
+        TransparentJPanel droitePart2 = new TransparentJPanel();
+        droitePart2.setLayout(new GridLayout(2,1));
 
         //Ajout du label Nouveautés pour le panel des nouveautés
         JLabel titreMeilleurScore = new JLabel("Meilleur score :", SwingConstants.CENTER);
@@ -46,11 +51,12 @@ public class Accueil extends JPanel {
 
         //Première nouveauté de la liste
         JLabel meilleurScore = new JLabel("00j | 00h | 00m | 00s");
-        meilleurScore.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        meilleurScore.setFont(CustomFont.customFont18);
         meilleurScore.setForeground(Color.WHITE);
 
-        droite.add(titreMeilleurScore);
-        droite.add(meilleurScore);
+        droitePart2.add(titreMeilleurScore);
+        droitePart2.add(meilleurScore);
+        droite.add(droitePart2);
 
         //BORDERLAYOUT.CENTER
         //Ajout d'un panel qui va stocker les différents boutons du menu
