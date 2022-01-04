@@ -42,17 +42,17 @@ public class BoucleJeu implements Runnable{
     private String music;
     private boolean isDifficultySet = false;
     private long sec;
+    private boolean isDisplayEvent = true;
 
     public synchronized void start() {
         myThread = new Thread(() -> {
-
-            playGameMusic();
 
             sec = 0;
             //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
                 System.out.println(); // ATTENTION: parfois ne fonctionne pas sans ce print
+                System.out.println("ISDIFFICULTY SET : " + isDifficultySet);
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
                         case "facile":
@@ -246,45 +246,64 @@ public class BoucleJeu implements Runnable{
     private void theEvent() {
         String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant", "vacances", "depression"};
         String alea = listeEvent[(int) (Math.random() * 9)];
+        System.out.println("ALEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA : " + alea);
         switch (alea) {
             case "malade":
                 updateSante(-2);
-                 new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est tombé malade !<br><br> Sa SANTE baisse de 2 points.")+"</html>", principale);
-                 break;
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est tombé malade !<br><br> Sa SANTE baisse de 2 points.")+"</html>", principale);
+                }
+                break;
             case "anniversaire":
                 updateDivertissement(1);
                 updateBonheur(1);
-                new PopUp("<html><center><br>"+("C'est l'anniversaire de "+ principale.getJeu().getAvatar().getNom()+ " !<br><br> Son BONHEUR augmente de 1 point<br><br>Son DIVERTISSEMENT augmente de 1 point.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+("C'est l'anniversaire de "+ principale.getJeu().getAvatar().getNom()+ " !<br><br> Son BONHEUR augmente de 1 point<br><br>Son DIVERTISSEMENT augmente de 1 point.")+"</html>", principale);
+                }
                 break;
             case "soiree":
                 updateDivertissement(1);
                 updateBonheur(1);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " fait une soirée !<br><br> Son BONHEUR augmente de 1 point<br><br>Son DIVERTISSEMENT augmente de 1 point.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " fait une soirée !<br><br> Son BONHEUR augmente de 1 point<br><br>Son DIVERTISSEMENT augmente de 1 point.")+"</html>", principale);
+                }
                 break;
             case "amoureux":
                 updateBonheur(1);
                 updateHygiene(2);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est tombé amoureux !<br><br> Son BONHEUR augmente de 1 point<br><br>Son HYGIENE augmente de 1 point.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est tombé amoureux !<br><br> Son BONHEUR augmente de 1 point<br><br>Son HYGIENE augmente de 1 point.")+"</html>", principale);
+                }
                 break;
             case "sport":
                 updateEnergie(-1);
                 updateSante(1);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " fait du sport !<br><br> Sa SANTE augmente de 1 point<br><br>Son ENERGIE baisse de 1 point.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " fait du sport !<br><br> Sa SANTE augmente de 1 point<br><br>Son ENERGIE baisse de 1 point.")+"</html>", principale);
+                }
                 break;
             case "jouer":
                 updateDivertissement(2);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " s'amuse !<br><br> Son DIVERTISSEMENT augmente de 2 points.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " s'amuse !<br><br> Son DIVERTISSEMENT augmente de 2 points.")+"</html>", principale);
+                }
                 break;
             case "restaurant":
                 updateNourriture(2);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est au restaurant !<br><br> Sa NOURRITURE augmente de 2 points.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est au restaurant !<br><br> Sa NOURRITURE augmente de 2 points.")+"</html>", principale);
+                }
                 break;
             case "vacances":
                 updateEnergie(3);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est en vacances !<br><br> Son ENERGIE augmente de 3 points.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est en vacances !<br><br> Son ENERGIE augmente de 3 points.")+"</html>", principale);
+                }
             case "depression":
                 updateBonheur(-2);
-                new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est en dépression !<br><br> Son BONHEUR baisse de 2 points.")+"</html>", principale);
+                if(isDisplayEvent) {
+                    new PopUp("<html><center><br>"+(principale.getJeu().getAvatar().getNom()+ " est en dépression !<br><br> Son BONHEUR baisse de 2 points.")+"</html>", principale);
+                }
         }
     }
 
@@ -375,7 +394,7 @@ public class BoucleJeu implements Runnable{
 
 
     private void updateStatWithStatsWhileDisconnect() {
-
+        isDisplayEvent = false;
         //Stats avant update
         int nourritureBeforeUpdate = this.principale.getJeu().getAvatar().getNourriture();
         int energieBeforeUpdate = this.principale.getJeu().getAvatar().getEnergie();
@@ -446,6 +465,7 @@ public class BoucleJeu implements Runnable{
             updateDivertissement(-1);
             usefullNbUpdateDivertissement--;
         }
+        isDisplayEvent = true;
 
         //Remise a niveau des valeurs a utiliser
         usefullNbUpdateNourriture = nbUpdateNourriture;
@@ -624,6 +644,7 @@ public class BoucleJeu implements Runnable{
 
     public BoucleJeu(FenetrePrincipale principale) {
         this.principale = principale;
+        playGameMusic();
         this.principale.setBoucle(this);
         start();
     }
@@ -638,6 +659,10 @@ public class BoucleJeu implements Runnable{
 
     public void setSec(long sec) {
         this.sec = sec;
+    }
+
+    public void setRunning(boolean bool) {
+        this.running = bool;
     }
 
 }

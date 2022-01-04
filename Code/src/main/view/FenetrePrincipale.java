@@ -162,6 +162,8 @@ public class FenetrePrincipale extends JFrame{
 
     public void actionChargerPartie(String nom) {
         this.boucle.setSec(0);
+        this.boucle.setRunning(true);
+        this.boucle.start();
         System.out.println("ISINITIALIZED : " + isInitialized);
         SauvegardePartie partie = new SauvegardePartie(nom);
         this.jeu = new Jeu();
@@ -193,6 +195,8 @@ public class FenetrePrincipale extends JFrame{
      * @param s - le nom du panneau en cours (le bouton retour est présent sur plusieurs panneaux)
      */
     public void actionRetour(String s){
+        //System.out.println("ACTION REEEEEEEEEEEEEEEETOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUURRRRRRRRRRRRRRRRRRRRRRRR");
+        this.boucle.setRunning(false);
 
         switch (s) {
             case "GameOver":
@@ -242,6 +246,8 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau correspondant à la chambre (Panneau de départ pour une nouvelle partie)
      */
     public void actionValider(){
+        this.boucle.setRunning(true);
+        this.boucle.start();
         this.boucle.setIsdifficultySet(false);
         this.boucle.setSec(0);
         this.tempsTotal = 0;
