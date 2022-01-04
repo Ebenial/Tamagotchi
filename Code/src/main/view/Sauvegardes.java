@@ -5,8 +5,13 @@ import javax.swing.*;
 import main.util.CustomJButton;
 import main.util.TransparentJPanel;
 
+
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
@@ -82,6 +87,29 @@ public class Sauvegardes extends JPanel {
         add(jScrollPane, BorderLayout.CENTER);
         add(trP, BorderLayout.SOUTH);
 
+    }
+
+    public void writeBestScore() {
+        Path filename = Path.of("./Code/resources/score/score.txt");
+        if(Long.parseLong(readBestScore()) < this.principale.getCurrentEnvironnement().getTimerPanel().getCount()) {
+            try {
+                Files.writeString(filename, "" + this.principale.getCurrentEnvironnement().getTimerPanel().getCount());
+            } catch (IOException ignored) {
+
+            }
+        }
+    }
+
+    public String readBestScore() {
+        Path filename = Path.of("./Code/resources/score/score.txt");
+        String score = "0";
+        try {
+            score = Files.readString(filename);
+            System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii : " + score);
+        } catch (IOException ignored) {
+
+        }
+        return score;
     }
 
     public void updateSaves() {

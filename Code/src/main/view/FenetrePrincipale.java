@@ -52,13 +52,13 @@ public class FenetrePrincipale extends JFrame{
 
         this.getContentPane().setLayout(layout);
         //Strings.language = "Fr";
+        this.sauvegardes = new Sauvegardes(this);
         Accueil accueil = new Accueil(this);
         Jouer jouer = new Jouer(this);
         this.nouvellePartie = new NouvellePartie(this);
         Options options = new Options(this);
         OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
         Regles regles = new Regles(this);
-        this.sauvegardes = new Sauvegardes(this);
         GameOver gameOver = new GameOver(this);
         LaunchScreen launchScreen = new LaunchScreen();
         Difficulte difficulte = new Difficulte(this);

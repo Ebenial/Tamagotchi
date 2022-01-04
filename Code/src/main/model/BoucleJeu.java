@@ -3,6 +3,7 @@ package main.model;
 import main.util.PopUp;
 import main.util.TimerPanel;
 import main.view.FenetrePrincipale;
+import main.view.GameOver;
 import main.view.NouvellePartie;
 
 import javax.sound.sampled.AudioInputStream;
@@ -65,6 +66,9 @@ public class BoucleJeu implements Runnable{
                 }
                 if(principale.getIsInitialized()) {
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
+                        GameOver.score = principale.getCurrentEnvironnement().getTimerPanel().getCount();
+                        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk : " + principale.getCurrentEnvironnement().getTimerPanel().getCount());
+                        System.out.println("llllllllllllllllllllllllllllllllllllllllllllllllllllllllll : " + GameOver.score);
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
                         running = false;
                         clip.stop();
@@ -99,6 +103,7 @@ public class BoucleJeu implements Runnable{
                         if(sec % nbSecAutoSave == 0) {
                             principale.actionSauvegarde();
                             principale.getSauvegardes().updateSaves();
+                            principale.getSauvegardes().writeBestScore();
                         }
                         if(sec % timeForAction == 0) {
                             principale.getJeu().getAvatar().setCanEat(true);

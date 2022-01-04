@@ -39,6 +39,7 @@ public class Environnement extends JPanel implements KeyListener{
     private final JLabel energie;
     private final JLabel hygiene;
     private final JLabel divertissement;
+    private TimerPanel timerPanel;
 
     /**
      * Initialise la vue
@@ -131,7 +132,7 @@ public class Environnement extends JPanel implements KeyListener{
         statistiquesPart1.add(imagesStatsPart2);
         statistiquesPart2.add(infosStatsPart2);
 
-        TimerPanel timerPanel = new TimerPanel(principale);
+        this.timerPanel = new TimerPanel(principale);
 
         //Ajout du panneau des stats dans le coin gauche de l'écran
         cNord.insets = new Insets(1,10,1,10);
@@ -394,5 +395,9 @@ public class Environnement extends JPanel implements KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {}
+
+    public TimerPanel getTimerPanel() {
+        return this.timerPanel;
+    }
 
 }

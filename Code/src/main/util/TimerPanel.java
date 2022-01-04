@@ -39,4 +39,8 @@ public class TimerPanel extends JPanel {
         timer.setInitialDelay(0);
         timer.start();
     }
+
+    public long getCount() {
+        return this.count;
+    }
 }

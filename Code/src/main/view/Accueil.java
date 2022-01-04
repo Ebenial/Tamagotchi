@@ -49,8 +49,21 @@ public class Accueil extends JPanel {
         TransparentJPanel droitePart2 = new TransparentJPanel();
         droitePart2.setLayout(new GridLayout(2,1));
 
+        String score = principale.getSauvegardes().readBestScore();
+        long sc = Long.parseLong(score);
+        int sec = (int) sc % 60;
+        int min = (int) (sc / 60) % 60;
+        int hours = (int) ((sc / 60) / 60)%24;
+        int days = (int) (((sc / 60) / 60) / 24);
+
+        String strSec = (sec < 10) ? "0" + sec : Integer.toString(sec);
+        String strmin = (min < 10) ? "0" + min : Integer.toString(min);
+        String strHours = (hours < 10) ? "0" + hours : Integer.toString(hours);
+        String strDays = (days < 10) ? "0" + days : Integer.toString(days);
+
         //Ajout du label Nouveautés pour le panel des nouveautés
-        JLabel titreMeilleurScore = new JLabel("Meilleur score :", SwingConstants.CENTER);
+        JLabel titreMeilleurScore = new JLabel(strDays + "j | " + strHours + "h | " + strmin + "m | " + strSec+"s", SwingConstants.CENTER);
+
         titreMeilleurScore.setFont(CustomFont.customFont28);
         titreMeilleurScore.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         titreMeilleurScore.setForeground(Color.WHITE);
