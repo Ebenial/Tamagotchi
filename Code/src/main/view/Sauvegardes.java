@@ -23,6 +23,7 @@ public class Sauvegardes extends JPanel {
     public static ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
     public static ArrayList<String> saveName = new ArrayList<>();
     public static ArrayList<CustomJButton> arrayDelete = new ArrayList<>();
+    FenetrePrincipale principale;
 
 
     /**
@@ -31,6 +32,7 @@ public class Sauvegardes extends JPanel {
      * @param principale - la JFrame dans laquelle est affiché le panneau des règles
      */
     public Sauvegardes(FenetrePrincipale principale) {
+        this.principale = principale;
         this.setLayout(new BorderLayout());
 
         //BORDERLAYOUT.CENTER
@@ -47,27 +49,13 @@ public class Sauvegardes extends JPanel {
         JPanel panel2 = new JPanel();
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         panel2.setOpaque(false);
-        Set<String> hset = listFilesUsingJavaIO(".");
-        for (String s : hset) {
-            if (s.toLowerCase().endsWith(".json")) {
-                String[] tokens = s.split("\\.");
-                String buttonName = tokens[0];
-                int length = 13;
-                if (buttonName.length() > length) {
-                    buttonName = buttonName.substring(0, length);
-                    buttonName = buttonName + "...";
-                }
-                arrayButton.add(new CustomJButton(buttonName, principale, null, "Code/resources/others/button_background_large.png", null, null, null));
-                saveName.add(s);
-                arrayDelete.add(new CustomJButton(principale));
-            }
-        }
+
+        updateSaves();
         for (CustomJButton j : Sauvegardes.arrayButton) {
             j.setBackground(new Color(0,0,0,0));
             j.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
             panel1.add(j);
         }
-
         for (CustomJButton j : Sauvegardes.arrayDelete) {
             j.setBackground(new Color(0,0,0,0));
             panel2.add(j);
@@ -94,6 +82,25 @@ public class Sauvegardes extends JPanel {
         add(jScrollPane, BorderLayout.CENTER);
         add(trP, BorderLayout.SOUTH);
 
+    }
+
+    public void updateSaves() {
+        Set<String> hset = listFilesUsingJavaIO("./Code/resources/saves/");
+        for (String s : hset) {
+            if (s.toLowerCase().endsWith(".json")) {
+                String[] tokens = s.split("\\.");
+                String buttonName = tokens[0];
+                int length = 13;
+                if (buttonName.length() > length) {
+                    buttonName = buttonName.substring(0, length);
+                    buttonName = buttonName + "...";
+                }
+                arrayButton.add(new CustomJButton(buttonName, principale, null, "Code/resources/others/button_background_large.png", null, null, null));
+                saveName.add(s);
+                arrayDelete.add(new CustomJButton(principale));
+                System.out.println("NOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM : " + s);
+            }
+        }
     }
 
     public Sauvegardes() {

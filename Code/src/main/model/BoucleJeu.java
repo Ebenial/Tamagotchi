@@ -41,7 +41,6 @@ public class BoucleJeu implements Runnable{
 
             while (running) {
                 System.out.println(); // ATTENTION: parfois ne fonctionne pas sans ce print
-                System.out.println("ISDIFFICULTY SET : " + isDifficultySet);
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
                         case "facile":
@@ -99,6 +98,7 @@ public class BoucleJeu implements Runnable{
                         }
                         if(sec % nbSecAutoSave == 0) {
                             principale.actionSauvegarde();
+                            principale.getSauvegardes().updateSaves();
                         }
                         if(sec % timeForAction == 0) {
                             principale.getJeu().getAvatar().setCanEat(true);

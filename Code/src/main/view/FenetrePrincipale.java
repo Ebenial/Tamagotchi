@@ -26,6 +26,7 @@ public class FenetrePrincipale extends JFrame{
     private BoucleJeu boucle;
 
     private Environnement currentEnvironnement;
+    private Sauvegardes sauvegardes;
 
     private final CardLayout layout = new CardLayout();
     private boolean isInitialized = false;
@@ -57,7 +58,7 @@ public class FenetrePrincipale extends JFrame{
         Options options = new Options(this);
         OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
         Regles regles = new Regles(this);
-        Sauvegardes sauvegardes = new Sauvegardes(this);
+        this.sauvegardes = new Sauvegardes(this);
         GameOver gameOver = new GameOver(this);
         LaunchScreen launchScreen = new LaunchScreen();
         Difficulte difficulte = new Difficulte(this);
@@ -374,4 +375,8 @@ public class FenetrePrincipale extends JFrame{
     public CardLayout getLayout(){return  this.layout;}
 
     public long getTempsTotal(){return this.tempsTotal;}
+
+    public Sauvegardes getSauvegardes() {
+        return this.sauvegardes;
+    }
 }
