@@ -1,11 +1,12 @@
 package main.model;
 import main.view.NouvellePartie;
-import main.view.Sauvegardes;
 
 import java.io.*;
 import java.util.Date;
 
-
+/**
+ * Cette classe correspond à la Sauvegarde, elle est sauvegardée dans un fichier
+ */
 public class SauvegardePartie implements Serializable {
     private Date dateFinSession;
     private long tempsJeu;
@@ -21,6 +22,14 @@ public class SauvegardePartie implements Serializable {
     private String difficulty;
     private boolean isDead;
 
+    /**
+     * Constructeur de SauvegardePartie
+     * @param nomJoueur le nom du joueur
+     * @param avatar le nom de l'avatar
+     * @param tempsJeu le temps de jeu
+     * @param isDead vrai si l'avatar est mort
+     * @throws IOException
+     */
     public SauvegardePartie(String nomJoueur, Avatar avatar, long tempsJeu, boolean isDead) throws IOException {
         this.nomJoueur = nomJoueur;
         this.nomAvatar = avatar.getNom();
@@ -37,19 +46,27 @@ public class SauvegardePartie implements Serializable {
 
         long millis = System.currentTimeMillis();
         this.dateFinSession = new Date(millis);
-        writeJSON();
+        writeSave();
 
     }
 
+    /**
+     * Constructeur de SauvegardePartie qui permet de charger une partie
+     * @param nom le nom du fichier de sauvegarde
+     */
     public SauvegardePartie(String nom) {
         try {
-            readJson(nom);
+            readSave(nom);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void writeJSON() throws IOException {
+    /**
+     * Serialize cette classe dans un fichier
+     * @throws IOException
+     */
+    private void writeSave() throws IOException {
         String filename = nomJoueur + "-" + nomAvatar + ".save";
         FileOutputStream file = new FileOutputStream("./Code/resources/saves/" + filename);
         ObjectOutputStream out = new ObjectOutputStream(file);
@@ -60,8 +77,13 @@ public class SauvegardePartie implements Serializable {
     }
 
 
-
-    private void readJson(String nom) throws IOException, ClassNotFoundException {
+    /**
+     * Permet de lire une sauvegarde pour charger une partie
+     * @param nom le nom de la sauvegarde
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    private void readSave(String nom) throws IOException, ClassNotFoundException {
 
         FileInputStream file = new FileInputStream(nom);
         ObjectInputStream in = new ObjectInputStream(file);
@@ -86,15 +108,24 @@ public class SauvegardePartie implements Serializable {
 
     }
 
+    /**
+     * Crée un avatar à partir d'une sauvegarde
+     * @param nom le nom de la sauvegarde
+     * @return un Avatar
+     */
     public Avatar creerAvatar(String nom) {
         try {
-            readJson(nom);
+            readSave(nom);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return new Avatar(typeAvatar, nomAvatar, santeAvatar, bonheurAvatar, nourritureAvatar, energieAvatar, hygieneAvatar, divertissementAvatar);
     }
 
+    /**
+     * Permet de récupérer le temps qui s'est écoulé depuis la dernière connexion
+     * @return le temps qui s'est écoulé depuis la dernière connexion
+     */
     public long getTimeSinceLastConnexion(){
         long millis = System.currentTimeMillis();
         Date current = new Date(millis);
@@ -102,50 +133,26 @@ public class SauvegardePartie implements Serializable {
         return (current.getTime() - this.dateFinSession.getTime());
     }
 
+    /**
+     * Le getter de tempsJeu
+     * @return tempsJeu
+     */
     public long getTempsJeu() {
         return this.tempsJeu;
     }
 
-    public Date getDateFinSession() {
-        return this.dateFinSession;
-    }
-
+    /**
+     * Le getter de nomJoueur
+     * @return nomJoueur
+     */
     public String getNomJoueur() {
         return nomJoueur;
     }
 
-    public String getNomAvatar() {
-        return nomAvatar;
-    }
-
-    public String getTypeAvatar() {
-        return typeAvatar;
-    }
-
-    public int getSanteAvatar() {
-        return santeAvatar;
-    }
-
-    public int getNourritureAvatar() {
-        return nourritureAvatar;
-    }
-
-    public int getEnergieAvatar() {
-        return energieAvatar;
-    }
-
-    public int getHygieneAvatar() {
-        return hygieneAvatar;
-    }
-
-    public int getDivertissementAvatar() {
-        return divertissementAvatar;
-    }
-
-    public int getBonheurAvatar() {
-        return bonheurAvatar;
-    }
-
+    /**
+     * Le getter de isDead
+     * @return isDead
+     */
     public boolean isDead() {
         return isDead;
     }

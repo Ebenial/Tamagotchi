@@ -19,6 +19,10 @@ public class Joueur {
     
     //GETTERS
 
+    /**
+     * Le getter du nom
+     * @return le nom
+     */
     public String getNom(){
         return this.nom;
     }

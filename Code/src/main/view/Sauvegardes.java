@@ -8,7 +8,6 @@ import main.util.TransparentJPanel;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +20,9 @@ import java.util.stream.Stream;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
+/**
+ * Page de chargement de parties
+ */
 public class Sauvegardes extends JPanel {
 
     public static CustomJButton retour;
@@ -35,8 +37,7 @@ public class Sauvegardes extends JPanel {
 
 
     /**
-     * Contient le panneau des règles
-     *
+     * Constructeur de Sauvegarde, mets tous les CustomJBUtton dans les arrayLists et les affiches sur la page de sauvegardes
      * @param principale - la JFrame dans laquelle est affiché le panneau des règles
      */
     public Sauvegardes(FenetrePrincipale principale) {
@@ -92,6 +93,9 @@ public class Sauvegardes extends JPanel {
 
     }
 
+    /**
+     * Ecrit le meilleur score réalisé par le joueur dans un fichier texte
+     */
     public void writeBestScore() {
         Path filename = Path.of("./Code/resources/score/score.txt");
         if(Long.parseLong(readBestScore()) < this.principale.getCurrentEnvironnement().getTimerPanel().getCount()) {
@@ -103,6 +107,10 @@ public class Sauvegardes extends JPanel {
         }
     }
 
+    /**
+     * lit le meilleur score écrit dans un fichier texte
+     * @return
+     */
     public String readBestScore() {
         Path filename = Path.of("./Code/resources/score/score.txt");
         String score = "0";
@@ -114,6 +122,9 @@ public class Sauvegardes extends JPanel {
         return score;
     }
 
+    /**
+     * Cette méthode permet de mettre à jour les arraylists avec les nouvelles sauvegardes réalisés
+     */
     public void updateSaves() {
         Set<String> hset = listFilesUsingJavaIO("./Code/resources/saves/");
         for (String s : hset) {
@@ -132,9 +143,17 @@ public class Sauvegardes extends JPanel {
         }
     }
 
+    /**
+     * Constructeur par défaut de sauvegarde
+     */
     public Sauvegardes() {
     }
 
+    /**
+     * Retourne un Set qui contient le nom de tous les fichiers présent dans le repertoire de sauvegarde
+     * @param dir le path du dossier
+     * @return un Set qui contient le nom de tous les fichiers présent dans le repertoire de sauvegarde
+     */
     public Set<String> listFilesUsingJavaIO(String dir) {
         return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
                 .filter(file -> !file.isDirectory())
@@ -145,7 +164,6 @@ public class Sauvegardes extends JPanel {
 
     /**
      * Permet de surcharger le paintComponent pour ajouter l'Image background en fond d'écran du panel.
-     *
      * @param g -
      */
     @Override
@@ -154,50 +172,98 @@ public class Sauvegardes extends JPanel {
         g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
 
+    /**
+     * Getter de panel1
+     * @return panel1
+     */
     public JPanel getPanel1() {
         return this.panel1;
     }
 
+    /**
+     * Setter de panel1
+     * @param panel un JPanel
+     */
     public void setPanel1(JPanel panel) {
         this.panel1 = panel;
     }
 
+    /**
+     * Setter de panel2
+     * @param panel un JPanel
+     */
     public void setPanel2(JPanel panel) {
         this.panel2 = panel;
     }
 
+    /**
+     * Setter de Centre
+     * @param panel un JPanel
+     */
     public void setCentre(JPanel panel) {
         this.centre = panel;
     }
 
+    /**
+     * getter de panel2
+     * @return panel2
+     */
     public JPanel getPanel2() {
         return this.panel2;
     }
 
+    /**
+     * getter de centre
+     * @return centre
+     */
     public JPanel getCentre() {
         return this.centre;
     }
 
+    /**
+     * getter de ArrayButton
+     * @return arrayButton
+     */
     public ArrayList<CustomJButton> getArrayButton() {
         return arrayButton;
     }
 
+    /**
+     * getter de arrayDelete
+     * @return arrayDelete
+     */
     public ArrayList<CustomJButton> getArrayDelete() {
         return arrayDelete;
     }
 
+    /**
+     * getter de saveName
+     * @return saveName
+     */
     public ArrayList<String> getSaveName() {
         return saveName;
     }
 
+    /**
+     * setter de ArrayButton
+     * @param arrayButton une ArrayList<CustomJButton>
+     */
     public void setArrayButton(ArrayList<CustomJButton> arrayButton) {
         this.arrayButton = arrayButton;
     }
 
+    /**
+     * setter de ArrayDelete
+     * @param arrayDelete une ArrayList<CustomJButton>
+     */
     public void setArrayDelete(ArrayList<CustomJButton> arrayDelete) {
         this.arrayDelete = arrayDelete;
     }
 
+    /**
+     * setter de saveName
+     * @param saveName une ArrayList de String
+     */
     public void setSaveName(ArrayList<String> saveName) {
         this.saveName = saveName;
     }

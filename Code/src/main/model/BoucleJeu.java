@@ -1,9 +1,7 @@
 package main.model;
 
 import main.util.PopUp;
-import main.util.TimerPanel;
 import main.view.FenetrePrincipale;
-import main.view.GameOver;
 import main.view.NouvellePartie;
 
 import javax.sound.sampled.AudioInputStream;
@@ -13,11 +11,14 @@ import javax.swing.*;
 
 import java.io.File;
 
+/**
+ * Cette classe correspond à la boucle du jeu
+ */
 public class BoucleJeu implements Runnable{
     public static Thread myThread;
     public boolean running = true;
     public static long secSinceLastConnexion;
-    private FenetrePrincipale principale;
+    private final FenetrePrincipale principale;
     private int nbSecUpdateSecondaryStats;
     private int nbSecUpdateSante = 5;
     private int nbSecUpdateBonheur = 5;
@@ -36,6 +37,10 @@ public class BoucleJeu implements Runnable{
     private long sec;
     private boolean isDisplayEvent = true;
 
+    /**
+     * Cette méthode est appelée lorsqu'une nouvelle partie est créer ou si une partie est chargée
+     * Elle s'occupe de gérer les mécanismes du jeu en temps réel
+     */
     public synchronized void start() {
         myThread = new Thread(() -> {
             sec = 0;
@@ -189,7 +194,9 @@ public class BoucleJeu implements Runnable{
 
     }
 
-
+    /**
+     * Update toutes les 3heures
+     */
     private void setDifficile() {
         //Updates toute les 3h
         this.nbSecUpdateMax = 10800;
@@ -204,6 +211,9 @@ public class BoucleJeu implements Runnable{
 
     }
 
+    /**
+     * Updates toutes les 7 secondes
+     */
     private void setLegendaire() {
         this.nbSecUpdateMax = 7;
         this.nbSecUpdateMin = (int) (nbSecUpdateMax / 2);
@@ -215,6 +225,10 @@ public class BoucleJeu implements Runnable{
 
     }
 
+    /**
+     * A chaque update de Event cette methode donne 1 chance sur 10 à un event de se produire
+     * @return vrai si un event doit se produire
+     */
     private boolean isEvent() {
         boolean evt = false;
         int isEv = (int) (Math.random() * 90);
@@ -224,6 +238,9 @@ public class BoucleJeu implements Runnable{
         return evt;
     }
 
+    /**
+     * Tire un evenement au sort parmit 9 evenements
+     */
     private void theEvent() {
         String[] listeEvent = {"malade", "anniversaire", "soiree", "amoureux", "sport", "jouer", "restaurant", "vacances", "depression"};
         String alea = listeEvent[(int) (Math.random() * 9)];
@@ -287,14 +304,25 @@ public class BoucleJeu implements Runnable{
         }
     }
 
+    /**
+     * Le getter de clip
+     * @return clip
+     */
     public Clip getClip() {
         return this.clip;
     }
 
+    /**
+     * Le getter de music
+     * @return music
+     */
     public String getMusic() {
         return this.music;
     }
 
+    /**
+     * Joue la musique principale du jeu
+     */
     public void playGameMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/Tamagotchi.wav").getAbsoluteFile());
@@ -307,6 +335,9 @@ public class BoucleJeu implements Runnable{
         }
     }
 
+    /**
+     * Joue la musique de mort de l'avatar
+     */
     public void playDeathMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Code/resources/music/death.wav").getAbsoluteFile());
@@ -322,13 +353,16 @@ public class BoucleJeu implements Runnable{
     /**
      * Compte le nombre d'update qui aurait du se passer pour un evenement donne pendant la deconnexion du joueur
      * @param secUpdate
-     * @return
+     * @return le nombre d'update qui aurait du se passer pour un evenement donne pendant la deconnexion du joueur
      */
     private long numberOfUpdate(long secUpdate) {
 
         return (secSinceLastConnexion / 1000) / secUpdate;
     }
 
+    /**
+     * Permet de faire diminuer / augmenter les statistiques des barres de vie et de bonheur en fonction des autres
+     */
     private void updateStatsWithStats() {
         Avatar avatar = principale.getJeu().getAvatar();
 
@@ -372,6 +406,9 @@ public class BoucleJeu implements Runnable{
     }
 
 
+    /**
+     * Permet de gérer tous ce qui aurait du se passer pendant la deconnexion du joueur, quand le joueur recharge une partie
+     */
     private void updateStatWithStatsWhileDisconnect() {
         isDisplayEvent = false;
         //Stats avant update
@@ -543,8 +580,8 @@ public class BoucleJeu implements Runnable{
     }
 
     /**
-     * 
-     * @param modif
+     * Modifie le bonheur de l'avatar de la valeur passé en paramètre
+     * @param modif - la valeur a jouter ou soustraire au bonheur actuel de l'avatar
      */
     private void updateBonheur(int modif) {
 
@@ -553,8 +590,8 @@ public class BoucleJeu implements Runnable{
     }
 
     /**
-     * 
-     * @param modif
+     * Modifie la nourriture de l'avatar de la valeur passé en paramètre
+     * @param modif - la valeur a jouter ou soustraire à la nourriture actuelle de l'avatar
      */
     private void updateNourriture(int modif) {
 
@@ -564,8 +601,8 @@ public class BoucleJeu implements Runnable{
     }
 
     /**
-     * 
-     * @param modif
+     * Modifie l'énergie de l'avatar de la valeur passé en paramètre
+     * @param modif - la valeur a jouter ou soustraire à l'énergie actuelle de l'avatar
      */
     private void updateEnergie(int modif) {
 
@@ -575,8 +612,8 @@ public class BoucleJeu implements Runnable{
     }
 
     /**
-     * 
-     * @param modif
+     * Modifie l'hygiene de l'avatar de la valeur passé en paramètre
+     * @param modif - la valeur a jouter ou soustraire à l'hygiene actuelle de l'avatar
      */
     private void updateHygiene(int modif) {
 
@@ -586,8 +623,8 @@ public class BoucleJeu implements Runnable{
     }
 
     /**
-     * 
-     * @param modif
+     * Modifie le divertissement de l'avatar de la valeur passé en paramètre
+     * @param modif - la valeur a jouter ou soustraire du divertissement de l'avatar
      */
     private void updateDivertissement(int modif) {
 
@@ -602,6 +639,10 @@ public class BoucleJeu implements Runnable{
 
     }
 
+    /**
+     * Constructeur de BoucleJeu
+     * @param principale la JFrame
+     */
     public BoucleJeu(FenetrePrincipale principale) {
         this.principale = principale;
         playGameMusic();
@@ -609,18 +650,34 @@ public class BoucleJeu implements Runnable{
         start();
     }
 
+    /**
+     * Le setter de isDifficultySet
+     * @param bool
+     */
     public void setIsdifficultySet(boolean bool) {
         this.isDifficultySet = bool;
     }
 
+    /**
+     * Le getter de Sec
+     * @return sec
+     */
     public long getSec() {
         return this.sec;
     }
 
+    /**
+     * Le setter de Sec
+     * @param sec les nombres de secondes
+     */
     public void setSec(long sec) {
         this.sec = sec;
     }
 
+    /**
+     * Le setter de running
+     * @param bool un boolean
+     */
     public void setRunning(boolean bool) {
         this.running = bool;
     }

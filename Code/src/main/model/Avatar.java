@@ -130,40 +130,77 @@ public class Avatar {
 
     //GETTERS
 
+    /**
+     * Le getter de type
+     * @return le type
+     */
     public String getType(){
         return this.type;
     }
 
+    /**
+     * Le getter de nom
+     * @return le nom
+     */
     public String getNom(){
         return this.nom;
     }
 
+    /**
+     * Le getter de sante
+     * @return la sante
+     */
     public int getSante(){
         return this.sante;
     }
 
+    /**
+     * Le getter de bonheur
+     * @return le bonheur
+     */
     public int getBonheur(){
         return this.bonheur;
     }
 
+    /**
+     *
+     * Le getter de nourriture
+     * @return la nourriture
+     */
     public int getNourriture(){
         return this.nourriture;
     }
 
+    /**
+     * Le getter de energie
+     * @return l'energie
+     */
     public int getEnergie(){
         return this.energie;
     }
 
+    /**
+     * Le getter de hygiene
+     * @return l'hygiene
+     */
     public int getHygiene(){
         return this.hygiene;
     }
 
+    /**
+     * Le getter de divertissement
+     * @return le divertissement
+     */
     public int getDivertissement(){
         return this.divertissement;
     }
 
     //SETTERS
 
+    /**
+     * Le setter de sante
+     * @param nouvelleSante
+     */
     public void setSante(int nouvelleSante){
         if(nouvelleSante < 0){
             this.sante = 0;
@@ -177,6 +214,10 @@ public class Avatar {
         label1.setIcon(principale.getJeu().choixBarreStats(this.sante)); //Mise à jour de l'affichage de la santé avec la nouvelle valeur
     }
 
+    /**
+     * Le setter de bonheur
+     * @param nouveauBonheur
+     */
     public void setBonheur(int nouveauBonheur){
         if(nouveauBonheur < 0) {
             this.bonheur = 0;
@@ -192,6 +233,10 @@ public class Avatar {
         label2.setIcon(principale.getJeu().choixBarreStats(this.bonheur));
     }
 
+    /**
+     * Le setter de nourriture
+     * @param nouvellenourriture
+     */
     public void setNourriture(int nouvellenourriture){
         if(nouvellenourriture < 0) {
             this.nourriture = 0;
@@ -207,6 +252,10 @@ public class Avatar {
         label1.setIcon(principale.getJeu().choixBarreStats(this.nourriture));
     }
 
+    /**
+     * Le setter de energie
+     * @param nouvelleenergie
+     */
     public void setEnergie(int nouvelleenergie){
         if(nouvelleenergie < 0) {
             this.energie = 0;
@@ -221,6 +270,10 @@ public class Avatar {
         label1.setIcon(principale.getJeu().choixBarreStats(this.energie));
     }
 
+    /**
+     * Le setter de hygiene
+     * @param nouvelleHygiene
+     */
     public void setHygiene(int nouvelleHygiene){
         if(nouvelleHygiene < 0) {
             this.hygiene = 0;
@@ -237,6 +290,10 @@ public class Avatar {
 
     }
 
+    /**
+     * Le setter de divertissement
+     * @param nouveauxdivertissement
+     */
     public void setDivertissement(int nouveauxdivertissement){
         if(nouveauxdivertissement < 0) {
             this.divertissement = 0;
@@ -252,46 +309,74 @@ public class Avatar {
         label3.setIcon(principale.getJeu().choixBarreStats(this.divertissement));
     }
 
+    /**
+     * Le setter de principale
+     * @param principale
+     */
     public void setPrincipale(FenetrePrincipale principale) {
         this.principale = principale;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
+    /**
+     * Le setter de canEat
+     * @param bool
+     */
     public void setCanEat(boolean bool) {
         this.canEat = bool;
     }
 
+    /**
+     * Le setter de canShower
+     * @param bool
+     */
     public void setCanShower(boolean bool) {
         this.canShower = bool;
     }
 
+    /**
+     * Le setter de canPlay
+     * @param bool
+     */
     public void setCanPlay(boolean bool) {
         this.canPlay = bool;
     }
 
+    /**
+     * Le setter de canSleep
+     * @param bool
+     */
     public void setCanSleep(boolean bool) {
         this.canSleep = bool;
     }
 
+    /**
+     * Le setter de canEat
+     * @return canEat
+     */
     public boolean getCanEat() {
         return canEat;
     }
 
+    /**
+     * Le getter de canPlay
+     * @return canPlay
+     */
     public boolean getCanPlay() {
         return canPlay;
     }
 
+    /**
+     * le getter de canShower
+     * @return canShower
+     */
     public boolean getCanShower() {
         return canShower;
     }
 
+    /**
+     * le getter de canSleep
+     * @return canSleep
+     */
     public boolean getCanSleep() {
         return canSleep;
     }

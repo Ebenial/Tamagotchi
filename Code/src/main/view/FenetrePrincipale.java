@@ -12,11 +12,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import main.model.*;
 import main.util.CustomFont;
 import main.util.LookAndFeel;
-import main.util.TimerPanel;
 
 /**
  * Permet de modéliser la fenêtre du programme et de la paramétrer
@@ -269,7 +267,6 @@ public class FenetrePrincipale extends JFrame{
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
 
         this.boucle.setRunning(true);
-        System.out.println("runnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn : " + this.boucle.running);
         this.boucle.start();
         this.boucle.setIsdifficultySet(false);
         this.boucle.setSec(0);
@@ -315,37 +312,24 @@ public class FenetrePrincipale extends JFrame{
         if(orientation.equals("Gauche")){
             switch (lieu) {
                 case CHAMBRE:
-                    //this.getBoucle().updateAllStats();
-                    //this.layout.show(this.getContentPane(), "douche");
                     this.currentEnvironnement.changerLieu(this, Lieu.LAVER);
                     break;
                 case LAVER:
-                    //this.getBoucle().updateAllStats();
-                    //this.layout.show(this.getContentPane(), "cuisine");
                     this.currentEnvironnement.changerLieu(this, Lieu.MANGER);
                     break;
                 case MANGER:
-                    //this.getBoucle().updateAllStats();
-                    //this.layout.show(this.getContentPane(), "jardin");
                     this.currentEnvironnement.changerLieu(this, Lieu.JOUER);
                     break;
             }
         }else if(orientation.equals("Droite")){
             switch (lieu) {
-                //case "Chambre":
                 case JOUER:
-                    //this.getBoucle().updateAllStats();
-                    //this.layout.show(this.getContentPane(), "cuisine");
                     this.currentEnvironnement.changerLieu(this, Lieu.MANGER);
                     break;
                 case LAVER:
-                    //this.getBoucle().updateAllStats();
-                    //this.layout.show(this.getContentPane(), "chambre");
                     this.currentEnvironnement.changerLieu(this, Lieu.CHAMBRE);
                     break;
                 case MANGER:
-                    //this.layout.show(this.getContentPane(), "douche");
-                    //this.getBoucle().updateAllStats();
                     this.currentEnvironnement.changerLieu(this, Lieu.LAVER);
                     break;
             }
@@ -401,16 +385,16 @@ public class FenetrePrincipale extends JFrame{
     }
 
     /**
-     *
-     * @return
+     * Retourne le boolean continuer (si le joueur à cliqué sur continuer)
+     * @return le boolean continuer
      */
     public boolean getContinuer() {
         return this.continuer;
     }
 
     /**
-     *
-     * @return
+     * Le getter de nouvelle partie
+     * @return nouvelle partie
      */
     public NouvellePartie getNouvellePartie() {
         return this.nouvellePartie;
@@ -429,8 +413,8 @@ public class FenetrePrincipale extends JFrame{
     public long getTempsTotal(){return this.tempsTotal;}
 
     /**
-     *
-     * @return
+     * le getter de sauvegardes
+     * @return sauvegardes
      */
     public Sauvegardes getSauvegardes() {
         return this.sauvegardes;
@@ -446,18 +430,34 @@ public class FenetrePrincipale extends JFrame{
         this.boucle = nouvelleBoucle;
     }
 
+    /**
+     * Le getter de gameOver
+     * @return gameOver
+     */
     public GameOver getGameOver() {
         return this.gameOver;
     }
 
+    /**
+     * Le setter de sauvegardes
+     * @param sauvegardes une instance de Sauvegardes
+     */
     public void setSauvegardes(Sauvegardes sauvegardes) {
         this.sauvegardes = sauvegardes;
     }
 
+    /**
+     * Le setter de isDead
+     * @param bool un boolean
+     */
     public void setIsDead(boolean bool) {
         isDead = bool;
     }
 
+    /**
+     * le getter de isDead
+     * @return isDead
+     */
     public boolean isDead() {
         return isDead;
     }

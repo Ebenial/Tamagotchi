@@ -17,8 +17,6 @@ public class Jeu{
     FenetrePrincipale principale;
     private Joueur joueur;
     private Avatar avatar;
-    private Date compteurTemps;
-    private boolean enCours;
 
     private static LocalTime SUNRISE_TIME = LocalTime.of(6, 0);
     private static LocalTime SUNSET_TIME = LocalTime.of(20, 0);
@@ -35,6 +33,9 @@ public class Jeu{
         this.avatar.setPrincipale(principale);
     }
 
+    /**
+     * Constructeur par défaut de jeu
+     */
     public Jeu(){}
 
     /**
@@ -86,6 +87,9 @@ public class Jeu{
         return res;
     }
 
+    /**
+     * @return vrai si c'est le jour
+     */
     public boolean isDay() {
         LocalTime nowTime = LocalTime.now();
         return nowTime.isAfter(SUNRISE_TIME) && nowTime.isBefore(SUNSET_TIME);
@@ -93,33 +97,44 @@ public class Jeu{
 
     //GETTERS
 
+    /**
+     * Le getter de Avatar
+     * @return un Avatar
+     */
     public Avatar getAvatar(){
         return this.avatar;
     }
 
-    public Date getCompteur() {
-        return this.compteurTemps;
-    }
-
-    public boolean getEnCours() {
-        return this.enCours;
-    }
-
+    /**
+     * Le getter de joueur
+     * @return le Joueur
+     */
     public Joueur getJoueur() {
         return this.joueur;
     }
 
+    /**
+     * Le getter de FenetrePrincipale
+     * @return l'instance de FenetrePrincipale
+     */
     public FenetrePrincipale getPrincipale(){
         return this.principale;
     }
 
     //SETTERS
 
-
+    /**
+     * Le setter de avatar
+     * @param avatar un Avatar
+     */
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
     }
 
+    /**
+     * Le setter de joueur
+     * @param joueur un Joueur
+     */
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
     }
