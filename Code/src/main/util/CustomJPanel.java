@@ -3,11 +3,19 @@ package main.util;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JPanel personnalisé
+ */
 public class CustomJPanel extends JPanel {
 
     Image image;
     Dimension dimension;
 
+    /**
+     * Construit un JPanel personnalisé
+     * @param image - l'image de fond du panneau
+     * @param dimension - les dimensions du panneau
+     */
     public CustomJPanel(Image image, Dimension dimension){
         this.image = image;
         this.dimension = dimension;

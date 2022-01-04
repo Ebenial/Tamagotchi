@@ -27,11 +27,17 @@ public class BoutonFleche extends JButton {
         }
     }
 
+    /**
+     * Active la fleche
+     */
     public void activerFleche() {
         this.setEnabled(true);
         this.setVisible(true);
     }
 
+    /**
+     * Désactive la fleche
+     */
     public void desactiverFleche() {
         this.setEnabled(false);
         this.setVisible(false);

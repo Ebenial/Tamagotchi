@@ -21,7 +21,6 @@ public class Jouer extends JPanel{
      * @param fenetre - la fenêtre dans laquelle sera affiché le panneau
      */
     public Jouer(FenetrePrincipale fenetre){
-
         this.setLayout(new BorderLayout());
 
         //BORDERLAYOUT.WEST
@@ -62,7 +61,6 @@ public class Jouer extends JPanel{
         signature.setForeground(Color.WHITE);
         signature.setBorder(BorderFactory.createEmptyBorder(0,0,10,10));
 
-
         //Ajout des différents boutons au panneau du menu
         gbc.insets = new Insets(30, 0, 30, 0);
         gbc.gridx = 1;
@@ -73,12 +71,10 @@ public class Jouer extends JPanel{
         menu.add(retour, gbc);
 
         //Ajout des composants au panneau d'accueil
-        //this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(menu, BorderLayout.CENTER);
         this.add(nouveautes, BorderLayout.EAST);
         this.add(signature, BorderLayout.SOUTH);
-
     }
 
     /**

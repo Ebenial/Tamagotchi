@@ -41,6 +41,7 @@ public class Accueil extends JPanel {
         gauche.setOpaque(false);
 
         //BORDERLAYOUT.EAST
+        //Affiche le meilleur score du joueur
         JPanel droite = new JPanel();
         droite.setLayout(new GridBagLayout());
         droite.setPreferredSize(new Dimension(500, 0));

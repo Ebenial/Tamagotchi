@@ -8,6 +8,9 @@ import main.util.CustomJPanel;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Page des options disponibles pendant la partie
+ */
 public class OptionsEnJeu extends JPanel{
 
     public JLabel titre;
@@ -18,6 +21,10 @@ public class OptionsEnJeu extends JPanel{
     public static JRadioButton r1;
     public static JRadioButton r2;
 
+    /**
+     * Construit le panneau pour afficher les options disponibles en jeu
+     * @param principale - la fenêtre dans laquelle sera affiché le panneau
+     */
     public OptionsEnJeu(FenetrePrincipale principale){
         this.setLayout(new BorderLayout());
 
@@ -57,7 +64,7 @@ public class OptionsEnJeu extends JPanel{
 
         soundOn = new JLabel("Musique : ", SwingConstants.CENTER);
         soundOn.setFont(CustomFont.customFont28);
-        soundOn.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        soundOn.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
 
         // créer une case à cocher avec une icône
         r1 = new JRadioButton("On",true);
@@ -82,9 +89,9 @@ public class OptionsEnJeu extends JPanel{
         gbc.gridx = 3;
         options.add(r2, gbc);
 
-
         //******************************************************************
 
+        //Création des autres boutons disponibles sur la page
         sauvegarde = new CustomJButton("Sauvegarder", principale, null, "Code/resources/others/button_background_large.png", null, null, null);
         retourAuMenu = new CustomJButton("Retour au menu", principale, null, "Code/resources/others/button_background_large.png", null, null, null);
         retour = new CustomJButton("Retour", principale, null, "Code/resources/others/button_background_large.png", null,null, null);

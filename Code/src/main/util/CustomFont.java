@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Enregistre des polices personnalisées pour l'ensemble du projet
+ */
 public class CustomFont{
     public static Font customFont100 = null;
     public static Font customFont100_PLAIN = null;
@@ -15,6 +18,9 @@ public class CustomFont{
     public static Font customFont18 = null;
     public static Font customFont13 = null;
 
+    /**
+     * Initialise les différentes polices
+     */
     public static void initFont(){
         try {
             String fontPath = "Code/resources/font/PixelArt.ttf";

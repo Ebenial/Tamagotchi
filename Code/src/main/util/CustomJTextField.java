@@ -3,7 +3,15 @@ package main.util;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JTextField personnalisé
+ */
 public class CustomJTextField extends JTextField {
+
+    /**
+     * Construit un JTextField personnalisé disposant d'un texte "indice"
+     * @param hint - le texte "indice" indiquant à l'utilisateur quoi mettre dans le JTextField
+     */
     public CustomJTextField(String hint) {
         _hint = hint;
     }
