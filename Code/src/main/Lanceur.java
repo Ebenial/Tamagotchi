@@ -31,7 +31,7 @@ public class Lanceur{
             System.exit(1);
         }
 
-        // Création dossier save si n'existe pas
+        // Création dossier score si n'existe pas
         try {
             Path scorePath = Paths.get("./Code/resources/score/");
             if (!Files.exists(scorePath) || !Files.isDirectory(scorePath)) {
