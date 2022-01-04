@@ -8,8 +8,22 @@ import main.view.NouvellePartie;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JButton personnalisé
+ */
 public class CustomJButton extends JButton {
 
+    /**
+     * Créé un JButton personnalisé en fonction des besoins
+     * Tous les paramètres ne sont pas nécessaires et peuvent donc être passés null
+     * @param text - le texte du bouton
+     * @param principale - la fenêtre dans laquelle le bouton sera affiché
+     * @param panel - le panneau dans lequel le bouton sera affiché
+     * @param imagePath - l'image de fond du bouton
+     * @param font - la police du bouton
+     * @param lieu - le lieu du bouton
+     * @param direction - la direction du bouton
+     */
     public CustomJButton(String text, FenetrePrincipale principale, NouvellePartie panel, String imagePath, Font font, Lieu lieu, String direction) {
         setText(text);
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -37,12 +51,16 @@ public class CustomJButton extends JButton {
             this.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/button_background.png").getImage().getScaledInstance(384, 96, java.awt.Image.SCALE_SMOOTH))); //old : 400 par 100
         }
         if (font == null) {
-            this.setFont(CustomFont.customFont50_PLAIN); //old font : setFont(new Font("Century Gothic", Font.PLAIN, 50));
+            this.setFont(CustomFont.customFont50_PLAIN);
         } else {
             this.setFont(font); //old font : setFont(new Font("Century Gothic", Font.PLAIN, 50));
         }
     }
 
+    /**
+     * Autre constructeur pour des besoins différents
+     * @param principale - la fenêtre dans laquelle le bouton sera affiché
+     */
     public CustomJButton(FenetrePrincipale principale){
         this.setBorder(BorderFactory.createEmptyBorder(21, 0, 21, 0));
         this.setOpaque(false);

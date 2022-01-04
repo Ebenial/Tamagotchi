@@ -5,8 +5,13 @@ import main.view.FenetrePrincipale;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Créé une Pop Up
+ */
 public class PopUp {
-
+    /**
+     * Panneau permettant de créer un arrière-plan à l'aide d'une image
+     */
     static class BackgroundJPanel extends JPanel{
         BackgroundJPanel(){
             this.setPreferredSize(new Dimension(384, 192));
@@ -21,6 +26,11 @@ public class PopUp {
 
     private static JDialog d;
 
+    /**
+     * Constructeur de la Pop Up
+     * @param text - le texte
+     * @param principale - la fenêtre dans laquelle afficher la pop up
+     */
     public PopUp(String text, FenetrePrincipale principale) {
         int width = 384;
         int height = 235;
@@ -41,12 +51,12 @@ public class PopUp {
         textLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         textLabel.setFont(CustomFont.customFont13);
 
-        JLabel test = new JLabel();
-        test.setLayout(new GridBagLayout());
-        test.add(b);
+        JLabel centerLabel = new JLabel();
+        centerLabel.setLayout(new GridBagLayout());
+        centerLabel.add(b);
 
         bJ.add(textLabel);
-        bJ.add(test);
+        bJ.add(centerLabel);
         d.setVisible(true);
     }
 }

@@ -7,12 +7,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Panneau affichant un chronomètre
+ */
 public class TimerPanel extends JPanel {
     JLabel label;
     Timer timer;
     private long count;
     FenetrePrincipale principale;
 
+    /**
+     * Constructeur du panneau
+     * @param principale - la fenêtre dans laquelle l'afficher
+     */
     public TimerPanel(FenetrePrincipale principale) {
         this.principale = principale;
         this.count = principale.getTempsTotal();
@@ -40,6 +47,10 @@ public class TimerPanel extends JPanel {
         timer.start();
     }
 
+    /**
+     * Accesseur retournant le temps affiché sur le compteur
+     * @return - le temps affiché sur le compteur
+     */
     public long getCount() {
         return this.count;
     }
