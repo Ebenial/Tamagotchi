@@ -8,6 +8,9 @@ import main.util.CustomJButton;
 
 import java.awt.*;
 
+/**
+ * Page d'options disponibles dans les menus
+ */
 public class Options extends JPanel{
 
     public JLabel titre;
@@ -16,10 +19,13 @@ public class Options extends JPanel{
     public static JRadioButton r1;
     public static JRadioButton r2;
 
+    /**
+     * Construit le panneau pour afficher les options
+     * @param principale - la fenêtre dans laquelle sera affiché le panneau
+     */
     public Options(FenetrePrincipale principale){
 
         this.setLayout(new BorderLayout());
-
 
         //BORDERLAYOUT.NORTH
         //Ajout du titre de la page
@@ -48,14 +54,13 @@ public class Options extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-
         soundOn = new JLabel("Musique : ", SwingConstants.CENTER);
         soundOn.setFont(CustomFont.customFont28);
         soundOn.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
-        // créer une case à cocher avec une icône
-        r1 = new JRadioButton("On" ,/*, new ImageIcon("C:/male.png"), */true);
-        r2 = new JRadioButton("Off", false);
+        //Crée une case à cocher
+        r1 = new JRadioButton("On" ,true);
+        r2 = new JRadioButton("Off",false);
         r1.setOpaque(false);
         r2.setOpaque(false);
         r1.addItemListener(new ListenerRadioButton(principale));
@@ -67,7 +72,6 @@ public class Options extends JPanel{
         buttonGroup.add(r1);
         buttonGroup.add(r2);
 
-
         //Ajout des différents boutons au panneau des options
         gbc.insets = new Insets(0, 10, 0, 10);
         gbc.gridx = 1;
@@ -77,10 +81,8 @@ public class Options extends JPanel{
         gbc.gridx = 3;
         options.add(r2, gbc);
 
-
         //BORDERLAYOUT.SOUTH
         //Ajout du bouton retour pour revenir à la page d'accueil
-
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
         buttonPanel.setOpaque(false);
@@ -103,14 +105,12 @@ public class Options extends JPanel{
         constraints.gridx = 2;
         buttonPanel.add(rightBox, constraints);
 
-
         //Ajout des composants au panneau
         this.add(titre, BorderLayout.NORTH);
         this.add(gauche, BorderLayout.WEST);
         this.add(droite, BorderLayout.EAST);
         this.add(options, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
-
     }
 
     /**

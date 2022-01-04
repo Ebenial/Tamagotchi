@@ -26,7 +26,7 @@ public class Regles extends JPanel {
         //Ajout du titre de la page
         JLabel titre = new JLabel("Règles du jeu", SwingConstants.CENTER);
         titre.setFont(CustomFont.customFont50_PLAIN);
-        titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
+        titre.setBorder(BorderFactory.createEmptyBorder(45,0,10,0));
         titre.setForeground(Color.white);
 
         //BORDERLAYOUT.WEST
@@ -48,8 +48,6 @@ public class Regles extends JPanel {
         options.setBackground(new Color(255, 255, 255, 161));
 
         new GridBagConstraints();
-
-
 
         //BORDERLAYOUT.SOUTH
         //Ajout du bouton retour pour revenir à la page d'accueil

@@ -378,30 +378,53 @@ public class Environnement extends JPanel implements KeyListener {
                 break;
             }
         }
-
         this.repaint();
     }
 
+    /**
+     * Accesseur de la santé de l'avatar
+     * @return - la santé de l'avatar
+     */
     public JLabel getSante() {
         return sante;
     }
 
+    /**
+     * Accesseur du bonheur de l'avatar
+     * @return - le bonheur de l'avatar
+     */
     public JLabel getBonheur() {
         return bonheur;
     }
 
+    /**
+     * Accesseur de l'énergie de l'avatar
+     * @return - l'énergie de l'avatar
+     */
     public JLabel getEnergie() {
         return energie;
     }
 
+    /**
+     * Accesseur de l'hygiène de l'avatar
+     * @return - ll'hygiène de l'avatar
+     */
     public JLabel getHygiene() {
         return hygiene;
     }
 
+    /**
+     * Accesseur du divertissement de l'avatar
+     * @return - le divertissement de l'avatar
+     */
     public JLabel getDivertissement() {
         return divertissement;
     }
 
+    /**
+     * Accesseur de la nourriture de l'avatar
+     * @return - la nourriture de l'avatar
+     */
     public JLabel getNourriture() {
         return nourriture;
     }
@@ -418,10 +441,18 @@ public class Environnement extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 
+    /**
+     * Accesseur du panneau qui gère le compteur de la partie
+     * @return - le panneau qui gère le compteur de la partie
+     */
     public TimerPanel getTimerPanel() {
         return this.timerPanel;
     }
 
+    /**
+     * Affiche un aspect différent pour le bouton d'action en fonction de son état
+     * @param state - état du bouton (activé ou désactivé)
+     */
     public void actionState(boolean state) {
         if (state) {
             action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
@@ -429,5 +460,4 @@ public class Environnement extends JPanel implements KeyListener {
             action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
         }
     }
-
 }

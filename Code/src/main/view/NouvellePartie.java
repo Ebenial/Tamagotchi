@@ -70,7 +70,7 @@ public class NouvellePartie extends JPanel{
         joueur.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
 
-        //TextArea pour choisir un nom de joueur
+        //Espace pour choisir un nom de joueur
         nomJoueur = new CustomJTextField("Ton pseudo");
         nomJoueur.setFont(CustomFont.customFont40);
 
@@ -79,7 +79,7 @@ public class NouvellePartie extends JPanel{
         avatar.setFont(CustomFont.customFont28);
         avatar.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));    //Bordure autour du texte (haut, gauche, bas, droite)
 
-        //TextArea pour choisir un nom d'avatar
+        //Espace pour choisir un nom d'avatar
         nomAvatar = new CustomJTextField("Surnom de ton avatar");
         nomAvatar.setFont(CustomFont.customFont40);
 
@@ -118,7 +118,6 @@ public class NouvellePartie extends JPanel{
         valider = new CustomJButton("Valider", principale, this, null, null, null, null);
 
         //Bouton pour retourner à la sélection nouvelle partie / charger une partie
-
         retour = new CustomJButton("Retour", principale, null, null, null, Lieu.CHAMBRE, null);
         retour.setPreferredSize(new Dimension(384, 96));
 
@@ -147,7 +146,6 @@ public class NouvellePartie extends JPanel{
         avatarChoisi = new JLabel(imagesAvatar[position]);
 
         //Ajout des différents éléments au panneau qui occupe le bas de l'écran
-
         retourPanel.add(new TransparentJPanel());
         retourPanel.add(retour);
         retourPanel.add(new TransparentJPanel());
@@ -178,6 +176,10 @@ public class NouvellePartie extends JPanel{
 
     }
 
+    /**
+     * Permet de modifier la difficulté du jeu
+     * @param difficult - la difficulté du jeu
+     */
     public void setDifficulty(String difficult) {
         difficulty = difficult;
     }
