@@ -4,9 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-import main.model.BoucleJeu;
 import main.model.Lieu;
-import main.model.SauvegardePartie;
+import main.util.PopUp;
 import main.view.*;
 
 import javax.swing.*;
@@ -141,36 +140,40 @@ public class ListenerBouton implements ActionListener{
                 int energieActuelle = this.principale.getJeu().getAvatar().getEnergie();
                 this.principale.getJeu().getAvatar().setEnergie(energieActuelle + 2);
                 this.principale.getJeu().getAvatar().setCanSleep(false);
+                this.principale.getCurrentEnvironnement().actionState(false);
             }
             else {
-                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
+                new PopUp("<html><center>Il est trop tôt pour pouvoir<br> refaire cette action !</html>", this.principale);
             }
         } else if(this.lieu == Lieu.LAVER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanShower()) {
                 int hygieneActuelle = this.principale.getJeu().getAvatar().getHygiene();
                 this.principale.getJeu().getAvatar().setHygiene(hygieneActuelle + 2);
                 this.principale.getJeu().getAvatar().setCanShower(false);
+                this.principale.getCurrentEnvironnement().actionState(false);
             }
             else {
-                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
+                new PopUp("<html><center>Il est trop tôt pour pouvoir<br> refaire cette action !</html>", this.principale);
             }
         } else if(this.lieu == Lieu.MANGER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanEat()) {
                 int mangerActuel = this.principale.getJeu().getAvatar().getNourriture();
                 this.principale.getJeu().getAvatar().setNourriture(mangerActuel + 2);
                 this.principale.getJeu().getAvatar().setCanEat(false);
+                this.principale.getCurrentEnvironnement().actionState(false);
             }
             else {
-                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
+                new PopUp("<html><center>Il est trop tôt pour pouvoir<br> refaire cette action !</html>", this.principale);
             }
         } else if(this.lieu == Lieu.JOUER && this.direction.equals("Action1")) {
             if(this.principale.getJeu().getAvatar().getCanPlay()) {
                 int divertissementActuel = this.principale.getJeu().getAvatar().getDivertissement();
                 this.principale.getJeu().getAvatar().setDivertissement(divertissementActuel + 2);
                 this.principale.getJeu().getAvatar().setCanPlay(false);
+                this.principale.getCurrentEnvironnement().actionState(false);
             }
             else {
-                JOptionPane.showMessageDialog(null, "Il est trop tôt pour pouvoir refaire cette action !");
+                new PopUp("<html><center>Il est trop tôt pour pouvoir<br> refaire cette action !</html>", this.principale);
             }
         } else if(e.getSource() == Difficulte.facile) {
             this.principale.getNouvellePartie().setDifficulty("facile");

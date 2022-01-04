@@ -128,6 +128,7 @@ public class BoucleJeu implements Runnable{
                             principale.getJeu().getAvatar().setCanPlay(true);
                             principale.getJeu().getAvatar().setCanShower(true);
                             principale.getJeu().getAvatar().setCanSleep(true);
+                            principale.getCurrentEnvironnement().actionState(true);
                         }
 
                         if(sec % nbSecEvent == 0) {

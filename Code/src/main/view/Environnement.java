@@ -21,7 +21,7 @@ import java.awt.event.KeyListener;
  * se trouve l'avatar
  */
 public class Environnement extends JPanel implements KeyListener{
-    private Jeu jeu;
+    private final Jeu jeu;
 
     private Lieu lieu;
     public static BoutonFleche gauche;
@@ -32,14 +32,14 @@ public class Environnement extends JPanel implements KeyListener{
     private static final int AVATAR_X_OFFSET = 200;
     private static final int AVATAR_Y_OFFSET = 200;
 
-    private JLabel avatarChoisi;
+    private final JLabel avatarChoisi;
     private final JLabel sante;
     private final JLabel bonheur;
     private final JLabel nourriture;
     private final JLabel energie;
     private final JLabel hygiene;
     private final JLabel divertissement;
-    private TimerPanel timerPanel;
+    private final TimerPanel timerPanel;
 
     /**
      * Initialise la vue
@@ -207,7 +207,7 @@ public class Environnement extends JPanel implements KeyListener{
         action1.setVerticalAlignment(JButton.CENTER);
         action1.setFont(CustomFont.customFont50_PLAIN);
         action1.setContentAreaFilled(false);
-        action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+        action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
 
         actions.add(action1);
 
@@ -385,8 +385,6 @@ public class Environnement extends JPanel implements KeyListener{
         return nourriture;
     }
 
-    public Lieu getLieu(){return this.lieu;}
-
     @Override
     public void keyTyped(KeyEvent e) {}
 
@@ -398,6 +396,14 @@ public class Environnement extends JPanel implements KeyListener{
 
     public TimerPanel getTimerPanel() {
         return this.timerPanel;
+    }
+
+    public void actionState(boolean state){
+        if (state){
+            action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+        }else{
+            action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+        }
     }
 
 }
