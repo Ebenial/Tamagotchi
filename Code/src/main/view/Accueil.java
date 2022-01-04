@@ -2,6 +2,7 @@ package main.view;
 
 import javax.swing.*;
 
+import main.util.CustomFont;
 import main.util.CustomJButton;
 
 import java.awt.*;
@@ -37,6 +38,20 @@ public class Accueil extends JPanel {
         droite.setPreferredSize(new Dimension(500, 0));
         droite.setOpaque(false);
 
+        //Ajout du label Nouveautés pour le panel des nouveautés
+        JLabel titreMeilleurScore = new JLabel("Meilleur score :", SwingConstants.CENTER);
+        titreMeilleurScore.setFont(CustomFont.customFont28);
+        titreMeilleurScore.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        titreMeilleurScore.setForeground(Color.WHITE);
+
+        //Première nouveauté de la liste
+        JLabel meilleurScore = new JLabel("00j | 00h | 00m | 00s");
+        meilleurScore.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        meilleurScore.setForeground(Color.WHITE);
+
+        droite.add(titreMeilleurScore);
+        droite.add(meilleurScore);
+
         //BORDERLAYOUT.CENTER
         //Ajout d'un panel qui va stocker les différents boutons du menu
         JPanel menu = new JPanel();
@@ -47,7 +62,7 @@ public class Accueil extends JPanel {
         //Bouton qui ouvre le dossier des sauvegardes
         jouer = new CustomJButton("Jouer", principale, null, null, null, null, null);
 
-        //Bouton qui mène à la page des régles du jeu
+        //Bouton qui mène à la page des règles du jeu
         regles = new CustomJButton("Règles", principale, null, null, null, null, null);
 
         //Bouton qui mène à la page des options
