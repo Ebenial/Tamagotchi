@@ -208,7 +208,7 @@ public class BoucleJeu implements Runnable{
         this.nbSecUpdateBonheur = nbSecUpdateMax;
         this.nbSecUpdateSante = nbSecUpdateMax;
         this.nbSecUpdateSecondaryStats = nbSecUpdateMax;
-        this.nbSecEvent = 1;
+        this.nbSecEvent = 10;
         this.timeForAction = 4;
 
     }

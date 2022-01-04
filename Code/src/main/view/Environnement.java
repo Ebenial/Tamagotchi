@@ -20,7 +20,7 @@ import java.awt.event.KeyListener;
  * Vue de la partie en cours, affiche le lieu dans lequel
  * se trouve l'avatar
  */
-public class Environnement extends JPanel implements KeyListener{
+public class Environnement extends JPanel implements KeyListener {
     private final Jeu jeu;
 
     private Lieu lieu;
@@ -44,10 +44,10 @@ public class Environnement extends JPanel implements KeyListener{
     /**
      * Initialise la vue
      *
-     * @param lieu - lieu actuel
+     * @param lieu       - lieu actuel
      * @param principale - la JFrame a laquelle on applique le panneau
      */
-    public Environnement(Lieu lieu, FenetrePrincipale principale){
+    public Environnement(Lieu lieu, FenetrePrincipale principale) {
         this.lieu = lieu;
 
         this.setLayout(new BorderLayout());
@@ -57,7 +57,7 @@ public class Environnement extends JPanel implements KeyListener{
         //BORDERLAYOUT.NORTH
         //Affichage des statistiques et de l'heure
         JPanel nord = new JPanel();
-        nord.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/4));
+        nord.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height / 4));
         nord.setLayout(new GridBagLayout());
         nord.setOpaque(false);
 
@@ -77,13 +77,13 @@ public class Environnement extends JPanel implements KeyListener{
         JPanel imagesStatsPart1 = new JPanel();
         imagesStatsPart1.setOpaque(false);
         imagesStatsPart1.setLayout(new GridLayout(2, 1));
-        imagesStatsPart1.setBorder(BorderFactory.createEmptyBorder(0,0,30,0));
+        imagesStatsPart1.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
 
         //Ajout d'un panneau qui va afficher les barres de statistiques
         JPanel infosStatsPart1 = new JPanel();
         infosStatsPart1.setOpaque(false);
         infosStatsPart1.setLayout(new GridLayout(2, 1));
-        infosStatsPart1.setBorder(BorderFactory.createEmptyBorder(0,0,30,0));
+        infosStatsPart1.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
 
         //Ajout d'un panneau qui va afficher les icônes des statistiques
         JPanel imagesStatsPart2 = new JPanel();
@@ -94,7 +94,6 @@ public class Environnement extends JPanel implements KeyListener{
         JPanel infosStatsPart2 = new JPanel();
         infosStatsPart2.setOpaque(false);
         infosStatsPart2.setLayout(new GridLayout(4, 1));
-
 
 
         //Construction des différents éléments des statistiques
@@ -135,7 +134,7 @@ public class Environnement extends JPanel implements KeyListener{
         this.timerPanel = new TimerPanel(principale);
 
         //Ajout du panneau des stats dans le coin gauche de l'écran
-        cNord.insets = new Insets(1,10,1,10);
+        cNord.insets = new Insets(1, 10, 1, 10);
 
         cNord.gridx = 0;
         cNord.gridy = 0;
@@ -148,7 +147,7 @@ public class Environnement extends JPanel implements KeyListener{
         cNord.weightx = 1.0;
         nord.add(new TransparentJPanel(), cNord);
 
-        cNord.gridx =3;
+        cNord.gridx = 3;
         cNord.weightx = 0.25;
         nord.add(timerPanel, cNord);
 
@@ -164,23 +163,23 @@ public class Environnement extends JPanel implements KeyListener{
         //Affichage de l'avatar
         String typeAvatar;
         switch (jeu.getAvatar().getType()) {
-            case "Chien" : {
+            case "Chien": {
                 typeAvatar = "dog";
                 break;
             }
-            case "Chat" : {
+            case "Chat": {
                 typeAvatar = "cat";
                 break;
             }
-            case "Oiseau" : {
+            case "Oiseau": {
                 typeAvatar = "bird";
                 break;
             }
-            case "Poulpe" : {
+            case "Poulpe": {
                 typeAvatar = "octopus";
                 break;
             }
-            default : {
+            default: {
                 typeAvatar = "robot";
                 break;
             }
@@ -194,7 +193,7 @@ public class Environnement extends JPanel implements KeyListener{
         //Affichage des actions possibles pour le joueur ainsi que la roue des options
         JPanel sud = new JPanel();
         sud.setOpaque(false);
-        sud.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height/6));
+        sud.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height / 6));
         sud.setLayout(new GridBagLayout());
         GridBagConstraints cSud = new GridBagConstraints();
 
@@ -212,7 +211,7 @@ public class Environnement extends JPanel implements KeyListener{
         actions.add(action1);
 
         JPanel vide3 = new JPanel();
-        vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
+        vide3.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width) * 3 / 4, 100));
         vide3.setOpaque(false);
         options = new JButton();
         options.addActionListener(new ListenerBouton(this.lieu, "Options", principale));
@@ -220,7 +219,7 @@ public class Environnement extends JPanel implements KeyListener{
         options.setFocusPainted(false);
         options.setBorderPainted(false);
         options.setIcon(new ImageIcon(new ImageIcon("Code/resources/others/settings_icon.png").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
-        options.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        options.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         cSud.gridx = 0;
         cSud.gridy = 0;
@@ -256,6 +255,7 @@ public class Environnement extends JPanel implements KeyListener{
 
     /**
      * Initialise les boutons d'un lieu. Utilisé lors du changement de lieu
+     *
      * @param lieu - nouveau lieu
      */
     public void changerLieu(FenetrePrincipale principale, Lieu lieu) {
@@ -263,42 +263,62 @@ public class Environnement extends JPanel implements KeyListener{
 
         //BORDERLAYOUT.WEST
         //Affichage du bouton fléché gauche pour changer d'environnement
-        if(this.lieu != Lieu.JOUER){
+        if (this.lieu != Lieu.JOUER) {
             gauche.activerFleche();
             this.replaceButtonListener(gauche, new ListenerBouton(this.lieu, "Gauche", principale));
-        }else{
+        } else {
             gauche.desactiverFleche();
         }
 
         //BORDERLAYOUT.EAST
         //Pas de possibilité d'aller à droite depuis la chambre, on ajoute un panel vide de la même taille que le bouton de gauche pour centrer le tout
-        if(this.lieu != Lieu.CHAMBRE){
+        if (this.lieu != Lieu.CHAMBRE) {
             droite.activerFleche();
             this.replaceButtonListener(droite, new ListenerBouton(this.lieu, "Droite", principale));
-        }else{
+        } else {
             droite.desactiverFleche();
         }
 
         // Change l'action
         String actionText = "";
-        switch (this.lieu){
+        switch (this.lieu) {
             case CHAMBRE: {
                 actionText = "Dormir";
+                if (principale.getJeu().getAvatar().getCanSleep()){
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }else{
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }
                 break;
             }
 
             case LAVER: {
                 actionText = "Laver";
+                if (principale.getJeu().getAvatar().getCanShower()){
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }else{
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }
                 break;
 
             }
 
             case MANGER: {
+                if (principale.getJeu().getAvatar().getCanEat()){
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }else{
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }
                 actionText = "Manger";
                 break;
             }
 
-            case JOUER:{
+            case JOUER: {
+                if (principale.getJeu().getAvatar().getCanPlay()){
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }else{
+                    action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
+                }
                 actionText = "Jouer";
             }
         }
@@ -335,10 +355,11 @@ public class Environnement extends JPanel implements KeyListener{
 
     /**
      * Permet de surcharger le paintComponent pour ajouter l'Image background en fond d'écran du panel.
+     *
      * @param g -
      */
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         switch (this.lieu) {
@@ -386,22 +407,25 @@ public class Environnement extends JPanel implements KeyListener{
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+    }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+    }
 
     public TimerPanel getTimerPanel() {
         return this.timerPanel;
     }
 
-    public void actionState(boolean state){
-        if (state){
+    public void actionState(boolean state) {
+        if (state) {
             action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button_available.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
-        }else{
+        } else {
             action1.setIcon(new ImageIcon(new ImageIcon("Code/resources/environnement/action_button.png").getImage().getScaledInstance(270, 115, java.awt.Image.SCALE_SMOOTH)));
         }
     }
