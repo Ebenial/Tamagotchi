@@ -33,6 +33,7 @@ public class FenetrePrincipale extends JFrame{
     private boolean continuer = false;
     private final NouvellePartie nouvellePartie;
     private long tempsTotal;
+    private GameOver gameOver;
     /**
      * Créé la fenêtre principale du jeu
      */
@@ -58,7 +59,7 @@ public class FenetrePrincipale extends JFrame{
         Options options = new Options(this);
         OptionsEnJeu optionsEnJeu = new OptionsEnJeu(this);
         Regles regles = new Regles(this);
-        GameOver gameOver = new GameOver(this);
+        this.gameOver = new GameOver(this);
         LaunchScreen launchScreen = new LaunchScreen();
         Difficulte difficulte = new Difficulte(this);
 
@@ -431,5 +432,9 @@ public class FenetrePrincipale extends JFrame{
      */
     public void setBoucle(BoucleJeu nouvelleBoucle){
         this.boucle = nouvelleBoucle;
+    }
+
+    public GameOver getGameOver() {
+        return this.gameOver;
     }
 }

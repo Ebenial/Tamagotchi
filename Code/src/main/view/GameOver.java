@@ -10,6 +10,7 @@ import java.awt.*;
 public class GameOver extends JPanel {
     public static CustomJButton retour;
     public static long score = 0;
+    private JLabel resultat;
 
     public GameOver(FenetrePrincipale principale){
         this.setLayout(new GridBagLayout());
@@ -28,7 +29,7 @@ public class GameOver extends JPanel {
         titre.setForeground(Color.red);
         titre.setHorizontalAlignment(JLabel.CENTER);
         this.setBackground(Color.black);
-        JLabel resultat = new JLabel("Votre score est "+score);
+        this.resultat = new JLabel("Votre score est "+score);
         resultat.setFont(CustomFont.customFont40);
         resultat.setForeground(Color.WHITE);
 
@@ -59,5 +60,9 @@ public class GameOver extends JPanel {
         this.add(button,c);
 
 
+    }
+
+    public JLabel getResultat() {
+        return this.resultat;
     }
 }

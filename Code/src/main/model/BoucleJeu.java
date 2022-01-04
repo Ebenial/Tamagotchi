@@ -9,6 +9,7 @@ import main.view.NouvellePartie;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.*;
 
 import java.io.File;
 
@@ -71,9 +72,21 @@ public class BoucleJeu implements Runnable{
                     System.out.println(principale.getJeu().getAvatar().getSante());
                     System.out.println(principale.getJeu().getAvatar().getBonheur());
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
-                        GameOver.score = principale.getCurrentEnvironnement().getTimerPanel().getCount();
-                        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk : " + principale.getCurrentEnvironnement().getTimerPanel().getCount());
-                        System.out.println("llllllllllllllllllllllllllllllllllllllllllllllllllllllllll : " + GameOver.score);
+                        //GameOver.score = principale.getCurrentEnvironnement().getTimerPanel().getCount();
+                        JLabel result = principale.getGameOver().getResultat();
+                        long count = principale.getCurrentEnvironnement().getTimerPanel().getCount();
+
+                        int sec = (int) count % 60;
+                        int min = (int) (count / 60) % 60;
+                        int hours = (int) ((count / 60) / 60)%24;
+                        int days = (int) (((count / 60) / 60) / 24);
+
+                        String strSec = (sec < 10) ? "0" + sec : Integer.toString(sec);
+                        String strmin = (min < 10) ? "0" + min : Integer.toString(min);
+                        String strHours = (hours < 10) ? "0" + hours : Integer.toString(hours);
+                        String strDays = (days < 10) ? "0" + days : Integer.toString(days);
+
+                        result.setText(strDays + "j | " + strHours + "h | " + strmin + "m | " + strSec+"s");
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
                         running = false;
                         clip.stop();
