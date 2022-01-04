@@ -115,7 +115,7 @@ public class Sauvegardes extends JPanel {
     public void updateSaves() {
         Set<String> hset = listFilesUsingJavaIO("./Code/resources/saves/");
         for (String s : hset) {
-            if (s.toLowerCase().endsWith(".json")) {
+            if (s.toLowerCase().endsWith(".save")) {
                 String[] tokens = s.split("\\.");
                 String buttonName = tokens[0];
                 int length = 13;

@@ -49,7 +49,7 @@ public class SauvegardePartie implements Serializable {
     }
 
     private void writeJSON() throws IOException {
-        String filename = nomJoueur + "-" + nomAvatar + ".json";
+        String filename = nomJoueur + "-" + nomAvatar + ".save";
         FileOutputStream file = new FileOutputStream("./Code/resources/saves/" + filename);
         ObjectOutputStream out = new ObjectOutputStream(file);
         out.writeObject(this);

@@ -62,14 +62,14 @@ public class Accueil extends JPanel {
         String strDays = (days < 10) ? "0" + days : Integer.toString(days);
 
         //Ajout du label Nouveautés pour le panel des nouveautés
-        JLabel titreMeilleurScore = new JLabel(strDays + "j | " + strHours + "h | " + strmin + "m | " + strSec+"s", SwingConstants.CENTER);
+        JLabel titreMeilleurScore = new JLabel("Meilleur Score : ", SwingConstants.CENTER);
 
         titreMeilleurScore.setFont(CustomFont.customFont28);
         titreMeilleurScore.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         titreMeilleurScore.setForeground(Color.WHITE);
 
         //Première nouveauté de la liste
-        JLabel meilleurScore = new JLabel("00j | 00h | 00m | 00s");
+        JLabel meilleurScore = new JLabel(strDays + "j | " + strHours + "h | " + strmin + "m | " + strSec+"s");
         meilleurScore.setFont(CustomFont.customFont18);
         meilleurScore.setForeground(Color.WHITE);
 
