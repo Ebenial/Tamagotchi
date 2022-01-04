@@ -255,12 +255,6 @@ public class FenetrePrincipale extends JFrame{
 
         this.resetEnvironnement();
 
-        //this.add(chambre, "chambre");
-        //this.add(douche, "douche");
-        //this.add(cuisine, "cuisine");
-        //this.add(jardin, "jardin");
-
-        //this.layout.show(this.getContentPane(), "chambre");
         this.layout.show(this.getContentPane(), "environnement");
         isInitialized = true;
     }

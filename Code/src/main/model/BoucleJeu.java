@@ -10,31 +10,21 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 import java.io.File;
-import java.time.LocalTime;
 
 public class BoucleJeu implements Runnable{
     public static Thread myThread;
     public boolean running = true;
     public static long secSinceLastConnexion;
     private final FenetrePrincipale principale;
+    private int nbSecUpdateSecondaryStats;
     private int nbSecUpdateSante = 5;
     private int nbSecUpdateBonheur = 5;
-    private int nbSecUpdateNourriture = 5;
-    private int nbSecUpdateEnergie = 5;
-    private int nbSecUpdateHygiene = 5;
-    private int nbSecUpdateDivertissement = 5;
     private final int nbSecAutoSave = 5;
     private int nbSecEvent = 1;
-    private long timeCanEat = 2;
-    private long timeCanSleep = 2;
-    private long timeCanShower = 2;
-    private long timeCanPlay = 2;
+    private long timeForAction = 2;
+
     private int nbSante = 0;
     private int nbBonheur = 0;
-    private int nbNourriture = -1;
-    private int nbEnergie = -1;
-    private int nbHygiene = -1;
-    private int nbDivertissement = -1;
     private int nbSecUpdateMax;
     private int nbSecUpdateMin;
     private boolean isUpdateAllInitialized = false;
@@ -48,7 +38,6 @@ public class BoucleJeu implements Runnable{
         myThread = new Thread(() -> {
 
             sec = 0;
-            //Temps petit pour les test, c'est ici qu'il faut changer les valeurs de temps d'update
 
             while (running) {
                 System.out.println(); // ATTENTION: parfois ne fonctionne pas sans ce print
@@ -75,7 +64,6 @@ public class BoucleJeu implements Runnable{
                             break;
                     }
                 }
-                //Bouger la ligne setPrincipale
                 if(principale.getIsInitialized()) {
                     if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
@@ -102,34 +90,23 @@ public class BoucleJeu implements Runnable{
                         if(sec % nbSecUpdateBonheur == 0) {
                             updateBonheur(nbBonheur);
                         }
-                        if(sec % nbSecUpdateNourriture == 0) {
-                            updateNourriture(nbNourriture);
+                        if(sec % nbSecUpdateSecondaryStats == 0) {
+                            updateNourriture(-1);
+                            updateEnergie(-1);
+                            updateHygiene(-1);
+                            updateDivertissement(-1);
                             updateStatsWithStats();
-                        }
-                        if(sec % nbSecUpdateEnergie == 0) {
-                            updateEnergie(nbEnergie);
-                        }
-                        if(sec % nbSecUpdateHygiene == 0) {
-                            updateHygiene(nbHygiene);
-                        }
-                        if(sec % nbSecUpdateDivertissement == 0) {
-                            updateDivertissement(nbDivertissement);
                         }
                         if(sec % nbSecAutoSave == 0) {
                             principale.actionSauvegarde();
                         }
-                        if(sec % timeCanEat == 0) {
+                        if(sec % timeForAction == 0) {
                             principale.getJeu().getAvatar().setCanEat(true);
-                        }
-                        if(sec % timeCanPlay == 0) {
                             principale.getJeu().getAvatar().setCanPlay(true);
-                        }
-                        if(sec % timeCanShower == 0) {
                             principale.getJeu().getAvatar().setCanShower(true);
-                        }
-                        if(sec % timeCanSleep == 0) {
                             principale.getJeu().getAvatar().setCanSleep(true);
                         }
+
                         if(sec % nbSecEvent == 0) {
                             if(isEvent()) {
                                 theEvent();
@@ -151,8 +128,6 @@ public class BoucleJeu implements Runnable{
         }
         principale.getLayout().show(principale.getContentPane(), "accueil");
 
-        running = true;
-        run(); // Pourquoi appeler run ?
     }
 
     /**
@@ -160,20 +135,15 @@ public class BoucleJeu implements Runnable{
      */
     private void setFacile() {
         this.nbSecUpdateMax = 36000;
-        this.nbSecUpdateMin = (int) (36000 / 2);
-        this.nbSecUpdateBonheur = 36000;
-        this.nbSecUpdateSante = 36000;
-        this.nbSecUpdateDivertissement = 36000;
-        this.nbSecUpdateEnergie = 36000;
-        this.nbSecUpdateHygiene = 36000;
-        this.nbSecUpdateNourriture = 36000;
+        this.nbSecUpdateMin = (int) (nbSecUpdateMax / 2);
+        this.nbSecUpdateBonheur = nbSecUpdateMax;
+        this.nbSecUpdateSante = nbSecUpdateMax;
+        this.nbSecUpdateSecondaryStats = nbSecUpdateMax;
         //Event toutes les heures
         this.nbSecEvent = 3600;
         //Peut faire une action une fois par heure
-        this.timeCanEat = 3600;
-        this.timeCanPlay = 3600;
-        this.timeCanShower = 3600;
-        this.timeCanSleep = 3600;
+        this.timeForAction = 3600;
+
     }
 
     /**
@@ -182,56 +152,41 @@ public class BoucleJeu implements Runnable{
     private void setNormal() {
         //toutes les 6h
         this.nbSecUpdateMax = 21600;
-        this.nbSecUpdateMin = (int) (21600 / 2);
-        this.nbSecUpdateBonheur = 21600;
-        this.nbSecUpdateSante = 21600;
-        this.nbSecUpdateDivertissement = 21600;
-        this.nbSecUpdateEnergie = 21600;
-        this.nbSecUpdateHygiene = 21600;
-        this.nbSecUpdateNourriture = 21600;
-        //Possible event toutes les 12 heures
-        this.nbSecEvent = 43200;
-        //Peut faire une action une fois par heure
-        this.timeCanEat = 18000; //5h
-        this.timeCanPlay = 10800; //3h
-        this.timeCanShower = 43200; //12h
-        this.timeCanSleep = 43200; //possiblement a changer 12h
+        this.nbSecUpdateMin = (int) (nbSecUpdateMax / 2);
+        this.nbSecUpdateBonheur = nbSecUpdateMax;
+        this.nbSecUpdateSante = nbSecUpdateMax;
+        this.nbSecUpdateSecondaryStats = nbSecUpdateMax;
+        //Possible event toutes les 5 heures
+        this.nbSecEvent = 18000;
+        //Peut faire une action une fois toutes les 3h
+        this.timeForAction = 10800;
+
     }
 
 
     private void setDifficile() {
         //Updates toute les 3h
         this.nbSecUpdateMax = 10800;
-        this.nbSecUpdateMin = (int) (10800 / 2);
-        this.nbSecUpdateBonheur = 10800;
-        this.nbSecUpdateSante = 10800;
-        this.nbSecUpdateDivertissement = 10800;
-        this.nbSecUpdateEnergie = 10800;
-        this.nbSecUpdateHygiene = 10800;
-        this.nbSecUpdateNourriture = 10800;
-        //Possible event toutes les 24 heures
-        this.nbSecEvent = 86400;
-        //Peut faire une action une fois par heure
-        this.timeCanEat = 25200; //7h
-        this.timeCanPlay = 21600; //6h
-        this.timeCanShower = 43200; //12h
-        this.timeCanSleep = 43200; //possiblement a changer 12h
+        this.nbSecUpdateMin = (int) (nbSecUpdateMax / 2);
+        this.nbSecUpdateBonheur = nbSecUpdateMax;
+        this.nbSecUpdateSante = nbSecUpdateMax;
+        this.nbSecUpdateSecondaryStats = nbSecUpdateMax;
+        //Possible event toutes les 10 heures
+        this.nbSecEvent = 36000;
+        //Peut faire une action toutes les 5 heures
+        this.timeForAction = 18000;
+
     }
 
     private void setLegendaire() {
         this.nbSecUpdateMax = 7;
-        this.nbSecUpdateMin = (int) (7 / 2);
-        this.nbSecUpdateBonheur = 7;
-        this.nbSecUpdateSante = 7;
-        this.nbSecUpdateDivertissement = 7;
-        this.nbSecUpdateEnergie = 7;
-        this.nbSecUpdateHygiene = 7;
-        this.nbSecUpdateNourriture = 7;
+        this.nbSecUpdateMin = (int) (nbSecUpdateMax / 2);
+        this.nbSecUpdateBonheur = nbSecUpdateMax;
+        this.nbSecUpdateSante = nbSecUpdateMax;
+        this.nbSecUpdateSecondaryStats = nbSecUpdateMax;
         this.nbSecEvent = 1;
-        this.timeCanEat = 4;
-        this.timeCanPlay = 4;
-        this.timeCanShower = 4;
-        this.timeCanSleep = 4;
+        this.timeForAction = 4;
+
     }
 
     private boolean isEvent() {
@@ -402,17 +357,14 @@ public class BoucleJeu implements Runnable{
         int divertissementBeforeUpdate = this.principale.getJeu().getAvatar().getDivertissement();
 
         //Nombre d'update pendant la deconnexion
-        int nbUpdateNourriture = (int) numberOfUpdate(nbSecUpdateNourriture);
-        int nbUpdateEnergie = (int) numberOfUpdate(nbSecUpdateEnergie);
-        int nbUpdateHygiene = (int) numberOfUpdate(nbSecUpdateHygiene);
-        int nbUpdateDivertissement = (int) numberOfUpdate(nbSecUpdateDivertissement);
+        int nbUpdateSecondaryStats = (int) numberOfUpdate(this.nbSecUpdateSecondaryStats);
         int eventInFourthUpdate = (int) (numberOfUpdate(nbSecEvent) / 4);
 
 
-        int usefullNbUpdateNourriture = nbUpdateNourriture;
-        int usefullNbUpdateEnergie = nbUpdateEnergie;
-        int usefullNbUpdateHygiene = nbUpdateHygiene;
-        int usefullNbUpdateDivertissement = nbUpdateDivertissement;
+        int usefullNbUpdateNourriture = nbUpdateSecondaryStats;
+        int usefullNbUpdateEnergie = nbUpdateSecondaryStats;
+        int usefullNbUpdateHygiene = nbUpdateSecondaryStats;
+        int usefullNbUpdateDivertissement = nbUpdateSecondaryStats;
 
         //Update les stats (sauf Sante et Bonheur) en fonction du nombre d'update qu'il y a eu lieu pendant la deconnexion + mets 1/4 des events pour une meilleur repartition
         int event = eventInFourthUpdate;
@@ -468,10 +420,10 @@ public class BoucleJeu implements Runnable{
         isDisplayEvent = true;
 
         //Remise a niveau des valeurs a utiliser
-        usefullNbUpdateNourriture = nbUpdateNourriture;
-        usefullNbUpdateEnergie = nbUpdateEnergie;
-        usefullNbUpdateHygiene = nbUpdateHygiene;
-        usefullNbUpdateDivertissement = nbUpdateDivertissement;
+        usefullNbUpdateNourriture = nbUpdateSecondaryStats;
+        usefullNbUpdateEnergie = nbUpdateSecondaryStats;
+        usefullNbUpdateHygiene = nbUpdateSecondaryStats;
+        usefullNbUpdateDivertissement = nbUpdateSecondaryStats;
 
         //Fait baisser le nombre d'updateNourriture jusqu'a ce que NourritureBeforeUpdate = 3.
         while (nourritureBeforeUpdate >= 3 && usefullNbUpdateNourriture > 0) {
@@ -556,10 +508,6 @@ public class BoucleJeu implements Runnable{
 
     }
 
-    public synchronized void stop() {
-        running = false;
-    }
-
     /**
      * Modifie la santé de l'avatar de la valeur passé en paramètre
      * @param modif - la valeur a jouter ou soustraire à la santé actuelle de l'avatar
@@ -625,17 +573,6 @@ public class BoucleJeu implements Runnable{
 
     }
 
-    /**
-     * 
-     */
-    public void updateAllStats(){
-        updateBonheur(0);
-        updateSante(0);
-        updateDivertissement(0);
-        updateEnergie(0);
-        updateHygiene(0);
-        updateNourriture(0);
-    }
 
     @Override
     public void run() {
