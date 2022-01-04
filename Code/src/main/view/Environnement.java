@@ -28,6 +28,10 @@ public class Environnement extends JPanel implements KeyListener{
     public static BoutonFleche droite;
     public static JButton options;
     public static JButton action1;
+
+    private static final int AVATAR_X_OFFSET = 200;
+    private static final int AVATAR_Y_OFFSET = 200;
+
     private JLabel avatarChoisi;
     private final JLabel sante;
     private final JLabel bonheur;
@@ -183,6 +187,7 @@ public class Environnement extends JPanel implements KeyListener{
 
         ImageIcon imageAvatar = new ImageIcon(new ImageIcon("Code/resources/tamagotchi/" + typeAvatar + ".gif").getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
         this.avatarChoisi = new JLabel(imageAvatar);
+        this.avatarChoisi.setBorder(BorderFactory.createEmptyBorder(AVATAR_Y_OFFSET, 0, 0, 0));
 
         //BORDERLAYOUT.SOUTH
         //Affichage des actions possibles pour le joueur ainsi que la roue des options
@@ -298,6 +303,33 @@ public class Environnement extends JPanel implements KeyListener{
         }
         action1.setText(actionText);
         this.replaceButtonListener(action1, new ListenerBouton(this.lieu, "Action1", principale));
+
+        // Position de l'avatar en fonction du lieu
+        int avatarXOff = AVATAR_X_OFFSET;
+        switch (lieu) {
+            case CHAMBRE:
+                this.avatarChoisi.setHorizontalAlignment(JLabel.RIGHT);
+                break;
+
+            case MANGER:
+                this.avatarChoisi.setHorizontalAlignment(JLabel.LEFT);
+                avatarXOff -= gauche.getWidth(); // compense la place que prend le bouton
+                avatarXOff -= 30; // décale à gauche pour le positionner sur le tapis
+                break;
+
+            case LAVER:
+                this.avatarChoisi.setHorizontalAlignment(JLabel.LEFT);
+                avatarXOff -= gauche.getWidth(); // compense la place que prend le bouton
+                break;
+
+            case JOUER:
+                this.avatarChoisi.setHorizontalAlignment(JLabel.LEFT);
+                avatarXOff += 150; // décale à droite pour le positionner à côté du ballon
+                break;
+
+            default:
+        }
+        this.avatarChoisi.setBorder(BorderFactory.createEmptyBorder(AVATAR_Y_OFFSET, avatarXOff, 0, avatarXOff));
     }
 
     /**
