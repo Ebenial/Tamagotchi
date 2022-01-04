@@ -37,7 +37,6 @@ public class FenetrePrincipale extends JFrame{
      * Créé la fenêtre principale du jeu
      */
     public FenetrePrincipale(){
-
         LookAndFeel.initLookAndFeel();
         CustomFont.initFont();
 
