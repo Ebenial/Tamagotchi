@@ -9,6 +9,7 @@ import main.util.BoutonFleche;
 import main.model.Jeu;
 import main.util.CustomFont;
 import main.util.TimerPanel;
+import main.util.TransparentJPanel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -58,19 +59,36 @@ public class Environnement extends JPanel implements KeyListener{
         GridBagConstraints cNord = new GridBagConstraints();
 
         //Configuration du panneau des statistiques de l'avatar
-        JPanel statistiques = new JPanel();
-        statistiques.setOpaque(false);
-        statistiques.setLayout(new GridLayout(1,1));
+        JPanel statistiquesPart1 = new JPanel();
+        statistiquesPart1.setOpaque(false);
+        statistiquesPart1.setLayout(new BoxLayout(statistiquesPart1, BoxLayout.Y_AXIS));
+
+        JPanel statistiquesPart2 = new JPanel();
+        statistiquesPart2.setOpaque(false);
+        statistiquesPart2.setLayout(new BoxLayout(statistiquesPart2, BoxLayout.Y_AXIS));
+
 
         //Ajout d'un panneau qui va afficher les icônes des statistiques
-        JPanel imagesStats = new JPanel();
-        imagesStats.setOpaque(false);
-        imagesStats.setLayout(new GridLayout(6, 1));
+        JPanel imagesStatsPart1 = new JPanel();
+        imagesStatsPart1.setOpaque(false);
+        imagesStatsPart1.setLayout(new GridLayout(2, 1));
+        imagesStatsPart1.setBorder(BorderFactory.createEmptyBorder(0,0,30,0));
 
         //Ajout d'un panneau qui va afficher les barres de statistiques
-        JPanel infosStats = new JPanel();
-        infosStats.setOpaque(false);
-        infosStats.setLayout(new GridLayout(6, 1));
+        JPanel infosStatsPart1 = new JPanel();
+        infosStatsPart1.setOpaque(false);
+        infosStatsPart1.setLayout(new GridLayout(2, 1));
+        infosStatsPart1.setBorder(BorderFactory.createEmptyBorder(0,0,30,0));
+
+        //Ajout d'un panneau qui va afficher les icônes des statistiques
+        JPanel imagesStatsPart2 = new JPanel();
+        imagesStatsPart2.setOpaque(false);
+        imagesStatsPart2.setLayout(new GridLayout(4, 1));
+
+        //Ajout d'un panneau qui va afficher les barres de statistiques
+        JPanel infosStatsPart2 = new JPanel();
+        infosStatsPart2.setOpaque(false);
+        infosStatsPart2.setLayout(new GridLayout(4, 1));
 
 
 
@@ -89,44 +107,45 @@ public class Environnement extends JPanel implements KeyListener{
         divertissement = new JLabel(jeu.choixBarreStats(jeu.getAvatar().getDivertissement()));
 
         //Ajout des images aux panneaux
-        imagesStats.add(imageSante);
-        infosStats.add(sante);
-        imagesStats.add(imageBonheur);
-        infosStats.add(bonheur);
-        imagesStats.add(imageNourriture);
-        infosStats.add(nourriture);
-        imagesStats.add(imageEnergie);
-        infosStats.add(energie);
-        imagesStats.add(imageHygiene);
-        infosStats.add(hygiene);
-        imagesStats.add(imageDivertissement);
-        infosStats.add(divertissement);
+        imagesStatsPart1.add(imageSante);
+        infosStatsPart1.add(sante);
+        imagesStatsPart1.add(imageBonheur);
+        infosStatsPart1.add(bonheur);
+        imagesStatsPart2.add(imageNourriture);
+        infosStatsPart2.add(nourriture);
+        imagesStatsPart2.add(imageEnergie);
+        infosStatsPart2.add(energie);
+        imagesStatsPart2.add(imageHygiene);
+        infosStatsPart2.add(hygiene);
+        imagesStatsPart2.add(imageDivertissement);
+        infosStatsPart2.add(divertissement);
 
         //Ajout des panneaux contenant les images et les barres de statistiques au panneau global qui contient toutes les statistiques
-        statistiques.add(imagesStats);
-        statistiques.add(infosStats);
+        statistiquesPart1.add(imagesStatsPart1);
+        statistiquesPart2.add(infosStatsPart1);
 
-        JPanel vide = new JPanel();
-        vide.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width)*3/4, 100));
-        vide.setOpaque(false);
+        statistiquesPart1.add(imagesStatsPart2);
+        statistiquesPart2.add(infosStatsPart2);
 
         TimerPanel timerPanel = new TimerPanel(principale);
 
         //Ajout du panneau des stats dans le coin gauche de l'écran
-        nord.add(statistiques);
+        cNord.insets = new Insets(1,10,1,10);
 
         cNord.gridx = 0;
         cNord.gridy = 0;
-        cNord.weightx = 0.25;
-
-        nord.add(imagesStats);
+        nord.add(statistiquesPart1, cNord);
 
         cNord.gridx = 1;
-        nord.add(infosStats);
+        nord.add(statistiquesPart2, cNord);
 
         cNord.gridx = 2;
-        cNord.weightx = 0.5;
-        nord.add(timerPanel);
+        cNord.weightx = 1.0;
+        nord.add(new TransparentJPanel(), cNord);
+
+        cNord.gridx =3;
+        cNord.weightx = 0.25;
+        nord.add(timerPanel, cNord);
 
         // BORDERLAYOUT.WEST et EAST
         // Création des flèches

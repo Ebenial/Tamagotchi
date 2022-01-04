@@ -23,7 +23,7 @@ public class TimerPanel extends JPanel {
         this.setOpaque(false);
         label = new JLabel("...");
         setLayout(new GridBagLayout());
-        label.setFont(CustomFont.customFont28);
+        label.setFont(CustomFont.customFont50_PLAIN);
         add(label);
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -54,8 +54,4 @@ public class TimerPanel extends JPanel {
         this.count = count;
     }
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(200, 200);
-    }
 }
