@@ -34,6 +34,7 @@ public class FenetrePrincipale extends JFrame{
     private final NouvellePartie nouvellePartie;
     private long tempsTotal;
     private GameOver gameOver;
+    private boolean isDead;
     /**
      * Créé la fenêtre principale du jeu
      */
@@ -163,6 +164,7 @@ public class FenetrePrincipale extends JFrame{
     public void actionContinuer(){
         isInitialized = false;
         this.continuer = true;
+
         this.layout.show(this.getContentPane(), "sauvegardes");
 
     }
@@ -178,10 +180,16 @@ public class FenetrePrincipale extends JFrame{
         this.boucle.start();
         System.out.println("ISINITIALIZED : " + isInitialized);
         SauvegardePartie partie = new SauvegardePartie(nom);
+        this.isDead = partie.isDead();
         this.jeu = new Jeu();
         BoucleJeu.secSinceLastConnexion = partie.getTimeSinceLastConnexion();
         System.out.println("GET TEMPS JEU : " + partie.getTempsJeu() );
-        tempsTotal = partie.getTempsJeu() + (partie.getTimeSinceLastConnexion() / 1000);
+        if(!isDead) {
+            tempsTotal = partie.getTempsJeu() + (partie.getTimeSinceLastConnexion() / 1000);
+        }
+        else {
+            tempsTotal = partie.getTempsJeu();
+        }
         //TimerPanel.count = tempsTotal;
 
         this.jeu.setAvatar(partie.creerAvatar(nom));
@@ -237,7 +245,12 @@ public class FenetrePrincipale extends JFrame{
             this.tempsTotal = this.boucle.getSec();
         }
         try {
-            new SauvegardePartie(this.jeu.getJoueur().getNom(), this.jeu.getAvatar(), (this.tempsTotal + this.boucle.getSec()));
+            if(!isDead) {
+                new SauvegardePartie(this.jeu.getJoueur().getNom(), this.jeu.getAvatar(), (this.tempsTotal + this.boucle.getSec()), isDead);
+            } else {
+                new SauvegardePartie(this.jeu.getJoueur().getNom(), this.jeu.getAvatar(), this.tempsTotal, isDead);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -252,6 +265,7 @@ public class FenetrePrincipale extends JFrame{
      * Affiche le panneau correspondant à la chambre (Panneau de départ pour une nouvelle partie)
      */
     public void actionValider(){
+        this.isDead = false;
         System.out.println("valider");
         this.tempsTotal = 0;
         this.jeu = new Jeu(NouvellePartie.nomJoueur.getText(), NouvellePartie.nomAvatar.getText(), NouvellePartie.monChoix, this);
@@ -436,5 +450,17 @@ public class FenetrePrincipale extends JFrame{
 
     public GameOver getGameOver() {
         return this.gameOver;
+    }
+
+    public void setSauvegardes(Sauvegardes sauvegardes) {
+        this.sauvegardes = sauvegardes;
+    }
+
+    public void setIsDead(boolean bool) {
+        isDead = bool;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }

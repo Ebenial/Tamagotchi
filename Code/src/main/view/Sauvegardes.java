@@ -25,10 +25,13 @@ public class Sauvegardes extends JPanel {
 
     public static CustomJButton retour;
 
-    public static ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
-    public static ArrayList<String> saveName = new ArrayList<>();
-    public static ArrayList<CustomJButton> arrayDelete = new ArrayList<>();
+    private ArrayList<CustomJButton> arrayButton = new ArrayList<CustomJButton>();
+    private ArrayList<String> saveName = new ArrayList<>();
+    private ArrayList<CustomJButton> arrayDelete = new ArrayList<>();
     FenetrePrincipale principale;
+    private JPanel panel1;
+    private JPanel panel2;
+    private JPanel centre;
 
 
     /**
@@ -41,27 +44,27 @@ public class Sauvegardes extends JPanel {
         this.setLayout(new BorderLayout());
 
         //BORDERLAYOUT.CENTER
-        JPanel centre = new JPanel();
+        this.centre = new JPanel();
         centre.setOpaque(false);
 
         JPanel panelInScroll = new JPanel();
         panelInScroll.setOpaque(false);
         panelInScroll.setLayout(new GridLayout(1, 4));
 
-        JPanel panel1 = new JPanel();
+        this.panel1 = new JPanel();
         panel1.setOpaque(false);
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-        JPanel panel2 = new JPanel();
+        this.panel2 = new JPanel();
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         panel2.setOpaque(false);
 
         updateSaves();
-        for (CustomJButton j : Sauvegardes.arrayButton) {
+        for (CustomJButton j : arrayButton) {
             j.setBackground(new Color(0,0,0,0));
             j.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
             panel1.add(j);
         }
-        for (CustomJButton j : Sauvegardes.arrayDelete) {
+        for (CustomJButton j : arrayDelete) {
             j.setBackground(new Color(0,0,0,0));
             panel2.add(j);
         }
@@ -151,5 +154,53 @@ public class Sauvegardes extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(new ImageIcon("Code/resources/background/accueil.gif").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+    }
+
+    public JPanel getPanel1() {
+        return this.panel1;
+    }
+
+    public void setPanel1(JPanel panel) {
+        this.panel1 = panel;
+    }
+
+    public void setPanel2(JPanel panel) {
+        this.panel2 = panel;
+    }
+
+    public void setCentre(JPanel panel) {
+        this.centre = panel;
+    }
+
+    public JPanel getPanel2() {
+        return this.panel2;
+    }
+
+    public JPanel getCentre() {
+        return this.centre;
+    }
+
+    public ArrayList<CustomJButton> getArrayButton() {
+        return arrayButton;
+    }
+
+    public ArrayList<CustomJButton> getArrayDelete() {
+        return arrayDelete;
+    }
+
+    public ArrayList<String> getSaveName() {
+        return saveName;
+    }
+
+    public void setArrayButton(ArrayList<CustomJButton> arrayButton) {
+        this.arrayButton = arrayButton;
+    }
+
+    public void setArrayDelete(ArrayList<CustomJButton> arrayDelete) {
+        this.arrayDelete = arrayDelete;
+    }
+
+    public void setSaveName(ArrayList<String> saveName) {
+        this.saveName = saveName;
     }
 }

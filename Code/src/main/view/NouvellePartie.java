@@ -124,11 +124,11 @@ public class NouvellePartie extends JPanel{
 
         //Bouton pour changer de type d'avatar vers la gauche String sensFleche, int x, int y, int longueur, int hauteur
         choixGauche = new BoutonFleche("Gauche", 96, 96);
-        choixGauche.addActionListener(new ListenerBouton(this));
+        choixGauche.addActionListener(new ListenerBouton(principale, this));
 
         //Bouton pour changer de type d'avatar vers la droite
         choixDroite = new BoutonFleche("Droite", 96, 96);
-        choixDroite.addActionListener(new ListenerBouton(this));
+        choixDroite.addActionListener(new ListenerBouton(principale, this));
 
         //Tableau contenant toutes les images possibles pour un avatar
         imagesAvatar = new ImageIcon[5];

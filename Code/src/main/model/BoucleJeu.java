@@ -37,13 +37,10 @@ public class BoucleJeu implements Runnable{
     private boolean isDisplayEvent = true;
 
     public synchronized void start() {
-        System.out.println("START : ");
         myThread = new Thread(() -> {
-            System.out.println("start ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
             sec = 0;
 
             while (running) {
-                System.out.println(running + "TU ES SUUUUUUUUUUUUUUR");
                 System.out.println(); // ATTENTION: parfois ne fonctionne pas sans ce print
                 if(!isDifficultySet && NouvellePartie.difficulty != null) {
                     switch (NouvellePartie.difficulty) {
@@ -68,11 +65,7 @@ public class BoucleJeu implements Runnable{
                     }
                 }
                 if(principale.getIsInitialized()) {
-                    System.out.println("AVATARRRRRRRRRRRR : ");
-                    System.out.println(principale.getJeu().getAvatar().getSante());
-                    System.out.println(principale.getJeu().getAvatar().getBonheur());
-                    if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0){
-                        //GameOver.score = principale.getCurrentEnvironnement().getTimerPanel().getCount();
+                    if(principale.getJeu().getAvatar().getSante() <= 0 || principale.getJeu().getAvatar().getBonheur() <= 0 || principale.isDead()){
                         JLabel result = principale.getGameOver().getResultat();
                         long count = principale.getCurrentEnvironnement().getTimerPanel().getCount();
 
@@ -86,12 +79,21 @@ public class BoucleJeu implements Runnable{
                         String strHours = (hours < 10) ? "0" + hours : Integer.toString(hours);
                         String strDays = (days < 10) ? "0" + days : Integer.toString(days);
 
-                        result.setText(strDays + "j | " + strHours + "h | " + strmin + "m | " + strSec+"s");
+                        if(!principale.isDead()) {
+                            result.setText(strDays + "j | " + strHours + "h | " + strmin + "m | " + strSec+"s");
+                        } else {
+                            result.setText("Votre Keneil se trouve actuellement au paradis des Keneils !");
+                        }
+
+
+                        principale.setIsDead(true);
+                        principale.actionSauvegarde();
                         principale.getLayout().show(principale.getContentPane(), "gameOver");
                         running = false;
                         clip.stop();
                         playDeathMusic();
                         music = "death";
+
                     }
                     principale.getJeu().getAvatar().setPrincipale(principale);
                     if(!isUpdateAllInitialized && principale.getContinuer()) {

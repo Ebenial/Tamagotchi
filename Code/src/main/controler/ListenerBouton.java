@@ -1,12 +1,17 @@
 package main.controler;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import main.model.BoucleJeu;
 import main.model.Lieu;
 import main.model.SauvegardePartie;
+import main.util.CustomJButton;
 import main.view.*;
 
 import javax.swing.*;
@@ -74,20 +79,35 @@ public class ListenerBouton implements ActionListener{
      */
     public void actionPerformed(ActionEvent e){
 
-        for(int i = 0; i < Sauvegardes.arrayButton.size(); i++) {
-            if(e.getSource() == Sauvegardes.arrayButton.get(i)) {
-                this.principale.actionChargerPartie("./Code/resources/saves/"+Sauvegardes.saveName.get(i));
+        //JOptionPane.showMessageDialog(null, "principale : " + principale);
+
+
+            for(int i = 0; i < this.principale.getSauvegardes().getArrayButton().size(); i++) {
+                if(e.getSource() == principale.getSauvegardes().getArrayButton().get(i)) {
+                    this.principale.actionChargerPartie("./Code/resources/saves/"+principale.getSauvegardes().getSaveName().get(i));
+                }
             }
-        }
-        for(int i = 0; i < Sauvegardes.arrayDelete.size(); i++) {
-            if(e.getSource() == Sauvegardes.arrayDelete.get(i)) {
-                File file = new File(Sauvegardes.saveName.get(i));
-                Sauvegardes.arrayButton.remove(i);
-                Sauvegardes.saveName.remove(i);
-                Sauvegardes.arrayDelete.remove(i);
-                file.delete();
+
+            for(int i = (principale.getSauvegardes().getArrayDelete().size() - 1); i >= 0; i--) {
+                if(e.getSource() == principale.getSauvegardes().getArrayDelete().get(i)) {
+                    File file = new File("./Code/resources/saves/"+principale.getSauvegardes().getSaveName().get(i));
+                    principale.getSauvegardes().getArrayButton().remove(i);
+                    principale.getSauvegardes().getSaveName().remove(i);
+                    principale.getSauvegardes().getArrayDelete().remove(i);
+                    file.delete();
+                }
             }
-        }
+
+            Sauvegardes save = new Sauvegardes(principale);
+            principale.getSauvegardes().setArrayButton(principale.getSauvegardes().getArrayButton());
+            principale.getSauvegardes().setArrayDelete(principale.getSauvegardes().getArrayDelete());
+            principale.getSauvegardes().setSaveName(principale.getSauvegardes().getSaveName());
+            principale.getLayout().removeLayoutComponent(this.principale.getSauvegardes());
+            principale.add(save, "sauvegardes");
+            principale.setSauvegardes(save);
+
+
+        ////////////////////////////////////////////////////////
         if(e.getSource() == Accueil.quitter){
             this.principale.actionQuitter();
         }else if(e.getSource() == Accueil.jouer){
